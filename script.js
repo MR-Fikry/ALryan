@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
+// 1️⃣ إعداد Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
   authDomain: "login-employees1.firebaseapp.com",
@@ -13,8 +14,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-window.saveEmployee = function () {
-
+// 2️⃣ دالة حفظ الموظف
+window.saveEmployee = async function () {
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const genderInput = document.querySelector('input[name="gender"]:checked');
@@ -31,37 +32,40 @@ window.saveEmployee = function () {
     createdAt: new Date().toLocaleString()
   };
 
-  // نخزن الموظف الحالي
+  // 3️⃣ تخزين محلي
   localStorage.setItem("currentEmployee", JSON.stringify(employee));
-
-  // علامة إنه اتسجل
   localStorage.setItem("isLoggedIn", "true");
 
-  alert("تم التسجيل بنجاح ✅");
+  // 4️⃣ إرسال البيانات للـ Firebase
+  try {
+    await addDoc(collection(db, "employees"), employee);
+    console.log("تم حفظ الموظف في Firebase ✅");
+  } catch (error) {
+    console.error("حدث خطأ عند حفظ الموظف في Firebase:", error);
+    alert("حصل خطأ أثناء إرسال البيانات للقاعدة!");
+    return;
+  }
 
-  // تحويل مباشر
+  // 5️⃣ رسالة نجاح وتحويل
+  alert("تم التسجيل بنجاح ✅");
   window.location.href = "sales/";
 };
 
-// لو مسجّل قبل كده → دخله على طول
+// 6️⃣ دخول تلقائي لو مسجّل قبل كده
 if (localStorage.getItem("isLoggedIn") === "true") {
   window.location.href = "sales/";
 }
 
-
-
+// 7️⃣ تأثير ظهور الصفحة
 window.onload = function () {
   const title = document.getElementById("title");
   const form = document.getElementById("form");
 
-  // العنوان يظهر الأول
   setTimeout(() => {
     title.classList.add("show");
   }, 200);
 
-  // الفورم يظهر بعد العنوان
   setTimeout(() => {
     form.classList.add("show");
   }, 2000);
 };
-
