@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family:  "Cairo", sans-serif;
+    direction: rtl;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+
+}
+
+
+.logo{
+    width: 70px;
+}
+
+
+.container {
+  width: 300px;
+  margin: 120px auto;
+}
+
+/* العنوان */
+#title {
+    
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+}
+
+/* الفورم */
+#form {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.7s ease;
+  margin-top: 20px;
+}
+
+#name , #phone{
+    width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1.5px solid #ddd;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+#phone:focus{
+     border-color: #1e90ff;
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+}
+
+#name:focus{
+     border-color: #1e90ff;
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+}
+
+label , label input{
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+/* لما يظهروا */
+.show {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}  
+
+/* زر الحفظ */
+#form button {
+  width: 100%;
+  padding: 12px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover */
+#form button:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 15px rgba(30, 144, 255, 0.4);
+}
+
+/* عند الضغط */
+#form button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+@media (max-width:420px) {
+    header{
+        padding:20px 30px;
+    }
+    header h1{
+        font-size: 16px;
+    }
+
+    .logo{
+        width: 40px;
+    }
+}
