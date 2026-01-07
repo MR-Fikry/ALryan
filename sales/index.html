@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الريان للأدوات المنزلية - فاتورة البيع</title>
+
+    <!-- Basic SEO -->
+    <meta name="description" content="نظام مبيعات شركة الريان للأدوات المنزلية">
+    <meta name="keywords" content="الريان, أدوات منزلية, فواتير, مبيعات, سيريال, منتجات">
+    <meta name="author" content="شركة الريان">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2e7d32">
+
+    <!-- CSS + Icons -->
+    <link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Print CSS -->
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #invoicePrint, #invoicePrint * {
+                visibility: visible;
+            }
+            #invoicePrint {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+        :root {
+            --primary-color: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary-color: #ff9800;
+            --danger-color: #f44336;
+            --warning-color: #ff9800;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --text-color: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 10px;
+            --radius-sm: 6px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Cairo", sans-serif;
+            direction: rtl;
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color), var(--primary-light));
+        }
+
+        header h1 {
+            color: var(--primary-dark);
+            font-size: 20px;
+            font-weight: 800;
+            text-align: center;
+            flex: 1;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        /* Employee Info */
+        .employee-info {
+            background: white;
+            padding: 12px 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .employee-info > div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .employee-info span {
+            font-weight: bold;
+            color: var(--primary-dark);
+            font-size: 15px;
+        }
+
+        .employee-info i {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        /* Invoice Info */
+        .invoice-info {
+            background: white;
+            padding: 12px 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .invoice-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .invoice-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Main Title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .page-title h2 {
+            font-size: 22px;
+            color: var(--primary-dark);
+            display: inline-block;
+            padding: 0 15px;
+            background: #f5f7fa;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            left: 0;
+            height: 1px;
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+
+        /* Input Section */
+        .input-section {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--primary-dark);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .serial-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            font-family: "Cairo", sans-serif;
+        }
+
+        .serial-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        .input-hint {
+            display: block;
+            color: #666;
+            font-size: 13px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        /* Suggestions */
+        .suggestions {
+            position: absolute;
+            width: calc(100% - 40px);
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            margin-top: -5px;
+            display: none;
+        }
+
+        .suggestions div {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1f1f1;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .suggestions div:hover {
+            background-color: #f5f5f5;
+        }
+
+        .suggestions div:last-child {
+            border-bottom: none;
+        }
+
+        /* Cart Section */
+        .cart-section {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .cart-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .cart-title h3 {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-count {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Cart Items */
+        .cart-items {
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            background: #fafafa;
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+        }
+
+        .cart-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--text-color);
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .item-price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .item-quantity {
+            color: #666;
+            font-size: 14px;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .item-serial {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            margin-right: 10px;
+        }
+
+        .item-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .item-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .item-btn.remove {
+            color: var(--danger-color);
+        }
+
+        .item-btn.remove:hover {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-cart i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-top: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .summary-label {
+            color: #666;
+        }
+
+        .summary-value {
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .total-amount {
+            color: var(--primary-color);
+            font-size: 22px;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Cairo", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to left, var(--primary-color), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to left, var(--primary-dark), #124816);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-bg);
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #f57c00;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quick-btn {
+            flex: 1;
+            padding: 10px;
+            background: #f0f7f0;
+            border: 1px solid var(--primary-light);
+            border-radius: var(--radius);
+            color: var(--primary-dark);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .quick-btn:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 15px;
+            right: 15px;
+            padding: 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            background-color: #e8f5e9;
+            border-right: 4px solid var(--primary-color);
+            color: var(--primary-dark);
+        }
+
+        .notification.error {
+            background-color: #ffebee;
+            border-right: 4px solid var(--danger-color);
+            color: #c62828;
+        }
+
+        .notification.warning {
+            background-color: #fff3e0;
+            border-right: 4px solid var(--warning-color);
+            color: #ef6c00;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: inherit;
+            padding: 0;
+            margin-right: 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 12px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            header h1 {
+                font-size: 18px;
+                order: 2;
+            }
+            
+            .logo {
+                width: 40px;
+                height: 40px;
+                order: 1;
+            }
+            
+            .input-section,
+            .cart-section {
+                padding: 15px;
+            }
+            
+            .cart-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .cart-count {
+                align-self: flex-start;
+            }
+            
+            .item-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .item-actions {
+                margin-right: 0;
+                margin-top: 8px;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+            }
+            
+
+        }
+
+        @media (max-width: 420px) {
+            header h1 {
+                font-size: 16px;
+            }
+            
+            .employee-info span {
+                font-size: 14px;
+            }
+            
+            .page-title h2 {
+                font-size: 18px;
+            }
+            
+            .serial-input {
+                font-size: 15px;
+                padding: 12px;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .item-info {
+                width: 100%;
+            }
+            
+            .item-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .btn {
+                padding: 9px ;
+                font-size: 10px;
+                gap: 3px;
+            }
+        }
+
+        /* Print Invoice Styles */
+        .print-invoice {
+            display: none;
+            background: white;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .print-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .print-header h1 {
+            color: var(--primary-dark);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .print-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .print-table th {
+            background-color: #f5f5f5;
+            padding: 12px;
+            text-align: right;
+            border: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .print-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: right;
+        }
+
+        .print-table tfoot td {
+            background-color: #f9f9f9;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .print-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>الريان للأدوات المنزلية</h1>
+        <img src="https://alryan.pages.dev/logo.png" class="logo" alt="شعار الريان">
+    </header>
+
+    <div class="container">
+        <!-- معلومات البائع -->
+        <div class="employee-info" id="employeeInfo">
+            <div>
+                <i class="fas fa-user"></i>
+                <span id="employeeName">جاري التحميل...</span>
+            </div>
+            <div>
+                <i class="fas fa-phone"></i>
+                <span id="employeePhone">جاري التحميل...</span>
+            </div>
+        </div>
+
+        <!-- معلومات الفاتورة -->
+        <div class="invoice-info" id="invoiceInfo">
+            <div class="invoice-number">
+                <i class="fas fa-file-invoice"></i>
+                رقم الفاتورة: <span id="invoiceNumber">--</span>
+            </div>
+            <div class="invoice-date">
+                <i class="fas fa-calendar"></i>
+                <span id="invoiceDate">--</span>
+            </div>
+        </div>
+
+        <!-- عنوان الصفحة -->
+        <div class="page-title">
+            <h2><i class="fas fa-receipt"></i> فاتورة بيع</h2>
+        </div>
+
+        <!-- قسم إدخال السيريال -->
+        <div class="input-section">
+            <label class="input-label">
+                <i class="fas fa-barcode"></i> إضافة منتج بالسيريال
+            </label>
+            <input 
+                type="text" 
+                id="serialInput" 
+                class="serial-input" 
+                placeholder="اكتب أو انسخ رمز السيريال هنا..."
+                autocomplete="off"
+                autofocus
+            >
+            <span class="input-hint">ابدأ بالكتابة وسيظهر لك قائمة بالمنتجات المطابقة</span>
+            
+            <!-- قائمة الاقتراحات -->
+            <div class="suggestions" id="suggestions"></div>
+        </div>
+
+        <!-- سلة المشتريات -->
+        <div class="cart-section" id="cartSection">
+            <div class="cart-title">
+                <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+                <div class="cart-count" id="cartCount">0 منتجات</div>
+            </div>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- المنتجات ستضاف هنا ديناميكياً -->
+                <div class="empty-cart" id="emptyCart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>لا توجد منتجات في السلة</p>
+                    <p style="font-size: 14px; margin-top: 5px;">ابدأ بإضافة منتجات باستخدام حقل السيريال بالأعلى</p>
+                </div>
+            </div>
+            
+            <div class="cart-summary" id="cartSummary" style="display: none;">
+                <div class="summary-row">
+                    <span class="summary-label">عدد المنتجات:</span>
+                    <span class="summary-value" id="summaryCount">0</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">إجمالي الفاتورة:</span>
+                    <span class="summary-value total-amount" id="summaryTotal">0 جنيه</span>
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="addAnotherProduct()">
+                    <i class="fas fa-plus"></i> إضافة منتج آخر
+                </button>
+                <button class="quick-btn" onclick="clearCart()">
+                    <i class="fas fa-trash"></i> تفريغ السلة
+                </button>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="completeSale()" id="completeBtn" disabled>
+                    <i class="fas fa-check-circle"></i> إتمام البيع
+                </button>
+                <button class="btn btn-warning" onclick="printInvoice()" id="printBtn" disabled>
+                    <i class="fas fa-print"></i> طباعة الفاتورة
+                </button>
+                <button class="btn btn-secondary" onclick="resetForm()">
+                    <i class="fas fa-redo"></i> إلغاء الفاتورة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الإشعارات -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle" id="notificationIcon"></i>
+            <span id="notificationMessage"></span>
+        </div>
+        <button class="notification-close" onclick="hideNotification()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- نموذج طباعة الفاتورة (مخفي) -->
+    <div id="invoicePrint" class="print-invoice">
+        <div class="print-header">
+            <h1>الريان للأدوات المنزلية</h1>
+            <p>فاتورة بيع</p>
+        </div>
+        
+        <div class="print-details">
+            <div>
+                <p><strong>رقم الفاتورة:</strong> <span id="printInvoiceNumber">--</span></p>
+                <p><strong>التاريخ:</strong> <span id="printInvoiceDate">--</span></p>
+                <p><strong>الوقت:</strong> <span id="printInvoiceTime">--</span></p>
+            </div>
+            <div>
+                <p><strong>اسم البائع:</strong> <span id="printSellerName">--</span></p>
+                <p><strong>هاتف البائع:</strong> <span id="printSellerPhone">--</span></p>
+            </div>
+        </div>
+        
+        <table class="print-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>اسم المنتج</th>
+                    <th>السيريال</th>
+                    <th>الكمية</th>
+                    <th>سعر الوحدة</th>
+                    <th>الإجمالي</th>
+                </tr>
+            </thead>
+            <tbody id="printItems">
+                <!-- سيتم ملؤه ديناميكياً -->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align: left;">الإجمالي النهائي:</td>
+                    <td id="printTotalAmount">0 جنيه</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <div class="print-footer">
+            <p>شكراً لتعاملكم مع الريان للأدوات المنزلية</p>
+            <p>هاتف: 01050513227 | العنوان: البحيره , مركز بدر , قريه ابو بكر الصديق</p>
+            <p>هذه الفاتورة صادرة إلكترونياً ولا تحتاج لتوقيع</p>
+        </div>
+    </div>
+
+    <footer class="no-print">
+        <p>جميع الحقوق محفوظة &copy; 2023 - شركة الريان للأدوات المنزلية</p>
+        <p>نظام إدارة المبيعات الإلكتروني | الإصدار 4.1</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            getDocs,
+            addDoc,
+            updateDoc,
+            doc,
+            Timestamp,
+            writeBatch,
+            increment
+        } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+            authDomain: "login-employees1.firebaseapp.com",
+            projectId: "login-employees1",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // عناصر DOM
+        const serialInput = document.getElementById('serialInput');
+        const suggestions = document.getElementById('suggestions');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const emptyCart = document.getElementById('emptyCart');
+        const cartSummary = document.getElementById('cartSummary');
+        const summaryCount = document.getElementById('summaryCount');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const completeBtn = document.getElementById('completeBtn');
+        const printBtn = document.getElementById('printBtn');
+        const employeeName = document.getElementById('employeeName');
+        const employeePhone = document.getElementById('employeePhone');
+        const invoiceNumber = document.getElementById('invoiceNumber');
+        const invoiceDate = document.getElementById('invoiceDate');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const notificationIcon = document.getElementById('notificationIcon');
+
+        // عناصر طباعة الفاتورة
+        const printInvoiceNumber = document.getElementById('printInvoiceNumber');
+        const printInvoiceDate = document.getElementById('printInvoiceDate');
+        const printInvoiceTime = document.getElementById('printInvoiceTime');
+        const printSellerName = document.getElementById('printSellerName');
+        const printSellerPhone = document.getElementById('printSellerPhone');
+        const printItems = document.getElementById('printItems');
+        const printTotalAmount = document.getElementById('printTotalAmount');
+
+        // المتغيرات العامة
+        let products = [];
+        let cart = [];
+        let currentEmployee = null;
+        let currentInvoiceNumber = null;
+        let lastInvoiceNumber = 1000;
+
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', async () => {
+            // تحميل بيانات البائع
+            loadEmployeeData();
+            
+            // إنشاء رقم فاتورة جديد
+            generateInvoiceNumber();
+            
+            // تحديث تاريخ الفاتورة
+            updateInvoiceDate();
+            
+            // تحميل المنتجات
+            await loadProducts();
+            
+            // تحميل السلة من التخزين المحلي إن وجدت
+            loadCartFromStorage();
+            
+            // تحديث واجهة السلة
+            updateCartUI();
+            
+            // تركيز على حقل الإدخال
+            serialInput.focus();
+            
+            // إضافة تأثير ظهور
+            document.querySelector('.container').classList.add('fade-in');
+        });
+
+        // تحميل بيانات البائع
+        function loadEmployeeData() {
+            try {
+                const employee = JSON.parse(localStorage.getItem('currentEmployee'));
+                if (employee) {
+                    currentEmployee = employee;
+                    employeeName.textContent = employee.name || 'غير معروف';
+                    employeePhone.textContent = employee.phone || 'غير معروف';
+                    
+                    // تحديث بيانات الطباعة
+                    printSellerName.textContent = employee.name || 'غير معروف';
+                    printSellerPhone.textContent = employee.phone || 'غير معروف';
+                } else {
+                    showNotification('لم يتم العثور على بيانات البائع. الرجاء تسجيل الدخول مرة أخرى.', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading employee data:', error);
+                showNotification('حدث خطأ في تحميل بيانات البائع', 'error');
+            }
+        }
+
+        // إنشاء رقم فاتورة جديد
+        function generateInvoiceNumber() {
+            try {
+                const savedNumber = localStorage.getItem('lastInvoiceNumber');
+                if (savedNumber) {
+                    lastInvoiceNumber = parseInt(savedNumber);
+                }
+                
+                currentInvoiceNumber = lastInvoiceNumber + 1;
+                invoiceNumber.textContent = `#${currentInvoiceNumber}`;
+                printInvoiceNumber.textContent = `#${currentInvoiceNumber}`;
+                
+                localStorage.setItem('lastInvoiceNumber', currentInvoiceNumber);
+            } catch (error) {
+                console.error('Error generating invoice number:', error);
+                currentInvoiceNumber = `TEMP-${Date.now()}`;
+                invoiceNumber.textContent = currentInvoiceNumber;
+                printInvoiceNumber.textContent = currentInvoiceNumber;
+            }
+        }
+
+        // تحديث تاريخ الفاتورة
+        function updateInvoiceDate() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('ar-EG');
+            const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+            
+            invoiceDate.textContent = dateStr;
+            printInvoiceDate.textContent = dateStr;
+            printInvoiceTime.textContent = timeStr;
+        }
+
+        // تحميل المنتجات
+        async function loadProducts() {
+            try {
+                const snapshot = await getDocs(collection(db, 'products'));
+                products = snapshot.docs.map(doc => ({ 
+                    id: doc.id, 
+                    ...doc.data(),
+                    originalQuantity: doc.data().quantity || 0
+                }));
+                console.log(`تم تحميل ${products.length} منتج`);
+            } catch (error) {
+                console.error('Error loading products:', error);
+                showNotification('حدث خطأ في تحميل المنتجات', 'error');
+            }
+        }
+
+        // تحميل السلة من التخزين المحلي
+        function loadCartFromStorage() {
+            try {
+                const savedCart = localStorage.getItem('currentCart');
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                    if (cart.length > 0) {
+                        showNotification('تم استعادة السلة السابقة', 'success');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading cart from storage:', error);
+                cart = [];
+            }
+        }
+
+        // حفظ السلة في التخزين المحلي
+        function saveCartToStorage() {
+            try {
+                localStorage.setItem('currentCart', JSON.stringify(cart));
+            } catch (error) {
+                console.error('Error saving cart to storage:', error);
+            }
+        }
+
+        // البحث عن المنتج بالسيريال
+        function findProductBySerial(serial) {
+            return products.find(p => p.serial === serial);
+        }
+
+        // البحث عن المنتج في السلة
+        function findProductInCart(serial) {
+            return cart.find(item => item.serial === serial);
+        }
+
+        // Autocomplete للسيريال
+        serialInput.addEventListener('input', () => {
+            const value = serialInput.value.trim().toLowerCase();
+            suggestions.innerHTML = '';
+
+            if (!value) {
+                suggestions.style.display = 'none';
+                return;
+            }
+
+            const filteredProducts = products.filter(p => 
+                (p.serial?.toLowerCase().includes(value) || 
+                 p.name?.toLowerCase().includes(value))
+            );
+
+            if (filteredProducts.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.textContent = 'لا توجد منتجات مطابقة';
+                noResults.style.color = '#999';
+                noResults.style.padding = '12px';
+                noResults.style.textAlign = 'center';
+                suggestions.appendChild(noResults);
+            } else {
+                filteredProducts.forEach(p => {
+                    const div = document.createElement('div');
+                    const inCart = findProductInCart(p.serial);
+                    const cartIndicator = inCart ? `<span style="color: #4caf50; font-size: 12px;">(في السلة: ${inCart.cartQuantity})</span>` : '';
+                    const available = p.originalQuantity > 0 ? p.originalQuantity : 'غير محدود';
+                    
+                    div.innerHTML = `
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>
+                                <strong>${p.serial}</strong> - ${p.name}
+                            </div>
+                            ${cartIndicator}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                            <small style="color:#666">السعر: ${p.sellPrice || 0} جنيه</small>
+                            <small style="color:#666">المخزون: ${available}</small>
+                        </div>
+                    `;
+                    div.onclick = () => addToCart(p);
+                    suggestions.appendChild(div);
+                });
+            }
+            
+            suggestions.style.display = 'block';
+        });
+
+        // إخفاء الاقتراحات عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#serialInput') && !e.target.closest('.suggestions')) {
+                suggestions.style.display = 'none';
+            }
+        });
+
+        // إضافة منتج للسلة
+        function addToCart(product) {
+            // التحقق من توفر المنتج إذا كان محدود الكمية
+            if (product.originalQuantity > 0) {
+                const existingItem = findProductInCart(product.serial);
+                const totalInCart = existingItem ? existingItem.cartQuantity : 0;
+                
+                if (totalInCart >= product.originalQuantity) {
+                    showNotification(`الكمية المتاحة من ${product.name} هي ${product.originalQuantity} فقط`, 'error');
+                    return;
+                }
+            }
+            
+            const existingItem = findProductInCart(product.serial);
+            
+            if (existingItem) {
+                existingItem.cartQuantity += 1;
+                showNotification(`تم زيادة كمية ${product.name} إلى ${existingItem.cartQuantity}`, 'success');
+            } else {
+                cart.push({
+                    ...product,
+                    cartQuantity: 1
+                });
+                showNotification(`تم إضافة ${product.name} إلى السلة`, 'success');
+            }
+            
+            serialInput.value = '';
+            suggestions.style.display = 'none';
+            
+            updateCartUI();
+            saveCartToStorage();
+            serialInput.focus();
+        }
+
+        // تحديث واجهة السلة - الإصلاح هنا!
+        function updateCartUI() {
+            console.log('Updating cart UI, cart length:', cart.length);
+            console.log('Cart items:', cart);
+            
+            // تحديث عدد المنتجات
+            const totalItems = cart.reduce((sum, item) => sum + item.cartQuantity, 0);
+            cartCount.textContent = `${totalItems} ${totalItems === 1 ? 'منتج' : 'منتجات'}`;
+            
+            // إخفاء أو إظهار السلة الفارغة
+            if (cart.length === 0) {
+                emptyCart.style.display = 'block';
+                cartSummary.style.display = 'none';
+                completeBtn.disabled = true;
+                printBtn.disabled = true;
+                
+                // تنظيف محتوى cartItems
+                cartItems.innerHTML = '';
+                cartItems.appendChild(emptyCart);
+            } else {
+                emptyCart.style.display = 'none';
+                cartSummary.style.display = 'block';
+                completeBtn.disabled = false;
+                printBtn.disabled = false;
+                
+                // تحديث قائمة المنتجات
+                cartItems.innerHTML = '';
+                cart.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-details">
+                                <div>
+                                    <span class="item-price">${item.sellPrice} جنيه</span>
+                                    <span class="item-quantity">الكمية: ${item.cartQuantity}</span>
+                                </div>
+                                <div class="item-serial">السيريال: ${item.serial}</div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="item-btn" onclick="increaseQuantity(${index})">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="item-btn" onclick="decreaseQuantity(${index})">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button class="item-btn remove" onclick="removeFromCart(${index})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItems.appendChild(itemElement);
+                });
+                
+                updateCartSummary();
+                updatePrintInvoice();
+            }
+        }
+
+        // تحديث إحصائيات السلة
+        function updateCartSummary() {
+            const totalItems = cart.reduce((sum, item) => sum + item.cartQuantity, 0);
+            const totalAmount = cart.reduce((sum, item) => sum + (item.sellPrice * item.cartQuantity), 0);
+            
+            summaryCount.textContent = totalItems;
+            summaryTotal.textContent = `${totalAmount.toLocaleString()} جنيه`;
+        }
+
+        // تحديث نموذج الطباعة
+        function updatePrintInvoice() {
+            printItems.innerHTML = '';
+            let totalAmount = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.sellPrice * item.cartQuantity;
+                totalAmount += itemTotal;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.serial}</td>
+                    <td>${item.cartQuantity}</td>
+                    <td>${item.sellPrice} جنيه</td>
+                    <td>${itemTotal} جنيه</td>
+                `;
+                printItems.appendChild(row);
+            });
+            
+            printTotalAmount.textContent = `${totalAmount.toLocaleString()} جنيه`;
+        }
+
+        // زيادة كمية منتج
+        window.increaseQuantity = function(index) {
+            const item = cart[index];
+            const originalProduct = findProductBySerial(item.serial);
+            
+            if (originalProduct.originalQuantity > 0 && item.cartQuantity >= originalProduct.originalQuantity) {
+                showNotification(`الكمية المتاحة من ${item.name} هي ${originalProduct.originalQuantity} فقط`, 'error');
+                return;
+            }
+            
+            item.cartQuantity += 1;
+            updateCartUI();
+            saveCartToStorage();
+            showNotification(`تم زيادة كمية ${item.name} إلى ${item.cartQuantity}`, 'success');
+        };
+
+        // تقليل كمية منتج
+        window.decreaseQuantity = function(index) {
+            const item = cart[index];
+            
+            if (item.cartQuantity > 1) {
+                item.cartQuantity -= 1;
+                updateCartUI();
+                saveCartToStorage();
+                showNotification(`تم تقليل كمية ${item.name} إلى ${item.cartQuantity}`, 'success');
+            } else {
+                removeFromCart(index);
+            }
+        };
+
+        // حذف منتج من السلة
+        window.removeFromCart = function(index) {
+            const item = cart[index];
+            if (confirm(`هل تريد إزالة ${item.name} من السلة؟`)) {
+                cart.splice(index, 1);
+                updateCartUI(); // تحديث الواجهة فوراً
+                saveCartToStorage();
+                showNotification(`تم إزالة ${item.name} من السلة`, 'success');
+            }
+        };
+
+        // إضافة منتج آخر
+        window.addAnotherProduct = function() {
+            serialInput.focus();
+            showNotification('يمكنك الآن إضافة منتج آخر', 'success');
+        };
+
+        // تفريغ السلة
+        window.clearCart = function() {
+            if (cart.length === 0) {
+                showNotification('السلة فارغة بالفعل', 'error');
+                return;
+            }
+            
+            if (confirm('هل تريد تفريغ السلة بالكامل؟')) {
+                cart = [];
+                updateCartUI(); // تحديث الواجهة فوراً
+                saveCartToStorage();
+                showNotification('تم تفريغ السلة بالكامل', 'success');
+                serialInput.focus();
+            }
+        };
+
+        // إتمام عملية البيع (فاتورة واحدة – Document واحد)
+window.completeSale = async function () {
+    if (cart.length === 0) {
+        showNotification('السلة فارغة، أضف منتجات أولاً', 'error');
+        return;
+    }
+
+    if (!currentEmployee) {
+        showNotification('لا يوجد بيانات بائع صالحة', 'error');
+        return;
+    }
+
+    try {
+        const batch = writeBatch(db);
+        const now = Timestamp.now();
+
+        // ✅ التحقق من الكميات قبل أي حفظ
+        for (const item of cart) {
+            if (item.originalQuantity > 0 && item.cartQuantity > item.originalQuantity) {
+                showNotification(
+                    `الكمية المتاحة من ${item.name} هي ${item.originalQuantity} فقط`,
+                    'error'
+                );
+                return;
+            }
+        }
+
+        // تجهيز عناصر الفاتورة
+        const invoiceItems = cart.map(item => ({
+            productId: item.id,
+            name: item.name,
+            serial: item.serial,
+            price: item.sellPrice,
+            quantity: item.cartQuantity,
+            total: item.sellPrice * item.cartQuantity,
+            buyPrice: item.buyPrice
+        }));
+
+        const totalAmount = invoiceItems.reduce(
+            (sum, item) => sum + item.total,
+            0
+        );
+
+        // ✅ ID الفاتورة = رقم الفاتورة
+        const invoiceId = String(currentInvoiceNumber);
+        const invoiceRef = doc(db, 'sales', invoiceId);
+
+        // حفظ الفاتورة (Document واحد)
+        batch.set(invoiceRef, {
+            invoiceNumber: currentInvoiceNumber,
+            seller: {
+                name: currentEmployee.name,
+                phone: currentEmployee.phone
+            },
+            items: invoiceItems,
+            totalAmount,
+            createdAt: now,
+            date: new Date().toLocaleDateString('ar-EG'),
+            time: new Date().toLocaleTimeString('ar-EG')
+        });
+
+        // خصم الكميات من المنتجات
+        for (const item of cart) {
+            if (item.id && item.originalQuantity > 0) {
+                const productRef = doc(db, 'products', item.id);
+
+                batch.update(productRef, {
+                    quantity: increment(-item.cartQuantity)
+                });
+
+                // تحديث الكمية محليًا
+                const pIndex = products.findIndex(p => p.id === item.id);
+                if (pIndex !== -1) {
+                    products[pIndex].originalQuantity -= item.cartQuantity;
+                }
+            }
+        }
+
+        // تنفيذ كل العمليات مرة واحدة
+        await batch.commit();
+
+        // رسالة نجاح
+        showNotification(
+            `✅ تم إصدار الفاتورة رقم ${currentInvoiceNumber} بنجاح! 
+            إجمالي المبلغ: ${totalAmount.toLocaleString()} جنيه`,
+            'success'
+        );
+
+        // تفريغ السلة وتحديث الواجهة
+        cart = [];
+        saveCartToStorage();
+        updateCartUI();
+
+        // إنشاء فاتورة جديدة
+        generateInvoiceNumber();
+        updateInvoiceDate();
+
+        setTimeout(() => {
+            serialInput.focus();
+        }, 400);
+
+    } catch (error) {
+        console.error('Error completing sale:', error);
+        showNotification('حدث خطأ أثناء إتمام عملية البيع', 'error');
+    }
+};
+
+
+        // طباعة الفاتورة
+        window.printInvoice = function() {
+            if (cart.length === 0) {
+                showNotification('السلة فارغة، لا يمكن طباعة فاتورة', 'error');
+                return;
+            }
+
+            updatePrintInvoice();
+            
+            const printContent = document.getElementById('invoicePrint');
+            printContent.style.display = 'block';
+            
+            window.print();
+            
+            printContent.style.display = 'none';
+        };
+
+        // إعادة تعيين النموذج
+        window.resetForm = function() {
+            if (cart.length === 0) {
+                showNotification('لا توجد فاتورة للإلغاء', 'warning');
+                return;
+            }
+            
+            if (confirm('هل تريد إلغاء الفاتورة الحالية؟ سيتم تفريغ السلة.')) {
+                cart = [];
+                updateCartUI(); // تحديث الواجهة فوراً
+                saveCartToStorage();
+                
+                generateInvoiceNumber();
+                updateInvoiceDate();
+                
+                serialInput.focus();
+                showNotification('تم إلغاء الفاتورة، يمكنك بدء فاتورة جديدة', 'success');
+            }
+        };
+
+        // عرض الإشعارات
+        function showNotification(message, type = 'success') {
+            notificationMessage.textContent = message;
+            notification.className = `notification ${type}`;
+            
+            if (type === 'success') {
+                notificationIcon.className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                notificationIcon.className = 'fas fa-exclamation-circle';
+            } else if (type === 'warning') {
+                notificationIcon.className = 'fas fa-exclamation-triangle';
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                hideNotification();
+            }, 4000);
+        }
+
+        function hideNotification() {
+            notification.classList.remove('show');
+        }
+
+        // دعم الإدخال عن طريق Enter
+        serialInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const value = serialInput.value.trim();
+                if (value) {
+                    const product = findProductBySerial(value);
+                    if (product) {
+                        addToCart(product);
+                    } else {
+                        showNotification('لم يتم العثور على منتج بهذا السيريال', 'error');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

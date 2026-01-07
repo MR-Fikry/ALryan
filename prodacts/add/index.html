@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>الريان للادوات المنزليه</title>
+
+<!-- Basic SEO -->
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#000000">
+
+<!-- Open Graph (Social Media) -->
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://alryan.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://alryan.pages.dev/icon.jpg">
+
+<!-- PWA / Mobile App Feel -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="OS Store">
+<link rel="apple-touch-icon" href="https://alryan.pages.dev/icon.jpg">
+
+<!-- Preload main resources (سرعة أعلى) -->
+<link rel="preload" as="image" href="https://alryan.pages.dev/icon.jpg">
+
+<link rel="preload" as="style" href="style.css">
+
+<!-- CSS + Icons -->
+<link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Security Headers (خفيفة بدون سيرفر) -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+
+    <header>
+<h1>الريان للادوات المنزليه</h1>
+<img src="https://alryan.pages.dev/logo.png" class="logo">
+</header>
+  
+
+<h2>المنتجات</h2>
+
+<input type="text" id="search" placeholder=" ابحث بالاسم أو السيريال">
+
+<table>
+  <tbody id="products"></tbody>
+</table>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+    authDomain: "login-employees1.firebaseapp.com",
+    projectId: "login-employees1",
+    storageBucket: "login-employees1.firebasestorage.app",
+    messagingSenderId: "907414298566",
+    appId: "1:907414298566:web:0141762effe0e9ff289cc7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const tbody = document.getElementById('products');
+
+  async function loadProducts() {
+    const querySnapshot = await getDocs(collection(db, 'products'));
+    tbody.innerHTML = '';
+
+    querySnapshot.forEach((docSnap) => {
+      const p = docSnap.data();
+      const tr = document.createElement('tr');
+
+tr.innerHTML = `
+  <td>
+    <div class="product-card" data-name="${p.name}" data-serial="${p.serial}">
+      
+      <!-- الاسم فقط -->
+      <div class="product-name" onclick="toggleDetails('${docSnap.id}')">
+        ${p.name}
+      </div>
+
+      <!-- التفاصيل -->
+      <div class="product-details" id="details-${docSnap.id}" onclick="event.stopPropagation()">
+        
+        <label>السيريال</label>
+        <input value="${p.serial}" id="serial-${docSnap.id}">
+<br>
+        <label>سعر الشراء</label>
+        <input type="number" value="${p.buyPrice}" id="buy-${docSnap.id}">
+<br>
+        <label>سعر البيع</label>
+        <input type="number" value="${p.sellPrice}" id="sell-${docSnap.id}">
+<br>
+        <label>الكمية</label>
+        <input type="number" value="${p.quantity}" id="qty-${docSnap.id}">
+<br>
+        <button onclick="save('${docSnap.id}')">💾 حفظ</button>
+      </div>
+
+    </div>
+  </td>
+`;
+
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.toggleDetails = (id) => {
+    const el = document.getElementById(`details-${id}`);
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  };
+
+  window.save = async (id) => {
+    await updateDoc(doc(db, 'products', id), {
+      buyPrice: Number(document.getElementById(`buy-${id}`).value),
+      sellPrice: Number(document.getElementById(`sell-${id}`).value),
+      quantity: Number(document.getElementById(`qty-${id}`).value),
+      serial: document.getElementById(`serial-${id}`).value,
+    });
+    alert('تم حفظ التعديلات ✅');
+  };
+
+  document.getElementById('search').addEventListener('input', function () {
+    const value = this.value.toLowerCase();
+    document.querySelectorAll('.product-card').forEach(card => {
+      const name = card.dataset.name.toLowerCase();
+      const serial = card.dataset.serial.toLowerCase();
+      card.style.display =
+        name.includes(value) || serial.includes(value)
+          ? 'block'
+          : 'none';
+    });
+  });
+
+  loadProducts();
+</script>
+
+</body>
+</html>
