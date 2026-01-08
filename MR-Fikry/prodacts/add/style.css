@@ -63,6 +63,36 @@ margin: 20px 0;
 
 
 
+.bu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  border-radius: 20px;
+  gap: 20px;
+  width: 60%;
+  
+}
+
+.activ{
+  text-decoration: none;
+  background-color: #1d4ed8;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 13px;
+}
+
+.go{
+  text-decoration: none;
+  border:1px #1d4ed8 solid;
+  color: #1d4ed8;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 13px;
+}
+
+
     /* card */
     .product-card {
       background: #fff;

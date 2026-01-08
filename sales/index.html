@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الريان للأدوات المنزلية - فاتورة البيع</title>
+    <title> فاتورة البيع</title>
 
     <!-- Basic SEO -->
     <meta name="description" content="نظام مبيعات شركة الريان للأدوات المنزلية">
@@ -894,6 +894,7 @@
     <!-- نموذج طباعة الفاتورة (مخفي) -->
     <div id="invoicePrint" class="print-invoice">
         <div class="print-header">
+            <img src="/logo.png" alt="" class="logo">
             <h1>الريان للأدوات المنزلية</h1>
             <p>فاتورة بيع</p>
         </div>
@@ -906,7 +907,6 @@
             </div>
             <div>
                 <p><strong>اسم البائع:</strong> <span id="printSellerName">--</span></p>
-                <p><strong>هاتف البائع:</strong> <span id="printSellerPhone">--</span></p>
             </div>
         </div>
         
@@ -936,12 +936,15 @@
             <p>شكراً لتعاملكم مع الريان للأدوات المنزلية</p>
             <p>هاتف: 01050513227 | العنوان: البحيره , مركز بدر , قريه ابو بكر الصديق</p>
             <p>هذه الفاتورة صادرة إلكترونياً ولا تحتاج لتوقيع</p>
+            <br> <br> <br>
+                    <p>مطور بواسطه semsem <br>01144898934</p>
+
         </div>
     </div>
 
     <footer class="no-print">
-        <p>جميع الحقوق محفوظة &copy; 2023 - شركة الريان للأدوات المنزلية</p>
-        <p>نظام إدارة المبيعات الإلكتروني | الإصدار 4.1</p>
+        <p>جميع الحقوق محفوظة &copy; 2026 - شركة الريان للأدوات المنزلية</p>
+        <p>مطور بواسطه semsem <br>01144898934</p>
     </footer>
 
     <script type="module">
@@ -991,7 +994,6 @@
         const printInvoiceDate = document.getElementById('printInvoiceDate');
         const printInvoiceTime = document.getElementById('printInvoiceTime');
         const printSellerName = document.getElementById('printSellerName');
-        const printSellerPhone = document.getElementById('printSellerPhone');
         const printItems = document.getElementById('printItems');
         const printTotalAmount = document.getElementById('printTotalAmount');
 
@@ -1040,7 +1042,6 @@
                     
                     // تحديث بيانات الطباعة
                     printSellerName.textContent = employee.name || 'غير معروف';
-                    printSellerPhone.textContent = employee.phone || 'غير معروف';
                 } else {
                     showNotification('لم يتم العثور على بيانات البائع. الرجاء تسجيل الدخول مرة أخرى.', 'error');
                 }

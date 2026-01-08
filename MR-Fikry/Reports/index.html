@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تقارير | الريان</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="icon.jpg">
+
+</head>
+<body>
+
+<header>
+<h1>الريان للادوات المنزليه</h1>
+<img src="logo.png" class="logo">
+</header>
+
+
+<section class="search-box">
+  <input type="text" id="searchInput" placeholder="🔍 رقم الفاتورة أو اسم البائع">
+  <input type="date" id="searchDate">
+  <button onclick="searchInvoices()">بحث</button>
+
+  <p class="result-count">
+    عدد الفواتير: <span id="resultCount">0</span>
+  </p>
+</section>
+
+
+<section class="dashboard">
+  <div class="box">
+    <h3>عدد الفواتير</h3>
+    <p id="invoiceCount">0</p>
+  </div>
+  <div class="box">
+    <h3>إجمالي المبيعات</h3>
+    <p id="totalSales">0</p>
+  </div>
+  <div class="box">
+    <h3>الأرباح</h3>
+    <p id="totalProfit">0</p>
+  </div>
+</section>
+
+<!-- فاتورة الطباعة -->
+<div id="invoicePrint" class="print-invoice">
+
+    <div class="print-header">
+        <img src="/logo.png" class="logo">
+        <h1>الريان للأدوات المنزلية</h1>
+        <p>فاتورة بيع</p>
+    </div>
+
+    <div class="print-details">
+        <div>
+
+            <p>رقم الفاتورة: <span id="printInvoiceNumber"></span>#</p>
+            <p>اسم البائع: <span id="printSeller"></span></p>
+        </div>
+        <div>
+            <p>التاريخ: <span id="printDate"></span></p>
+            <p>الوقت: <span id="printTime"></span></p>
+        </div>
+    </div>
+
+    <table class="print-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>اسم المنتج</th>
+                <th>السيريال</th>
+                <th>الكمية</th>
+                <th>سعر الوحدة</th>
+                <th>الإجمالي</th>
+            </tr>
+        </thead>
+        <tbody id="printItems"></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" style="text-align:left">الإجمالي النهائي:</td>
+                <td id="printTotalAmount">0 جنيه</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="print-footer">
+        <p>شكراً لتعاملكم مع الريان للأدوات المنزلية</p>
+        <p>هاتف: 01050513227 | العنوان: البحيره , مركز بدر , قريه ابو بكر الصديق</p>
+        <p>هذه الفاتورة صادرة إلكترونياً ولا تحتاج لتوقيع</p>
+        <br><br>
+        <p>مطور بواسطة semsem<br>01144898934</p>
+    </div>
+
+</div>
+
+<section class="days" id="daysContainer"></section>
+
+<section class="cards" id="invoicesContainer"></section>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MR-Fikry</title>
+
+<!-- Basic SEO -->
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#000000">
+
+<!-- Open Graph (Social Media) -->
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://alryan.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://alryan.pages.dev/icon.jpg">
+
+<!-- PWA / Mobile App Feel -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="OS Store">
+<link rel="apple-touch-icon" href="https://alryan.pages.dev/icon.jpg">
+
+<!-- Preload main resources (سرعة أعلى) -->
+<link rel="preload" as="image" href="https://alryan.pages.dev/icon.jpg">
+
+<link rel="preload" as="style" href="style.css">
+
+<!-- CSS + Icons -->
+<link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Security Headers (خفيفة بدون سيرفر) -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+
+<!-- شاشة تسجيل الدخول -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <h2>تسجيل الدخول</h2>
+
+    <input type="text" id="username" placeholder="اسم المستخدم">
+    <input type="password" id="password" placeholder="كلمة المرور">
+
+    <button onclick="login()">دخول</button>
+
+    <p id="loginError"></p>
+  </div>
+</div>
+
+
+ <header>
+  <h1>الريان للادوات المنزليه</h1>
+  <img src="logo.png" class="logo">
+ </header>
+
+ <div class="text-top">
+ <h1>لــــوحه التحكم</h1>
+ <h3>Control panel</h3>
+</div>
+
+<div class="show">
+
+  <!-- عدد فواتير اليوم -->
+  <div class="dashboard">
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-file-invoice"></i>
+        <span>فواتير اليوم</span>
+      </div>
+      <div class="card-body">
+        <h2 id="todayInvoiceCount">0</h2>
+        <p id="todayDate"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- مبيعات اليوم -->
+  <div class="dashboard">
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-coins"></i>
+        <span>مبيعات اليوم</span>
+      </div>
+      <div class="card-body">
+        <h2 id="todaySales">—</h2>
+        <p>إجمالي المبيعات</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- أرباح اليوم -->
+  <div class="dashboard">
+    <div class="card monthly">
+      <div class="card-header">
+        <i class="fas fa-chart-line"></i>
+        <span>أرباح اليوم</span>
+      </div>
+      <div class="card-body">
+        <h2 id="todayProfit">—</h2>
+        <p>صافي الربح</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="patg">
+  <a href="prodacts/" class="green">
+    <i class="fas fa-box"></i>
+    <span>المنتجــــات</span>
+  </a>
+
+  <a href="Reports/" class="blu">
+    <i class="fas fa-chart-line"></i>
+    <span>التقـــارير</span>
+  </a>
+
+  <a href="" class="bana">
+    <i class="fas fa-users"></i>
+    <span>الموظفيـــن</span>
+  </a>
+</div>
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+  Timestamp
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+  authDomain: "login-employees1.firebaseapp.com",
+  projectId: "login-employees1",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// عناصر العرض
+const todayInvoiceCountEl = document.getElementById('todayInvoiceCount');
+const todaySalesEl = document.getElementById('todaySales');
+const todayProfitEl = document.getElementById('todayProfit');
+const todayDateEl = document.getElementById('todayDate');
+
+async function loadTodayDashboard() {
+  try {
+    const now = new Date();
+
+    const startOfDay = new Date(now);
+    startOfDay.setHours(0,0,0,0);
+
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23,59,59,999);
+
+    const q = query(
+      collection(db, 'sales'),
+      where('createdAt', '>=', Timestamp.fromDate(startOfDay)),
+      where('createdAt', '<=', Timestamp.fromDate(endOfDay))
+    );
+
+    const snapshot = await getDocs(q);
+
+    let totalSales = 0;
+    let totalProfit = 0;
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      // إجمالي المبيعات
+      totalSales += data.totalAmount || 0;
+
+      // حساب الأرباح من items
+      if (Array.isArray(data.items)) {
+        data.items.forEach(item => {
+          const profitPerItem = (item.price - item.buyPrice) * item.quantity;
+          totalProfit += profitPerItem;
+        });
+      }
+    });
+
+    // عرض النتائج
+    todayInvoiceCountEl.textContent = snapshot.size;
+    todaySalesEl.textContent = `${totalSales.toLocaleString()} جنيه`;
+    todayProfitEl.textContent = `${totalProfit.toLocaleString()} جنيه`;
+    todayDateEl.textContent = now.toLocaleDateString('ar-EG');
+
+  } catch (error) {
+    console.error('❌ خطأ تحميل بيانات اليوم:', error);
+    todaySalesEl.textContent = '—';
+    todayProfitEl.textContent = '—';
+    todayInvoiceCountEl.textContent = '—';
+  }
+}
+
+loadTodayDashboard();
+</script>
+
+<script>
+/* ===== إعدادات ===== */
+const USERS = [
+  { username: "admin", password: "1234" },
+  { username: "ryan", password: "2026" }
+];
+
+const SESSION_HOURS = 8; // مدة الجلسة بالساعات
+
+/* ===== فحص الجلسة عند فتح الصفحة ===== */
+checkSession();
+
+function checkSession() {
+  const loggedIn = sessionStorage.getItem("loggedIn");
+  const loginTime = sessionStorage.getItem("loginTime");
+
+  if (!loggedIn || !loginTime) {
+    showLogin();
+    return;
+  }
+
+  const now = Date.now();
+  const diffHours = (now - Number(loginTime)) / (1000 * 60 * 60);
+
+  if (diffHours > SESSION_HOURS) {
+    logout();
+  } else {
+    hideLogin();
+  }
+}
+
+/* ===== تسجيل الدخول ===== */
+function login() {
+  const u = document.getElementById("username").value.trim();
+  const p = document.getElementById("password").value.trim();
+
+  const user = USERS.find(
+    x => x.username === u && x.password === p
+  );
+
+  if (user) {
+    sessionStorage.setItem("loggedIn", "true");
+    sessionStorage.setItem("username", u);
+    sessionStorage.setItem("loginTime", Date.now());
+
+    hideLogin();
+  } else {
+    document.getElementById("loginError").textContent =
+      "اسم المستخدم أو كلمة المرور غير صحيحة";
+  }
+}
+
+/* ===== تسجيل خروج ===== */
+function logout() {
+  sessionStorage.clear();
+  location.reload();
+}
+
+/* ===== إظهار / إخفاء ===== */
+function showLogin() {
+  document.getElementById("loginScreen").style.display = "flex";
+}
+
+function hideLogin() {
+  document.getElementById("loginScreen").style.display = "none";
+}
+</script>
+
+
+</body>
+</html>

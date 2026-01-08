@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family:  "Cairo", sans-serif;
+    direction: rtl;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+
+}
+
+
+.logo{
+    width: 70px;
+}
+/* ======================
+   DASHBOARD
+====================== */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  padding: 20px;
+}
+
+.box {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px 15px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0,0,0,.12);
+}
+
+.box h3 {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.box p {
+  font-size: 26px;
+  font-weight: bold;
+  color: #111;
+}
+
+
+/* ======================
+   DAYS FILTER
+====================== */
+.days {
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.days button {
+  margin: 6px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #111, #333);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-family:  "Cairo", sans-serif;
+  transition: background .2s ease, transform .15s ease;
+}
+
+.days button:hover {
+  background: linear-gradient(135deg, #333, #555);
+  transform: scale(1.05);
+}
+
+
+/* ======================
+   INVOICE CARDS
+====================== */
+.cards {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.invoice-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.invoice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+}
+
+.invoice-card h4 {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.invoice-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.invoice-card button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px;
+  background: linear-gradient(135deg, #000, #222);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background .2s ease, transform .15s ease;
+}
+
+.invoice-card button:hover {
+  background: linear-gradient(135deg, #222, #444);
+  transform: translateY(-1px);
+}
+
+
+
+.print-invoice {
+    display: none;
+    background: white;
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    direction: rtl;
+}
+
+.print-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 20px;
+}
+
+.print-header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.print-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.print-table th {
+    background-color: #f5f5f5;
+    padding: 12px;
+    text-align: right;
+    border: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.print-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: right;
+}
+
+.print-table tfoot td {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.print-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+
+/* الطباعة */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #invoicePrint, #invoicePrint * {
+        visibility: visible;
+    }
+
+    #invoicePrint {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+.logo{
+    width: 60px;
+}
+
+@media (max-width:420px) {
+    header{
+        padding:20px 30px;
+    }
+    header h1{
+        font-size: 16px;
+    }
+
+    .logo{
+        width: 40px;
+    }
+}
+
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px 20px;
+  background: #fff;
+  border-radius: 12px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 160px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.search-box button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.result-count {
+  width: 100%;
+  margin-top: 10px;
+  font-weight: bold;
+}
