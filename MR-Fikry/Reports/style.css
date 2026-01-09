@@ -198,14 +198,14 @@ header{
     border-top: 1px solid #ddd;
     color: #666;
 }
-
 /* ================== الطباعة A5 ================== */
 @media print {
 
-    /* إخفاء كل حاجة */
-    body * {
-        visibility: hidden !important;
-    }
+body > *:not(#invoicePrint) {
+  display: none !important;
+}
+
+
     .logo{
       width: 10px;
     }
@@ -218,17 +218,17 @@ header{
 
     #invoicePrint {
         display: block !important;
-        position: absolute;
-        inset: 0;
+        position: absolute;     /* ✅ زي ما هو */
+        top: 0;                 /* ✅ بدل inset */
+        left: 0;                /* ✅ بدل inset */
         width: 100%;
         max-width: 100%;
-        justify-content: center;
-        margin: 0 auto;
-        padding: 30px;              /* 🔥 تقليل المسافات */
         margin: 0;
+        padding: 30px;
         background: #fff;
-        font-size: 11px;           /* 🔥 تصغير الخط */
+        font-size: 11px;
         line-height: 1.2;
+        height: auto;           /* 🔥 مهم جدًا */
     }
 
     .print-header h1{
@@ -242,21 +242,21 @@ header{
     /* مقاس الورقة A5 */
     @page {
         size: A5 portrait;
-        margin: 6mm;               /* 🔥 هوامش صغيرة */
+        margin: 6mm;
     }
 
     /* الجدول */
     table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 10.5px;         /* 🔥 أصغر شوية */
+        font-size: 10.5px;
     }
 
     th, td {
-        padding: 4px 3px;          /* 🔥 ضغط الخلايا */
+        padding: 4px 3px;
         border: 1px solid #000;
         text-align: right;
-        white-space: nowrap;       /* 🔥 يمنع التكسير */
+        white-space: normal;   /* 🔥 بدل nowrap */
     }
 
     thead th {
@@ -274,19 +274,16 @@ header{
         page-break-inside: avoid;
     }
 
-    /* إخفاء أي عناصر مش مطلوبة */
     .no-print {
         display: none !important;
     }
 
-    /* تقليل العناوين */
     h1 { font-size: 16px; margin: 4px 0; }
     h2 { font-size: 14px; margin: 4px 0; }
     h3 { font-size: 13px; margin: 3px 0; }
     p  { margin: 2px 0; }
     .print-table tfoot td{ font-size: 10px;}
 }
-
 
 
 
