@@ -94,14 +94,57 @@ function renderInvoices(day) {
     card.className = "invoice-card";
 
     card.innerHTML = `
-      <h4>فاتورة #${inv.invoiceNumber}</h4>
-      <p>👤 البائع: <strong>${inv.seller?.name || "—"}</strong></p>
-      <p>👤 المشتري: <strong>${inv.buyer?.name || "—"}</strong></p>
-      <p>💰 الإجمالي: <strong>${inv.totalAmount} جنيه</strong></p>
-
-      <div class="card-actions">
-        <button onclick="showInvoice('${id}')">👁 عرض</button>
-        <button onclick="printInvoice('${id}')">🖨 طباعة</button>
+      <div class="invoice-header">
+        <div class="invoice-number">فاتورة #${inv.invoiceNumber}</div>
+        <div class="invoice-date">${inv.date || "—"}</div>
+      </div>
+      
+      <div class="invoice-content">
+        <div class="detail-item">
+          <div class="detail-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="detail-info">
+            <div class="detail-label">البائع</div>
+            <div class="detail-value">${inv.seller?.name || "غير محدد"}</div>
+          </div>
+        </div>
+        
+        <div class="detail-item">
+          <div class="detail-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="detail-info">
+            <div class="detail-label">المشتري</div>
+            <div class="detail-value">${inv.buyer?.name || "غير محدد"}</div>
+          </div>
+        </div>
+        
+        <div class="detail-item">
+          <div class="detail-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="detail-info">
+            <div class="detail-label">الوقت</div>
+            <div class="detail-value">${inv.time || "—"}</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="invoice-total">
+        <div class="total-label">المبلغ الإجمالي</div>
+        <div class="total-amount">${inv.totalAmount} جنيه</div>
+      </div>
+      
+      <div class="invoice-actions">
+        <button class="action-btn view-btn" onclick="showInvoice('${id}')">
+          <i class="fas fa-eye"></i>
+          <span>عرض</span>
+        </button>
+        <button class="action-btn print-btn" onclick="printInvoice('${id}')">
+          <i class="fas fa-print"></i>
+          <span>طباعة</span>
+        </button>
       </div>
     `;
 
