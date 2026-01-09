@@ -20,10 +20,6 @@ header{
 }
 
 
-.logo{
-    width: 70px;
-}
-
 /* ======================
    DASHBOARD
 ====================== */
@@ -152,7 +148,7 @@ header{
 
 .print-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     border-bottom: 2px solid #333;
     padding-bottom: 20px;
 }
@@ -165,7 +161,6 @@ header{
 .print-details {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid #ddd;
 }
@@ -193,7 +188,7 @@ header{
 .print-table tfoot td {
     background-color: #f9f9f9;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .print-footer {
@@ -204,47 +199,96 @@ header{
     color: #666;
 }
 
-/* الطباعة */
+/* ================== الطباعة A5 ================== */
 @media print {
 
+    /* إخفاء كل حاجة */
     body * {
         visibility: hidden !important;
     }
+    .logo{
+      width: 10px;
+    }
 
+    /* إظهار الفاتورة فقط */
     #invoicePrint,
     #invoicePrint * {
         visibility: visible !important;
     }
 
     #invoicePrint {
-        display: block !important;   /* 🔥 دي أهم سطر */
+        display: block !important;
         position: absolute;
-        left: 0;
-        top: 0;
+        inset: 0;
         width: 100%;
         max-width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding: 30px;              /* 🔥 تقليل المسافات */
         margin: 0;
-        padding: 15px;
         background: #fff;
+        font-size: 11px;           /* 🔥 تصغير الخط */
+        line-height: 1.2;
     }
 
-    /* منع الهوامش الغريبة في الموبايل */
+    .print-header h1{
+      font-size: 15px;
+    }
+
+    .print-footer{
+      margin: 0;
+    }
+
+    /* مقاس الورقة A5 */
     @page {
-        margin: 10mm;
-        size: auto;
+        size: A5 portrait;
+        margin: 6mm;               /* 🔥 هوامش صغيرة */
     }
 
+    /* الجدول */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10.5px;         /* 🔥 أصغر شوية */
+    }
+
+    th, td {
+        padding: 4px 3px;          /* 🔥 ضغط الخلايا */
+        border: 1px solid #000;
+        text-align: right;
+        white-space: nowrap;       /* 🔥 يمنع التكسير */
+    }
+
+    thead th {
+        font-weight: bold;
+        background: #f1f1f1;
+    }
+
+    tfoot td {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    /* منع تقطيع الصفوف */
+    table, tr, td, th {
+        page-break-inside: avoid;
+    }
+
+    /* إخفاء أي عناصر مش مطلوبة */
     .no-print {
         display: none !important;
     }
 
-    @media print {
-    table, tr, td, th {
-        page-break-inside: avoid;
-    }
+    /* تقليل العناوين */
+    h1 { font-size: 16px; margin: 4px 0; }
+    h2 { font-size: 14px; margin: 4px 0; }
+    h3 { font-size: 13px; margin: 3px 0; }
+    p  { margin: 2px 0; }
+    .print-table tfoot td{ font-size: 10px;}
 }
 
-}
+
+
 
 .logo{
     width: 60px;
