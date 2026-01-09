@@ -49,9 +49,12 @@ async function init() {
     invoicesByDay[day].push(doc.id);
   });
 
-  invoiceCountEl.textContent = snap.size;
-  totalSalesEl.textContent = totalSales + " جنيه";
-  totalProfitEl.textContent = totalProfit + " جنيه";
+ totalProfitEl.textContent =
+  totalProfit.toLocaleString("ar-EG", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }) + " جنيه";
+
 
   renderDays();
 }
@@ -78,6 +81,7 @@ function renderInvoices(day) {
     card.innerHTML = `
   <h4>فاتورة #${inv.invoiceNumber}</h4>
   <p>👤 البائع: <strong>${inv.seller?.name || "—"}</strong></p>
+  <p>👤 المشتري: <strong>${inv.buyer?.name || "—"}</strong></p>
   <p>💰 الإجمالي: <strong>${inv.totalAmount} جنيه</strong></p>
 
   <div class="card-actions">
@@ -94,7 +98,6 @@ function renderInvoices(day) {
   });
 }
 
-
 window.showInvoice = function (id) {
   const inv = allInvoices[id];
   if (!inv) {
@@ -108,6 +111,10 @@ window.showInvoice = function (id) {
   document.getElementById("printInvoiceNumber").textContent = inv.invoiceNumber;
   document.getElementById("printSeller").textContent =
     inv.seller?.name || "—";
+
+  // ✅ اسم المشتري
+  document.getElementById("printBuyer").textContent =
+    inv.buyer?.name || "—";
 
   document.getElementById("printDate").textContent = inv.date;
   document.getElementById("printTime").textContent = inv.time;
@@ -133,6 +140,7 @@ window.showInvoice = function (id) {
 
   box.scrollIntoView({ behavior: "smooth" });
 };
+
 
 window.printInvoice = function (id) {
   window.showInvoice(id);
