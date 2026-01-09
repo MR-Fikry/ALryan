@@ -25,7 +25,7 @@ header{
 ====================== */
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 3fr));
   gap: 18px;
   padding: 20px;
 }
@@ -305,6 +305,10 @@ header{
     .logo{
         width: 40px;
     }
+
+    #invoiceCount , #totalSales , #totalProfit {
+      font-size: 18px;
+    }
 }
 
 .search-box {
@@ -347,6 +351,148 @@ header{
 
 
 
+/* ====== Invoice Card ====== */
+.invoice-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 14px 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
+}
+
+/* ====== Header ====== */
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ddd;
+}
+
+.invoice-number {
+  font-size: 16px;
+  font-weight: bold;
+  color: #1d4ed8;
+}
+
+.invoice-date {
+  font-size: 13px;
+  color: #666;
+}
+
+/* ====== Content ====== */
+.invoice-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+}
+
+.detail-info {
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 12px;
+  color: #888;
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #111;
+}
+
+/* ====== Total ====== */
+.invoice-total {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.total-label {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.total-amount {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+/* ====== Actions ====== */
+.invoice-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  flex: 1;
+  border: none;
+  border-radius: 14px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.view-btn {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.view-btn:hover {
+  background: #dbeafe;
+}
+
+.print-btn {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.print-btn:hover {
+  background: #dcfce7;
+}
+
+/* ====== Mobile Optimization ====== */
+@media (max-width: 480px) {
+  .invoice-card {
+    padding: 14px;
+  }
+
+  .total-amount {
+    font-size: 18px;
+  }
+}
 
 
 .day-summary {

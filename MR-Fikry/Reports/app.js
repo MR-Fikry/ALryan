@@ -220,9 +220,23 @@ window.printInvoice = function (id) {
 
 init();
 
+
+function normalizeArabic(text = "") {
+  return text
+    .toLowerCase()
+    .replace(/[أإآ]/g, "ا")
+    .replace(/ة/g, "ه")
+    .replace(/ى/g, "ي")
+    .replace(/\s+/g, "")
+    .replace(/[٠-٩]/g, d => "0123456789"["٠١٢٣٤٥٦٧٨٩".indexOf(d)]);
+}
 window.searchInvoices = function () {
-  const text = document.getElementById("searchInput").value.trim().toLowerCase();
-  const date = document.getElementById("searchDate").value;
+  const text = document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "");
 
   invoicesContainer.innerHTML = "";
   let count = 0;
@@ -230,42 +244,67 @@ window.searchInvoices = function () {
   Object.keys(allInvoices).forEach(id => {
     const inv = allInvoices[id];
 
-    let matchText = false;
-    let matchDate = false;
+    // القيم اللي هنبحث فيها
+    const invoiceNumber =
+      inv.invoiceNumber?.toString().toLowerCase() || "";
 
-    // بحث بالرقم أو اسم البائع
-    if (text) {
-      if (
-        inv.invoiceNumber?.toString().includes(text) ||
-        inv.seller?.name?.toLowerCase().includes(text)
-      ) {
-        matchText = true;
-      }
-    } else {
-      matchText = true;
-    }
+    const sellerName =
+      inv.seller?.name?.toLowerCase().replace(/\s+/g, "") || "";
 
-    // بحث بالتاريخ
-    if (date) {
-      matchDate = inv.createdAt.toDate().toISOString().split("T")[0] === date;
-    } else {
-      matchDate = true;
-    }
+    const buyerName =
+      inv.buyer?.name?.toLowerCase().replace(/\s+/g, "") || "";
 
-    if (matchText && matchDate) {
+    const matchText =
+      !text ||
+      invoiceNumber.includes(text) ||
+      sellerName.includes(text) ||
+      buyerName.includes(text);
+
+    if (matchText) {
       count++;
 
       const card = document.createElement("div");
       card.className = "invoice-card";
-      card.innerHTML = `
-        <h4>فاتورة #${inv.invoiceNumber}</h4>
-        <p>👤 البائع: ${inv.seller?.name || "—"}</p>
-        <p>📅 ${inv.date}</p>
-        <p>💰 ${inv.totalAmount} جنيه</p>
 
-        <button onclick="showInvoice('${id}')">عرض</button>
-        <button onclick="printInvoice('${id}')">طباعة</button>
+      // ✅ نفس الاستايل بتاع العرض العادي
+      card.innerHTML = `
+        <div class="invoice-header">
+          <div class="invoice-number">فاتورة #${inv.invoiceNumber}</div>
+          <div class="invoice-date">${inv.date || "—"}</div>
+        </div>
+
+        <div class="invoice-content">
+          <div class="detail-item">
+            <div class="detail-label">البائع</div>
+            <div class="detail-value">${inv.seller?.name || "—"}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">المشتري</div>
+            <div class="detail-value">${inv.buyer?.name || "—"}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">الوقت</div>
+            <div class="detail-value">${inv.time || "—"}</div>
+          </div>
+        </div>
+
+        <div class="invoice-total">
+          <div class="total-label">المبلغ الإجمالي</div>
+          <div class="total-amount">${inv.totalAmount} جنيه</div>
+        </div>
+
+        <div class="invoice-actions">
+          <button class="action-btn view-btn" onclick="showInvoice('${id}')">
+            👁 عرض
+          </button>
+          <button class="action-btn print-btn" onclick="printInvoice('${id}')">
+            🖨 طباعة
+          </button>
+        </div>
       `;
+
       invoicesContainer.appendChild(card);
     }
   });
