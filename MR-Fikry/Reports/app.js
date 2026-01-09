@@ -54,10 +54,10 @@ async function init() {
   totalProfitEl.textContent = totalProfit + " جنيه";
 
   totalProfitEl.textContent =
-  totalProfit.toLocaleString("ar-EG", {
+  totalProfit.toLocaleString("en-EG", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
-  }) + " جنيه";
+  }) + " جنيه ";
 
 
 
@@ -73,35 +73,58 @@ function renderDays() {
     daysContainer.appendChild(btn);
   });
 }
-
 function renderInvoices(day) {
   invoicesContainer.innerHTML = "";
 
+  let daySales = 0;
+  let dayProfit = 0;
+
   invoicesByDay[day].forEach(id => {
     const inv = allInvoices[id];
+
+    // 🔹 إجمالي اليوم
+    daySales += inv.totalAmount || 0;
+
+    inv.items?.forEach(i => {
+      const profit = (i.price - i.buyPrice) * i.quantity;
+      dayProfit += Number(profit.toFixed(2));
+    });
 
     const card = document.createElement("div");
     card.className = "invoice-card";
 
     card.innerHTML = `
-  <h4>فاتورة #${inv.invoiceNumber}</h4>
-  <p>👤 البائع: <strong>${inv.seller?.name || "—"}</strong></p>
-          <p>👤 المشتري: <strong>${inv.buyer?.name || "—"}</strong></p>
-  <p>💰 الإجمالي: <strong>${inv.totalAmount} جنيه</strong></p>
+      <h4>فاتورة #${inv.invoiceNumber}</h4>
+      <p>👤 البائع: <strong>${inv.seller?.name || "—"}</strong></p>
+      <p>👤 المشتري: <strong>${inv.buyer?.name || "—"}</strong></p>
+      <p>💰 الإجمالي: <strong>${inv.totalAmount} جنيه</strong></p>
 
-  <div class="card-actions">
-    <button class="view-btn" onclick="showInvoice('${id}')">
-      👁 عرض الفاتورة
-    </button>
-    <button class="print-btn" onclick="printInvoice('${id}')">
-      🖨 طباعة
-    </button>
-  </div>
-`;
+      <div class="card-actions">
+        <button onclick="showInvoice('${id}')">👁 عرض</button>
+        <button onclick="printInvoice('${id}')">🖨 طباعة</button>
+      </div>
+    `;
 
     invoicesContainer.appendChild(card);
   });
+
+  // 🟢 عرض ملخص اليوم
+  document.getElementById("daySummary").style.display = "block";
+
+  document.getElementById("daySales").textContent =
+    daySales.toLocaleString("ar-EG", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + " جنيه";
+
+  document.getElementById("dayProfit").textContent =
+    dayProfit.toLocaleString("ar-EG", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + " جنيه";
 }
+
+
 
 window.showInvoice = function (id) {
   const inv = allInvoices[id];

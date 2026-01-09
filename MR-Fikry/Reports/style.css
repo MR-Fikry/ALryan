@@ -23,6 +23,7 @@ header{
 .logo{
     width: 70px;
 }
+
 /* ======================
    DASHBOARD
 ====================== */
@@ -205,25 +206,46 @@ header{
 
 /* الطباعة */
 @media print {
+
     body * {
-        visibility: hidden;
+        visibility: hidden !important;
     }
 
-    #invoicePrint, #invoicePrint * {
-        visibility: visible;
+    #invoicePrint,
+    #invoicePrint * {
+        visibility: visible !important;
     }
 
     #invoicePrint {
+        display: block !important;   /* 🔥 دي أهم سطر */
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 15px;
+        background: #fff;
+    }
+
+    /* منع الهوامش الغريبة في الموبايل */
+    @page {
+        margin: 10mm;
+        size: auto;
     }
 
     .no-print {
         display: none !important;
     }
+
+    @media print {
+    table, tr, td, th {
+        page-break-inside: avoid;
+    }
 }
+
+}
+
 .logo{
     width: 60px;
 }
@@ -274,4 +296,59 @@ header{
   width: 100%;
   margin-top: 10px;
   font-weight: bold;
+}
+
+
+
+
+
+
+
+
+.day-summary {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #fff;
+  padding: 18px 20px;
+  border-radius: 20px;
+  margin: 16px;
+  box-shadow:
+    0 12px 30px rgba(37, 99, 235, 0.35),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* لمسة خفيفة ديكور */
+.day-summary::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.12),
+    transparent 60%
+  );
+}
+
+.day-summary h3 {
+  margin: 0 0 12px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+.day-summary p {
+  margin: 8px 0;
+  font-size: 15.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.day-summary strong {
+  font-size: 18px;
+  font-weight: 700;
 }

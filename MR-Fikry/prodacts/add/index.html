@@ -101,10 +101,13 @@ tr.innerHTML = `
     <div class="product-card" data-name="${p.name}" data-serial="${p.serial}">
       
       <!-- الاسم فقط -->
+     <div class="product">
       <div class="product-name" onclick="toggleDetails('${docSnap.id}')">
         ${p.name}
+        <br>
+        <span>الكميه :${p.quantity}</span>
       </div>
-
+     </div>
       <!-- التفاصيل -->
       <div class="product-details" id="details-${docSnap.id}" onclick="event.stopPropagation()">
         

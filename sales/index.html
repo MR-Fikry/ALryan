@@ -773,6 +773,47 @@
             border-top: 1px solid #ddd;
             color: #666;
         }
+        @media print {
+
+    body * {
+        visibility: hidden !important;
+    }
+
+    #invoicePrint,
+    #invoicePrint * {
+        visibility: visible !important;
+    }
+
+    #invoicePrint {
+        display: block !important;   /* 🔥 دي أهم سطر */
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 15px;
+        background: #fff;
+    }
+
+    /* منع الهوامش الغريبة في الموبايل */
+    @page {
+        margin: 10mm;
+        size: auto;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
+@media print {
+    table, tr, td, th {
+        page-break-inside: avoid;
+    }
+}
+
+
     </style>
 </head>
 <body>
