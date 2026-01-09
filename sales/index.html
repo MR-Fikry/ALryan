@@ -811,6 +811,21 @@
             <h2><i class="fas fa-receipt"></i> فاتورة بيع</h2>
         </div>
 
+        <!-- قسم اسم المشتري -->
+<div class="input-section">
+    <label class="input-label">
+        <i class="fas fa-user"></i> اسم المشتري
+    </label>
+    <input 
+        type="text"
+        id="buyerNameInput"
+        class="serial-input"
+        placeholder="اكتب اسم المشتري..."
+        autocomplete="off"
+    >
+</div>
+
+
         <!-- قسم إدخال السيريال -->
         <div class="input-section">
             <label class="input-label">
@@ -905,9 +920,11 @@
                 <p><strong>التاريخ:</strong> <span id="printInvoiceDate">--</span></p>
                 <p><strong>الوقت:</strong> <span id="printInvoiceTime">--</span></p>
             </div>
-            <div>
-                <p><strong>اسم البائع:</strong> <span id="printSellerName">--</span></p>
-            </div>
+           <div>
+            <p><strong>اسم البائع:</strong> <span id="printSellerName">--</span></p>
+            <p><strong>اسم المشتري:</strong> <span id="printBuyerName">--</span></p>
+           </div>
+
         </div>
         
         <table class="print-table">
@@ -988,6 +1005,7 @@
         const notification = document.getElementById('notification');
         const notificationMessage = document.getElementById('notificationMessage');
         const notificationIcon = document.getElementById('notificationIcon');
+        
 
         // عناصر طباعة الفاتورة
         const printInvoiceNumber = document.getElementById('printInvoiceNumber');
@@ -1296,27 +1314,31 @@
 
         // تحديث نموذج الطباعة
         function updatePrintInvoice() {
-            printItems.innerHTML = '';
-            let totalAmount = 0;
-            
-            cart.forEach((item, index) => {
-                const itemTotal = item.sellPrice * item.cartQuantity;
-                totalAmount += itemTotal;
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${item.name}</td>
-                    <td>${item.serial}</td>
-                    <td>${item.cartQuantity}</td>
-                    <td>${item.sellPrice} جنيه</td>
-                    <td>${itemTotal} جنيه</td>
-                `;
-                printItems.appendChild(row);
-            });
-            
-            printTotalAmount.textContent = `${totalAmount.toLocaleString()} جنيه`;
-        }
+    printItems.innerHTML = '';
+    let totalAmount = 0;
+
+    const buyerName = document.getElementById('buyerNameInput').value || '—';
+    document.getElementById('printBuyerName').textContent = buyerName;
+
+    cart.forEach((item, index) => {
+        const itemTotal = item.sellPrice * item.cartQuantity;
+        totalAmount += itemTotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.serial}</td>
+            <td>${item.cartQuantity}</td>
+            <td>${item.sellPrice} جنيه</td>
+            <td>${itemTotal} جنيه</td>
+        `;
+        printItems.appendChild(row);
+    });
+
+    printTotalAmount.textContent = `${totalAmount.toLocaleString()} جنيه`;
+}
+
 
         // زيادة كمية منتج
         window.increaseQuantity = function(index) {
@@ -1427,20 +1449,25 @@ window.completeSale = async function () {
         // ✅ ID الفاتورة = رقم الفاتورة
         const invoiceId = String(currentInvoiceNumber);
         const invoiceRef = doc(db, 'sales', invoiceId);
+        const buyerName = document.getElementById('buyerNameInput').value || '';
 
-        // حفظ الفاتورة (Document واحد)
+
         batch.set(invoiceRef, {
-            invoiceNumber: currentInvoiceNumber,
-            seller: {
-                name: currentEmployee.name,
-                phone: currentEmployee.phone
-            },
-            items: invoiceItems,
-            totalAmount,
-            createdAt: now,
-            date: new Date().toLocaleDateString('ar-EG'),
-            time: new Date().toLocaleTimeString('ar-EG')
-        });
+    invoiceNumber: currentInvoiceNumber,
+    buyer: {
+        name: buyerName
+    },
+    seller: {
+        name: currentEmployee.name,
+        phone: currentEmployee.phone
+    },
+    items: invoiceItems,
+    totalAmount,
+    createdAt: now,
+    date: new Date().toLocaleDateString('ar-EG'),
+    time: new Date().toLocaleTimeString('ar-EG')
+});
+
 
         // خصم الكميات من المنتجات
         for (const item of cart) {
