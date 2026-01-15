@@ -11,861 +11,23 @@
     <meta name="author" content="شركة الريان">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#2e7d32">
+    <link rel="stylesheet" href="style.css">
 
     <!-- CSS + Icons -->
     <link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Print CSS -->
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            #invoicePrint, #invoicePrint * {
-                visibility: visible;
-            }
-            #invoicePrint {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                padding: 20px;
-            }
-            .no-print {
-                display: none !important;
-            }
-        }
-    </style>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
-
-        :root {
-            --primary-color: #2e7d32;
-            --primary-dark: #1b5e20;
-            --primary-light: #4caf50;
-            --secondary-color: #ff9800;
-            --danger-color: #f44336;
-            --warning-color: #ff9800;
-            --light-bg: #f8f9fa;
-            --border-color: #e0e0e0;
-            --text-color: #333;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --radius: 10px;
-            --radius-sm: 6px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Cairo", sans-serif;
-            direction: rtl;
-            background-color: #f5f7fa;
-            color: var(--text-color);
-            line-height: 1.5;
-            font-size: 16px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background-color: white;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            border-radius: var(--radius);
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color), var(--primary-light));
-        }
-
-        header h1 {
-            color: var(--primary-dark);
-            font-size: 20px;
-            font-weight: 800;
-            text-align: center;
-            flex: 1;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-        }
-
-        /* Employee Info */
-        .employee-info {
-            background: white;
-            padding: 12px 15px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            border-right: 4px solid var(--primary-color);
-        }
-
-        .employee-info > div {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .employee-info span {
-            font-weight: bold;
-            color: var(--primary-dark);
-            font-size: 15px;
-        }
-
-        .employee-info i {
-            color: var(--primary-color);
-            font-size: 16px;
-        }
-
-        /* Invoice Info */
-        .invoice-info {
-            background: white;
-            padding: 12px 15px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-right: 4px solid var(--primary-color);
-        }
-
-        .invoice-number {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-dark);
-        }
-
-        .invoice-date {
-            color: #666;
-            font-size: 14px;
-        }
-
-        /* Main Title */
-        .page-title {
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .page-title h2 {
-            font-size: 22px;
-            color: var(--primary-dark);
-            display: inline-block;
-            padding: 0 15px;
-            background: #f5f7fa;
-            position: relative;
-            z-index: 2;
-        }
-
-        .page-title::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 0;
-            left: 0;
-            height: 1px;
-            background-color: var(--border-color);
-            z-index: 1;
-        }
-
-        /* Input Section */
-        .input-section {
-            background: white;
-            padding: 20px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .input-label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: var(--primary-dark);
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .serial-input {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 16px;
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius);
-            margin-bottom: 10px;
-            transition: all 0.3s;
-            font-family: "Cairo", sans-serif;
-        }
-
-        .serial-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
-        }
-
-        .input-hint {
-            display: block;
-            color: #666;
-            font-size: 13px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        /* Suggestions */
-        .suggestions {
-            position: absolute;
-            width: calc(100% - 40px);
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 100;
-            box-shadow: var(--shadow);
-            margin-top: -5px;
-            display: none;
-        }
-
-        .suggestions div {
-            padding: 12px 16px;
-            border-bottom: 1px solid #f1f1f1;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .suggestions div:hover {
-            background-color: #f5f5f5;
-        }
-
-        .suggestions div:last-child {
-            border-bottom: none;
-        }
-
-        /* Cart Section */
-        .cart-section {
-            background: white;
-            padding: 20px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            border-top: 5px solid var(--primary-color);
-        }
-
-        .cart-title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            color: var(--primary-dark);
-        }
-
-        .cart-title h3 {
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cart-count {
-            background: var(--primary-color);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* Cart Items */
-        .cart-items {
-            margin-bottom: 20px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid var(--border-color);
-            background: #fafafa;
-            border-radius: var(--radius-sm);
-            margin-bottom: 8px;
-        }
-
-        .cart-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .item-info {
-            flex: 1;
-        }
-
-        .item-name {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 4px;
-            color: var(--text-color);
-        }
-
-        .item-details {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .item-price {
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .item-quantity {
-            color: #666;
-            font-size: 14px;
-            background: #eee;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .item-serial {
-            color: #888;
-            font-size: 12px;
-        }
-
-        .item-actions {
-            display: flex;
-            gap: 8px;
-            margin-right: 10px;
-        }
-
-        .item-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: none;
-            background: var(--light-bg);
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .item-btn:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .item-btn.remove {
-            color: var(--danger-color);
-        }
-
-        .item-btn.remove:hover {
-            background: var(--danger-color);
-            color: white;
-        }
-
-        /* Empty Cart */
-        .empty-cart {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-        }
-
-        .empty-cart i {
-            font-size: 48px;
-            margin-bottom: 15px;
-            color: #ddd;
-        }
-
-        /* Cart Summary */
-        .cart-summary {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: var(--radius);
-            margin-top: 20px;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .summary-row:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .summary-label {
-            color: #666;
-        }
-
-        .summary-value {
-            color: var(--primary-dark);
-            font-weight: bold;
-        }
-
-        .total-amount {
-            color: var(--primary-color);
-            font-size: 22px;
-        }
-
-        /* Buttons */
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 14px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: "Cairo", sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: linear-gradient(to left, var(--primary-color), var(--primary-dark));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(to left, var(--primary-dark), #124816);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--light-bg);
-        }
-
-        .btn-danger {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #d32f2f;
-        }
-
-        .btn-warning {
-            background-color: var(--warning-color);
-            color: white;
-        }
-
-        .btn-warning:hover {
-            background-color: #f57c00;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .quick-btn {
-            flex: 1;
-            padding: 10px;
-            background: #f0f7f0;
-            border: 1px solid var(--primary-light);
-            border-radius: var(--radius);
-            color: var(--primary-dark);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            font-size: 14px;
-        }
-
-        .quick-btn:hover {
-            background: var(--primary-light);
-            color: white;
-        }
-
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 20px;
-            left: 15px;
-            right: 15px;
-            padding: 15px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transform: translateY(-100px);
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .notification.success {
-            background-color: #e8f5e9;
-            border-right: 4px solid var(--primary-color);
-            color: var(--primary-dark);
-        }
-
-        .notification.error {
-            background-color: #ffebee;
-            border-right: 4px solid var(--danger-color);
-            color: #c62828;
-        }
-
-        .notification.warning {
-            background-color: #fff3e0;
-            border-right: 4px solid var(--warning-color);
-            color: #ef6c00;
-        }
-
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .notification-close {
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: inherit;
-            padding: 0;
-            margin-right: 5px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 15px;
-            color: #666;
-            font-size: 12px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            header {
-                padding: 12px;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            header h1 {
-                font-size: 18px;
-                order: 2;
-            }
-            
-            .logo {
-                width: 40px;
-                height: 40px;
-                order: 1;
-            }
-            
-            .input-section,
-            .cart-section {
-                padding: 15px;
-            }
-            
-            .cart-title {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .cart-count {
-                align-self: flex-start;
-            }
-            
-            .item-details {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-            
-            .item-actions {
-                margin-right: 0;
-                margin-top: 8px;
-            }
-            
-            .quick-actions {
-                flex-direction: column;
-            }
-            
-
-        }
-
-        @media (max-width: 420px) {
-            header h1 {
-                font-size: 16px;
-            }
-            
-            .employee-info span {
-                font-size: 14px;
-            }
-            
-            .page-title h2 {
-                font-size: 18px;
-            }
-            
-            .serial-input {
-                font-size: 15px;
-                padding: 12px;
-            }
-            
-            .cart-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .item-info {
-                width: 100%;
-            }
-            
-            .item-actions {
-                width: 100%;
-                justify-content: flex-start;
-            }
-            
-            .btn {
-                padding: 9px ;
-                font-size: 10px;
-                gap: 3px;
-            }
-        }
-
-.print-invoice {
-    display: none;
-    background: white;
-    padding: 30px;
-    max-width: 800px;
-    margin: 0 auto;
-    direction: rtl;
-}
-
-.print-header {
-    text-align: center;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 20px;
-}
-
-.print-header h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.print-details {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.print-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-}
-
-.print-table th {
-    background-color: #f5f5f5;
-    padding: 12px;
-    text-align: right;
-    border: 1px solid #ddd;
-    font-weight: bold;
-}
-
-.print-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: right;
-}
-
-.print-table tfoot td {
-    background-color: #f9f9f9;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.print-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-    color: #666;
-}
-
-/* ================== الطباعة A5 ================== */
-@media print {
-
-body > *:not(#invoicePrint) {
-  display: none !important;
-}
-
-    /* إظهار الفاتورة فقط */
-    #invoicePrint,
-    #invoicePrint * {
-        visibility: visible !important;
-    }
-
-    #invoicePrint {
-        display: block !important;
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        max-width: 100%;
-        justify-content: center;
-        margin: 0 auto;
-        padding: 30px;              /* 🔥 تقليل المسافات */
-        margin: 0;
-        background: #fff;
-        font-size: 11px;           /* 🔥 تصغير الخط */
-        line-height: 1.2;
-    }
-
-    .print-header h1{
-      font-size: 15px;
-    }
-
-    .print-footer{
-      margin: 0;
-    }
-
-    /* مقاس الورقة A5 */
-    @page {
-        size: A5 portrait;
-        margin: 6mm;               /* 🔥 هوامش صغيرة */
-    }
-
-    /* الجدول */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 10.5px;         /* 🔥 أصغر شوية */
-    }
-
-    th, td {
-        padding: 4px 3px;          /* 🔥 ضغط الخلايا */
-        border: 1px solid #000;
-        text-align: right;
-        white-space: nowrap;       /* 🔥 يمنع التكسير */
-    }
-
-    thead th {
-        font-weight: bold;
-        background: #f1f1f1;
-    }
-
-    tfoot td {
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    /* منع تقطيع الصفوف */
-    table, tr, td, th {
-        page-break-inside: avoid;
-    }
-
-    /* إخفاء أي عناصر مش مطلوبة */
-    .no-print {
-        display: none !important;
-    }
-
-    /* تقليل العناوين */
-    h1 { font-size: 16px; margin: 4px 0; }
-    h2 { font-size: 14px; margin: 4px 0; }
-    h3 { font-size: 13px; margin: 3px 0; }
-    p  { margin: 2px 0; }
-    .print-table tfoot td{ font-size: 10px;}
-}
-
-
-
-
-    </style>
 </head>
 <body>
     <header>
         <h1>الريان للأدوات المنزلية</h1>
         <img src="https://alryan.pages.dev/logo.png" class="logo" alt="شعار الريان">
     </header>
+
+    <div class="bu">
+      <a href="" class="activ">مبيعات</a>
+      <a href="Returns/" class="go">مرتجعات</a>
+    </div>
 
     <div class="container">
         <!-- معلومات البائع -->
@@ -1035,17 +197,11 @@ body > *:not(#invoicePrint) {
             </tfoot>
         </table>
         
-        <div class="print-footer">
-            <p>شكراً لتعاملكم مع الريان للأدوات المنزلية</p>
-            <p>هاتف: 01050513227 | العنوان: البحيره , مركز بدر , قريه ابو بكر الصديق</p>
-                    <p style="color: #1b5e20;">Developed by semsem > 01144898934</p>
 
-        </div>
     </div>
 
     <footer class="no-print">
         <p>جميع الحقوق محفوظة &copy; 2026 - شركة الريان للأدوات المنزلية</p>
-        <p>مطور بواسطه semsem <br>01144898934</p>
     </footer>
 
     <script type="module">
@@ -1246,10 +402,13 @@ body > *:not(#invoicePrint) {
                 return;
             }
 
-            const filteredProducts = products.filter(p => 
-                (p.serial?.toLowerCase().includes(value) || 
-                 p.name?.toLowerCase().includes(value))
-            );
+            const filteredProducts = products.filter(p =>
+    p.originalQuantity > 0 && (
+        p.serial?.toLowerCase().includes(value) ||
+        p.name?.toLowerCase().includes(value)
+    )
+);
+
 
             if (filteredProducts.length === 0) {
                 const noResults = document.createElement('div');
@@ -1294,37 +453,44 @@ body > *:not(#invoicePrint) {
 
         // إضافة منتج للسلة
         function addToCart(product) {
-            // التحقق من توفر المنتج إذا كان محدود الكمية
-            if (product.originalQuantity > 0) {
-                const existingItem = findProductInCart(product.serial);
-                const totalInCart = existingItem ? existingItem.cartQuantity : 0;
-                
-                if (totalInCart >= product.originalQuantity) {
-                    showNotification(`الكمية المتاحة من ${product.name} هي ${product.originalQuantity} فقط`, 'error');
-                    return;
-                }
-            }
-            
-            const existingItem = findProductInCart(product.serial);
-            
-            if (existingItem) {
-                existingItem.cartQuantity += 1;
-                showNotification(`تم زيادة كمية ${product.name} إلى ${existingItem.cartQuantity}`, 'success');
-            } else {
-                cart.push({
-                    ...product,
-                    cartQuantity: 1
-                });
-                showNotification(`تم إضافة ${product.name} إلى السلة`, 'success');
-            }
-            
-            serialInput.value = '';
-            suggestions.style.display = 'none';
-            
-            updateCartUI();
-            saveCartToStorage();
-            serialInput.focus();
-        }
+
+    // ❌ لو المخزون صفر → امنع الإضافة
+    if (product.originalQuantity === 0) {
+        showNotification(`❌ المنتج ${product.name} غير متوفر في المخزون`, 'error');
+        return;
+    }
+
+    // التحقق من توفر المنتج إذا كان محدود الكمية
+    const existingItem = findProductInCart(product.serial);
+    const totalInCart = existingItem ? existingItem.cartQuantity : 0;
+
+    if (totalInCart >= product.originalQuantity) {
+        showNotification(
+            `الكمية المتاحة من ${product.name} هي ${product.originalQuantity} فقط`,
+            'error'
+        );
+        return;
+    }
+
+    if (existingItem) {
+        existingItem.cartQuantity += 1;
+        showNotification(`تم زيادة كمية ${product.name}`, 'success');
+    } else {
+        cart.push({
+            ...product,
+            cartQuantity: 1
+        });
+        showNotification(`تم إضافة ${product.name} إلى السلة`, 'success');
+    }
+
+    serialInput.value = '';
+    suggestions.style.display = 'none';
+
+    updateCartUI();
+    saveCartToStorage();
+    serialInput.focus();
+}
+
 
         // تحديث واجهة السلة - الإصلاح هنا!
         function updateCartUI() {
@@ -1513,6 +679,17 @@ window.completeSale = async function () {
                 return;
             }
         }
+
+for (const item of cart) {
+    if (item.originalQuantity === 0) {
+        showNotification(
+            `❌ المنتج ${item.name} غير متوفر في المخزون`,
+            'error'
+        );
+        return;
+    }
+}
+
 
         // تجهيز عناصر الفاتورة
         const invoiceItems = cart.map(item => ({
