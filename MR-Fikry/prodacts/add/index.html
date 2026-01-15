@@ -62,7 +62,20 @@
       <a href="" class="activ" >عرض المنتجات</a>
     </div>
 
+    <div class="low-stock-header">
+  <button id="lowStockBtn" onclick="toggleLowStock()">
+    ⚠️ المنتجات الناقصة
+  </button>
+  <span id="lowStockCount" class="count-badge">0</span>
+</div>
+
+<div id="lowStockBox" class="low-stock-box" style="display:none"></div>
+
+<hr style="margin:30px 0">
+
+
 <h2>المنتجات</h2>
+
 
 <input type="text" id="search" placeholder=" ابحث بالاسم أو السيريال">
 
@@ -88,52 +101,82 @@
 
   const tbody = document.getElementById('products');
 
-  async function loadProducts() {
-    const querySnapshot = await getDocs(collection(db, 'products'));
-    tbody.innerHTML = '';
+ const LOW_STOCK_LIMIT = 5;
+const lowStockBox = document.getElementById("lowStockBox");
+const lowStockCount = document.getElementById("lowStockCount");
 
-    querySnapshot.forEach((docSnap) => {
-      const p = docSnap.data();
-      const tr = document.createElement('tr');
+async function loadProducts() {
+  const querySnapshot = await getDocs(collection(db, 'products'));
+  tbody.innerHTML = '';
+  lowStockBox.innerHTML = '';
 
-tr.innerHTML = `
-  <td>
-    <div class="product-card" data-name="${p.name}" data-serial="${p.serial}">
-      
-      <!-- الاسم فقط -->
-     <div class="product">
-      <div class="product-name" onclick="toggleDetails('${docSnap.id}')">
-        ${p.name}
-        <br>
-        <span>الكميه :${p.quantity}</span>
-      </div>
-     </div>
-      <!-- التفاصيل -->
-      <div class="product-details" id="details-${docSnap.id}" onclick="event.stopPropagation()">
-        
-        <label>السيريال</label>
-        <input value="${p.serial}" id="serial-${docSnap.id}">
-<br>
-        <label>سعر الشراء</label>
-        <input type="number" value="${p.buyPrice}" id="buy-${docSnap.id}">
-<br>
-        <label>سعر البيع</label>
-        <input type="number" value="${p.sellPrice}" id="sell-${docSnap.id}">
-<br>
-        <label>الكمية</label>
-        <input type="number" value="${p.quantity}" id="qty-${docSnap.id}">
-<br>
-        <button onclick="save('${docSnap.id}')">💾 حفظ</button>
-      </div>
+  let lowCount = 0;
 
-    </div>
-  </td>
-`;
+  querySnapshot.forEach((docSnap) => {
+    const p = docSnap.data();
 
+    /* ===== الكارت العادي ===== */
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <div class="product-card ${p.quantity <= LOW_STOCK_LIMIT ? 'low-stock' : ''}"
+             data-name="${p.name}" data-serial="${p.serial}">
+          
+          <div class="product-name" onclick="toggleDetails('${docSnap.id}')">
+            ${p.name}
+            <span>الكمية: ${p.quantity}</span>
+          </div>
 
-      tbody.appendChild(tr);
-    });
+          <div class="product-details" id="details-${docSnap.id}">
+            <label>السيريال</label>
+            <input value="${p.serial}" id="serial-${docSnap.id}">
+
+            <label>سعر الشراء</label>
+            <input type="number" value="${p.buyPrice}" id="buy-${docSnap.id}">
+
+            <label>سعر البيع</label>
+            <input type="number" value="${p.sellPrice}" id="sell-${docSnap.id}">
+
+            <label>الكمية</label>
+            <input type="number" value="${p.quantity}" id="qty-${docSnap.id}">
+
+            <button onclick="save('${docSnap.id}')">💾 حفظ</button>
+          </div>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+
+    /* ===== المنتجات الناقصة (نفس الكارت) ===== */
+    if (p.quantity <= LOW_STOCK_LIMIT) {
+      lowCount++;
+
+      lowStockBox.innerHTML += `
+        <div class="product-card low-stock">
+          <div class="product-name">
+            ⚠️ ${p.name}
+            <span>الكمية المتبقية: ${p.quantity}</span>
+            <span>السيريال: ${p.serial}</span>
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  /* تحديث العدّاد */
+  lowStockCount.textContent = lowCount;
+
+  if (lowCount === 0) {
+    lowStockBox.innerHTML = `<p class="empty">لا يوجد منتجات ناقصة 🎉</p>`;
   }
+}
+
+
+window.toggleLowStock = function(){
+  const box = document.getElementById("lowStockBox");
+  box.style.display = box.style.display === "none" ? "grid" : "none";
+};
+  
 
   window.toggleDetails = (id) => {
     const el = document.getElementById(`details-${id}`);
