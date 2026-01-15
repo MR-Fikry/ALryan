@@ -89,6 +89,11 @@ header{
 
 }
 
+.red{
+            background: linear-gradient(135deg , #ff0000 , #f84444);
+
+}
+
 @media (max-width:470px) {
     header{
         padding:20px 30px;
@@ -137,9 +142,9 @@ header{
 }
 
 .patg{
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
     padding: 60px 20px;
-    gap: 10px;
+    gap: 30px;
 }
 
 .patg a{

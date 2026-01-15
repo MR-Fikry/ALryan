@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>المرتجعات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:"Cairo",sans-serif;
+  direction:rtl;
+  background:#f4f6f8;
+}
+
+/* ===== Header ===== */
+header{
+  padding:20px;
+  background:#111;
+  color:#fff;
+  text-align:center;
+  font-size:20px;
+}
+
+/* ===== Dashboard ===== */
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+  padding:20px;
+}
+.box{
+  background:#fff;
+  padding:16px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 6px 15px rgba(0,0,0,.08)
+}
+.box h3{font-size:14px;color:#666}
+.box p{font-size:22px;font-weight:800}
+
+/* ===== Search ===== */
+.search-box{
+  margin:0 20px 10px;
+  display:flex;
+  gap:10px
+}
+.search-box input{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:15px
+}
+
+/* ===== Cards ===== */
+.cards{
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:15px
+}
+.invoice-card{
+  background:#fff;
+  border-radius:16px;
+  padding:15px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08)
+}
+.invoice-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+  font-weight:700
+}
+.invoice-date{font-size:12px;color:#777}
+
+.detail{font-size:14px;margin:4px 0}
+
+.total{
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#fff;
+  padding:10px;
+  border-radius:12px;
+  text-align:center;
+  margin:10px 0;
+  font-weight:700
+}
+
+.invoice-card button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:#111;
+  color:#fff;
+  font-size:14px
+}
+
+/* ===== Loader ===== */
+#loader{
+  text-align:center;
+  padding:40px;
+  font-size:18px;
+  display:none
+}
+
+/* ===== Modal ===== */
+.invoice-print{
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  width:95%;
+  max-width:700px;
+}
+
+.invoice-head{
+  text-align:center;
+  border-bottom:2px solid #000;
+  margin-bottom:10px;
+  padding-bottom:10px;
+}
+
+.invoice-head h3{
+  margin-bottom:5px;
+}
+
+.invoice-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+  font-size:14px;
+}
+
+.invoice-table th,
+.invoice-table td{
+  border:1px solid #000;
+  padding:6px;
+  text-align:center;
+}
+
+.invoice-table th{
+  background:#f3f3f3;
+  font-weight:700;
+}
+
+.invoice-table tfoot td{
+  font-weight:800;
+  background:#fafafa;
+}
+
+
+.invoice-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.invoice-box{
+  background:#fff;
+  width:95%;
+  max-width:700px;
+  padding:20px;
+  border-radius:12px;
+  direction:rtl;
+}
+
+.invoice-header{
+  text-align:center;
+  border-bottom:2px solid #000;
+  margin-bottom:12px;
+  padding-bottom:8px;
+}
+
+.invoice-header h2{
+  margin:4px 0;
+}
+
+.invoice-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.invoice-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+
+.invoice-table th,
+.invoice-table td{
+  border:1px solid #000;
+  padding:6px;
+  text-align:center;
+}
+
+.invoice-table th{
+  background:#f3f3f3;
+}
+
+.close-btn{
+  margin-top:15px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#000;
+  color:#fff;
+  cursor:pointer;
+}
+
+.logo{
+    width: 40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>📦 المرتجعات</header>
+
+<!-- Dashboard -->
+<div class="dashboard">
+  <div class="box">
+    <h3>عدد المرتجعات</h3>
+    <p id="returnsCount">0</p>
+  </div>
+  <div class="box">
+    <h3>إجمالي المرتجع</h3>
+    <p id="returnsTotal">0</p>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="search-box">
+  <input id="searchInput" placeholder="🔍 بحث برقم الفاتورة / المشتري / الموظف">
+</div>
+
+<div id="loader">⏳ جاري تحميل المرتجعات...</div>
+
+<!-- Cards -->
+<div class="cards" id="returnsCards"></div>
+
+
+<!-- Modal -->
+<div id="invoiceView" class="invoice-overlay">
+
+  <div class="invoice-box">
+
+    <div class="invoice-header">
+      <img src="https://alryan.pages.dev/logo.png" class="logo">
+      <h2>الريان للأدوات المنزلية</h2>
+      <p>عرض فاتورة مرتجع</p>
+    </div>
+
+    <div class="invoice-info">
+      <div>
+        <p>رقم الفاتورة: <strong id="vInvoice"></strong></p>
+        <p>التاريخ: <strong id="vDate"></strong></p>
+        <p>الوقت: <strong id="vTime"></strong></p>
+      </div>
+      <div>
+        <p>اسم البائع: <strong id="vEmployee"></strong></p>
+        <p>اسم المشتري: <strong id="vBuyer"></strong></p>
+      </div>
+    </div>
+
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>اسم المنتج</th>
+          <th>السيريال</th>
+          <th>الكمية</th>
+          <th>سعر الوحدة</th>
+          <th>الإجمالي</th>
+        </tr>
+      </thead>
+      <tbody id="vItems"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">الإجمالي النهائي</td>
+          <td id="vTotal"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <button class="close-btn" onclick="closeInvoice()">إغلاق</button>
+
+  </div>
+</div>
+
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getFirestore, collection, getDocs }
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+/* Firebase */
+const firebaseConfig = {
+  apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+  authDomain: "login-employees1.firebaseapp.com",
+  projectId: "login-employees1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const cards = document.getElementById("returnsCards");
+const countEl = document.getElementById("returnsCount");
+const totalEl = document.getElementById("returnsTotal");
+
+let total = 0, count = 0;
+
+async function loadReturns(){
+  loader.style.display="block";
+  const snap = await getDocs(collection(db,"returns"));
+  loader.style.display="none";
+
+  snap.forEach(doc=>{
+    const d = doc.data();
+    count++;
+    total += d.totalReturnAmount;
+
+    const card = document.createElement("div");
+    card.className="invoice-card";
+    card.innerHTML=`
+      <div class="invoice-header">
+        <span>مرتجع #${d.returnNumber}</span>
+        <span class="invoice-date">${d.date}</span>
+      </div>
+
+      <div class="detail">🧾 فاتورة: ${d.invoiceNumber}</div>
+      <div class="detail">👤 مشتري: ${d.buyer?.name || "-"}</div>
+      <div class="detail">👨‍💼 موظف: ${d.employee?.name || "-"}</div>
+      <div class="detail">❗ السبب: ${d.reason}</div>
+
+      <div class="total">${d.totalReturnAmount} جنيه</div>
+
+      <button onclick='viewReturnInvoice(${JSON.stringify(d)})'>
+👁 عرض الفاتورة
+</button>
+
+    `;
+    cards.appendChild(card);
+  });
+
+  countEl.textContent=count;
+  totalEl.textContent=total+" جنيه";
+}
+
+window.viewReturnInvoice = function(d){
+
+  document.getElementById("vInvoice").textContent = d.returnNumber;
+  document.getElementById("vDate").textContent = d.date;
+  document.getElementById("vTime").textContent = d.time;
+  document.getElementById("vEmployee").textContent = d.employee?.name || "-";
+  document.getElementById("vBuyer").textContent = d.buyer?.name || "-";
+
+  const body = document.getElementById("vItems");
+  body.innerHTML = "";
+
+  let total = 0;
+
+  d.returnedItems.forEach((i,idx)=>{
+    const rowTotal = i.returnedQuantity * i.price;
+    total += rowTotal;
+
+    body.innerHTML += `
+      <tr>
+        <td>${idx+1}</td>
+        <td>${i.name}</td>
+        <td>${i.serial || "-"}</td>
+        <td>${i.returnedQuantity}</td>
+        <td>${i.price}</td>
+        <td>${rowTotal}</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("vTotal").textContent = total + " جنيه";
+
+  document.getElementById("invoiceView").style.display="flex";
+}
+
+window.closeInvoice = function(){
+  document.getElementById("invoiceView").style.display="none";
+}
+
+
+window.showItems = function(items){
+  modalItems.innerHTML="";
+  let total = 0;
+
+  items.forEach(i=>{
+    const rowTotal = i.returnedQuantity * i.price;
+    total += rowTotal;
+
+    modalItems.innerHTML += `
+      <tr>
+        <td>${i.name}</td>
+        <td>${i.serial || "-"}</td>
+        <td>${i.returnedQuantity}</td>
+        <td>${i.price}</td>
+        <td>${rowTotal}</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("returnTotal").textContent = total + " جنيه";
+  document.getElementById("returnInfo").textContent = 
+    "عدد الأصناف: " + items.length;
+
+  modal.style.display="flex";
+};
+
+
+window.closeModal = ()=> modal.style.display="none";
+
+/* Search */
+searchInput.addEventListener("input",e=>{
+  const v=e.target.value.toLowerCase();
+  document.querySelectorAll(".invoice-card").forEach(c=>{
+    c.style.display = c.textContent.toLowerCase().includes(v) ? "block":"none";
+  });
+});
+
+loadReturns();
+</script>
+
+</body>
+</html>
