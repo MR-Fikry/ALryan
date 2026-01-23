@@ -194,16 +194,22 @@ window.toggleLowStock = function(){
   };
 
   document.getElementById('search').addEventListener('input', function () {
-    const value = this.value.toLowerCase();
-    document.querySelectorAll('.product-card').forEach(card => {
-      const name = card.dataset.name.toLowerCase();
-      const serial = card.dataset.serial.toLowerCase();
-      card.style.display =
-        name.includes(value) || serial.includes(value)
-          ? 'block'
-          : 'none';
-    });
+  const value = this.value.toLowerCase();
+
+  document.querySelectorAll('#products tr').forEach(tr => {
+    const card = tr.querySelector('.product-card');
+    if (!card) return;
+
+    const name = (card.dataset.name || '').toLowerCase();
+    const serial = (card.dataset.serial || '').toLowerCase();
+
+    tr.style.display =
+      name.includes(value) || serial.includes(value)
+        ? ''
+        : 'none';
   });
+});
+
 
   loadProducts();
 </script>

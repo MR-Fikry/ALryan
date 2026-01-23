@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>نظام تسجيل التزامات الموظفين</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #a02c2c;
+      --primary-light: #c84a4a;
+      --secondary-color: #198754;
+      --danger-color: #dc3545;
+      --warning-color: #ffc107;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --gray-color: #6c757d;
+      --gray-light: #e9ecef;
+      --border-radius: 12px;
+      --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --box-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.12);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #FFFF 100%);
+      color: var(--dark-color);
+      line-height: 1.6;
+      min-height: 100vh;
+       position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 20px 20px;
+      opacity: 0.03;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 25px;
+      box-shadow: var(--box-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header .subtitle {
+        font-size: 14px;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Employee Info Card */
+    .employee-card {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .employee-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .employee-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .employee-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .employee-phone {
+      font-size: 1rem;
+      color: var(--gray-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .salary-info {
+      background: linear-gradient(135deg, #ffebee, #ffcdd2);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 250px;
+      margin-top: 10px;
+    }
+
+    .salary-label {
+      font-size: 0.9rem;
+      color: #c62828;
+      margin-bottom: 5px;
+    }
+
+    .salary-amount {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #c62828;
+    }
+
+    .monthly-deduction {
+      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 250px;
+      margin-top: 10px;
+    }
+
+    .deduction-label {
+      font-size: 0.9rem;
+      color: #2e7d32;
+      margin-bottom: 5px;
+    }
+
+    .deduction-amount {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+
+    /* Button Styles */
+    .btn-add {
+      background: linear-gradient(135deg, var(--danger-color), #a71d1d);
+      color: white;
+      width: 70%;
+      padding: 16px;
+      border: none;
+      border-radius: 50PX;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 25px auto;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-add:hover {
+      background: linear-gradient(135deg, #1da750, var(--secondary-color));
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    /* Month Selector */
+    .month-selector {
+      background: white;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 20px;
+      box-shadow: var(--box-shadow);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .month-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .month-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .month-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .month-btn:hover {
+      background: var(--primary-light);
+      transform: scale(1.1);
+    }
+
+    .current-month {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark-color);
+      min-width: 200px;
+      text-align: center;
+    }
+
+    /* Commitments List */
+    .commitments-container {
+      margin: 20px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .commitment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Commitment Card */
+    .commitment-card {
+      background: white;
+      padding: 18px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      border-top: 4px solid var(--secondary-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .commitment-card.money {
+      border-top-color: #28a745;
+    }
+
+    .commitment-card.product {
+      border-top-color: #007bff;
+    }
+
+    .commitment-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .commitment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .commitment-type {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .commitment-type.money {
+      color: #28a745;
+    }
+
+    .commitment-type.product {
+      color: #007bff;
+    }
+
+    .commitment-amount {
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    .commitment-date {
+      font-size: 0.85rem;
+      color: var(--gray-color);
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .commitment-note {
+      background: var(--gray-light);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .product-details {
+      background: #e8f4ff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .product-name {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .product-info {
+      display: flex;
+      gap: 15px;
+      color: var(--gray-color);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      color: var(--gray-light);
+      margin-bottom: 15px;
+    }
+
+    .empty-text {
+      color: var(--gray-color);
+      font-size: 1.1rem;
+    }
+
+    /* Monthly Summary */
+    .monthly-summary {
+      background: white;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin-bottom: 20px;
+      box-shadow: var(--box-shadow);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .summary-item {
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f8f9fa;
+    }
+
+    .summary-label {
+      font-size: 0.9rem;
+      color: var(--gray-color);
+      margin-bottom: 5px;
+    }
+
+    .summary-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .summary-value.total {
+      color: var(--primary-color);
+    }
+
+    .summary-value.deduction {
+      color: #c62828;
+    }
+
+    .summary-value.remaining {
+      color: var(--secondary-color);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.3s ease;
+      overflow: hidden;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-size: 1.4rem;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-modal:hover {
+      transform: scale(1.2);
+    }
+
+    .modal-body {
+      padding: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid var(--gray-light);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%232c5aa0' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 15px center;
+      padding-right: 15px;
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .suggestions-box {
+      position: relative;
+      margin-top: 5px;
+    }
+
+    .suggestions-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      max-height: 250px;
+      overflow-y: auto;
+      z-index: 10;
+      display: none;
+    }
+
+    .suggestions-list.active {
+      display: block;
+    }
+
+    .suggestion-item {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--gray-light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .suggestion-item:hover {
+      background: var(--gray-light);
+    }
+
+    .suggestion-name {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 4px;
+    }
+
+    .suggestion-details {
+      font-size: 0.85rem;
+      color: var(--gray-color);
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 15px;
+      padding: 20px 25px;
+      background: var(--gray-light);
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--gray-color);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+      transform: translateY(-2px);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: var(--gray-color);
+    }
+
+    .loading-spinner {
+      border: 3px solid var(--gray-light);
+      border-top: 3px solid var(--primary-color);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .employee-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .salary-info, .monthly-deduction {
+        width: 100%;
+      }
+      
+      .month-selector {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .month-controls {
+        justify-content: center;
+      }
+      
+      .modal-footer {
+        flex-direction: column;
+      }
+      
+      .monthly-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      
+      header h1 {
+        font-size: 1rem;
+      }
+      
+      .employee-name {
+        font-size: 1.2rem;
+      }
+      
+      .month-controls {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-file-contract"></i> نظام تسجيل التزامات الموظفين</h1>
+      <div class="subtitle">تسجيل الالتزامات الشهرية </div>
+    </header>
+
+    <div class="employee-card" id="employeeInfo">
+      <div class="employee-info">
+        <div class="employee-name" id="employeeName"></div>
+        <div class="employee-phone">
+          <i class="fas fa-phone"></i>
+          <span id="employeePhone"></span>
+        </div>
+      </div>
+      
+      
+    </div>
+
+ <button class="btn-add" onclick="openModal()">
+      <i class="fas fa-plus-circle"></i> تسجيل التزام جديد
+    </button>
+
+    <div class="month-selector">
+      <div class="month-title">
+        <i class="fas fa-calendar-alt"></i>
+        <span>الالتزامات الشهرية</span>
+      </div>
+      <div class="month-controls">
+        <button class="month-btn" onclick="changeMonth(-1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="current-month" id="currentMonth"></div>
+        <button class="month-btn" onclick="changeMonth(1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="monthly-summary" id="monthlySummary" style="display: none;">
+      <div class="summary-item">
+        <div class="summary-label">إجمالي الالتزامات</div>
+        <div class="summary-value total" id="totalCommitments">0 ج.م</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">الخصم الشهري</div>
+        <div class="summary-value deduction">1,800 ج.م</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">المتبقي بعد الخصم</div>
+        <div class="summary-value remaining" id="remainingAfterDeduction">0 ج.م</div>
+      </div>
+    </div>
+
+   
+
+    <div class="commitments-container">
+      
+      <div id="commitmentsList" class="commitment-list">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          جاري تحميل الالتزامات...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-file-signature"></i> تسجيل التزام جديد</h3>
+        <button class="close-modal" onclick="closeModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="type">
+            <i class="fas fa-tag"></i> نوع الالتزام
+          </label>
+          <select class="form-control" id="type" onchange="toggleProduct()">
+            <option value="money">💰 التزام مالي</option>
+            <option value="product">📦 التزام عيني (بضاعة)</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="productBox" style="display:none">
+          <label class="form-label" for="productSearch">
+            <i class="fas fa-search"></i> البحث عن المنتج
+          </label>
+          <input 
+            class="form-control" 
+            id="productSearch" 
+            placeholder="اكتب اسم المنتج أو الرقم التسلسلي للبحث"
+            oninput="searchProducts()"
+          />
+          <div class="suggestions-box">
+            <div class="suggestions-list" id="suggestions"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="amount">
+            <i class="fas fa-calculator"></i> القيمة / الكمية
+          </label>
+          <input 
+            class="form-control" 
+            id="amount" 
+            type="number" 
+            min="1" 
+            step="0.01"
+            placeholder="أدخل القيمة المالية أو الكمية"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="note">
+            <i class="fas fa-sticky-note"></i> ملاحظات
+          </label>
+          <textarea 
+            class="form-control" 
+            id="note" 
+            placeholder="سبب الالتزام أو أي ملاحظات إضافية"
+          ></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="commitmentMonth">
+            <i class="fas fa-calendar"></i> الشهر المستهدف
+          </label>
+          <input 
+            class="form-control" 
+            id="commitmentMonth" 
+            type="month"
+          />
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="saveCommitment()">
+          <i class="fas fa-save"></i> حفظ الالتزام
+        </button>
+        <button class="btn btn-secondary" onclick="closeModal()">
+          <i class="fas fa-times"></i> إلغاء
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { 
+      getFirestore, 
+      collection, 
+      addDoc, 
+      getDocs, 
+      query, 
+      orderBy, 
+      onSnapshot,
+      serverTimestamp,
+      where,
+      Timestamp
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // تكوين Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+      authDomain: "login-employees1.firebaseapp.com",
+      projectId: "login-employees1",
+      storageBucket: "login-employees1.firebasestorage.app",
+      messagingSenderId: "907414298566",
+      appId: "1:907414298566:web:0141762effe0e9ff289cc7"
+    };
+
+    // تهيئة Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // بيانات الموظف الحالي
+    const currentEmployee = JSON.parse(localStorage.getItem('currentEmployee'));
+    
+    // التحقق من وجود موظف مسجل
+    if (!currentEmployee) {
+      alert('لا يوجد موظف مسجل، يرجى تسجيل الدخول أولاً');
+      window.location.href = 'index.html';
+    }
+
+    // ثوابت النظام
+    const MONTHLY_DEDUCTION = 1800; // خصم شهري ثابت
+    
+    // عناصر DOM
+    const modal = document.getElementById('modal');
+    const commitmentsList = document.getElementById('commitmentsList');
+    const employeeName = document.getElementById('employeeName');
+    const employeePhone = document.getElementById('employeePhone');
+    const currentMonthElement = document.getElementById('currentMonth');
+    const monthlySummary = document.getElementById('monthlySummary');
+    const totalCommitments = document.getElementById('totalCommitments');
+    const remainingAfterDeduction = document.getElementById('remainingAfterDeduction');
+    
+    // متغيرات التطبيق
+    let selectedProduct = null;
+    let allProducts = [];
+    let currentMonth = new Date(); // الشهر الحالي
+    let commitmentsData = [];
+
+    // تنسيق التاريخ العربي
+    const arabicMonths = [
+      'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
+    ];
+
+    // تهيئة التطبيق
+    document.addEventListener('DOMContentLoaded', function() {
+      // عرض بيانات الموظف
+      employeeName.textContent = currentEmployee.name;
+      employeePhone.textContent = currentEmployee.phone;
+      
+      // تعيين الشهر الحالي
+      updateMonthDisplay();
+      
+      // تعيين قيمة الشهر في النموذج
+      const today = new Date();
+      const monthInput = document.getElementById('commitmentMonth');
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      monthInput.value = `${year}-${month}`;
+      
+      // جلب جميع المنتجات لتخزينها محلياً
+      loadAllProducts();
+      
+      // تحميل الالتزامات للشهر الحالي
+      loadCommitmentsForMonth();
+    });
+
+    // تحديث عرض الشهر الحالي
+    function updateMonthDisplay() {
+      const monthName = arabicMonths[currentMonth.getMonth()];
+      const year = currentMonth.getFullYear();
+      currentMonthElement.textContent = `${monthName} ${year}`;
+      
+      // تحديث عنوان النموذج
+      const monthInput = document.getElementById('commitmentMonth');
+      const yearNum = currentMonth.getFullYear();
+      const monthNum = String(currentMonth.getMonth() + 1).padStart(2, '0');
+      monthInput.value = `${yearNum}-${monthNum}`;
+    }
+
+    // تغيير الشهر
+    window.changeMonth = (direction) => {
+      currentMonth.setMonth(currentMonth.getMonth() + direction);
+      updateMonthDisplay();
+      loadCommitmentsForMonth();
+    };
+
+    // فتح النافذة المنبثقة
+    window.openModal = () => {
+      modal.style.display = 'flex';
+      document.getElementById('amount').focus();
+    };
+
+    // إغلاق النافذة المنبثقة
+    window.closeModal = () => {
+      modal.style.display = 'none';
+      resetForm();
+    };
+
+    // إعادة تعيين النموذج
+    function resetForm() {
+      document.getElementById('amount').value = '';
+      document.getElementById('note').value = '';
+      document.getElementById('productSearch').value = '';
+      document.getElementById('suggestions').classList.remove('active');
+      document.getElementById('suggestions').innerHTML = '';
+      selectedProduct = null;
+      
+      // تعيين الشهر الحالي في النموذج
+      const monthInput = document.getElementById('commitmentMonth');
+      const year = currentMonth.getFullYear();
+      const month = String(currentMonth.getMonth() + 1).padStart(2, '0');
+      monthInput.value = `${year}-${month}`;
+    }
+
+    // تبديل عرض مربع البحث عن المنتجات
+    window.toggleProduct = () => {
+      const type = document.getElementById('type').value;
+      const productBox = document.getElementById('productBox');
+      
+      if (type === 'product') {
+        productBox.style.display = 'block';
+      } else {
+        productBox.style.display = 'none';
+        selectedProduct = null;
+      }
+    };
+
+    // جلب جميع المنتجات من Firebase
+    async function loadAllProducts() {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'products'));
+        allProducts = [];
+        querySnapshot.forEach(doc => {
+          allProducts.push({
+            id: doc.id,
+            ...doc.data()
+          });
+        });
+      } catch (error) {
+        console.error('خطأ في جلب المنتجات:', error);
+        showToast('خطأ في تحميل قائمة المنتجات', 'error');
+      }
+    }
+
+    // البحث عن المنتجات
+    window.searchProducts = () => {
+      const searchText = document.getElementById('productSearch').value.trim().toLowerCase();
+      const suggestionsBox = document.getElementById('suggestions');
+      
+      suggestionsBox.innerHTML = '';
+      
+      if (searchText.length < 1) {
+        suggestionsBox.classList.remove('active');
+        return;
+      }
+      
+      // تصفية المنتجات بناءً على نص البحث
+      const filteredProducts = allProducts.filter(product => {
+        return (
+          (product.name && product.name.toLowerCase().includes(searchText)) ||
+          (product.serial && product.serial.toLowerCase().includes(searchText))
+        );
+      });
+      
+      // عرض المنتجات المطابقة
+      if (filteredProducts.length > 0) {
+        suggestionsBox.classList.add('active');
+        
+        filteredProducts.forEach(product => {
+          const suggestionItem = document.createElement('div');
+          suggestionItem.className = 'suggestion-item';
+          suggestionItem.innerHTML = `
+            <div class="suggestion-name">${product.name || 'غير معروف'}</div>
+            <div class="suggestion-details">
+              <span><i class="fas fa-barcode"></i> ${product.serial || 'لا يوجد'}</span>
+              <span><i class="fas fa-money-bill-wave"></i> ${product.sellPrice || 0} ج.م</span>
+            </div>
+          `;
+          
+          suggestionItem.onclick = () => {
+            selectedProduct = product;
+            document.getElementById('productSearch').value = product.name;
+            suggestionsBox.classList.remove('active');
+          };
+          
+          suggestionsBox.appendChild(suggestionItem);
+        });
+      } else {
+        suggestionsBox.classList.remove('active');
+      }
+    };
+
+    // حفظ الالتزام
+    window.saveCommitment = async () => {
+      const type = document.getElementById('type').value;
+      const amount = document.getElementById('amount').value;
+      const note = document.getElementById('note').value.trim();
+      const commitmentMonth = document.getElementById('commitmentMonth').value;
+      
+      // التحقق من صحة البيانات
+      if (!amount || amount <= 0) {
+        showToast('يرجى إدخال قيمة صحيحة', 'error');
+        document.getElementById('amount').focus();
+        return;
+      }
+      
+      if (type === 'product' && !selectedProduct) {
+        showToast('يرجى اختيار منتج', 'error');
+        return;
+      }
+      
+      if (!commitmentMonth) {
+        showToast('يرجى اختيار الشهر', 'error');
+        return;
+      }
+      
+      // تحليل الشهر المختار
+      const [year, month] = commitmentMonth.split('-');
+      const targetDate = new Date(year, month - 1, 1);
+      
+      // إنشاء كائن الالتزام
+      const commitmentData = {
+        type: type,
+        amount: parseFloat(amount),
+        note: note || 'لا توجد ملاحظات',
+        month: targetDate.getTime(), // حفظ ك timestamp للشهر
+        monthString: `${year}-${month}`, // حفظ كسلسلة نصية للاستعلام
+        createdAt: serverTimestamp(),
+        employeeName: currentEmployee.name,
+        employeePhone: currentEmployee.phone,
+        monthlyDeduction: MONTHLY_DEDUCTION // إضافة مبلغ الخصم الشهري
+      };
+      
+      // إضافة بيانات المنتج إذا كان التزام عيني
+      if (type === 'product') {
+        commitmentData.product = {
+          name: selectedProduct.name,
+          sellPrice: selectedProduct.sellPrice || 0,
+          serial: selectedProduct.serial || 'غير معروف'
+        };
+      }
+      
+      try {
+        // إضافة الالتزام إلى Firebase
+        await addDoc(
+          collection(db, 'employees', currentEmployee.phone, 'commitments'), 
+          commitmentData
+        );
+        
+        showToast('تم حفظ الالتزام بنجاح', 'success');
+        closeModal();
+        
+        // إعادة تحميل الالتزامات للشهر الحالي
+        loadCommitmentsForMonth();
+      } catch (error) {
+        console.error('خطأ في حفظ الالتزام:', error);
+        showToast('حدث خطأ أثناء حفظ الالتزام', 'error');
+      }
+    };
+
+    // تحميل الالتزامات للشهر الحالي
+    async function loadCommitmentsForMonth() {
+      try {
+        commitmentsList.innerHTML = `
+          <div class="loading">
+            <div class="loading-spinner"></div>
+            جاري تحميل الالتزامات...
+          </div>
+        `;
+        
+        // حساب بداية ونهاية الشهر
+        const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+        const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+        
+        // تحويل التواريخ إلى Timestamp
+        const startTimestamp = Timestamp.fromDate(startOfMonth);
+        const endTimestamp = Timestamp.fromDate(endOfMonth);
+        
+        // إنشاء الاستعلام للالتزامات في هذا الشهر
+        const q = query(
+          collection(db, 'employees', currentEmployee.phone, 'commitments'),
+          where('createdAt', '>=', startTimestamp),
+          where('createdAt', '<=', endTimestamp),
+          orderBy('createdAt', 'desc')
+        );
+        
+        const snapshot = await getDocs(q);
+        
+        // معالجة البيانات
+        commitmentsData = [];
+        let totalAmount = 0;
+        
+        if (snapshot.empty) {
+          commitmentsList.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <div class="empty-text">لا توجد التزامات مسجلة لهذا الشهر</div>
+            </div>
+          `;
+          monthlySummary.style.display = 'none';
+        } else {
+          let commitmentsHTML = '';
+          
+          snapshot.forEach(doc => {
+            const commitment = {
+              id: doc.id,
+              ...doc.data()
+            };
+            
+            commitmentsData.push(commitment);
+            totalAmount += commitment.amount;
+            
+            // تنسيق التاريخ
+            const date = commitment.createdAt?.toDate 
+              ? commitment.createdAt.toDate() 
+              : new Date();
+            
+            const formattedDate = date.toLocaleDateString('ar-EG', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            
+            // إنشاء HTML للالتزام
+            commitmentsHTML += `
+              <div class="commitment-card ${commitment.type}">
+                <div class="commitment-header">
+                  <div class="commitment-type ${commitment.type}">
+                    ${commitment.type === 'money' ? 
+                      '<i class="fas fa-money-bill-wave"></i> التزام مالي' : 
+                      '<i class="fas fa-box-open"></i> التزام عيني'}
+                  </div>
+                  <div class="commitment-amount">
+                    ${commitment.amount} ${commitment.type === 'money' ? 'ج.م' : 'وحدة'}
+                  </div>
+                </div>
+                
+                ${commitment.product ? `
+                  <div class="product-details">
+                    <div class="product-name">${commitment.product.name}</div>
+                    <div class="product-info">
+                      <span><i class="fas fa-barcode"></i> ${commitment.product.serial || 'لا يوجد'}</span>
+                      <span><i class="fas fa-money-bill-wave"></i> سعر البيع: ${commitment.product.sellPrice || 0} ج.م</span>
+                    </div>
+                  </div>
+                ` : ''}
+                
+                <div class="commitment-note">
+                  <strong><i class="fas fa-sticky-note"></i> الملاحظات:</strong> ${commitment.note}
+                </div>
+                
+                <div class="commitment-date">
+                  <i class="far fa-calendar"></i> ${formattedDate}
+                </div>
+              </div>
+            `;
+          });
+          
+          commitmentsList.innerHTML = commitmentsHTML;
+          
+          // تحديث الملخص الشهري
+          updateMonthlySummary(totalAmount);
+        }
+      } catch (error) {
+        console.error('خطأ في جلب الالتزامات:', error);
+        commitmentsList.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="empty-text">حدث خطأ أثناء تحميل الالتزامات</div>
+          </div>
+        `;
+      }
+    }
+
+    // تحديث الملخص الشهري
+    function updateMonthlySummary(totalAmount) {
+      monthlySummary.style.display = 'grid';
+      totalCommitments.textContent = `${totalAmount.toFixed(2)} ج.م`;
+      
+      // حساب المتبقي بعد الخصم
+      const remaining = totalAmount - MONTHLY_DEDUCTION;
+      remainingAfterDeduction.textContent = `${remaining.toFixed(2)} ج.م`;
+      
+      // تغيير لون المتبقي بناءً على القيمة
+      if (remaining < 0) {
+        remainingAfterDeduction.style.color = '#c62828'; // أحمر إذا سالب
+      } else {
+        remainingAfterDeduction.style.color = '#2e7d32'; // أخضر إذا موجب
+      }
+    }
+
+    // وظيفة لعرض الرسائل
+    function showToast(message, type = 'info') {
+      // إنصراف الرسالة المؤقتة
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#007bff'};
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: slideDown 0.3s ease;
+      `;
+      
+      toast.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+        ${message}
+      `;
+      
+      document.body.appendChild(toast);
+      
+      // إزالة الرسالة بعد 3 ثوانٍ
+      setTimeout(() => {
+        toast.style.animation = 'slideUp 0.3s ease';
+        setTimeout(() => {
+          if (toast.parentNode) {
+            document.body.removeChild(toast);
+          }
+        }, 300);
+      }, 3000);
+    }
+
+    // إغلاق النافذة المنبثقة عند الضغط على Esc
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // إغلاق النافذة المنبثقة عند النقر خارجها
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // إغلاق قائمة الاقتراحات عند النقر خارجها
+    document.addEventListener('click', function(event) {
+      const suggestionsBox = document.getElementById('suggestions');
+      const productSearch = document.getElementById('productSearch');
+      
+      if (!productSearch.contains(event.target) && !suggestionsBox.contains(event.target)) {
+        suggestionsBox.classList.remove('active');
+      }
+    });
+  </script>
+
+  <style>
+    /* إضافة أنماط الرسوم المتحركة للرسائل */
+    @keyframes slideDown {
+      from { top: -100px; opacity: 0; }
+      to { top: 20px; opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { top: 20px; opacity: 1; }
+      to { top: -100px; opacity: 0; }
+    }
+  </style>
+</body>
+</html>
