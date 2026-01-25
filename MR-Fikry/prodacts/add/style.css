@@ -152,8 +152,13 @@ h2{
 
 /* ===== Table ===== */
 table{
-  width:100%;
+  width:90%;
   border-collapse:collapse;
+  flex-wrap: wrap;
+}
+
+#products{
+  flex-wrap: wrap;
 }
 
 td{
@@ -249,6 +254,23 @@ td{
   font-size:15px;
   padding:20px;
 }
+
+
+.delete-btn{
+  background:#e53935;
+  color:#fff;
+  border:none;
+  padding:8px;
+  margin-top:8px;
+  border-radius:6px;
+  cursor:pointer;
+  width:100%;
+}
+.delete-btn:hover{
+  background:#c62828;
+}
+
+
 
 @media (max-width:420px) {
     header{

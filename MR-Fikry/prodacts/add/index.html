@@ -85,7 +85,8 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc } 
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
@@ -141,6 +142,10 @@ async function loadProducts() {
             <input type="number" value="${p.quantity}" id="qty-${docSnap.id}">
 
             <button onclick="save('${docSnap.id}')">💾 حفظ</button>
+            <button class="delete-btn" onclick="removeProduct('${docSnap.id}', '${p.name}')">
+              🗑️ حذف المنتج
+            </button>
+
           </div>
         </div>
       </td>
@@ -191,7 +196,23 @@ window.toggleLowStock = function(){
       serial: document.getElementById(`serial-${id}`).value,
     });
     alert('تم حفظ التعديلات ✅');
-  };
+  }; 
+
+  window.removeProduct = async (id, name) => {
+  const ok = confirm(`⚠️ هل أنت متأكد من حذف المنتج:\n${name} ؟`);
+
+  if (!ok) return;
+
+  try {
+    await deleteDoc(doc(db, 'products', id));
+    alert('تم حذف المنتج بنجاح ✅');
+    loadProducts(); // إعادة تحميل القائمة
+  } catch (e) {
+    alert('حصل خطأ أثناء الحذف ❌');
+    console.error(e);
+  }
+};
+
 
   document.getElementById('search').addEventListener('input', function () {
   const value = this.value.toLowerCase();
