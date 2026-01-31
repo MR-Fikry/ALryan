@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<!-- Basic SEO -->
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#000000">
+
+<!-- Open Graph (Social Media) -->
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://alryan.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://alryan.pages.dev/icon.jpg">
+
+<!-- PWA / Mobile App Feel -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="OS Store">
+<link rel="apple-touch-icon" href="https://alryan.pages.dev/icon.jpg">
+
+<!-- Preload main resources (سرعة أعلى) -->
+<link rel="preload" as="image" href="https://alryan.pages.dev/icon.jpg">
+
+<link rel="preload" as="style" href="style.css">
+
+<!-- CSS + Icons -->
+<link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    
+<header>
+  <h1>الريان للادوات المنزليه</h1>
+  <img src="https://alryan.pages.dev/logo.png" class="logo">
+</header>
+
+
+
+
+
+<div id="employees"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getFirestore, doc, getDoc }
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+  authDomain: "login-employees1.firebaseapp.com",
+  projectId: "login-employees1",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// الاتنين اللي عاوزين نعرضهم
+const employeeIds = [
+  "TPdbOH8BE41OTYyeP09H",
+  "E13jdzGCCGXJJJa0nDdv"
+];
+
+async function em () {
+    const employe = document.getElementById("employees")
+    const snapshot = await getDoc(collection(db ,"employees"))
+
+snapshot.forEach(doc => {
+    
+    const e =doc.data();
+
+    employe.innerHTML+=`
+      👤 ${e.name}<br>
+        📞 ${e.phone}<br>
+    `;
+});    
+}
+loadEmployees();
+</script>
+
+
+</body>
+</html>

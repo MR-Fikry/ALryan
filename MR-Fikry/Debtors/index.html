@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المدينون</title>
+<style>
+body { font-family: Arial; margin:0px; background:#f0f0f0; }
+.tabs { display:flex; gap:10px; margin:20px; }
+.tab { padding:10px 20px; cursor:pointer; border-radius:8px; border:none; background:#ddd; }
+.tab.active { background:#4caf50; color:#fff; }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+.cards { display:flex; flex-wrap:wrap; gap:15px; }
+.card{font-size: 14px;}
+.debtor-card { background:#fff; padding:15px; border-radius:8px; cursor:pointer; flex:1 1 100px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+.box { background:#fff; padding:15px; border-radius:8px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+input, textarea, select { width:70%; margin:5px 0 10px 0; padding:8px; border-radius:5px; border:1px solid #ccc; }
+button { padding:10px 15px; border:none; border-radius:5px; cursor:pointer; background:#4caf50; color:#fff; }
+button.red { background:red; }
+ul { padding-left:20px; }
+.dashboard{
+    display: flex;
+    gap: 10px;
+    color: white;
+}
+.card{background-color: darkred; padding: 10px; border-radius: 10px;}
+.da{
+ padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab active" onclick="showTab('debtorsTab', event)">👥 المدينون</button>
+  <button class="tab" onclick="showTab('addTab', event)">➕ إضافة مدين</button>
+</div>
+
+
+<!-- Edit / Transaction -->
+<div id="editBox" class="box" style="display:none">
+  <h3>✏️ تعديل بيانات المدين</h3>
+  <input id="editName">
+  <input id="editBalance" disabled>
+  <button onclick="saveEdit()">💾 حفظ التعديل</button>
+  <button class="red" onclick="deleteDebtor()">❌ مسح العميل نهائيًا</button>
+
+  <h3>💰 إضافة / دفع مبلغ</h3>
+  <select id="transType">
+    <option value="pay">دفع (ينقص)</option>
+    <option value="add">إضافة (يزيد)</option>
+  </select>
+  <input id="transAmount" type="number" placeholder="المبلغ">
+  <textarea id="transNote" placeholder="ملاحظة"></textarea>
+  <button onclick="saveTransaction()">تسجيل العملية</button>
+
+  <h3>📜 سجل العمليات</h3>
+  <ul id="transactionsList"></ul>
+</div>
+
+
+<!-- Debtors List -->
+<div id="debtorsTab" class="tab-content active">
+  <div class="da">
+    <div class="dashboard">
+    <div class="card">
+      <h4>👥 عدد المدينين</h4>
+      <span id="totalDebtors">0</span>
+    </div>
+    <div class="card">
+      <h4>💰 إجمالي المديونية</h4>
+      <span id="totalBalance">0</span>
+    </div>
+    <div class="card">
+      <h4>🧾 إجمالي العمليات</h4>
+      <span id="totalTransactions">0</span>
+    </div>
+  </div>
+  <h2>📋 قائمة المدينين</h2>
+  <input id="searchDebtor" type="text" placeholder="ابحث باسم المدين...">
+  <div id="debtorsList" class="cards"></div>
+  </div>
+</div>
+
+<!-- Add Debtor -->
+<div id="addTab" class="tab-content">
+  <div class="box">
+    <h3>➕ إضافة مدين جديد</h3>
+    <input id="newName" placeholder="اسم المدين">
+    <input id="newBalance" type="number" placeholder="المبلغ">
+    <button onclick="addDebtor()">حفظ</button>
+  </div>
+</div>
+
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, Timestamp, increment, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+  authDomain: "login-employees1.firebaseapp.com",
+  projectId: "login-employees1"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let currentDebtorId = null;
+const debtorsList = document.getElementById("debtorsList");
+const totalDebtors = document.getElementById("totalDebtors");
+const totalBalance = document.getElementById("totalBalance");
+const totalTransactions = document.getElementById("totalTransactions");
+const editBox = document.getElementById("editBox");
+const moneyBox = document.getElementById("moneyBox");
+const editName = document.getElementById("editName");
+const editBalance = document.getElementById("editBalance");
+const transAmount = document.getElementById("transAmount");
+const transType = document.getElementById("transType");
+const transNote = document.getElementById("transNote");
+const transactionsList = document.getElementById("transactionsList");
+const newName = document.getElementById("newName");
+const newBalance = document.getElementById("newBalance");
+const searchInput = document.getElementById("searchDebtor");
+
+let allDebtors = [];
+
+/* Tabs */
+window.showTab = (id, e) => {
+  document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  e.target.classList.add("active");
+};
+
+/* إضافة مدين */
+window.addDebtor = async () => {
+  if (!newName.value || !newBalance.value) { alert("املأ البيانات"); return; }
+  await addDoc(collection(db, "debtors"), { name:newName.value, balance:+newBalance.value, createdAt:Timestamp.now() });
+  newName.value=""; newBalance.value="";
+  loadDebtors();
+};
+
+/* مسح مدين */
+window.deleteDebtor = async () => {
+  if (!currentDebtorId) return;
+  if (!confirm("⚠️ سيتم مسح العميل وكل عملياته نهائيًا")) return;
+  const transSnap = await getDocs(collection(db, "debtors", currentDebtorId, "transactions"));
+  for(const docu of transSnap.docs) await deleteDoc(docu.ref);
+  await deleteDoc(doc(db, "debtors", currentDebtorId));
+  alert("تم مسح العميل بالكامل ✅");
+  editBox.style.display="none"; transactionsList.innerHTML=""; currentDebtorId=null;
+  loadDebtors();
+};
+
+/* فتح مدين */
+async function openDebtor(id) {
+  currentDebtorId = id;
+  const snap = await getDoc(doc(db, "debtors", id));
+  editBox.style.display="block";
+  editName.value = snap.data().name;
+  editBalance.value = snap.data().balance;
+  loadTransactions(id);
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+/* حفظ تعديل الاسم */
+window.saveEdit = async () => {
+  await updateDoc(doc(db, "debtors", currentDebtorId), { name:editName.value });
+  alert("تم التعديل ✅");
+  loadDebtors();
+};
+
+/* إضافة / دفع مبلغ */
+window.saveTransaction = async () => {
+  const amount = +transAmount.value; if(!amount) return;
+  await updateDoc(doc(db,"debtors",currentDebtorId),{ balance:increment(transType.value==="pay"?-amount:amount) });
+  await addDoc(collection(db,"debtors",currentDebtorId,"transactions"), { type:transType.value, amount, note:transNote.value, date:Timestamp.now() });
+  transAmount.value=""; transNote.value="";
+  openDebtor(currentDebtorId);
+};
+
+/* سجل العمليات */
+async function loadTransactions(id) {
+  transactionsList.innerHTML="";
+  const snap = await getDocs(collection(db,"debtors",id,"transactions"));
+  snap.forEach(d=>{
+    const t=d.data();
+    const li=document.createElement("li");
+    li.textContent = `${t.type==="pay"?"دفع":"إضافة"} | ${t.amount} جنيه | ${t.note||""}`;
+    transactionsList.appendChild(li);
+  });
+}
+
+/* تحميل المدينين */
+async function loadDebtors() {
+  debtorsList.innerHTML=""; allDebtors=[];
+  let totalB=0,totalT=0,count=0;
+  const snap = await getDocs(collection(db,"debtors"));
+  for(const d of snap.docs){
+    const data = d.data(); data.id=d.id; allDebtors.push(data);
+    count++; totalB+=data.balance;
+    const transSnap = await getDocs(collection(db,"debtors",d.id,"transactions"));
+    totalT+=transSnap.size;
+  }
+  totalDebtors.textContent=count;
+  totalBalance.textContent=totalB+" جنيه";
+  totalTransactions.textContent=totalT;
+  displayDebtors(allDebtors);
+}
+
+/* عرض المدينين */
+function displayDebtors(arr){
+  debtorsList.innerHTML="";
+  arr.forEach(data=>{
+    const card=document.createElement("div");
+    card.className="debtor-card";
+    card.innerHTML=`<h4>${data.name}</h4><p>💰 ${data.balance} جنيه</p>`;
+    
+    card.onclick=()=>openDebtor(data.id);
+    debtorsList.appendChild(card);
+  });
+}
+
+/* بحث مباشر */
+searchInput.addEventListener("input",()=>{
+  const query = searchInput.value.trim().toLowerCase();
+  displayDebtors(allDebtors.filter(d=>d.name.toLowerCase().includes(query)));
+});
+
+/* أول تحميل */
+loadDebtors();
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+body {
+  font-family: "Segoe UI", Tahoma;
+  background: #f4f6f8;
+  padding: 20px;
+  direction: rtl;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  background: #e0e0e0;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tab.active {
+  background: #2196f3;
+  color: #fff;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
+  color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+  gap: 15px;
+}
+
+.debtor-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  cursor: pointer;
+  transition: .2s;
+}
+
+.debtor-card:hover {
+  transform: translateY(-3px);
+  background: #e3f2fd;
+}
+
+.box {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+input, textarea, select, button {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background: #2196f3;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+}
