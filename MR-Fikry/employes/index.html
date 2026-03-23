@@ -523,6 +523,81 @@
             box-shadow: 0 10px 20px -8px #10b981;
         }
 
+/* صندوق الالتزامات */
+.commitments-box{
+    margin-top:15px;
+    padding:14px;
+    background:linear-gradient(145deg,#f8fafc,#eef2ff);
+    border-radius:12px;
+    border:1px solid rgba(0,0,0,0.05);
+}
+
+/* ملخص الالتزامات */
+.commitments-summary{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:14px;
+    margin-bottom:10px;
+    color:#374151;
+}
+
+.commitments-summary strong{
+    color:#4f46e5;
+    font-size:15px;
+}
+
+/* زر عرض الالتزامات */
+.commitments-box button{
+    width:100%;
+    padding:8px 10px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(145deg,#6366f1,#4f46e5);
+    color:white;
+    font-size:13px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.commitments-box button:hover{
+    transform:scale(1.03);
+    background:linear-gradient(145deg,#4f46e5,#4338ca);
+}
+
+/* قائمة الالتزامات */
+.commitments-list{
+    margin-top:12px;
+}
+
+/* عنصر التزام */
+.commitment-item{
+    background:white;
+    padding:10px;
+    border-radius:8px;
+    margin-top:8px;
+    font-size:13px;
+    line-height:1.6;
+    border:1px solid rgba(0,0,0,0.05);
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* عناوين البيانات */
+.commitment-item strong{
+    color:#111827;
+}
+
+/* موبايل */
+@media(max-width:600px){
+
+.commitments-summary{
+    flex-direction:column;
+    gap:5px;
+    align-items:flex-start;
+}
+
+}
+
         /* ===== Responsive ===== */
         @media (max-width: 1024px) {
             .stats-grid {
@@ -733,39 +808,34 @@
 
         // تحميل الموظفين
         async function loadEmployees() {
-            employeesGrid.innerHTML = "";
 
-            try {
-                const snapshot = await getDocs(collection(db, "employees"));
-                
-                let totalSalary = 0;
-                let totalDeduction = 0;
-                let totalNet = 0;
+    employeesGrid.innerHTML = "";
 
-                snapshot.forEach(docSnap => {
-                    const employee = { id: docSnap.id, ...docSnap.data() };
-                    
-                    // حساب إجمالي الخصومات من المصفوفة
-                    const deductions = employee.deductions || [];
-                    const totalDeductionsAmount = deductions.reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
-                    
-                    totalSalary += employee.salary || 0;
-                    totalDeduction += totalDeductionsAmount;
-                    totalNet += (employee.salary || 0) - totalDeductionsAmount;
+    const snapshot = await getDocs(collection(db, "employees"));
 
-                    const card = createEmployeeCard(employee);
-                    employeesGrid.appendChild(card);
-                });
+    for (const docSnap of snapshot.docs) {
 
-                totalEmployeesEl.textContent = snapshot.size;
-                totalSalariesEl.textContent = totalSalary.toLocaleString() + " جنيه";
-                totalDeductionsEl.textContent = totalDeduction.toLocaleString() + " جنيه";
-                totalNetEl.textContent = totalNet.toLocaleString() + " جنيه";
+        const employee = { id: docSnap.id, ...docSnap.data() };
 
-            } catch (error) {
-                console.error("خطأ:", error);
-            }
-        }
+        // قراءة الالتزامات
+        const commitmentsSnap = await getDocs(
+            collection(db, "employees", employee.id, "commitments")
+        );
+
+        let commitmentsTotal = 0;
+
+        commitmentsSnap.forEach(c => {
+            const data = c.data();
+            commitmentsTotal += Number(data.amount) || 0;
+        });
+
+        employee.commitmentsCount = commitmentsSnap.size;
+        employee.commitmentsTotal = commitmentsTotal;
+
+        const card = createEmployeeCard(employee);
+        employeesGrid.appendChild(card);
+    }
+}
 
         // إنشاء بطاقة موظف
         function createEmployeeCard(employee) {
@@ -821,6 +891,36 @@
                         <span class="total-amount" id="totalDeductions-${employee.id}">0 جنيه</span>
                     </div>
                 </div>
+
+                <div class="commitments-section">
+                     <div class="section-header">
+                         <h4>
+                             <i class="fas fa-hand-holding-heart"></i>
+                             الالتزامات
+                         </h4>
+                     </div>
+                 
+               <div class="commitments-box">
+
+    <div class="commitments-summary">
+        <div>
+            عدد الالتزامات:
+            <strong>${employee.commitmentsCount || 0}</strong>
+        </div>
+
+        <div>
+            الإجمالي:
+            <strong>${(employee.commitmentsTotal || 0).toLocaleString()} جنيه</strong>
+        </div>
+    </div>
+
+    <button onclick="showCommitments('${employee.id}')">
+        عرض الالتزامات
+    </button>
+
+    <div id="commitments-${employee.id}" style="display:none"></div>
+
+</div>
 
                 <!-- صافي الراتب -->
                 <div class="net-salary">
@@ -910,7 +1010,12 @@
             }
 
             // حساب وعرض صافي الراتب
-            const netSalary = salary - totalDeductions;
+            const commitmentsTotal = Number(
+            document.getElementById(`commitmentsTotal-${employeeId}`)?.dataset.value
+            ) || 0;
+            
+            const netSalary = salary - totalDeductions - commitmentsTotal;
+
             const netSalaryEl = document.getElementById(`netSalary-${employeeId}`);
             if (netSalaryEl) {
                 netSalaryEl.textContent = netSalary.toLocaleString() + ' جنيه';
@@ -968,29 +1073,54 @@
             });
         };
 
+window.showCommitments = async function(employeeId) {
 
-window.deleteEmployee = async function(employeeId) {
+    const container = document.getElementById(`commitments-${employeeId}`);
 
-    const confirmDelete = confirm("هل أنت متأكد من حذف الموظف؟");
-
-    if (!confirmDelete) return;
-
-    try {
-
-        await deleteDoc(doc(db, "employees", employeeId));
-
-        alert("✅ تم حذف الموظف بنجاح");
-
-        loadEmployees(); // تحديث القائمة
-
-    } catch (error) {
-
-        console.error("خطأ في الحذف:", error);
-        alert("❌ حدث خطأ أثناء الحذف");
-
+    if (container.style.display === "block") {
+        container.style.display = "none";
+        return;
     }
 
+    container.innerHTML = "جاري التحميل...";
+
+    const snapshot = await getDocs(
+        collection(db, "employees", employeeId, "commitments")
+    );
+
+    let html = "";
+
+    snapshot.forEach(doc => {
+
+        const data = doc.data();
+
+        const productName = data.product?.name || "التزام";
+        const serial = data.product?.serial || "-";
+        const sellPrice = data.product?.sellPrice || 0;
+
+        html += `
+        <div class="commitment-item">
+
+            <div><strong>المنتج:</strong> ${productName}</div>
+
+            <div><strong>السيريال:</strong> ${serial}</div>
+
+            <div><strong>القيمة:</strong> ${data.amount} جنيه</div>
+
+            <div><strong>سعر البيع:</strong> ${sellPrice} جنيه</div>
+
+            <div><strong>ملاحظة:</strong> ${data.note || "-"}</div>
+
+            <div><strong>التاريخ:</strong> ${data.createdAt}</div>
+
+        </div>
+        `;
+    });
+
+    container.innerHTML = html;
+    container.style.display = "block";
 };
+
 
         // إضافة مستمع للبحث المباشر
         document.getElementById("searchInput")?.addEventListener("input", filterEmployees);

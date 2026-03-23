@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>MR Fikry | التزامات الموظفين</title>
+  <title> التزامات الموظفين</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
  
  <style>
@@ -409,7 +409,7 @@
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(10px);
       border-radius: 35px;
-      padding: 25px;
+      padding: 39px 25px 25px 25px;
       border: 1px solid rgba(255, 255, 255, 0.9);
       box-shadow: var(--box-shadow);
       transition: var(--transition);
@@ -810,24 +810,9 @@
 
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
-      .header {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 10px;
-      }
 
-      .employee-header {
-        flex-direction: column;
-        text-align: center;
-      }
 
-      .employee-stats {
-        grid-template-columns: 1fr;
-      }
 
-      .summary-cards {
-        grid-template-columns: 1fr;
-      }
 
       .month-selector {
         flex-direction: column;
@@ -842,15 +827,46 @@
       .section-title h2::after {
         display: none;
       }
+
+      .brand-text{
+        font-size: 20px;
+      }
+
+      .date-badge{
+        font-size: 12px;
+      }
+
+      .container{
+        padding: 0 10px;
+      }
+
+            .month-selector{
+        border-radius: 20px ;
+      }
+
+      .month-btn {
+        width: 35px;
+        height: 35px;
+      }
     }
 
     @media (max-width: 480px) {
+      .header{
+        padding: 3%;
+        margin-bottom: 17px;
+      }
       .employee-name {
         font-size: 22px;
       }
 
       .stat-value {
         font-size: 26px;
+      }
+
+
+      
+      .summary-cards {
+        grid-template-columns: 1fr;
       }
 
       .current-month {
@@ -875,7 +891,7 @@
         <i class="fas fa-file-contract"></i>
       </div>
       <div class="brand-text">
-        MR Fikry <span>| التزامات الموظفين</span>
+       التزامات الموظفين
       </div>
     </div>
     <div class="date-badge" id="currentDate"></div>
@@ -978,7 +994,7 @@
   <!-- Footer -->
   <footer class="footer">
     <i class="fas fa-crown"></i> 
-    <strong>MR Fikry</strong> | نظام إدارة التزامات الموظفين 
+    <strong>MR Fikry</strong>
     <i class="fas fa-sparkles"></i>
   </footer>
 
@@ -1135,48 +1151,45 @@
       'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
     ];
 
-    // عرض بيانات الموظف الأساسية من localStorage
-    function displayBasicEmployeeInfo() {
-      employeeName.textContent = currentEmployee.name || '-';
-      employeePhone.textContent = currentEmployee.phone || '-';
+function displayBasicEmployeeInfo() {
+  employeeName.textContent = currentEmployee.name || '-';
+  employeePhone.textContent = currentEmployee.phone || '-';
+}
+   async function loadEmployeeData() {
+  try {
+
+    const q = query(
+      collection(db, "employees"),
+      where("phone", "==", currentEmployee.phone)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.log("الموظف غير موجود");
+      return;
     }
 
-    // تحميل بيانات الموظف الكاملة من Firebase
-    async function loadEmployeeData() {
-      try {
-        const employeeDoc = await getDoc(doc(db, 'employees', currentEmployee.phone));
-        
-        if (employeeDoc.exists()) {
-          employeeData = { id: employeeDoc.id, ...employeeDoc.data() };
-          
-          // حساب إجمالي الخصومات من مصفوفة الخصومات
-          const deductions = employeeData.deductions || [];
-          const totalDeductionsAmount = deductions.reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
-          
-          // عرض إحصائيات الموظف
-          const salary = employeeData.salary || 0;
-          employeeSalary.textContent = `${salary.toLocaleString()} جنيه`;
-          totalDeductions.textContent = `${totalDeductionsAmount.toLocaleString()} جنيه`;
-          
-          const remaining = salary - totalDeductionsAmount;
-          remainingSalary.textContent = `${remaining.toLocaleString()} جنيه`;
-          
-        } else {
-          // إذا لم يتم العثور على بيانات في Firebase، استخدم القيم الافتراضية
-          employeeSalary.textContent = '0 جنيه';
-          totalDeductions.textContent = '0 جنيه';
-          remainingSalary.textContent = '0 جنيه';
-          console.log('لم يتم العثور على بيانات إضافية للموظف في Firebase');
-        }
-      } catch (error) {
-        console.error('خطأ في تحميل بيانات الموظف:', error);
-        // استمر في العرض حتى لو فشل تحميل Firebase
-        employeeSalary.textContent = '0 جنيه';
-        totalDeductions.textContent = '0 جنيه';
-        remainingSalary.textContent = '0 جنيه';
-      }
-    }
+    const docSnap = querySnapshot.docs[0];
+    employeeData = { id: docSnap.id, ...docSnap.data() };
 
+    // حفظ id
+    currentEmployee.id = docSnap.id;
+    localStorage.setItem("currentEmployee", JSON.stringify(currentEmployee));
+
+    const salary = employeeData.salary || 0;
+
+    const deductions = employeeData.deductions || [];
+    const total = deductions.reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
+
+    employeeSalary.textContent = salary + " جنيه";
+    totalDeductions.textContent = total + " جنيه";
+    remainingSalary.textContent = (salary - total) + " جنيه";
+
+  } catch (error) {
+    console.error("خطأ في تحميل بيانات الموظف:", error);
+  }
+}
     // تحديث عرض الشهر
     function updateMonthDisplay() {
       const monthName = arabicMonths[currentMonth.getMonth()];
@@ -1335,7 +1348,7 @@
       
       try {
         await addDoc(
-          collection(db, 'employees', currentEmployee.phone, 'commitments'), 
+          collection(db, 'employees', currentEmployee.id, 'commitments'), 
           commitmentData
         );
         
@@ -1364,7 +1377,7 @@
         
         // جلب جميع الالتزامات
         const querySnapshot = await getDocs(
-          collection(db, 'employees', currentEmployee.phone, 'commitments')
+          collection(db, 'employees', currentEmployee.id, 'commitments')
         );
         
         let totalAmount = 0;
@@ -1438,7 +1451,7 @@
           const remaining = totalAmount - monthlyDeductionValue;
           remainingAfterDeduction.textContent = `${remaining.toFixed(2)} ج.م`;
           
-          if (remaining < 0) {
+          if (remaining > 0) {
             remainingAfterDeduction.style.color = '#d63031';
           } else {
             remainingAfterDeduction.style.color = '#00b894';
