@@ -1,224 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    
+    <!-- العنوان الرئيسي باسم MR Fikry -->
+    <title>MR Fikry | لوحة تحكم راقية</title>
+    
+    <!-- تحسين SEO -->
+    <meta name="description" content="لوحة تحكم MR Fikry - تصميم أنيق وعصري لإدارة الأعمال">
+    <meta name="author" content="MR Fikry">
+    <meta name="theme-color" content="#f5f0ff">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
 
-<title>MR-Fikry</title>
-
-<!-- Basic SEO -->
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#000000">
-
-<!-- Open Graph (Social Media) -->
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://alryan.pages.dev/">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ar_AR">
-
-<!-- Twitter Cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://alryan.pages.dev/icon.jpg">
-
-<!-- PWA / Mobile App Feel -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="OS Store">
-<link rel="apple-touch-icon" href="https://alryan.pages.dev/icon.jpg">
-
-<!-- Preload main resources (سرعة أعلى) -->
-<link rel="preload" as="image" href="https://alryan.pages.dev/icon.jpg">
-
-<link rel="preload" as="style" href="style.css">
-
-<!-- CSS + Icons -->
-<link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<!-- Security Headers (خفيفة بدون سيرفر) -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    </style>
 </head>
 <body>
 
+    <!-- Watermark خفي -->
+    <div class="watermark">MR Fikry</div>
 
+    <!-- هيدر أنيق -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fas fa-store"></i>
+            </div>
+            <div class="brand-text">
+                MR Fikry 
+            </div>
+        </div>
+        
+        <div class="header-left">
+            <div class="date-badge">
+                <i class="far fa-calendar-alt"></i>
+                <span id="currentDate"></span>
+            </div>
+           
+        </div>
+    </header>
 
-
- <header>
-  <h1>الريان للادوات المنزليه</h1>
-  <img src="logo.png" class="logo">
- </header>
-
- <div class="text-top">
- <h1>لــــوحه التحكم</h1>
- <h3>Control panel</h3>
-</div>
-
-<div class="show">
-
-  <!-- عدد فواتير اليوم -->
-  <div class="dashboard">
-    <div class="card">
-      <div class="card-header">
-        <i class="fas fa-file-invoice"></i>
-        <span>فواتير اليوم</span>
-      </div>
-      <div class="card-body">
-        <h2 id="todayInvoiceCount">0</h2>
-        <p id="todayDate"></p>
-      </div>
+    <!-- العنوان الرئيسي -->
+    <div class="hero-title">
+        <h1>لوحة التحكم</h1>
+        <div class="sub">
+            <i class="fas fa-minus"></i> 
+            Control Panel 
+            <i class="fas fa-minus"></i>
+        </div>
     </div>
-  </div>
 
-  <!-- مبيعات اليوم -->
-  <div class="dashboard">
-    <div class="card">
-      <div class="card-header">
-        <i class="fas fa-coins"></i>
-        <span>مبيعات اليوم</span>
-      </div>
-      <div class="card-body">
-        <h2 id="todaySales">—</h2>
-        <p>إجمالي المبيعات</p>
-      </div>
+    <!-- بطاقات الإحصائيات -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-file-invoice"></i>
+            </div>
+            <div class="stat-label">فواتير اليوم</div>
+            <div class="stat-value" id="todayInvoiceCount">0</div>
+            <div class="stat-desc">
+                <i class="fas fa-circle"></i>
+                <span id="todayDate"></span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-label">مبيعات اليوم</div>
+            <div class="stat-value" id="todaySales">—</div>
+            <div class="stat-desc">
+                <i class="fas fa-chart-line"></i>
+                إجمالي المبيعات
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="stat-label">أرباح اليوم</div>
+            <div class="stat-value" id="todayProfit">—</div>
+            <div class="stat-desc">
+                <i class="fas fa-tag"></i>
+                صافي الربح
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- أرباح اليوم -->
-  <div class="dashboard">
-    <div class="card monthly">
-      <div class="card-header">
-        <i class="fas fa-chart-line"></i>
-        <span>أرباح اليوم</span>
-      </div>
-      <div class="card-body">
-        <h2 id="todayProfit">—</h2>
-        <p>صافي الربح</p>
-      </div>
+    <!-- أزرار التنقل الأنيقة -->
+    <div class="nav-grid">
+        <a href="prodacts/" class="nav-item">
+            <div class="nav-button">
+                <div class="nav-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <span class="nav-text">المنتجات</span>
+                <span class="nav-count">المخزون</span>
+            </div>
+        </a>
+
+        <a href="Reports/" class="nav-item">
+            <div class="nav-button">
+                <div class="nav-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <span class="nav-text">التقارير</span>
+                <span class="nav-count">تحليلات</span>
+            </div>
+        </a>
+
+        <a href="employes/" class="nav-item">
+            <div class="nav-button">
+                <div class="nav-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <span class="nav-text">الموظفين</span>
+                <span class="nav-count">الفريق</span>
+            </div>
+        </a>
+
+        <a href="returns/" class="nav-item">
+            <div class="nav-button">
+                <div class="nav-icon">
+                    <i class="fas fa-undo-alt"></i>
+                </div>
+                <span class="nav-text">المرتجعات</span>
+                <span class="nav-count">المردودات</span>
+            </div>
+        </a>
+
+        <a href="Debtors/" class="nav-item">
+            <div class="nav-button">
+                <div class="nav-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <span class="nav-text">المدينون</span>
+                <span class="nav-count">الذمم</span>
+            </div>
+        </a>
     </div>
-  </div>
-
-</div>
-
-<div class="patg">
-  <a href="prodacts/" class="green">
-    <i class="fas fa-box"></i>
-    <span>المنتجــــات</span>
-  </a>
-
-  <a href="Reports/" class="blu">
-    <i class="fas fa-chart-line"></i>
-    <span>التقـــارير</span>
-  </a>
-
-  <a href="employes/" class="bana">
-    <i class="fas fa-users"></i>
-    <span>الموظفيـــن</span>
-  </a>
-
-  <a href="returns/" class="red">
-    <i class="fas fa-users"></i>
-    <span>المرتجعات</span>
-  </a>
-
-  <a href="Debtors/" class="yell">
-    <i class="fas fa-users"></i>
-    <span>المدينون</span>
-  </a>
-
-</div>
 
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  where,
-  Timestamp
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    <!-- Firebase script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            getDocs,
+            query,
+            where,
+            Timestamp
+        } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
-  authDomain: "login-employees1.firebaseapp.com",
-  projectId: "login-employees1",
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+            authDomain: "login-employees1.firebaseapp.com",
+            projectId: "login-employees1",
+        };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-// عناصر العرض
-const todayInvoiceCountEl = document.getElementById('todayInvoiceCount');
-const todaySalesEl = document.getElementById('todaySales');
-const todayProfitEl = document.getElementById('todayProfit');
-const todayDateEl = document.getElementById('todayDate');
+        // عناصر الواجهة
+        const todayInvoiceCountEl = document.getElementById('todayInvoiceCount');
+        const todaySalesEl = document.getElementById('todaySales');
+        const todayProfitEl = document.getElementById('todayProfit');
+        const todayDateEl = document.getElementById('todayDate');
+        const currentDateEl = document.getElementById('currentDate');
 
-async function loadTodayDashboard() {
-  try {
-    const now = new Date();
+        // عرض التاريخ الحالي بشكل أنيق
+        const now = new Date();
+        if (currentDateEl) {
+            currentDateEl.textContent = now.toLocaleDateString('ar-EG', { 
+                year: 'numeric', 
+                month: 'numeric', 
+                day: 'numeric' 
+            });
+        }
 
-    const startOfDay = new Date(now);
-    startOfDay.setHours(0,0,0,0);
+        async function loadTodayDashboard() {
+            try {
+                const startOfDay = new Date(now);
+                startOfDay.setHours(0,0,0,0);
+                const endOfDay = new Date(now);
+                endOfDay.setHours(23,59,59,999);
 
-    const endOfDay = new Date(now);
-    endOfDay.setHours(23,59,59,999);
+                const q = query(
+                    collection(db, 'sales'),
+                    where('createdAt', '>=', Timestamp.fromDate(startOfDay)),
+                    where('createdAt', '<=', Timestamp.fromDate(endOfDay))
+                );
 
-    const q = query(
-      collection(db, 'sales'),
-      where('createdAt', '>=', Timestamp.fromDate(startOfDay)),
-      where('createdAt', '<=', Timestamp.fromDate(endOfDay))
-    );
+                const snapshot = await getDocs(q);
 
-    const snapshot = await getDocs(q);
+                let totalSales = 0;
+                let totalProfit = 0;
 
-    let totalSales = 0;
-    let totalProfit = 0;
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    totalSales += data.totalAmount || 0;
 
-    snapshot.forEach(doc => {
-      const data = doc.data();
+                    if (Array.isArray(data.items)) {
+                        data.items.forEach(item => {
+                            const profitPerItem = (item.price - (item.buyPrice || 0)) * (item.quantity || 1);
+                            totalProfit += profitPerItem;
+                        });
+                    }
+                });
 
-      // إجمالي المبيعات
-      totalSales += data.totalAmount || 0;
+                todayInvoiceCountEl.textContent = snapshot.size;
+                todaySalesEl.textContent = `${totalSales.toLocaleString()} جنيه`;
+                todayProfitEl.textContent = `${totalProfit.toLocaleString()} جنيه`;
+                
+                if (todayDateEl) {
+                    todayDateEl.textContent = now.toLocaleDateString('ar-EG', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                }
 
-      // حساب الأرباح من items
-      if (Array.isArray(data.items)) {
-        data.items.forEach(item => {
-          const profitPerItem = (item.price - item.buyPrice) * item.quantity;
-          totalProfit += profitPerItem;
+            } catch (error) {
+                console.error('⚠️ خطأ في تحميل البيانات:', error);
+                todaySalesEl.textContent = '—';
+                todayProfitEl.textContent = '—';
+                todayInvoiceCountEl.textContent = '—';
+                
+                if (todayDateEl) {
+                    todayDateEl.textContent = now.toLocaleDateString('ar-EG', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                }
+            }
+        }
+
+        loadTodayDashboard();
+    </script>
+
+    <!-- سكريبت احتياطي للتاريخ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateEl = document.getElementById('todayDate');
+            if (dateEl && !dateEl.innerHTML) {
+                const today = new Date();
+                dateEl.innerHTML = today.toLocaleDateString('ar-EG', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+            }
         });
-      }
-    });
-
-    // عرض النتائج
-    todayInvoiceCountEl.textContent = snapshot.size;
-    todaySalesEl.textContent = `${totalSales.toLocaleString()} جنيه`;
-    todayProfitEl.textContent = `${totalProfit.toLocaleString()} جنيه`;
-    todayDateEl.textContent = now.toLocaleDateString('ar-EG');
-
-  } catch (error) {
-    console.error('❌ خطأ تحميل بيانات اليوم:', error);
-    todaySalesEl.textContent = '—';
-    todayProfitEl.textContent = '—';
-    todayInvoiceCountEl.textContent = '—';
-  }
-}
-
-loadTodayDashboard();
-</script>
-
-
+    </script>
 </body>
 </html>

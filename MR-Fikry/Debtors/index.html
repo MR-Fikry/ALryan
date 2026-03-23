@@ -1,237 +1,1132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>المدينون</title>
-<style>
-body { font-family: Arial; margin:0px; background:#f0f0f0; }
-.tabs { display:flex; gap:10px; margin:20px; }
-.tab { padding:10px 20px; cursor:pointer; border-radius:8px; border:none; background:#ddd; }
-.tab.active { background:#4caf50; color:#fff; }
-.tab-content { display:none; }
-.tab-content.active { display:block; }
-.cards { display:flex; flex-wrap:wrap; gap:15px; }
-.card{font-size: 14px;}
-.debtor-card { background:#fff; padding:15px; border-radius:8px; cursor:pointer; flex:1 1 100px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-.box { background:#fff; padding:15px; border-radius:8px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-input, textarea, select { width:70%; margin:5px 0 10px 0; padding:8px; border-radius:5px; border:1px solid #ccc; }
-button { padding:10px 15px; border:none; border-radius:5px; cursor:pointer; background:#4caf50; color:#fff; }
-button.red { background:red; }
-ul { padding-left:20px; }
-.dashboard{
-    display: flex;
-    gap: 10px;
-    color: white;
-}
-.card{background-color: darkred; padding: 10px; border-radius: 10px;}
-.da{
- padding: 10px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    
+    <title>MR Fikry | المدينون</title>
+    
+    <!-- تحسين SEO -->
+    <meta name="description" content="إدارة المدينون والديون - MR Fikry">
+    <meta name="author" content="MR Fikry">
+    <meta name="theme-color" content="#6c5ce7">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="MR Fikry - المدينون">
+    <meta property="og:description" content="نظام متطور لإدارة المدينون والديون">
+    <meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5f0ff 0%, #e9e4ff 100%);
+            min-height: 100vh;
+            color: #2d2a4e;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ===== الهيدر الأنيق ===== */
+        .header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            box-shadow: 0 8px 16px -6px rgba(108, 92, 231, 0.4);
+        }
+
+        .brand-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(145deg, #4a3f96, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text span {
+            font-weight: 300;
+            font-size: 16px;
+            color: #8f8bb3;
+            -webkit-text-fill-color: #8f8bb3;
+            margin-right: 6px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .date-badge {
+            background: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #4a3f96;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            font-size: 14px;
+        }
+
+        .date-badge i {
+            margin-left: 8px;
+            color: #6c5ce7;
+        }
+
+        /* ===== شريط التنقل ===== */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto 10px;
+            gap: 20px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            color: white;
+            box-shadow: 0 10px 20px -8px rgba(108, 92, 231, 0.4);
+        }
+
+        .nav-link:not(.active) {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            color: #4a3f96;
+        }
+
+        .nav-link:not(.active):hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== بطاقات الإحصائيات المتطورة ===== */
+        .stats-wrapper {
+            max-width: 1300px;
+            margin: 30px auto 20px;
+            padding: 0 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 30px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 20px 40px -12px rgba(108, 92, 231, 0.2);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #8f8bb3;
+            margin-bottom: 5px;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d2a4e;
+        }
+
+        .stat-unit {
+            font-size: 16px;
+            color: #8f8bb3;
+            margin-right: 5px;
+        }
+
+        /* ===== شريط البحث ===== */
+        .search-section {
+            max-width: 1300px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 16px 25px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
+            background: transparent;
+            border-radius: 50px;
+        }
+
+        .search-container input::placeholder {
+            color: #b7b1d9;
+        }
+
+        .search-container button {
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 4px;
+            transition: 0.3s;
+        }
+
+        .search-container button:hover {
+            background: linear-gradient(145deg, #5b4bc4, #7a6ad9);
+            transform: translateY(-2px);
+        }
+
+        /* ===== شبكة المدينين ===== */
+        .debtors-section {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #2d2a4e;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::before,
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 40px;
+            background: linear-gradient(90deg, transparent, #6c5ce7, transparent);
+            top: 50%;
+        }
+
+        .section-title h2::before {
+            right: -60px;
+        }
+
+        .section-title h2::after {
+            left: -60px;
+        }
+
+        .debtors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* ===== بطاقة المدين المتطورة ===== */
+        .debtor-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .debtor-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -12px rgba(108, 92, 231, 0.2);
+        }
+
+        .debtor-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .debtor-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d2a4e;
+            margin-bottom: 10px;
+        }
+
+        .debtor-balance {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+
+        .debtor-balance i {
+            font-size: 16px;
+        }
+
+        /* ===== لوحة التعديل المتطورة ===== */
+        .edit-panel {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .edit-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed rgba(108, 92, 231, 0.2);
+        }
+
+        .edit-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .edit-title {
+            flex: 1;
+        }
+
+        .edit-title h3 {
+            font-size: 20px;
+            color: #2d2a4e;
+            margin-bottom: 5px;
+        }
+
+        .edit-title p {
+            color: #8f8bb3;
+            font-size: 14px;
+        }
+
+        .edit-section {
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .edit-section h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c5ce7;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .modern-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(108, 92, 231, 0.15);
+            border-radius: 16px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .modern-input:focus {
+            outline: none;
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(108, 92, 231, 0.15);
+            border-radius: 16px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border: none;
+            padding: 14px;
+            border-radius: 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+            min-width: 120px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px #6c5ce7;
+        }
+
+        .btn-danger {
+            background: linear-gradient(145deg, #ef4444, #dc2626);
+            border: none;
+            padding: 14px;
+            border-radius: 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px #ef4444;
+        }
+
+        .btn-success {
+            background: linear-gradient(145deg, #10b981, #059669);
+        }
+
+        .transactions-list {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .transaction-icon.pay {
+            background: #10b981;
+        }
+
+        .transaction-icon.add {
+            background: #ef4444;
+        }
+
+        .transaction-details {
+            flex: 1;
+        }
+
+        .transaction-amount {
+            font-weight: 700;
+        }
+
+        .transaction-note {
+            font-size: 13px;
+            color: #8f8bb3;
+        }
+
+        .transaction-date {
+            font-size: 12px;
+            color: #b7b1d9;
+        }
+
+        /* ===== نموذج الإضافة ===== */
+        .add-section {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .add-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .add-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            margin: 0 auto 20px;
+        }
+
+        /* ===== فوتر ===== */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            color: #5b5880;
+            font-size: 15px;
+            margin-top: 50px;
+        }
+
+        .footer strong {
+            color: #6c5ce7;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 25px;
+                flex-wrap: wrap;
+            }
+
+            .brand-text {
+                font-size: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+
+            .section-title h2::before,
+            .section-title h2::after {
+                width: 30px;
+            }
+
+            .section-title h2::before { right: -40px; }
+            .section-title h2::after { left: -40px; }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-bar {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-link {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-container {
+                flex-direction: column;
+                background: transparent;
+                gap: 10px;
+            }
+
+            .search-container input {
+                width: 100%;
+                background: white;
+                border-radius: 40px;
+            }
+
+            .search-container button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title h2::before,
+            .section-title h2::after {
+                display: none;
+            }
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            opacity: 0.05;
+            font-size: 80px;
+            font-weight: 800;
+            color: #2d2a4e;
+            pointer-events: none;
+            z-index: -1;
+            transform: rotate(-10deg);
+        }
+    </style>
 </head>
 <body>
 
-<!-- Tabs -->
-<div class="tabs">
-  <button class="tab active" onclick="showTab('debtorsTab', event)">👥 المدينون</button>
-  <button class="tab" onclick="showTab('addTab', event)">➕ إضافة مدين</button>
-</div>
+    <!-- Watermark -->
+    <div class="watermark">MR Fikry</div>
 
+    <!-- Header -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <div class="brand-text">
+                MR Fikry <span>| المدينون</span>
+            </div>
+        </div>
+        
+        <div class="header-left">
+            <div class="date-badge">
+                <i class="far fa-calendar-alt"></i>
+                <span id="currentDate"></span>
+            </div>
+        </div>
+    </header>
 
-<!-- Edit / Transaction -->
-<div id="editBox" class="box" style="display:none">
-  <h3>✏️ تعديل بيانات المدين</h3>
-  <input id="editName">
-  <input id="editBalance" disabled>
-  <button onclick="saveEdit()">💾 حفظ التعديل</button>
-  <button class="red" onclick="deleteDebtor()">❌ مسح العميل نهائيًا</button>
-
-  <h3>💰 إضافة / دفع مبلغ</h3>
-  <select id="transType">
-    <option value="pay">دفع (ينقص)</option>
-    <option value="add">إضافة (يزيد)</option>
-  </select>
-  <input id="transAmount" type="number" placeholder="المبلغ">
-  <textarea id="transNote" placeholder="ملاحظة"></textarea>
-  <button onclick="saveTransaction()">تسجيل العملية</button>
-
-  <h3>📜 سجل العمليات</h3>
-  <ul id="transactionsList"></ul>
-</div>
-
-
-<!-- Debtors List -->
-<div id="debtorsTab" class="tab-content active">
-  <div class="da">
-    <div class="dashboard">
-    <div class="card">
-      <h4>👥 عدد المدينين</h4>
-      <span id="totalDebtors">0</span>
+    <!-- Navigation Tabs -->
+    <div class="nav-bar">
+        <div class="nav-link active" onclick="showTab('debtorsTab')">
+            <i class="fas fa-users"></i>
+            المدينون
+        </div>
+        <div class="nav-link" onclick="showTab('addTab')">
+            <i class="fas fa-plus-circle"></i>
+            إضافة مدين
+        </div>
     </div>
-    <div class="card">
-      <h4>💰 إجمالي المديونية</h4>
-      <span id="totalBalance">0</span>
+
+    <!-- Stats -->
+    <div class="stats-wrapper" id="debtorsTab">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-content">
+                    <div class="stat-label">عدد المدينين</div>
+                    <div class="stat-number" id="totalDebtors">0</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(145deg, #ef4444, #dc2626);">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">إجمالي المديونية</div>
+                    <div class="stat-number" id="totalBalance">0 <span class="stat-unit">جنيه</span></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(145deg, #10b981, #059669);">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">إجمالي العمليات</div>
+                    <div class="stat-number" id="totalTransactions">0</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card">
-      <h4>🧾 إجمالي العمليات</h4>
-      <span id="totalTransactions">0</span>
+
+    <!-- Search -->
+    <div class="search-section" id="debtorsTab">
+        <div class="search-container">
+            <input type="text" id="searchDebtor" placeholder="ابحث باسم المدين...">
+            <button onclick="filterDebtors()">
+                <i class="fas fa-search"></i>
+                بحث
+            </button>
+        </div>
     </div>
-  </div>
-  <h2>📋 قائمة المدينين</h2>
-  <input id="searchDebtor" type="text" placeholder="ابحث باسم المدين...">
-  <div id="debtorsList" class="cards"></div>
-  </div>
-</div>
 
-<!-- Add Debtor -->
-<div id="addTab" class="tab-content">
-  <div class="box">
-    <h3>➕ إضافة مدين جديد</h3>
-    <input id="newName" placeholder="اسم المدين">
-    <input id="newBalance" type="number" placeholder="المبلغ">
-    <button onclick="addDebtor()">حفظ</button>
-  </div>
-</div>
+    <!-- Debtors Grid -->
+    <div class="debtors-section" id="debtorsTab">
+        <div class="section-title">
+            <h2>قائمة المدينين</h2>
+        </div>
+        <div id="debtorsList" class="debtors-grid"></div>
+    </div>
 
+    <!-- Edit Panel -->
+    <div id="editBox" class="edit-panel" style="display: none;">
+        <div class="edit-card">
+            <div class="edit-header">
+                <div class="edit-icon">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+                <div class="edit-title">
+                    <h3>تعديل بيانات المدين</h3>
+                    <p>إدارة الديون والعمليات</p>
+                </div>
+            </div>
 
-<!-- Firebase -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, Timestamp, increment, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+            <div class="edit-section">
+                <h4><i class="fas fa-user"></i> البيانات الشخصية</h4>
+                <input id="editName" class="modern-input" placeholder="اسم المدين">
+                <input id="editBalance" class="modern-input" disabled>
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="saveEdit()">
+                        <i class="fas fa-save"></i>
+                        حفظ التعديل
+                    </button>
+                    <button class="btn-danger" onclick="deleteDebtor()">
+                        <i class="fas fa-trash"></i>
+                        مسح العميل
+                    </button>
+                </div>
+            </div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
-  authDomain: "login-employees1.firebaseapp.com",
-  projectId: "login-employees1"
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+            <div class="edit-section">
+                <h4><i class="fas fa-money-bill-wave"></i> إضافة / دفع مبلغ</h4>
+                <select id="transType" class="modern-select">
+                    <option value="pay">💰 دفع (ينقص من الدين)</option>
+                    <option value="add">➕ إضافة (يزيد الدين)</option>
+                </select>
+                <input id="transAmount" type="number" class="modern-input" placeholder="المبلغ">
+                <textarea id="transNote" class="modern-input" placeholder="ملاحظة (اختياري)" rows="2"></textarea>
+                
+                <button class="btn-primary btn-success" onclick="saveTransaction()">
+                    <i class="fas fa-check-circle"></i>
+                    تسجيل العملية
+                </button>
+            </div>
 
-let currentDebtorId = null;
-const debtorsList = document.getElementById("debtorsList");
-const totalDebtors = document.getElementById("totalDebtors");
-const totalBalance = document.getElementById("totalBalance");
-const totalTransactions = document.getElementById("totalTransactions");
-const editBox = document.getElementById("editBox");
-const moneyBox = document.getElementById("moneyBox");
-const editName = document.getElementById("editName");
-const editBalance = document.getElementById("editBalance");
-const transAmount = document.getElementById("transAmount");
-const transType = document.getElementById("transType");
-const transNote = document.getElementById("transNote");
-const transactionsList = document.getElementById("transactionsList");
-const newName = document.getElementById("newName");
-const newBalance = document.getElementById("newBalance");
-const searchInput = document.getElementById("searchDebtor");
+            <div class="edit-section">
+                <h4><i class="fas fa-history"></i> سجل العمليات</h4>
+                <div id="transactionsList" class="transactions-list"></div>
+            </div>
+        </div>
+    </div>
 
-let allDebtors = [];
+    <!-- Add Debtor -->
+    <div id="addTab" style="display: none;">
+        <div class="add-section">
+            <div class="add-card">
+                <div class="add-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3 style="margin-bottom: 20px;">إضافة مدين جديد</h3>
+                <input id="newName" class="modern-input" placeholder="اسم المدين">
+                <input id="newBalance" type="number" class="modern-input" placeholder="المبلغ">
+                <button class="btn-primary" onclick="addDebtor()" style="width: 100%;">
+                    <i class="fas fa-save"></i>
+                    حفظ
+                </button>
+            </div>
+        </div>
+    </div>
 
-/* Tabs */
-window.showTab = (id, e) => {
-  document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  e.target.classList.add("active");
-};
+    <!-- Footer -->
+    <footer class="footer">
+        <i class="fas fa-crown"></i> 
+        <strong>MR Fikry</strong> | نظام إدارة المدينون المتطور 
+        <i class="fas fa-sparkles"></i>
+    </footer>
 
-/* إضافة مدين */
-window.addDebtor = async () => {
-  if (!newName.value || !newBalance.value) { alert("املأ البيانات"); return; }
-  await addDoc(collection(db, "debtors"), { name:newName.value, balance:+newBalance.value, createdAt:Timestamp.now() });
-  newName.value=""; newBalance.value="";
-  loadDebtors();
-};
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, Timestamp, increment, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-/* مسح مدين */
-window.deleteDebtor = async () => {
-  if (!currentDebtorId) return;
-  if (!confirm("⚠️ سيتم مسح العميل وكل عملياته نهائيًا")) return;
-  const transSnap = await getDocs(collection(db, "debtors", currentDebtorId, "transactions"));
-  for(const docu of transSnap.docs) await deleteDoc(docu.ref);
-  await deleteDoc(doc(db, "debtors", currentDebtorId));
-  alert("تم مسح العميل بالكامل ✅");
-  editBox.style.display="none"; transactionsList.innerHTML=""; currentDebtorId=null;
-  loadDebtors();
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+            authDomain: "login-employees1.firebaseapp.com",
+            projectId: "login-employees1"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-/* فتح مدين */
-async function openDebtor(id) {
-  currentDebtorId = id;
-  const snap = await getDoc(doc(db, "debtors", id));
-  editBox.style.display="block";
-  editName.value = snap.data().name;
-  editBalance.value = snap.data().balance;
-  loadTransactions(id);
-  window.scrollTo({ top:0, behavior:"smooth" });
-}
+        // عناصر DOM
+        const currentDateEl = document.getElementById("currentDate");
+        const debtorsList = document.getElementById("debtorsList");
+        const totalDebtors = document.getElementById("totalDebtors");
+        const totalBalance = document.getElementById("totalBalance");
+        const totalTransactions = document.getElementById("totalTransactions");
+        const editBox = document.getElementById("editBox");
+        const editName = document.getElementById("editName");
+        const editBalance = document.getElementById("editBalance");
+        const transAmount = document.getElementById("transAmount");
+        const transType = document.getElementById("transType");
+        const transNote = document.getElementById("transNote");
+        const transactionsList = document.getElementById("transactionsList");
+        const newName = document.getElementById("newName");
+        const newBalance = document.getElementById("newBalance");
+        const searchInput = document.getElementById("searchDebtor");
+        const addTab = document.getElementById("addTab");
+        const debtorsTab = document.getElementById("debtorsTab");
 
-/* حفظ تعديل الاسم */
-window.saveEdit = async () => {
-  await updateDoc(doc(db, "debtors", currentDebtorId), { name:editName.value });
-  alert("تم التعديل ✅");
-  loadDebtors();
-};
+        // التاريخ
+        const now = new Date();
+        currentDateEl.textContent = now.toLocaleDateString('ar-EG', { 
+            year: 'numeric', 
+            month: 'numeric', 
+            day: 'numeric' 
+        });
 
-/* إضافة / دفع مبلغ */
-window.saveTransaction = async () => {
-  const amount = +transAmount.value; if(!amount) return;
-  await updateDoc(doc(db,"debtors",currentDebtorId),{ balance:increment(transType.value==="pay"?-amount:amount) });
-  await addDoc(collection(db,"debtors",currentDebtorId,"transactions"), { type:transType.value, amount, note:transNote.value, date:Timestamp.now() });
-  transAmount.value=""; transNote.value="";
-  openDebtor(currentDebtorId);
-};
+        let currentDebtorId = null;
+        let allDebtors = [];
 
-/* سجل العمليات */
-async function loadTransactions(id) {
-  transactionsList.innerHTML="";
-  const snap = await getDocs(collection(db,"debtors",id,"transactions"));
-  snap.forEach(d=>{
-    const t=d.data();
-    const li=document.createElement("li");
-    li.textContent = `${t.type==="pay"?"دفع":"إضافة"} | ${t.amount} جنيه | ${t.note||""}`;
-    transactionsList.appendChild(li);
-  });
-}
+        // Tabs
+        window.showTab = (tabId) => {
+            if (tabId === 'debtorsTab') {
+                debtorsTab.style.display = 'block';
+                addTab.style.display = 'none';
+                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                document.querySelector('.nav-link:first-child').classList.add('active');
+            } else {
+                debtorsTab.style.display = 'none';
+                addTab.style.display = 'block';
+                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                document.querySelector('.nav-link:last-child').classList.add('active');
+            }
+        };
 
-/* تحميل المدينين */
-async function loadDebtors() {
-  debtorsList.innerHTML=""; allDebtors=[];
-  let totalB=0,totalT=0,count=0;
-  const snap = await getDocs(collection(db,"debtors"));
-  for(const d of snap.docs){
-    const data = d.data(); data.id=d.id; allDebtors.push(data);
-    count++; totalB+=data.balance;
-    const transSnap = await getDocs(collection(db,"debtors",d.id,"transactions"));
-    totalT+=transSnap.size;
-  }
-  totalDebtors.textContent=count;
-  totalBalance.textContent=totalB+" جنيه";
-  totalTransactions.textContent=totalT;
-  displayDebtors(allDebtors);
-}
+        // إضافة مدين
+        window.addDebtor = async () => {
+            if (!newName.value || !newBalance.value) { 
+                alert("❌ الرجاء إدخال جميع البيانات"); 
+                return; 
+            }
+            await addDoc(collection(db, "debtors"), { 
+                name: newName.value, 
+                balance: +newBalance.value, 
+                createdAt: Timestamp.now() 
+            });
+            newName.value = ""; 
+            newBalance.value = "";
+            alert("✅ تم إضافة المدين بنجاح");
+            loadDebtors();
+            showTab('debtorsTab');
+        };
 
-/* عرض المدينين */
-function displayDebtors(arr){
-  debtorsList.innerHTML="";
-  arr.forEach(data=>{
-    const card=document.createElement("div");
-    card.className="debtor-card";
-    card.innerHTML=`<h4>${data.name}</h4><p>💰 ${data.balance} جنيه</p>`;
-    
-    card.onclick=()=>openDebtor(data.id);
-    debtorsList.appendChild(card);
-  });
-}
+        // مسح مدين
+        window.deleteDebtor = async () => {
+            if (!currentDebtorId) return;
+            if (!confirm("⚠️ هل أنت متأكد؟ سيتم مسح العميل وكل عملياته نهائيًا")) return;
+            
+            const transSnap = await getDocs(collection(db, "debtors", currentDebtorId, "transactions"));
+            for (const docu of transSnap.docs) await deleteDoc(docu.ref);
+            await deleteDoc(doc(db, "debtors", currentDebtorId));
+            
+            alert("✅ تم مسح العميل بالكامل");
+            editBox.style.display = "none"; 
+            transactionsList.innerHTML = ""; 
+            currentDebtorId = null;
+            loadDebtors();
+        };
 
-/* بحث مباشر */
-searchInput.addEventListener("input",()=>{
-  const query = searchInput.value.trim().toLowerCase();
-  displayDebtors(allDebtors.filter(d=>d.name.toLowerCase().includes(query)));
-});
+        // فتح مدين
+        async function openDebtor(id) {
+            currentDebtorId = id;
+            const snap = await getDoc(doc(db, "debtors", id));
+            editBox.style.display = "block";
+            editName.value = snap.data().name;
+            editBalance.value = snap.data().balance + " جنيه";
+            loadTransactions(id);
+            window.scrollTo({ top: editBox.offsetTop - 100, behavior: "smooth" });
+        }
 
-/* أول تحميل */
-loadDebtors();
-</script>
+        // حفظ تعديل الاسم
+        window.saveEdit = async () => {
+            await updateDoc(doc(db, "debtors", currentDebtorId), { name: editName.value });
+            alert("✅ تم تعديل الاسم بنجاح");
+            loadDebtors();
+        };
+
+        // إضافة / دفع مبلغ
+        window.saveTransaction = async () => {
+            const amount = +transAmount.value; 
+            if (!amount) {
+                alert("❌ الرجاء إدخال المبلغ");
+                return;
+            }
+            
+            await updateDoc(doc(db, "debtors", currentDebtorId), { 
+                balance: increment(transType.value === "pay" ? -amount : amount) 
+            });
+            
+            await addDoc(collection(db, "debtors", currentDebtorId, "transactions"), { 
+                type: transType.value, 
+                amount, 
+                note: transNote.value || "بدون ملاحظة", 
+                date: Timestamp.now() 
+            });
+            
+            transAmount.value = ""; 
+            transNote.value = "";
+            alert("✅ تم تسجيل العملية بنجاح");
+            openDebtor(currentDebtorId);
+            loadDebtors();
+        };
+
+        // سجل العمليات
+        async function loadTransactions(id) {
+            transactionsList.innerHTML = "";
+            const snap = await getDocs(collection(db, "debtors", id, "transactions"));
+            
+            if (snap.empty) {
+                transactionsList.innerHTML = '<p style="text-align: center; color: #8f8bb3;">لا توجد عمليات حتى الآن</p>';
+                return;
+            }
+
+            snap.forEach(d => {
+                const t = d.data();
+                const li = document.createElement("div");
+                li.className = "transaction-item";
+                
+                const date = t.date?.toDate().toLocaleDateString('ar-EG') || '';
+                
+                li.innerHTML = `
+                    <div class="transaction-icon ${t.type === 'pay' ? 'pay' : 'add'}">
+                        <i class="fas ${t.type === 'pay' ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-amount">${t.amount} جنيه</div>
+                        <div class="transaction-note">${t.note || ''}</div>
+                        <div class="transaction-date">${date}</div>
+                    </div>
+                `;
+                transactionsList.appendChild(li);
+            });
+        }
+
+        // تحميل المدينين
+        async function loadDebtors() {
+            debtorsList.innerHTML = ""; 
+            allDebtors = [];
+            
+            let totalB = 0, totalT = 0, count = 0;
+            
+            const snap = await getDocs(collection(db, "debtors"));
+            
+            for (const d of snap.docs) {
+                const data = d.data(); 
+                data.id = d.id; 
+                allDebtors.push(data);
+                
+                count++; 
+                totalB += data.balance;
+                
+                const transSnap = await getDocs(collection(db, "debtors", d.id, "transactions"));
+                totalT += transSnap.size;
+            }
+            
+            totalDebtors.textContent = count;
+            totalBalance.textContent = totalB.toLocaleString() + " جنيه";
+            totalTransactions.textContent = totalT;
+            
+            displayDebtors(allDebtors);
+        }
+
+        // عرض المدينين
+        function displayDebtors(arr) {
+            debtorsList.innerHTML = "";
+            
+            if (arr.length === 0) {
+                debtorsList.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px; background: white; border-radius: 30px;">
+                        <i class="fas fa-users" style="font-size: 60px; color: #6c5ce7; margin-bottom: 20px;"></i>
+                        <p style="font-size: 18px; color: #8f8bb3;">لا يوجد مدينون حتى الآن</p>
+                    </div>
+                `;
+                return;
+            }
+
+            arr.forEach(data => {
+                const card = document.createElement("div");
+                card.className = "debtor-card";
+                card.innerHTML = `
+                    <div class="debtor-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="debtor-name">${data.name}</div>
+                    <div class="debtor-balance">
+                        <i class="fas fa-wallet"></i>
+                        ${data.balance.toLocaleString()} جنيه
+                    </div>
+                `;
+                
+                card.onclick = () => openDebtor(data.id);
+                debtorsList.appendChild(card);
+            });
+        }
+
+        // فلترة المدينين
+        window.filterDebtors = function() {
+            const query = searchInput.value.trim().toLowerCase();
+            const filtered = allDebtors.filter(d => d.name.toLowerCase().includes(query));
+            displayDebtors(filtered);
+        };
+
+        // بحث مباشر
+        searchInput.addEventListener("input", filterDebtors);
+
+        // تحميل أولي
+        loadDebtors();
+        showTab('debtorsTab');
+    </script>
 </body>
 </html>

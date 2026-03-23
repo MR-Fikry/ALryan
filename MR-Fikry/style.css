@@ -1,169 +1,673 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+        /* ===== المتغيرات والأساسيات ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #e4e4e4 0%, #fff6e4 100%);
+            min-height: 100vh;
+            color: #2d2a4e;
+            line-height: 1.5;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
 
-body{
-    font-family:  "Cairo", sans-serif;
-    direction: rtl;
-}
+        /* تأثير الخلفية الناعم */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(180, 160, 255, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
+        /* ===== الهيدر الأنيق ===== */
+        .header {
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 60px;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-}
+        .brand-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 10px 20px -8px rgba(108, 92, 231, 0.4);
+        }
 
-.logo{
-    width: 70px;
-}
+        .brand-text {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(145deg, #4a3f96, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
 
-.text-top{
-    text-align: center;
-    
-}
+        .brand-text span {
+            font-weight: 300;
+            font-size: 18px;
+            color: #8f8bb3;
+            background: none;
+            -webkit-text-fill-color: #8f8bb3;
+            margin-right: 6px;
+        }
 
-.text-top h3{
-    color: darkgreen;
-}
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-.show{
-    display: flex;
-    justify-content: space-evenly;
-    gap: 30px;
-    padding: 80px 0;
-}
+        .date-badge {
+            background: white;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #4a3f96;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            font-size: 15px;
+        }
 
-.dashboard{
-    padding: 30px;
-    background-color: rgb(0, 110, 255);
-    color: #ffffff;
-    border-radius: 15px;
-    width: 30%;
-}
+        .date-badge i {
+            margin-left: 8px;
+            color: #6c5ce7;
+        }
 
-.patg{
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+        /* ===== العنوان الرئيسي ===== */
+        .hero-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            padding: 0 20px;
+        }
 
-}
+        .hero-title h1 {
+            font-size: 42px;
+            font-weight: 600;
+            color: #2d2a4e;
+            position: relative;
+            display: inline-block;
+        }
 
+        .hero-title h1::before,
+        .hero-title h1::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 60px;
+            background: linear-gradient(90deg, transparent, #6c5ce7, transparent);
+            top: 50%;
+        }
 
+        .hero-title h1::before {
+            right: -80px;
+        }
 
-.patg a{
-   text-decoration: none;
-   display: flex;
-   justify-content: center;
-   align-items: right;
-   flex-direction: column;
-   color: #ffffff;
-   padding: 50px 30px;
-   border-radius: 10px;
-   font-size: 25px;
-   width: 20%;
-   gap: 10px;
+        .hero-title h1::after {
+            left: -80px;
+        }
 
-}
+        .hero-title .sub {
+            color: #6b6890;
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
 
-.patg i{
-    margin: 0 10px;
-}
+        .hero-title .sub i {
+            color: #6c5ce7;
+            margin: 0 8px;
+        }
 
-.green{
-            background: linear-gradient(135deg , #007924 , #539c00);
+        /* ===== بطاقات الإحصائيات ===== */
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px 40px 50px;
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
-}
+        .stat-card {
+            flex: 1 1 280px;
+            min-width: 260px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 35px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
 
-.blu{
-            background: linear-gradient(135deg , #0051ff , #447df8);
+        .stat-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 25px 50px -12px rgba(108, 92, 231, 0.25);
+            border-color: white;
+        }
 
-}
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #6c5ce7, #a594ff);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 10px 20px -5px rgba(108, 92, 231, 0.4);
+        }
 
-.bana{
-            background: linear-gradient(135deg , #3700ff , #7444f8);
+        .stat-label {
+            font-size: 18px;
+            font-weight: 500;
+            color: #6b6890;
+            margin-bottom: 8px;
+        }
 
-}
+        .stat-value {
+            font-size: 38px;
+            font-weight: 700;
+            color: #2d2a4e;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
 
-.red{
-            background: linear-gradient(135deg , #ff0000 , #f84444);
-
-}
-
-.yell{
-            background: linear-gradient(135deg , #ffa600 , #f8b044);
-}
-
-@media (max-width:470px) {
-    header{
-        padding:20px 30px;
-    }
-    header h1{
-        font-size: 16px;
-    }
-
-    .logo{
-        width: 40px;
-    }
-
-    .text-top{
-        margin: 20px 0;
-    }
-
-    .text-top h1{
-        font-size: 20px;
-    }
-    
-        .text-top h3{
+        .stat-desc {
             font-size: 14px;
-    }
+            color: #9491b5;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-    .show{
-    display: flex;
-    
-    gap: 10px;
-    padding: 10px;
-}
+        .stat-desc i {
+            color: #6c5ce7;
+            font-size: 12px;
+        }
 
-.dashboard{
-    padding: 13px;
-}
+        /* ===== أزرار التنقل الأنيقة ===== */
+        .nav-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 30px 30px 70px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
-.card span{
-    font-size: 12px;
-}
+        .nav-item {
+            flex: 1 1 160px;
+            max-width: 200px;
+            text-decoration: none;
+        }
 
-.card-body h2{
-    font-size: 15px;
-}
+        .nav-button {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 35px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.05);
+        }
 
-.card-body p {
-    font-size: 10px;
-}
+        .nav-button:hover {
+            background: white;
+            transform: scale(1.03) translateY(-6px);
+            border-color: white;
+            box-shadow: 0 25px 40px -12px rgba(108, 92, 231, 0.25);
+        }
 
-.patg{
-    flex-wrap:wrap;
-    padding: 60px 20px;
-    gap: 30px;
-}
+        .nav-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #6c5ce7;
+            transition: 0.3s;
+        }
 
-.patg a{
-    width: 45%;
-    padding: 20px 10px;
-}
+        .nav-button:hover .nav-icon {
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            color: white;
+            box-shadow: 0 5px 20px -8px #6c5ce7;
+        }
 
-.patg a i{
-    font-size: 20px;
-}
+        .nav-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d2a4e;
+        }
 
-.patg a span{
-    font-size: 15px;
-}
+        .nav-count {
+            font-size: 14px;
+            color: #9491b5;
+            background: rgba(108, 92, 231, 0.08);
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
 
-}
+        /* ألوان مميزة خفيفة لكل قسم */
+        .nav-item:nth-child(1) .nav-icon { color: #27ae60; }
+        .nav-item:nth-child(2) .nav-icon { color: #2980b9; }
+        .nav-item:nth-child(3) .nav-icon { color: #8e44ad; }
+        .nav-item:nth-child(4) .nav-icon { color: #c0392b; }
+        .nav-item:nth-child(5) .nav-icon { color: #f39c12; }
+
+        .nav-item:nth-child(1):hover .nav-icon { background: linear-gradient(145deg, #27ae60, #2ecc71); color: white; }
+        .nav-item:nth-child(2):hover .nav-icon { background: linear-gradient(145deg, #2980b9, #3498db); color: white; }
+        .nav-item:nth-child(3):hover .nav-icon { background: linear-gradient(145deg, #8e44ad, #9b59b6); color: white; }
+        .nav-item:nth-child(4):hover .nav-icon { background: linear-gradient(145deg, #c0392b, #e74c3c); color: white; }
+        .nav-item:nth-child(5):hover .nav-icon { background: linear-gradient(145deg, #f39c12, #f1c40f); color: white; }
+
+        /* ===== الفوتر الأنيق ===== */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            color: #5b5880;
+            font-size: 16px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #5b5880;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #6c5ce7;
+        }
+
+        .footer-copyright {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-copyright i {
+            color: #6c5ce7;
+        }
+
+        .footer strong {
+            color: #6c5ce7;
+            font-weight: 600;
+        }
+
+        /* ===== شعار MR Fikry المائي الخفيف ===== */
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            opacity: 0.1;
+            font-size: 70px;
+            font-weight: 800;
+            color: #2d2a4e;
+            pointer-events: none;
+            z-index: -1;
+            transform: rotate(-10deg);
+            white-space: nowrap;
+        }
+
+        /* ===== تحسينات Responsive متقدمة ===== */
+        @media (max-width: 1024px) {
+            .header {
+                padding: 20px 30px;
+            }
+            
+            .brand-text {
+                font-size: 24px;
+            }
+            
+            .hero-title h1 {
+                font-size: 38px;
+            }
+            
+            .stat-value {
+                font-size: 34px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .brand {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .header-left {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .brand-text {
+                font-size: 22px;
+            }
+            
+            .brand-text span {
+                font-size: 16px;
+            }
+            
+            .hero-title {
+                margin: 30px 0 15px;
+            }
+            
+            .hero-title h1 {
+                font-size: 32px;
+            }
+            
+            .hero-title h1::before,
+            .hero-title h1::after {
+                width: 30px;
+            }
+            
+            .hero-title h1::before { right: -40px; }
+            .hero-title h1::after { left: -40px; }
+            
+            .hero-title .sub {
+                font-size: 18px;
+            }
+            
+            .stats-grid {
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .stat-card {
+                min-width: 240px;
+                padding: 20px;
+            }
+            
+            .stat-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+            
+            .stat-label {
+                font-size: 16px;
+            }
+            
+            .stat-value {
+                font-size: 30px;
+            }
+            
+            .nav-grid {
+                padding: 20px 20px 40px;
+                gap: 15px;
+            }
+            
+            .nav-item {
+                flex: 1 1 140px;
+                max-width: 160px;
+            }
+            
+            .nav-button {
+                padding: 20px 12px;
+                gap: 12px;
+            }
+            
+            .nav-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 26px;
+                border-radius: 25px;
+            }
+            
+            .nav-text {
+                font-size: 17px;
+            }
+            
+            .nav-count {
+                font-size: 12px;
+                padding: 3px 10px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+                border-radius: 14px;
+            }
+            
+            .brand-text {
+                font-size: 20px;
+            }
+            
+            .brand-text span {
+                font-size: 14px;
+            }
+            
+            .date-badge {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .hero-title h1 {
+                font-size: 26px;
+            }
+            
+            .hero-title h1::before,
+            .hero-title h1::after {
+                display: none;
+            }
+            
+            .hero-title .sub {
+                font-size: 16px;
+            }
+            
+            .stats-grid {
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .stat-card {
+                min-width: 100%;
+                padding: 18px;
+            }
+            
+            .stat-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+                border-radius: 16px;
+            }
+            
+            .stat-label {
+                font-size: 15px;
+            }
+            
+            .stat-value {
+                font-size: 28px;
+            }
+            
+            .nav-grid {
+                padding: 15px 15px 30px;
+                gap: 12px;
+            }
+            
+            .nav-item {
+                flex: 1 1 calc(50% - 12px);
+                max-width: none;
+            }
+            
+            .nav-button {
+                padding: 18px 10px;
+            }
+            
+            .nav-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                border-radius: 22px;
+            }
+            
+            .nav-text {
+                font-size: 16px;
+            }
+            
+            .footer {
+                padding: 20px 15px;
+                font-size: 14px;
+            }
+            
+            .footer-links {
+                gap: 12px;
+            }
+            
+            .footer-links a {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-item {
+                flex: 1 1 100%;
+            }
+            
+            .nav-button {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding: 15px 20px;
+            }
+            
+            .nav-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
+        }
+
+        /* تحسينات إضافية للشاشات الصغيرة جداً */
+        @media (max-width: 320px) {
+            .brand-text {
+                font-size: 18px;
+            }
+            
+            .brand-text span {
+                font-size: 12px;
+            }
+            
+            .date-badge {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            
+            .stat-value {
+                font-size: 24px;
+            }
+            
+            .nav-text {
+                font-size: 14px;
+            }
+        }
+
+        /* تحسين شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(108, 92, 231, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(108, 92, 231, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(108, 92, 231, 0.5);
+        }

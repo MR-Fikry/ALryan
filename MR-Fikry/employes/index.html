@@ -1,100 +1,1002 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
-<!-- Basic SEO -->
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#000000">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    
+    <title>MR Fikry | الموظفين</title>
+    
+    <!-- تحسين SEO -->
+    <meta name="description" content="إدارة الموظفين والرواتب مع خصومات متعددة - MR Fikry">
+    <meta name="author" content="MR Fikry">
+    <meta name="theme-color" content="#6c5ce7">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- Open Graph (Social Media) -->
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://alryan.pages.dev/">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ar_AR">
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5f0ff 0%, #e9e4ff 100%);
+            min-height: 100vh;
+            color: #2d2a4e;
+            line-height: 1.5;
+            position: relative;
+        }
 
-<!-- Twitter Cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://alryan.pages.dev/icon.jpg">
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-<!-- PWA / Mobile App Feel -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="OS Store">
-<link rel="apple-touch-icon" href="https://alryan.pages.dev/icon.jpg">
+        /* ===== الهيدر الأنيق ===== */
+        .header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-<!-- Preload main resources (سرعة أعلى) -->
-<link rel="preload" as="image" href="https://alryan.pages.dev/icon.jpg">
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-<link rel="preload" as="style" href="style.css">
+        .brand-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            box-shadow: 0 8px 16px -6px rgba(108, 92, 231, 0.4);
+        }
 
-<!-- CSS + Icons -->
-<link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        .brand-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(145deg, #4a3f96, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
+        .brand-text span {
+            font-weight: 300;
+            font-size: 16px;
+            color: #8f8bb3;
+            -webkit-text-fill-color: #8f8bb3;
+            margin-right: 6px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .date-badge {
+            background: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #4a3f96;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            font-size: 14px;
+        }
+
+        /* ===== شريط التنقل ===== */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto 10px;
+            gap: 20px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            color: white;
+            box-shadow: 0 10px 20px -8px rgba(108, 92, 231, 0.4);
+        }
+
+        /* ===== بطاقات الإحصائيات ===== */
+        .stats-wrapper {
+            max-width: 1400px;
+            margin: 30px auto 20px;
+            padding: 0 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 30px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: white;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #8f8bb3;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d2a4e;
+        }
+
+        /* ===== شريط البحث ===== */
+        .search-section {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 16px 25px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
+            background: transparent;
+            border-radius: 50px;
+        }
+
+        .search-container button {
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 4px;
+            transition: 0.3s;
+        }
+
+        /* ===== شبكة الموظفين ===== */
+        .employees-section {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #2d2a4e;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::before,
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 40px;
+            background: linear-gradient(90deg, transparent, #6c5ce7, transparent);
+            top: 50%;
+        }
+
+        .section-title h2::before { right: -60px; }
+        .section-title h2::after { left: -60px; }
+
+        .employees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        /* ===== بطاقة الموظف المتطورة ===== */
+        .employee-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .employee-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -12px rgba(108, 92, 231, 0.2);
+        }
+
+        .employee-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed rgba(108, 92, 231, 0.2);
+        }
+
+        .employee-avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .employee-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d2a4e;
+        }
+
+        .employee-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #8f8bb3;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* ===== قسم الخصومات المتعددة ===== */
+        .deductions-section {
+            background: rgba(239, 68, 68, 0.05);
+            border-radius: 20px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .section-header h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ef4444;
+            font-size: 16px;
+        }
+
+        .add-deduction-btn {
+            background: linear-gradient(145deg, #ef4444, #dc2626);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+
+        .add-deduction-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px -6px #ef4444;
+        }
+
+        .deductions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .deduction-item {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            border-right: 3px solid #ef4444;
+        }
+
+        .deduction-input {
+            flex: 2;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+        }
+
+        .deduction-reason {
+            flex: 3;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+        }
+
+        .remove-deduction {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+            transition: 0.3s;
+        }
+
+        .remove-deduction:hover {
+            color: #dc2626;
+            transform: scale(1.1);
+        }
+
+        .total-deductions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+
+        .total-label {
+            font-size: 14px;
+            color: #8f8bb3;
+        }
+
+        .total-amount {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ef4444;
+        }
+
+        /* ===== قسم الراتب ===== */
+        .salary-section {
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: 20px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .salary-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c5ce7;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .salary-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(108, 92, 231, 0.15);
+            border-radius: 14px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .net-salary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 14px;
+            margin: 15px 0;
+        }
+
+        .net-label {
+            font-size: 16px;
+            color: #2d2a4e;
+            font-weight: 600;
+        }
+
+        .net-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .save-btn {
+            width: 100%;
+            background: linear-gradient(145deg, #10b981, #059669);
+            border: none;
+            padding: 14px;
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+            
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px #10b981;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2::before,
+            .section-title h2::after {
+                display: none;
+            }
+
+            .employees-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .deduction-item {
+                flex-direction: column;
+            }
+
+            .deduction-input,
+            .deduction-reason {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                text-align: center;
+                padding:  3%;
+            }
+
+            .nav-bar {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-link {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-container {
+                flex-direction: column;
+                background: transparent;
+                gap: 10px;
+            }
+
+            .search-container input {
+                width: 100%;
+                background: white;
+                border-radius: 40px;
+            }
+
+            .search-container button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            opacity: 0.05;
+            font-size: 80px;
+            font-weight: 800;
+            color: #2d2a4e;
+            pointer-events: none;
+            z-index: -1;
+            transform: rotate(-10deg);
+        }
+    </style>
 </head>
 <body>
-    
-<header>
-  <h1>الريان للادوات المنزليه</h1>
-  <img src="https://alryan.pages.dev/logo.png" class="logo">
-</header>
+
+    <!-- Watermark -->
+    <div class="watermark">MR Fikry</div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="brand-text">
+                MR Fikry <span>| الموظفين</span>
+            </div>
+        </div>
+        
+        <div class="header-left">
+            <div class="date-badge">
+                <i class="far fa-calendar-alt"></i>
+                <span id="currentDate"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-bar">
+        <a href="#" class="nav-link active" onclick="return false;">
+            <i class="fas fa-users"></i>
+            الموظفين
+        </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-wrapper">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-content">
+                    <div class="stat-label">إجمالي الموظفين</div>
+                    <div class="stat-number" id="totalEmployees">0</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(145deg, #f59e0b, #d97706);">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">إجمالي الرواتب</div>
+                    <div class="stat-number" id="totalSalaries">0</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(145deg, #ef4444, #dc2626);">
+                    <i class="fas fa-minus-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">إجمالي الخصومات</div>
+                    <div class="stat-number" id="totalDeductions">0</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(145deg, #10b981, #059669);">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">صافي الرواتب</div>
+                    <div class="stat-number" id="totalNet">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-section">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="ابحث باسم الموظف...">
+            <button onclick="filterEmployees()">
+                <i class="fas fa-search"></i>
+                بحث
+            </button>
+        </div>
+    </div>
+
+    <!-- Employees Grid -->
+    <div class="employees-section">
+        <div class="section-title">
+            <h2>الموظفين</h2>
+        </div>
+        <div id="employeesGrid" class="employees-grid"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" style="text-align: center; padding: 25px; background: rgba(255,255,255,0.3); backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,0.6); color: #5b5880; margin-top: 50px;">
+        <i class="fas fa-crown"></i> 
+        <strong>MR Fikry</strong> | نظام إدارة الموظفين المتطور 
+        <i class="fas fa-sparkles"></i>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+      
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+            authDomain: "login-employees1.firebaseapp.com",
+            projectId: "login-employees1",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const employeesGrid = document.getElementById("employeesGrid");
+        const currentDateEl = document.getElementById("currentDate");
+        const totalEmployeesEl = document.getElementById("totalEmployees");
+        const totalSalariesEl = document.getElementById("totalSalaries");
+        const totalDeductionsEl = document.getElementById("totalDeductions");
+        const totalNetEl = document.getElementById("totalNet");
+
+        // التاريخ
+        const now = new Date();
+        currentDateEl.textContent = now.toLocaleDateString('ar-EG', { 
+            year: 'numeric', 
+            month: 'numeric', 
+            day: 'numeric' 
+        });
+
+        // تحميل الموظفين
+        async function loadEmployees() {
+            employeesGrid.innerHTML = "";
+
+            try {
+                const snapshot = await getDocs(collection(db, "employees"));
+                
+                let totalSalary = 0;
+                let totalDeduction = 0;
+                let totalNet = 0;
+
+                snapshot.forEach(docSnap => {
+                    const employee = { id: docSnap.id, ...docSnap.data() };
+                    
+                    // حساب إجمالي الخصومات من المصفوفة
+                    const deductions = employee.deductions || [];
+                    const totalDeductionsAmount = deductions.reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
+                    
+                    totalSalary += employee.salary || 0;
+                    totalDeduction += totalDeductionsAmount;
+                    totalNet += (employee.salary || 0) - totalDeductionsAmount;
+
+                    const card = createEmployeeCard(employee);
+                    employeesGrid.appendChild(card);
+                });
+
+                totalEmployeesEl.textContent = snapshot.size;
+                totalSalariesEl.textContent = totalSalary.toLocaleString() + " جنيه";
+                totalDeductionsEl.textContent = totalDeduction.toLocaleString() + " جنيه";
+                totalNetEl.textContent = totalNet.toLocaleString() + " جنيه";
+
+            } catch (error) {
+                console.error("خطأ:", error);
+            }
+        }
+
+        // إنشاء بطاقة موظف
+        function createEmployeeCard(employee) {
+            const card = document.createElement("div");
+            card.className = "employee-card";
+            card.setAttribute('data-name', employee.name || '');
+
+            // استرجاع الخصومات المخزنة
+            const savedDeductions = employee.deductions || [];
+            
+            // تحديد الجنس
+            const genderIcon = employee.gender === 'ذكر' ? 'mars' : 'venus';
+
+            card.innerHTML = `
+                <div class="employee-header">
+                    <div class="employee-avatar">
+                        <i class="fas fa-${genderIcon}"></i>
+                    </div>
+                    <div>
+                        <div class="employee-name">${employee.name || '—'}</div>
+                        <div class="employee-phone">
+                            <i class="fas fa-phone"></i>
+                            ${employee.phone || '—'}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الراتب الأساسي -->
+                <div class="salary-section">
+                    <div class="salary-header">
+                        <i class="fas fa-wallet"></i>
+                        الراتب الأساسي
+                    </div>
+                    <input type="number" id="salary-${employee.id}" class="salary-input" value="${employee.salary || 0}" placeholder="أدخل الراتب الأساسي" oninput="calculateNetSalary('${employee.id}')">
+                </div>
+
+                <!-- الخصومات المتعددة -->
+                <div class="deductions-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-minus-circle"></i> الخصومات</h4>
+                        <button class="add-deduction-btn" onclick="addDeduction('${employee.id}')">
+                            <i class="fas fa-plus"></i>
+                            إضافة خصم
+                        </button>
+                    </div>
+
+                    <div id="deductions-${employee.id}" class="deductions-list">
+                        <!-- سيتم إضافة الخصومات هنا ديناميكياً -->
+                    </div>
+
+                    <div class="total-deductions">
+                        <span class="total-label">إجمالي الخصومات</span>
+                        <span class="total-amount" id="totalDeductions-${employee.id}">0 جنيه</span>
+                    </div>
+                </div>
+
+                <!-- صافي الراتب -->
+                <div class="net-salary">
+                    <span class="net-label">صافي الراتب</span>
+                    <span class="net-amount" id="netSalary-${employee.id}">0 جنيه</span>
+                </div>
+
+                <!-- زر الحفظ -->
+                <button class="save-btn" onclick="saveEmployeeData('${employee.id}')">
+                    <i class="fas fa-save"></i>
+                    حفظ جميع البيانات
+                </button>
+
+                <button class="save-btn" style="background: linear-gradient(145deg,#ef4444,#dc2626); margin: 20px 0; " onclick="deleteEmployee('${employee.id}')">
+                    <i class="fas fa-trash"></i>
+                    حذف الموظف
+                </button>
+
+            `;
+
+            // إضافة الخصومات المحفوظة بعد إنشاء البطاقة
+            setTimeout(() => {
+                savedDeductions.forEach(ded => {
+                    addDeduction(employee.id, ded.amount, ded.reason);
+                });
+                calculateNetSalary(employee.id);
+            }, 100);
+
+            return card;
+        }
+
+        // دالة إضافة خصم جديد
+        window.addDeduction = function(employeeId, amount = '', reason = '') {
+            const container = document.getElementById(`deductions-${employeeId}`);
+            if (!container) return;
+
+            const deductionId = 'ded_' + Date.now() + '_' + Math.random();
+            
+            const deductionItem = document.createElement('div');
+            deductionItem.className = 'deduction-item';
+            deductionItem.id = deductionId;
+            deductionItem.innerHTML = `
+                <input type="number" class="deduction-input" placeholder="قيمة الخصم" value="${amount}" oninput="calculateNetSalary('${employeeId}')">
+                <input type="text" class="deduction-reason" placeholder="سبب الخصم" value="${reason}">
+                <button class="remove-deduction" onclick="removeDeduction('${employeeId}', '${deductionId}')">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(deductionItem);
+            calculateNetSalary(employeeId);
+        };
+
+        // دالة حذف خصم
+        window.removeDeduction = function(employeeId, deductionId) {
+            const deductionItem = document.getElementById(deductionId);
+            if (deductionItem) {
+                deductionItem.remove();
+                calculateNetSalary(employeeId);
+            }
+        };
+
+        // دالة حساب صافي الراتب
+        window.calculateNetSalary = function(employeeId) {
+            const salaryInput = document.getElementById(`salary-${employeeId}`);
+            const deductionsContainer = document.getElementById(`deductions-${employeeId}`);
+            
+            if (!salaryInput || !deductionsContainer) return;
+
+            const salary = Number(salaryInput.value) || 0;
+            
+            // حساب إجمالي الخصومات
+            const deductionItems = deductionsContainer.querySelectorAll('.deduction-item');
+            let totalDeductions = 0;
+
+            deductionItems.forEach(item => {
+                const amountInput = item.querySelector('.deduction-input');
+                if (amountInput) {
+                    totalDeductions += Number(amountInput.value) || 0;
+                }
+            });
+
+            // عرض إجمالي الخصومات
+            const totalDeductionsEl = document.getElementById(`totalDeductions-${employeeId}`);
+            if (totalDeductionsEl) {
+                totalDeductionsEl.textContent = totalDeductions.toLocaleString() + ' جنيه';
+            }
+
+            // حساب وعرض صافي الراتب
+            const netSalary = salary - totalDeductions;
+            const netSalaryEl = document.getElementById(`netSalary-${employeeId}`);
+            if (netSalaryEl) {
+                netSalaryEl.textContent = netSalary.toLocaleString() + ' جنيه';
+            }
+        };
+
+        // دالة حفظ بيانات الموظف
+        window.saveEmployeeData = async function(employeeId) {
+            try {
+                // جمع بيانات الخصومات
+                const deductionsContainer = document.getElementById(`deductions-${employeeId}`);
+                const salary = Number(document.getElementById(`salary-${employeeId}`)?.value) || 0;
+                
+                const deductions = [];
+                if (deductionsContainer) {
+                    const deductionItems = deductionsContainer.querySelectorAll('.deduction-item');
+                    deductionItems.forEach(item => {
+                        const amount = item.querySelector('.deduction-input')?.value;
+                        const reason = item.querySelector('.deduction-reason')?.value;
+                        if (amount && reason) {
+                            deductions.push({
+                                amount: Number(amount),
+                                reason: reason
+                            });
+                        }
+                    });
+                }
+
+                // حفظ في Firebase
+                await updateDoc(doc(db, "employees", employeeId), {
+                    salary: salary,
+                    deductions: deductions,
+                    updatedAt: new Date().toLocaleString('ar-EG')
+                });
+
+                alert("✅ تم حفظ جميع البيانات بنجاح");
+                
+                // تحديث الإحصائيات
+                loadEmployees();
+
+            } catch (error) {
+                console.error("خطأ في الحفظ:", error);
+                alert("❌ حدث خطأ أثناء حفظ البيانات");
+            }
+        };
+
+        // فلترة الموظفين
+        window.filterEmployees = function() {
+            const searchText = document.getElementById("searchInput").value.toLowerCase().trim();
+            const cards = document.querySelectorAll(".employee-card");
+
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name')?.toLowerCase() || '';
+                card.style.display = name.includes(searchText) ? '' : 'none';
+            });
+        };
 
 
+window.deleteEmployee = async function(employeeId) {
 
+    const confirmDelete = confirm("هل أنت متأكد من حذف الموظف؟");
 
+    if (!confirmDelete) return;
 
-<div id="employees"></div>
+    try {
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, doc, getDoc }
-from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+        await deleteDoc(doc(db, "employees", employeeId));
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
-  authDomain: "login-employees1.firebaseapp.com",
-  projectId: "login-employees1",
+        alert("✅ تم حذف الموظف بنجاح");
+
+        loadEmployees(); // تحديث القائمة
+
+    } catch (error) {
+
+        console.error("خطأ في الحذف:", error);
+        alert("❌ حدث خطأ أثناء الحذف");
+
+    }
+
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+        // إضافة مستمع للبحث المباشر
+        document.getElementById("searchInput")?.addEventListener("input", filterEmployees);
 
-// الاتنين اللي عاوزين نعرضهم
-const employeeIds = [
-  "TPdbOH8BE41OTYyeP09H",
-  "E13jdzGCCGXJJJa0nDdv"
-];
-
-async function em () {
-    const employe = document.getElementById("employees")
-    const snapshot = await getDoc(collection(db ,"employees"))
-
-snapshot.forEach(doc => {
-    
-    const e =doc.data();
-
-    employe.innerHTML+=`
-      👤 ${e.name}<br>
-        📞 ${e.phone}<br>
-    `;
-});    
-}
-loadEmployees();
-</script>
-
-
+        // تحميل البيانات
+        loadEmployees();
+    </script>
 </body>
 </html>

@@ -2,238 +2,648 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    
+    <title>MR Fikry | إضافة منتجات</title>
+    
+    <!-- تحسين SEO -->
+    <meta name="description" content="صفحة إدارة المنتجات - إضافة منتجات جديدة بسهولة">
+    <meta name="author" content="MR Fikry">
+    <meta name="theme-color" content="#6c5ce7">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="MR Fikry - إدارة المنتجات">
+    <meta property="og:description" content="صفحة احترافية لإضافة وتعديل المنتجات">
+    <meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5f0ff 0%, #e9e4ff 100%);
+            min-height: 100vh;
+            color: #2d2a4e;
+            line-height: 1.5;
+            position: relative;
+        }
 
-<title>الريان للادوات المنزليه</title>
+        /* تأثير الخلفية الناعم */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-<!-- Basic SEO -->
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#000000">
+        /* ===== الهيدر الأنيق ===== */
+        .header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-<!-- Open Graph (Social Media) -->
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://alryan.pages.dev/">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ar_AR">
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-<!-- Twitter Cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://alryan.pages.dev/icon.jpg">
+        .brand-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            box-shadow: 0 8px 16px -6px rgba(108, 92, 231, 0.4);
+        }
 
-<!-- PWA / Mobile App Feel -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="OS Store">
-<link rel="apple-touch-icon" href="https://alryan.pages.dev/icon.jpg">
+        .brand-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(145deg, #4a3f96, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-<!-- Preload main resources (سرعة أعلى) -->
-<link rel="preload" as="image" href="https://alryan.pages.dev/icon.jpg">
+        .brand-text span {
+            font-weight: 300;
+            font-size: 16px;
+            color: #8f8bb3;
+            -webkit-text-fill-color: #8f8bb3;
+            margin-right: 6px;
+        }
 
-<link rel="preload" as="style" href="style.css">
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-<!-- CSS + Icons -->
-<link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        .date-badge {
+            background: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #4a3f96;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            font-size: 14px;
+        }
 
-<!-- Security Headers (خفيفة بدون سيرفر) -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        .date-badge i {
+            margin-left: 8px;
+            color: #6c5ce7;
+        }
+
+        /* ===== شريط التنقل ===== */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto 20px;
+            gap: 20px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            color: white;
+            box-shadow: 0 10px 20px -8px rgba(108, 92, 231, 0.4);
+        }
+
+        .nav-link.active i {
+            color: white;
+        }
+
+        .nav-link:not(.active) {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            color: #4a3f96;
+        }
+
+        .nav-link:not(.active):hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px -6px rgba(108, 92, 231, 0.2);
+        }
+
+        .nav-link i {
+            font-size: 18px;
+        }
+
+        .nav-link.active i {
+            color: white;
+        }
+
+        /* ===== البطاقة الرئيسية ===== */
+        .main-card {
+            max-width: 500px;
+            margin: 20px auto 50px;
+            padding: 0 20px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 35px;
+            padding: 35px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .card-title h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2d2a4e;
+            margin-bottom: 8px;
+        }
+
+        .card-title .title-decoration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #6c5ce7;
+        }
+
+        .card-title .title-decoration i {
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        .card-title .title-decoration span {
+            font-size: 14px;
+            color: #8f8bb3;
+        }
+
+        /* ===== حقول الإدخال الأنيقة ===== */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #4a3f96;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-label i {
+            font-size: 16px;
+            color: #6c5ce7;
+        }
+
+        .modern-input {
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid rgba(108, 92, 231, 0.15);
+            border-radius: 20px;
+            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s;
+            outline: none;
+            background: white;
+        }
+
+        .modern-input:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15);
+        }
+
+        .modern-input::placeholder {
+            color: #b7b1d9;
+            font-size: 14px;
+        }
+
+        /* ===== زر الحفظ الأنيق ===== */
+        .save-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            box-shadow: 0 10px 25px -8px #6c5ce7;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -8px #6c5ce7;
+        }
+
+        .save-btn:active {
+            transform: translateY(0);
+        }
+
+        .save-btn i {
+            font-size: 20px;
+        }
+
+        /* ===== فوتر أنيق ===== */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            color: #5b5880;
+            font-size: 15px;
+            margin-top: 30px;
+        }
+
+        .footer strong {
+            color: #6c5ce7;
+            font-weight: 600;
+        }
+
+        .footer i {
+            color: #6c5ce7;
+            margin: 0 5px;
+        }
+
+        /* ===== شعار مائي خفيف ===== */
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            opacity: 0.05;
+            font-size: 80px;
+            font-weight: 800;
+            color: #2d2a4e;
+            pointer-events: none;
+            z-index: -1;
+            transform: rotate(-10deg);
+            white-space: nowrap;
+        }
+
+        /* ===== تحسينات Responsive ===== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 25px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .brand-text {
+                font-size: 20px;
+            }
+
+            .brand-text span {
+                font-size: 14px;
+            }
+
+            .brand-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
+
+            .date-badge {
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+
+            .nav-link {
+                padding: 10px 22px;
+                font-size: 14px;
+            }
+
+            .card-title h2 {
+                font-size: 24px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .brand {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .header-left {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-bar {
+                gap: 12px;
+            }
+
+            .nav-link {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+
+            .nav-link i {
+                font-size: 14px;
+            }
+
+            .main-card {
+                margin: 10px auto 30px;
+            }
+
+            .content-card {
+                border-radius: 25px;
+                padding: 20px 15px;
+            }
+
+            .card-title h2 {
+                font-size: 22px;
+            }
+
+            .modern-input {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .save-btn {
+                padding: 14px;
+                font-size: 16px;
+            }
+
+            .footer {
+                padding: 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-bar {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* تخصيص شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(108, 92, 231, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(108, 92, 231, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(108, 92, 231, 0.5);
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-<h1>الريان للادوات المنزليه</h1>
-<img src="https://alryan.pages.dev/logo.png" class="logo">
-</header>
-  
-    <div class="bu">
-      <a href="/MR-Fikry/prodacts/" class="go">اضافه منتجات</a>
-      <a href="" class="activ" >عرض المنتجات</a>
+    <!-- Watermark خفي -->
+    <div class="watermark">MR Fikry</div>
+
+    <!-- هيدر أنيق -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fas fa-store"></i>
+            </div>
+            <div class="brand-text">
+                MR Fikry <span>| المنتجات</span>
+            </div>
+        </div>
+        
+        <div class="header-left">
+            <div class="date-badge">
+                <i class="far fa-calendar-alt"></i>
+                <span id="currentDate"></span>
+            </div>
+            <div class="brand-icon" style="width: 45px; height: 45px; background: white; color: #6c5ce7;">
+                <i class="fas fa-box"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط التنقل -->
+    <div class="nav-bar">
+        <a href="" class="nav-link active">
+            <i class="fas fa-plus-circle"></i>
+            إضافة منتجات
+        </a>
+        <a href="/MR-Fikry/prodacts/" class="nav-link">
+            <i class="fas fa-boxes"></i>
+            عرض المنتجات
+        </a>
     </div>
 
-    <div class="low-stock-header">
-  <button id="lowStockBtn" onclick="toggleLowStock()">
-    ⚠️ المنتجات الناقصة
-  </button>
-  <span id="lowStockCount" class="count-badge">0</span>
-</div>
+    <!-- البطاقة الرئيسية -->
+    <div class="main-card">
+        <div class="content-card">
+            <div class="card-title">
+                <h2>إضافة منتج جديد</h2>
+                <div class="title-decoration">
+                    <i class="fas fa-minus"></i>
+                    <span>املأ بيانات المنتج</span>
+                    <i class="fas fa-minus"></i>
+                </div>
+            </div>
 
-<div id="lowStockBox" class="low-stock-box" style="display:none"></div>
+            <!-- نموذج الإضافة -->
+            <div id="form">
+                <div class="input-group">
+                    <div class="input-label">
+                        <i class="fas fa-tag"></i>
+                        <span>اسم المنتج</span>
+                    </div>
+                    <input class="modern-input" id="productName" placeholder="أدخل اسم المنتج">
+                </div>
 
-<hr style="margin:30px 0">
+                <div class="input-group">
+                    <div class="input-label">
+                        <i class="fas fa-barcode"></i>
+                        <span>السيريال</span>
+                    </div>
+                    <input class="modern-input" id="serial" placeholder="أدخل الرقم التسلسلي">
+                </div>
 
+                <div class="input-group">
+                    <div class="input-label">
+                        <i class="fas fa-cubes"></i>
+                        <span>الكمية</span>
+                    </div>
+                    <input class="modern-input" id="quantity" type="number" placeholder="أدخل الكمية">
+                </div>
 
-<h2>المنتجات</h2>
+                <div class="input-group">
+                    <div class="input-label">
+                        <i class="fas fa-coins"></i>
+                        <span>سعر الشراء</span>
+                    </div>
+                    <input class="modern-input" id="buyPrice" type="number" placeholder="أدخل سعر الشراء">
+                </div>
 
+                <div class="input-group">
+                    <div class="input-label">
+                        <i class="fas fa-chart-line"></i>
+                        <span>سعر البيع</span>
+                    </div>
+                    <input class="modern-input" id="sellPrice" type="number" placeholder="أدخل سعر البيع">
+                </div>
 
-<input type="text" id="search" placeholder=" ابحث بالاسم أو السيريال">
-
-<table>
-  <tbody id="products"></tbody>
-</table>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc } 
-from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
-    authDomain: "login-employees1.firebaseapp.com",
-    projectId: "login-employees1",
-    storageBucket: "login-employees1.firebasestorage.app",
-    messagingSenderId: "907414298566",
-    appId: "1:907414298566:web:0141762effe0e9ff289cc7"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  const tbody = document.getElementById('products');
-
- const LOW_STOCK_LIMIT = 2;
-const lowStockBox = document.getElementById("lowStockBox");
-const lowStockCount = document.getElementById("lowStockCount");
-
-async function loadProducts() {
-  const querySnapshot = await getDocs(collection(db, 'products'));
-  tbody.innerHTML = '';
-  lowStockBox.innerHTML = '';
-
-  let lowCount = 0;
-
-  querySnapshot.forEach((docSnap) => {
-    const p = docSnap.data();
-
-    /* ===== الكارت العادي ===== */
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>
-        <div class="product-card ${p.quantity <= LOW_STOCK_LIMIT ? 'low-stock' : ''}"
-             data-name="${p.name}" data-serial="${p.serial}">
-          
-          <div class="product-name" onclick="toggleDetails('${docSnap.id}')">
-            ${p.name}
-            <span>الكمية: ${p.quantity}</span>
-          </div>
-
-          <div class="product-details" id="details-${docSnap.id}">
-            <label>السيريال</label>
-            <input value="${p.serial}" id="serial-${docSnap.id}">
-
-            <label>سعر الشراء</label>
-            <input type="number" value="${p.buyPrice}" id="buy-${docSnap.id}">
-
-            <label>سعر البيع</label>
-            <input type="number" value="${p.sellPrice}" id="sell-${docSnap.id}">
-
-            <label>الكمية</label>
-            <input type="number" value="${p.quantity}" id="qty-${docSnap.id}">
-
-            <button onclick="save('${docSnap.id}')">💾 حفظ</button>
-            <button class="delete-btn" onclick="removeProduct('${docSnap.id}', '${p.name}')">
-              🗑️ حذف المنتج
-            </button>
-
-          </div>
+                <button onclick="saveProduct()" class="save-btn">
+                    <i class="fas fa-save"></i>
+                    حفظ المنتج
+                </button>
+            </div>
         </div>
-      </td>
-    `;
-    tbody.appendChild(tr);
+    </div>
 
-    /* ===== المنتجات الناقصة (نفس الكارت) ===== */
-    if (p.quantity <= LOW_STOCK_LIMIT) {
-      lowCount++;
+    <!-- فوتر أنيق -->
+    <footer class="footer">
+        <i class="fas fa-crown"></i> 
+        <strong>MR Fikry</strong> | نظام إدارة المنتجات 
+        <i class="fas fa-sparkles"></i>
+    </footer>
 
-      lowStockBox.innerHTML += `
-        <div class="product-card low-stock">
-          <div class="product-name">
-            ⚠️ ${p.name}
-            <span>الكمية المتبقية: ${p.quantity}</span>
-            <span>السيريال: ${p.serial}</span>
-          </div>
-        </div>
-      `;
-    }
-  });
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-  /* تحديث العدّاد */
-  lowStockCount.textContent = lowCount;
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+            authDomain: "login-employees1.firebaseapp.com",
+            projectId: "login-employees1",
+            storageBucket: "login-employees1.firebasestorage.app",
+            messagingSenderId: "907414298566",
+            appId: "1:907414298566:web:0141762effe0e9ff289cc7",
+            measurementId: "G-Q6XWR5X38W"
+        };
 
-  if (lowCount === 0) {
-    lowStockBox.innerHTML = `<p class="empty">لا يوجد منتجات ناقصة 🎉</p>`;
-  }
-}
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
+        // عرض التاريخ الحالي
+        const currentDateEl = document.getElementById('currentDate');
+        const now = new Date();
+        currentDateEl.textContent = now.toLocaleDateString('ar-EG', { 
+            year: 'numeric', 
+            month: 'numeric', 
+            day: 'numeric' 
+        });
 
-window.toggleLowStock = function(){
-  const box = document.getElementById("lowStockBox");
-  box.style.display = box.style.display === "none" ? "grid" : "none";
-};
-  
+        // Save product function
+        window.saveProduct = async function() {
+            const name = document.getElementById("productName").value.trim();
+            const serial = document.getElementById("serial").value.trim();
+            const quantity = document.getElementById("quantity").value.trim();
+            const buyPrice = document.getElementById("buyPrice").value.trim();
+            const sellPrice = document.getElementById("sellPrice").value.trim();
 
-  window.toggleDetails = (id) => {
-    const el = document.getElementById(`details-${id}`);
-    el.style.display = el.style.display === 'block' ? 'none' : 'block';
-  };
+            if (!name || !serial || !quantity || !buyPrice || !sellPrice) {
+                alert("❌ الرجاء ملء جميع البيانات!");
+                return;
+            }
 
-  window.save = async (id) => {
-    await updateDoc(doc(db, 'products', id), {
-      buyPrice: Number(document.getElementById(`buy-${id}`).value),
-      sellPrice: Number(document.getElementById(`sell-${id}`).value),
-      quantity: Number(document.getElementById(`qty-${id}`).value),
-      serial: document.getElementById(`serial-${id}`).value,
-    });
-    alert('تم حفظ التعديلات ✅');
-  }; 
+            const product = {
+                name,
+                serial,
+                quantity: Number(quantity),
+                buyPrice: Number(buyPrice),
+                sellPrice: Number(sellPrice),
+                createdAt: new Date().toLocaleString('ar-EG')
+            };
 
-  window.removeProduct = async (id, name) => {
-  const ok = confirm(`⚠️ هل أنت متأكد من حذف المنتج:\n${name} ؟`);
+            try {
+                await addDoc(collection(db, "products"), product);
+                alert("✅ تم حفظ المنتج بنجاح");
 
-  if (!ok) return;
+                // تفريغ الحقول
+                document.getElementById("productName").value = "";
+                document.getElementById("serial").value = "";
+                document.getElementById("quantity").value = "";
+                document.getElementById("buyPrice").value = "";
+                document.getElementById("sellPrice").value = "";
 
-  try {
-    await deleteDoc(doc(db, 'products', id));
-    alert('تم حذف المنتج بنجاح ✅');
-    loadProducts(); // إعادة تحميل القائمة
-  } catch (e) {
-    alert('حصل خطأ أثناء الحذف ❌');
-    console.error(e);
-  }
-};
-
-
-  document.getElementById('search').addEventListener('input', function () {
-  const value = this.value.toLowerCase();
-
-  document.querySelectorAll('#products tr').forEach(tr => {
-    const card = tr.querySelector('.product-card');
-    if (!card) return;
-
-    const name = (card.dataset.name || '').toLowerCase();
-    const serial = (card.dataset.serial || '').toLowerCase();
-
-    tr.style.display =
-      name.includes(value) || serial.includes(value)
-        ? ''
-        : 'none';
-  });
-});
-
-
-  loadProducts();
-</script>
-
+            } catch (error) {
+                console.error("حدث خطأ عند الحفظ: ", error);
+                alert("❌ حصل خطأ أثناء حفظ المنتج!");
+            }
+        };
+    </script>
 </body>
 </html>
