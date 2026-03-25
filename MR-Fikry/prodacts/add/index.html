@@ -3,25 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    
-    <title>MR Fikry | إضافة منتجات</title>
-    
-    <!-- تحسين SEO -->
-    <meta name="description" content="صفحة إدارة المنتجات - إضافة منتجات جديدة بسهولة">
+    <title>MR Fikry | إضافة منتجات - اقتراحات ذكية</title>
+    <meta name="description" content="صفحة إدارة المنتجات - إضافة منتجات جديدة مع اقتراحات ذكية">
     <meta name="author" content="MR Fikry">
-    <meta name="theme-color" content="#6c5ce7">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="MR Fikry - إدارة المنتجات">
-    <meta property="og:description" content="صفحة احترافية لإضافة وتعديل المنتجات">
-    <meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
-    
-    <!-- Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <style>
         * {
             margin: 0;
@@ -35,10 +23,8 @@
             min-height: 100vh;
             color: #2d2a4e;
             line-height: 1.5;
-            position: relative;
         }
 
-        /* تأثير الخلفية الناعم */
         body::before {
             content: '';
             position: fixed;
@@ -51,7 +37,7 @@
             pointer-events: none;
         }
 
-        /* ===== الهيدر الأنيق ===== */
+        /* Header */
         .header {
             padding: 20px 40px;
             display: flex;
@@ -59,12 +45,13 @@
             align-items: center;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
             position: sticky;
             top: 0;
             z-index: 100;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .brand {
@@ -91,6 +78,7 @@
             font-weight: 700;
             background: linear-gradient(145deg, #4a3f96, #6c5ce7);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -102,29 +90,21 @@
             margin-right: 6px;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
         .date-badge {
             background: white;
             padding: 8px 18px;
             border-radius: 40px;
             font-weight: 500;
             color: #4a3f96;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
             border: 1px solid rgba(108, 92, 231, 0.15);
             font-size: 14px;
         }
 
         .date-badge i {
             margin-left: 8px;
-            color: #6c5ce7;
         }
 
-        /* ===== شريط التنقل ===== */
+        /* Navigation */
         .nav-bar {
             display: flex;
             justify-content: center;
@@ -153,10 +133,6 @@
             box-shadow: 0 10px 20px -8px rgba(108, 92, 231, 0.4);
         }
 
-        .nav-link.active i {
-            color: white;
-        }
-
         .nav-link:not(.active) {
             background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(8px);
@@ -167,20 +143,11 @@
         .nav-link:not(.active):hover {
             background: white;
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px -6px rgba(108, 92, 231, 0.2);
         }
 
-        .nav-link i {
-            font-size: 18px;
-        }
-
-        .nav-link.active i {
-            color: white;
-        }
-
-        /* ===== البطاقة الرئيسية ===== */
+        /* Main Card */
         .main-card {
-            max-width: 500px;
+            max-width: 550px;
             margin: 20px auto 50px;
             padding: 0 20px;
         }
@@ -188,7 +155,6 @@
         .content-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-radius: 35px;
             padding: 35px 30px;
             border: 1px solid rgba(255, 255, 255, 0.9);
@@ -198,7 +164,6 @@
         .card-title {
             text-align: center;
             margin-bottom: 30px;
-            position: relative;
         }
 
         .card-title h2 {
@@ -208,27 +173,10 @@
             margin-bottom: 8px;
         }
 
-        .card-title .title-decoration {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: #6c5ce7;
-        }
-
-        .card-title .title-decoration i {
-            font-size: 14px;
-            opacity: 0.6;
-        }
-
-        .card-title .title-decoration span {
-            font-size: 14px;
-            color: #8f8bb3;
-        }
-
-        /* ===== حقول الإدخال الأنيقة ===== */
+        /* Form */
         .input-group {
             margin-bottom: 20px;
+            position: relative;
         }
 
         .input-label {
@@ -263,12 +211,77 @@
             box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15);
         }
 
-        .modern-input::placeholder {
-            color: #b7b1d9;
-            font-size: 14px;
+        /* Suggestions Box */
+        .suggestions-container {
+            position: relative;
+            width: 100%;
         }
 
-        /* ===== زر الحفظ الأنيق ===== */
+        .suggestions-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-height: 280px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            margin-top: 5px;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .suggestions-box.active {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0eef7;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-item:hover {
+            background: linear-gradient(135deg, #f5f0ff, #ede7ff);
+        }
+
+        .suggestion-name {
+            font-weight: 700;
+            color: #6c5ce7;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .suggestion-price {
+            background: #00b894;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .suggestion-details {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #8f8bb3;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-details i {
+            margin-left: 5px;
+            width: 18px;
+        }
+
+        /* Save Button */
         .save-btn {
             width: 100%;
             padding: 16px;
@@ -294,15 +307,45 @@
             box-shadow: 0 15px 30px -8px #6c5ce7;
         }
 
-        .save-btn:active {
-            transform: translateY(0);
+        /* Toast Message */
+        .toast-message {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 2000;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.3s ease;
+            border-right: 5px solid #6c5ce7;
         }
 
-        .save-btn i {
-            font-size: 20px;
+        .toast-message.success {
+            border-right-color: #00b894;
         }
 
-        /* ===== فوتر أنيق ===== */
+        .toast-message.error {
+            border-right-color: #d63031;
+        }
+
+        @keyframes slideDown {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+            to {
+                top: 30px;
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
             padding: 25px;
@@ -316,15 +359,8 @@
 
         .footer strong {
             color: #6c5ce7;
-            font-weight: 600;
         }
 
-        .footer i {
-            color: #6c5ce7;
-            margin: 0 5px;
-        }
-
-        /* ===== شعار مائي خفيف ===== */
         .watermark {
             position: fixed;
             bottom: 20px;
@@ -336,146 +372,61 @@
             pointer-events: none;
             z-index: -1;
             transform: rotate(-10deg);
-            white-space: nowrap;
         }
 
-        /* ===== تحسينات Responsive ===== */
         @media (max-width: 768px) {
             .header {
                 padding: 15px 25px;
-                flex-wrap: wrap;
-                gap: 10px;
             }
-
             .brand-text {
                 font-size: 20px;
             }
-
-            .brand-text span {
-                font-size: 14px;
-            }
-
-            .brand-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 22px;
-            }
-
-            .date-badge {
-                padding: 6px 14px;
-                font-size: 13px;
-            }
-
-            .nav-link {
-                padding: 10px 22px;
-                font-size: 14px;
-            }
-
-            .card-title h2 {
-                font-size: 24px;
-            }
-
             .content-card {
                 padding: 25px 20px;
+            }
+            .card-title h2 {
+                font-size: 24px;
             }
         }
 
         @media (max-width: 480px) {
             .header {
-                padding: 12px 15px;
                 flex-direction: column;
                 text-align: center;
             }
-
-            .brand {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .header-left {
-                width: 100%;
-                justify-content: center;
-            }
-
             .nav-bar {
                 gap: 12px;
             }
-
             .nav-link {
                 padding: 8px 18px;
-                font-size: 13px;
-            }
-
-            .nav-link i {
                 font-size: 14px;
             }
-
-            .main-card {
-                margin: 10px auto 30px;
-            }
-
             .content-card {
-                border-radius: 25px;
                 padding: 20px 15px;
             }
-
-            .card-title h2 {
-                font-size: 22px;
-            }
-
-            .modern-input {
-                padding: 12px 15px;
-                font-size: 14px;
-            }
-
-            .save-btn {
-                padding: 14px;
-                font-size: 16px;
-            }
-
-            .footer {
-                padding: 20px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .nav-bar {
+            .suggestion-name {
                 flex-direction: column;
-                width: 100%;
-            }
-
-            .nav-link {
-                width: 100%;
-                justify-content: center;
+                align-items: flex-start;
             }
         }
 
-        /* تخصيص شريط التمرير */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
-
         ::-webkit-scrollbar-track {
-            background: rgba(108, 92, 231, 0.05);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(108, 92, 231, 0.3);
+            background: #f0edff;
             border-radius: 10px;
         }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(108, 92, 231, 0.5);
+        ::-webkit-scrollbar-thumb {
+            background: #6c5ce7;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Watermark خفي -->
     <div class="watermark">MR Fikry</div>
 
-    <!-- هيدر أنيق -->
     <header class="header">
         <div class="brand">
             <div class="brand-icon">
@@ -485,31 +436,23 @@
                 MR Fikry <span>| المنتجات</span>
             </div>
         </div>
-        
-        <div class="header-left">
-            <div class="date-badge">
-                <i class="far fa-calendar-alt"></i>
-                <span id="currentDate"></span>
-            </div>
-            <div class="brand-icon" style="width: 45px; height: 45px; background: white; color: #6c5ce7;">
-                <i class="fas fa-box"></i>
-            </div>
+        <div class="date-badge">
+            <i class="far fa-calendar-alt"></i>
+            <span id="currentDate"></span>
         </div>
     </header>
 
-    <!-- شريط التنقل -->
     <div class="nav-bar">
-        <a href="" class="nav-link active">
+        <a href="#" class="nav-link active">
             <i class="fas fa-plus-circle"></i>
             إضافة منتجات
         </a>
-        <a href="/MR-Fikry/prodacts/" class="nav-link">
+        <a href="/MR-Fikry/prodacts/" class="nav-link" id="viewProductsLink">
             <i class="fas fa-boxes"></i>
             عرض المنتجات
         </a>
     </div>
 
-    <!-- البطاقة الرئيسية -->
     <div class="main-card">
         <div class="content-card">
             <div class="card-title">
@@ -521,14 +464,17 @@
                 </div>
             </div>
 
-            <!-- نموذج الإضافة -->
             <div id="form">
+                <!-- حقل اسم المنتج مع الاقتراحات -->
                 <div class="input-group">
                     <div class="input-label">
                         <i class="fas fa-tag"></i>
                         <span>اسم المنتج</span>
                     </div>
-                    <input class="modern-input" id="productName" placeholder="أدخل اسم المنتج">
+                    <div class="suggestions-container">
+                        <input class="modern-input" id="productName" placeholder="اكتب اسم المنتج... (سيظهر اقتراحات بعد 4 أحرف)" autocomplete="off">
+                        <div class="suggestions-box" id="suggestionsBox"></div>
+                    </div>
                 </div>
 
                 <div class="input-group">
@@ -571,42 +517,120 @@
         </div>
     </div>
 
-    <!-- فوتر أنيق -->
     <footer class="footer">
         <i class="fas fa-crown"></i> 
-        <strong>MR Fikry</strong> | نظام إدارة المنتجات 
+        <strong>MR Fikry</strong> | نظام إدارة المنتجات مع اقتراحات ذكية
         <i class="fas fa-sparkles"></i>
     </footer>
 
-    <script type="module">
+ <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
             authDomain: "login-employees1.firebaseapp.com",
             projectId: "login-employees1",
             storageBucket: "login-employees1.firebasestorage.app",
             messagingSenderId: "907414298566",
-            appId: "1:907414298566:web:0141762effe0e9ff289cc7",
-            measurementId: "G-Q6XWR5X38W"
+            appId: "1:907414298566:web:0141762effe0e9ff289cc7"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // عرض التاريخ الحالي
-        const currentDateEl = document.getElementById('currentDate');
-        const now = new Date();
-        currentDateEl.textContent = now.toLocaleDateString('ar-EG', { 
-            year: 'numeric', 
-            month: 'numeric', 
-            day: 'numeric' 
-        });
+        let allProducts = []; // تخزين جميع المنتجات للاقتراحات
+        let searchTimeout; // متغير لتأخير البحث
 
-        // Save product function
+        // عرض التاريخ
+        const now = new Date();
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('ar-EG');
+
+        // جلب جميع المنتجات من Firebase
+        async function loadAllProducts() {
+            try {
+                const productsRef = collection(db, "products");
+                const q = query(productsRef, orderBy("name"));
+                const querySnapshot = await getDocs(q);
+                allProducts = [];
+                querySnapshot.forEach((doc) => {
+                    allProducts.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                console.log(`تم تحميل ${allProducts.length} منتج للاقتراحات`);
+            } catch (error) {
+                console.error("خطأ في تحميل المنتجات:", error);
+            }
+        }
+
+        // عرض الاقتراحات مع تحسين الأداء
+        function showSuggestions() {
+            const input = document.getElementById('productName');
+            const searchText = input.value.trim();
+            const suggestionsBox = document.getElementById('suggestionsBox');
+            
+            // إذا كان النص فارغاً، إخفاء الاقتراحات
+            if (searchText === '') {
+                suggestionsBox.classList.remove('active');
+                suggestionsBox.innerHTML = '';
+                return;
+            }
+
+            // البحث السريع عن المنتجات المطابقة
+            const searchLower = searchText.toLowerCase();
+            const filtered = allProducts.filter(product => {
+                const productName = (product.name || '').toLowerCase();
+                // بحث سريع: مطابقة تامة أو تبدأ بالنص المدخل
+                return productName === searchLower || productName.startsWith(searchLower) || productName.includes(searchLower);
+            });
+
+            if (filtered.length > 0) {
+                suggestionsBox.innerHTML = filtered.map(product => `
+                    <div class="suggestion-item" onclick="selectProduct('${product.id}', '${escapeHtml(product.name)}', '${escapeHtml(product.serial || '')}', ${product.sellPrice || 0}, ${product.quantity || 0}, ${product.buyPrice || 0})">
+                        <div class="suggestion-name">
+                            <span><i class="fas fa-box"></i> ${escapeHtml(product.name)}</span>
+                            <span class="suggestion-price">${(product.sellPrice || 0).toFixed(2)} ج.م</span>
+                        </div>
+                        <div class="suggestion-details">
+                            <span><i class="fas fa-barcode"></i> سيريال: ${escapeHtml(product.serial || '-')}</span>
+                            <span><i class="fas fa-cubes"></i> الكمية: ${product.quantity || 0}</span>
+                            <span><i class="fas fa-coins"></i> سعر الشراء: ${(product.buyPrice || 0).toFixed(2)} ج.م</span>
+                        </div>
+                    </div>
+                `).join('');
+                suggestionsBox.classList.add('active');
+            } else {
+                suggestionsBox.classList.remove('active');
+                suggestionsBox.innerHTML = '';
+            }
+        }
+
+        // دالة مساعدة لتنقية النص من علامات HTML
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // اختيار منتج من الاقتراحات
+        window.selectProduct = function(id, name, serial, sellPrice, quantity, buyPrice) {
+            document.getElementById('productName').value = name;
+            document.getElementById('serial').value = serial;
+            document.getElementById('quantity').value = quantity;
+            document.getElementById('buyPrice').value = buyPrice;
+            document.getElementById('sellPrice').value = sellPrice;
+            
+            // إخفاء صندوق الاقتراحات
+            const suggestionsBox = document.getElementById('suggestionsBox');
+            suggestionsBox.classList.remove('active');
+            
+            showToast(`✅ تم اختيار المنتج: ${name}`, 'success');
+        };
+
+        // حفظ المنتج مع التحقق من الاسم المكرر
         window.saveProduct = async function() {
             const name = document.getElementById("productName").value.trim();
             const serial = document.getElementById("serial").value.trim();
@@ -614,9 +638,44 @@
             const buyPrice = document.getElementById("buyPrice").value.trim();
             const sellPrice = document.getElementById("sellPrice").value.trim();
 
-            if (!name || !serial || !quantity || !buyPrice || !sellPrice) {
-                alert("❌ الرجاء ملء جميع البيانات!");
+            if (!name) {
+                showToast("❌ الرجاء إدخال اسم المنتج!", "error");
                 return;
+            }
+            if (!serial) {
+                showToast("❌ الرجاء إدخال السيريال!", "error");
+                return;
+            }
+            if (!quantity || isNaN(quantity) || Number(quantity) < 0) {
+                showToast("❌ الرجاء إدخال كمية صحيحة!", "error");
+                return;
+            }
+            if (!buyPrice || isNaN(buyPrice) || Number(buyPrice) < 0) {
+                showToast("❌ الرجاء إدخال سعر شراء صحيح!", "error");
+                return;
+            }
+            if (!sellPrice || isNaN(sellPrice) || Number(sellPrice) < 0) {
+                showToast("❌ الرجاء إدخال سعر بيع صحيح!", "error");
+                return;
+            }
+
+            // التحقق من وجود اسم مطابق بنفس السيريال
+            const existingProduct = allProducts.find(p => 
+                p.name.toLowerCase() === name.toLowerCase() && 
+                p.serial.toLowerCase() === serial.toLowerCase()
+            );
+
+            if (existingProduct) {
+                // عرض رسالة تأكيد للمستخدم
+                const confirmUpdate = confirm(`⚠️ يوجد منتج بنفس الاسم "${name}" والسيريال "${serial}"\n\nالكمية الحالية: ${existingProduct.quantity}\nسعر الشراء: ${existingProduct.buyPrice}\nسعر البيع: ${existingProduct.sellPrice}\n\nهل تريد تحديث بيانات هذا المنتج؟`);
+                
+                if (confirmUpdate) {
+                    // يمكن إضافة منطق التحديث هنا
+                    showToast(`📦 يمكن تحديث المنتج ${name} من صفحة الإدارة`, 'success');
+                    return;
+                } else {
+                    return;
+                }
             }
 
             const product = {
@@ -630,7 +689,7 @@
 
             try {
                 await addDoc(collection(db, "products"), product);
-                alert("✅ تم حفظ المنتج بنجاح");
+                showToast("✅ تم حفظ المنتج بنجاح", "success");
 
                 // تفريغ الحقول
                 document.getElementById("productName").value = "";
@@ -638,12 +697,82 @@
                 document.getElementById("quantity").value = "";
                 document.getElementById("buyPrice").value = "";
                 document.getElementById("sellPrice").value = "";
+                
+                // إعادة تحميل قائمة المنتجات للاقتراحات
+                await loadAllProducts();
 
             } catch (error) {
-                console.error("حدث خطأ عند الحفظ: ", error);
-                alert("❌ حصل خطأ أثناء حفظ المنتج!");
+                console.error("خطأ عند الحفظ:", error);
+                showToast("❌ حدث خطأ أثناء حفظ المنتج!", "error");
             }
         };
+
+        // البحث المباشر عند الكتابة مع تأخير بسيط
+        function handleProductNameInput() {
+            clearTimeout(searchTimeout);
+            const input = document.getElementById('productName');
+            const searchText = input.value.trim();
+            
+            if (searchText === '') {
+                const suggestionsBox = document.getElementById('suggestionsBox');
+                suggestionsBox.classList.remove('active');
+                suggestionsBox.innerHTML = '';
+                return;
+            }
+            
+            // تأخير البحث لتقليل العمليات
+            searchTimeout = setTimeout(() => {
+                showSuggestions();
+            }, 300);
+        }
+
+        // عرض رسالة منبثقة
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast-message ${type}`;
+            const icon = type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle';
+            toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // إغلاق الاقتراحات عند النقر خارجها
+        document.addEventListener('click', function(e) {
+            const suggestionsBox = document.getElementById('suggestionsBox');
+            const productNameInput = document.getElementById('productName');
+            if (productNameInput && !productNameInput.contains(e.target) && suggestionsBox && !suggestionsBox.contains(e.target)) {
+                suggestionsBox.classList.remove('active');
+            }
+        });
+
+        // ربط حدث الكتابة في حقل اسم المنتج
+        const productNameInput = document.getElementById('productName');
+        if (productNameInput) {
+            productNameInput.addEventListener('input', handleProductNameInput);
+            
+            // إضافة خاصية الإكمال التلقائي السريع
+            productNameInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab' || e.key === 'Enter') {
+                    const suggestionsBox = document.getElementById('suggestionsBox');
+                    const activeSuggestions = suggestionsBox.querySelectorAll('.suggestion-item');
+                    
+                    if (activeSuggestions.length > 0 && suggestionsBox.classList.contains('active')) {
+                        e.preventDefault();
+                        const firstSuggestion = activeSuggestions[0];
+                        const onclickAttr = firstSuggestion.getAttribute('onclick');
+                        if (onclickAttr) {
+                            eval(onclickAttr);
+                        }
+                    }
+                }
+            });
+        }
+
+
+        // تحميل المنتجات عند بدء التشغيل
+        loadAllProducts();
     </script>
 </body>
 </html>
