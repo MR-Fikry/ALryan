@@ -2,78 +2,420 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>الريان للأدوات المنزلية | تسجيل دخول الموظفين</title>
+    <!-- Font Awesome 6 (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- RESET & GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>الريان للادوات المنزليه</title>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f8f9fc 0%, #eef2f7 100%);
+            direction: rtl;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-<!-- Basic SEO -->
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#000000">
+        /* Header Modern Design */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 50px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
 
-<!-- Open Graph (Social Media) -->
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://alryan.pages.dev/icone.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://alryan.pages.dev/">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ar_AR">
+        header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
 
-<!-- Twitter Cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://alryan.pages.dev/">
+        .logo {
+            width: 70px;
+            height: auto;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+            transition: transform 0.2s ease;
+        }
+        .logo:hover {
+            transform: scale(1.02);
+        }
 
-<!-- PWA / Mobile App Feel -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="OS Store">
-<link rel="apple-touch-icon" href="/icon.jpg">
+        /* Main Container - Card */
+        .container {
+            width: 400px;
+            max-width: 90%;
+            margin: 130px auto 60px auto;
+            padding: 30px 28px 38px;
+            border-radius: 32px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(2px);
+        }
 
-<!-- Preload main resources (سرعة أعلى) -->
-<link rel="preload" as="image" href="https://alryan.pages.dev/icone.jpg">
+        /* عنوان تسجيل الدخول */
+        #title {
+            text-align: center;
+            margin-bottom: 28px;
+            font-weight: 700;
+            font-size: 1.9rem;
+            color: #040c13;
+            position: relative;
+            opacity: 0;
+            transform: translateY(35px);
+            transition: all 0.65s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
 
-<link rel="preload" as="style" href="style.css">
+        #title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #582ca0;
+            margin: 12px auto 0;
+            border-radius: 6px;
+        }
 
-<!-- CSS + Icons -->
-<link rel="icon" href="icon.jpg" type="image/png">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        /* Form Wrapper */
+        #form {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.7s cubic-bezier(0.2, 0.85, 0.4, 1.05);
+            margin-top: 12px;
+        }
 
-<!-- Security Headers (خفيفة بدون سيرفر) -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        /* Input Fields */
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            margin: 12px 0;
+            border-radius: 20px;
+            border: 1.5px solid #e2e8f0;
+            background-color: #fefefe;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            outline: none;
+            font-weight: 500;
+            color: #5213e6;
+        }
 
+        .form-input:focus {
+            border-color: #5213e6;
+            box-shadow: 0 12px 28px -8px rgba(108, 92, 231, 0.507);
+            background-color: #fff;
+        }
+
+        /* زر الدخول */
+        #form button {
+            width: 100%;
+            padding: 14px 12px;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #form button i {
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        #form button:hover {
+            background: #8b5cf6;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(30, 47, 62, 0.4);
+        }
+
+        #form button:active {
+            transform: translateY(1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ظهور العناصر مع كلاس show */
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* رسائل خطأ مخصصة (alert محسّنة قليلاً) - لكننا نبقي alert بسيط */
+        /* تحسين responsiveness */
+        @media (max-width: 520px) {
+            header {
+                padding: 14px 24px;
+            }
+            header h1 {
+                font-size: 1.2rem;
+            }
+            .logo {
+                width: 48px;
+            }
+            .container {
+                margin-top: 110px;
+                padding: 22px 20px 32px;
+            }
+            #title {
+                font-size: 1.6rem;
+            }
+            .form-input {
+                padding: 12px 16px;
+                font-size: 0.95rem;
+            }
+            #form button {
+                padding: 12px;
+                font-size: 1rem;
+            }
+        }
+
+        /* إضافة تنسيق بسيط لشاشات صغيرة جداً */
+        @media (max-width: 380px) {
+            .container {
+                width: 95%;
+                padding: 18px 16px 28px;
+            }
+            #title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* footer اختياري: رسالة حقوق */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #8a9cb0;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
+
 <header>
-<h1>الريان للادوات المنزليه</h1>
-<img src="logo.png" class="logo">
+    <h1>الريان للأدوات المنزلية</h1>
+    <img src="logo.png" class="logo" alt="شعار الريان" onerror="this.src='https://placehold.co/70x70?text=الريان'; this.onerror=null;">
 </header>
 
 <div class="container"> 
-  <!-- العنوان -->
-  <h2 id="title">تسجيل موظف جديد</h2>
-  <!-- الفورم -->
-  <div id="form">
-    <input id="name" placeholder="الاسم">
-    <input id="phone" placeholder="رقم الهاتف">
-    <label>
-      <input type="radio" name="gender" value="ذكر"> ذكر
-    </label>
-    <label>
-      <input type="radio" name="gender" value="أنثى"> أنثى
-    </label>
-    <br><br>
-    <button onclick="saveEmployee()">حفظ</button>
-  </div>
+    <h2 id="title">تسجيل دخول الموظف</h2>
+
+    <div id="form">
+        <input id="employeeId" class="form-input" type="text" placeholder="📇 ID الموظف" autocomplete="off">
+        <input id="password" type="password" class="form-input" placeholder="🔒 كلمة المرور" autocomplete="off">
+        <br>
+        <button onclick="loginEmployee()">
+            <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+        </button>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-shield-alt"></i> بيئة آمنة للموظفين المعتمدين
+    </div>
 </div>
 
-<script type="module" src="script.js"></script>
+<!-- Import Firebase Modules (ES modules) -->
+<script type="importmap">
+    {
+        "imports": {
+            "firebase/app": "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js",
+            "firebase/firestore": "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"
+        }
+    }
+</script>
+
+<script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+    // Firebase configuration (exactly as provided)
+    const firebaseConfig = {
+        apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+        authDomain: "login-employees1.firebaseapp.com",
+        projectId: "login-employees1",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // تعريـف الدوال على النطاق العام (window) لاستخدامها في onclick داخل HTML
+    // كما نحتاج للتحقق من تسجيل الدخول التلقائي وتأثيرات الظهور
+
+    window.db = db; // optional but not needed
+
+    // دالة تسجيل الدخول الأساسية
+    window.loginEmployee = async function() {
+        const employeeIdElem = document.getElementById("employeeId");
+        const passwordElem = document.getElementById("password");
+        
+        const employeeId = employeeIdElem ? employeeIdElem.value.trim() : "";
+        const password = passwordElem ? passwordElem.value.trim() : "";
+
+        if (!employeeId || !password) {
+            alert("❌ الرجاء إدخال ID الموظف وكلمة المرور");
+            return;
+        }
+
+        // إظهار حالة تحميل بسيطة على الزر (اختياري)
+        const loginBtn = document.querySelector("#form button");
+        const originalBtnText = loginBtn.innerHTML;
+        loginBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري التحقق...';
+        loginBtn.disabled = true;
+
+        try {
+            // جلب جميع الموظفين من مجموعة "employees"
+            const employeesRef = collection(db, "employees");
+            const querySnapshot = await getDocs(employeesRef);
+            
+            let foundEmployee = null;
+
+            // البحث عن الموظف الذي يطابق employeeId وكلمة المرور
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                // مقارنة الحقول: employeeId (نصي) و password
+                // مراعاة أن يكون المطابقة حساسة لحالة الأحرف ولكن نستخدم تطابق نصي تام
+                if (data.employeeId === employeeId && data.password === password) {
+                    foundEmployee = { 
+                        id: docSnap.id, 
+                        ...data,
+                        // نضمن وجود حقول إضافية إن وجدت
+                    };
+                }
+            });
+
+            if (!foundEmployee) {
+                alert("⚠️ بيانات الدخول غير صحيحة. تأكد من ID الموظف وكلمة المرور.");
+                loginBtn.innerHTML = originalBtnText;
+                loginBtn.disabled = false;
+                return;
+            }
+
+            // حفظ بيانات الجلسة
+           // جلب أي بيانات قديمة محفوظة
+            const oldEmployeeData = JSON.parse(localStorage.getItem("currentEmployee")) || {};
+            
+            // دمج البيانات الجديدة من Firebase مع البيانات القديمة
+            const mergedEmployee = { ...oldEmployeeData, ...foundEmployee };
+            
+            // حفظ النسخة المدمجة في localStorage
+            localStorage.setItem("currentEmployee", JSON.stringify(mergedEmployee));
+
+            localStorage.setItem("isLoggedIn", "true");
+            
+            // إضافة سجل زمني اختياري لآخر دخول
+            const loginTime = new Date().toISOString();
+            localStorage.setItem("lastLogin", loginTime);
+            
+            alert(`✅ مرحباً ${foundEmployee.name || foundEmployee.employeeId || 'موظف'}! تم تسجيل الدخول بنجاح`);
+            
+            // التوجيه إلى صفحة المبيعات (يجب أن يوجد مجلد sales مع ملف index.html)
+            window.location.href = "sales/";
+            
+        } catch (error) {
+            console.error("Firebase Auth Error:", error);
+            alert("⚠️ حدث خطأ أثناء الاتصال بقاعدة البيانات. تأكد من اتصال الإنترنت وحاول مجدداً.");
+            loginBtn.innerHTML = originalBtnText;
+            loginBtn.disabled = false;
+        }
+    };
+
+    // تأثيرات ظهور الصفحة + التحقق من الجلسة النشطة
+    window.onload = function() {
+        // تأثير ظهور العنوان والنموذج بشكل متسلسل
+        const titleEl = document.getElementById("title");
+        const formEl = document.getElementById("form");
+        
+        if (titleEl) titleEl.classList.add("show");
+        setTimeout(() => {
+            if (formEl) formEl.classList.add("show");
+        }, 180); // تأخير ناعم
+        
+        // التحقق من وجود جلسة سابقة (تسجيل دخول تلقائي)
+       // التحقق من وجود جلسة سابقة (تسجيل دخول تلقائي)
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      if (isLoggedIn === "true") {
+          const empData = localStorage.getItem("currentEmployee"); // <-- تم التغيير هنا
+          if (empData) {
+              // توجيه تلقائي إلى صفحة المبيعات
+              window.location.href = "sales/";
+          } else {
+              // إذا كانت isLoggedIn true ولكن لا توجد بيانات موظف -> إعادة تعيين
+              localStorage.removeItem("isLoggedIn");
+          }
+      }
+        
+        // إضافة إمكانية الضغط على Enter في حقول الإدخال
+        const empIdInput = document.getElementById("employeeId");
+        const pwdInput = document.getElementById("password");
+        
+        const handleKeyPress = (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                if (window.loginEmployee) window.loginEmployee();
+            }
+        };
+        
+        if (empIdInput) empIdInput.addEventListener("keypress", handleKeyPress);
+        if (pwdInput) pwdInput.addEventListener("keypress", handleKeyPress);
+        
+        // إضافة تأثير بسيط: إزالة التنبيهات الافتراضية للتحسين
+        // تغيير لون الخلفية عند التركيز
+        const inputs = document.querySelectorAll(".form-input");
+        inputs.forEach(input => {
+            input.addEventListener("focus", (e) => {
+                e.target.style.borderColor = "#2c7da0";
+            });
+            input.addEventListener("blur", (e) => {
+                if (!e.target.value.trim()) {
+                    e.target.style.borderColor = "#e2e8f0";
+                } else {
+                    e.target.style.borderColor = "#cbd5e1";
+                }
+            });
+        });
+    };
+    
+    // تصدير إضافي لضمان توفر الوظيفة في السياق العام (لأي استخدامات مستقبلية)
+    window.ensureFirebaseReady = true;
+</script>
+
+<!-- تضمين نسخة احتياطية من Firebase في حالة وجود مشاكل importmap (ضمان) 
+     ولكننا نعتمد على module import أعلاه، كل شيء يعمل بشكل طبيعي -->
 </body>
 </html>

@@ -21,9 +21,9 @@
 
 
         :root {
-            --primary-color: #2e7d32;
-            --primary-dark: #1b5e20;
-            --primary-light: #4caf50;
+            --primary-color: #8b5cf6;
+            --primary-dark: #31117e;
+            --primary-light: #5a16f7;
             --secondary-color: #ff9800;
             --danger-color: #f44336;
             --warning-color: #ff9800;
@@ -61,7 +61,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
+            padding: 1% 15%;
             background-color: white;
             box-shadow: var(--shadow);
             margin-bottom: 20px;
@@ -97,7 +97,7 @@
 
 .activ{
   text-decoration: none;
-  background-color: #2e7d32;
+  background-color: #7803ff;
   color: #ffffff;
   padding: 10px 15px;
   border-radius: 30px;
@@ -483,7 +483,7 @@
         }
 
         .btn-primary:hover {
-            background: linear-gradient(to left, var(--primary-dark), #124816);
+            background: linear-gradient(to left, var(--primary-dark), #aa58ee);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
         }
