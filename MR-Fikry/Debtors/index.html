@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>الريان للأدوات المنزلية | نظام إدارة العملاء والفواتير</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 
         /* ===== الهيدر ===== */
         .header {
-            padding: 15px 20px;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -34,29 +34,29 @@
             top: 0;
             z-index: 100;
             flex-wrap: wrap;
-            gap: 10px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .brand-icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 20px;
+            font-size: 26px;
+            box-shadow: 0 8px 16px -6px rgba(108, 92, 231, 0.4);
         }
 
         .brand-text {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 700;
             background: linear-gradient(145deg, #4a3f96, #6c5ce7);
             -webkit-background-clip: text;
@@ -65,80 +65,86 @@
 
         .date-badge {
             background: white;
-            padding: 6px 12px;
-            border-radius: 30px;
+            padding: 8px 18px;
+            border-radius: 40px;
             font-weight: 500;
             color: #4a3f96;
-            font-size: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            font-size: 14px;
         }
 
         /* ===== الإحصائيات ===== */
         .stats-wrapper {
             max-width: 1300px;
-            margin: 20px auto;
-            padding: 0 15px;
+            margin: 30px auto 20px;
+            padding: 0 20px;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 20px;
         }
 
         .stat-card {
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(8px);
-            border-radius: 20px;
-            padding: 15px;
+            border-radius: 30px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 20px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: white;
         }
 
         .stat-icon {
-            width: 45px;
-            height: 45px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border-radius: 14px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 20px;
+            font-size: 28px;
         }
 
         .stat-number {
-            font-size: 22px;
+            font-size: 32px;
             font-weight: 700;
             color: #2d2a4e;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #8f8bb3;
         }
 
         /* ===== البحث ===== */
         .search-section {
             max-width: 1300px;
-            margin: 15px auto;
-            padding: 0 15px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
         .search-container {
             background: white;
             border-radius: 50px;
-            padding: 4px;
+            padding: 5px;
             display: flex;
-            gap: 8px;
+            align-items: center;
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
         }
 
         .search-container input {
             flex: 1;
-            padding: 12px 18px;
+            padding: 16px 25px;
             border: none;
             outline: none;
-            font-size: 14px;
+            font-size: 15px;
             font-family: 'Cairo', sans-serif;
             background: transparent;
             border-radius: 50px;
@@ -148,78 +154,91 @@
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
             border: none;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 30px;
             border-radius: 40px;
             font-weight: 500;
             cursor: pointer;
-            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         /* ===== شبكة العملاء ===== */
         .debtors-section {
             max-width: 1300px;
-            margin: 20px auto;
-            padding: 0 15px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .section-title h2 {
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 32px;
+            font-weight: 600;
+            color: #2d2a4e;
         }
 
         .debtors-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
+        /* ===== بطاقة العميل ===== */
         .debtor-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
-            border-radius: 25px;
-            padding: 18px;
+            border-radius: 30px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .debtor-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             background: white;
+            box-shadow: 0 20px 40px -12px rgba(108, 92, 231, 0.2);
         }
 
         .debtor-avatar {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border-radius: 16px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
-            margin-bottom: 12px;
+            font-size: 28px;
+            margin-bottom: 15px;
         }
 
         .debtor-name {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
+            color: #2d2a4e;
+            margin-bottom: 5px;
         }
 
         .debtor-balance {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 16px;
+            gap: 8px;
+            font-size: 18px;
             font-weight: 600;
             color: #ef4444;
             background: rgba(239, 68, 68, 0.1);
-            padding: 6px 10px;
-            border-radius: 16px;
+            padding: 8px 12px;
+            border-radius: 20px;
             margin-top: 10px;
         }
 
-        /* ===== مودال ===== */
+        /* ===== مودال بروفيشنال ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -232,24 +251,25 @@
             display: none;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            animation: fadeIn 0.3s ease;
         }
 
         .modal-container {
             background: white;
-            border-radius: 30px;
-            width: 100%;
-            max-width: 900px;
+            border-radius: 40px;
+            width: 90%;
+            max-width: 1100px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
         }
 
         .modal-header {
-            padding: 18px 20px;
+            padding: 25px 30px;
             background: linear-gradient(135deg, #6c5ce7, #8b7cf0);
             color: white;
-            border-radius: 30px 30px 0 0;
+            border-radius: 40px 40px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -259,148 +279,123 @@
         }
 
         .modal-header h2 {
-            font-size: 18px;
+            font-size: 24px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         .close-modal {
             background: rgba(255, 255, 255, 0.2);
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             color: white;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(90deg);
         }
 
         .modal-body {
-            padding: 20px;
+            padding: 25px 30px;
         }
 
         /* ===== معلومات العميل ===== */
         .customer-info-section {
-            background: #f8f7ff;
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f8f7ff, #fff);
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(108, 92, 231, 0.2);
         }
 
         .customer-details {
             display: flex;
+            justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 20px;
+            margin-bottom: 15px;
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
+            font-size: 16px;
             background: white;
-            padding: 6px 12px;
+            padding: 8px 15px;
             border-radius: 20px;
-            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .info-item i {
+            color: #6c5ce7;
+            font-size: 18px;
         }
 
         .edit-customer-btn {
-            background: #f59e0b;
+            background: linear-gradient(145deg, #f59e0b, #d97706);
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             color: white;
             font-weight: 500;
             cursor: pointer;
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
         }
 
-        /* ===== زرار الدفع ===== */
+        /* ===== زرار الدفع الموحد ===== */
         .universal-payment {
             background: linear-gradient(135deg, #ef4444, #dc2626);
             border: none;
-            padding: 12px;
-            border-radius: 25px;
+            padding: 12px 25px;
+            border-radius: 30px;
             color: white;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        /* ===== سجل المعاملات ===== */
-        .transactions-history {
-            background: #f1f5f9;
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .transactions-history h4 {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-            color: #334155;
-            font-size: 14px;
-        }
-
-        .transactions-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .transaction-item {
-            background: white;
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            border-right: 3px solid #10b981;
-        }
-
-        .transaction-amount {
             font-weight: 700;
-            color: #10b981;
-            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+            justify-content: center;
+            transition: 0.3s;
         }
 
-        .transaction-date {
-            font-size: 11px;
-            color: #64748b;
+        .universal-payment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
         }
 
-        .transaction-note {
-            font-size: 12px;
-            color: #475569;
-            flex: 1;
-        }
-
-        /* ===== الفواتير - تصميم متجاوب وجذاب ===== */
+        /* ===== فواتير مميزة ===== */
         .invoices-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .invoice-card {
-            background: white;
-            border-radius: 20px;
-            padding: 15px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            background: #f8f9ff;
+            border-radius: 25px;
+            padding: 20px;
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            transition: all 0.3s;
         }
 
         .invoice-card:hover {
-            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.1);
-            border-color: #cbd5e1;
+            background: white;
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.15);
         }
 
         .invoice-header {
@@ -408,40 +403,37 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed rgba(108, 92, 231, 0.2);
         }
 
         .invoice-number {
+            font-size: 18px;
             font-weight: 700;
             color: #6c5ce7;
-            font-size: 14px;
-            background: #ede9fe;
-            padding: 4px 10px;
-            border-radius: 20px;
         }
 
         .invoice-date {
-            font-size: 11px;
-            color: #94a3b8;
+            color: #8f8bb3;
+            font-size: 13px;
         }
 
         .invoice-stats {
             display: flex;
+            gap: 15px;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .stat-badge {
-            background: #f1f5f9;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            font-weight: 500;
         }
 
         .stat-badge.danger {
@@ -450,89 +442,100 @@
         }
 
         .stat-badge.success {
-            background: #dcfce7;
-            color: #16a34a;
+            background: #e0f2fe;
+            color: #0284c7;
         }
 
         .invoice-actions {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .btn-print, .btn-edit-invoice, .btn-view {
             border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
+            padding: 8px 18px;
+            border-radius: 25px;
             color: white;
             font-weight: 500;
             cursor: pointer;
-            font-size: 11px;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            font-size: 13px;
+            transition: 0.2s;
         }
 
-        .btn-print { background: #10b981; }
-        .btn-edit-invoice { background: #3b82f6; }
-        .btn-view { background: #8b5cf6; }
+        .btn-print { background: linear-gradient(145deg, #10b981, #059669); }
+        .btn-edit-invoice { background: linear-gradient(145deg, #3b82f6, #2563eb); }
+        .btn-view { background: linear-gradient(145deg, #8b5cf6, #6c5ce7); }
 
-        /* ===== نماذج ===== */
+        /* ===== نماذج التعديل الداخلية ===== */
         .inline-form {
             background: white;
-            border-radius: 16px;
-            padding: 15px;
-            margin-top: 12px;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 15px;
             border: 2px solid #6c5ce7;
+            animation: slideDown 0.3s ease;
+        }
+
+        .inline-form h4 {
+            margin-bottom: 15px;
+            color: #6c5ce7;
         }
 
         .inline-form input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
             font-family: 'Cairo', sans-serif;
-            margin-bottom: 10px;
-            font-size: 13px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .inline-form input:focus {
+            outline: none;
+            border-color: #6c5ce7;
         }
 
         .form-buttons {
             display: flex;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .form-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 500;
         }
 
         .btn-save {
             background: #10b981;
             color: white;
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
         }
 
         .btn-cancel {
             background: #e2e8f0;
-            color: #475569;
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
+            color: #4a5568;
         }
 
-        /* ===== نافذة التفاصيل ===== */
+        /* ===== نافذة عرض التفاصيل ===== */
         .details-modal {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            border-radius: 25px;
-            padding: 20px;
+            border-radius: 30px;
+            padding: 25px;
             width: 90%;
-            max-width: 450px;
+            max-width: 500px;
             max-height: 80vh;
             overflow-y: auto;
             z-index: 2000;
@@ -540,12 +543,19 @@
             display: none;
         }
 
-        .close-details {
+        .details-modal h3 {
+            color: #6c5ce7;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .details-modal .close-details {
             float: left;
             background: #ef4444;
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             color: white;
             cursor: pointer;
@@ -553,65 +563,57 @@
 
         .product-item {
             background: #f8f9ff;
-            padding: 8px;
-            margin: 6px 0;
-            border-radius: 10px;
-            font-size: 12px;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 12px;
         }
 
-        /* ===== طباعة ===== */
+        /* ===== فاتورة الطباعة ===== */
         .print-invoice {
             display: none;
             background: white;
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
+            font-family: 'Cairo', sans-serif;
         }
 
         .print-header {
             text-align: center;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #6c5ce7;
+            margin-bottom: 20px;
             padding-bottom: 10px;
+            border-bottom: 2px solid #6c5ce7;
         }
 
+        .print-header h1 { color: #6c5ce7; font-size: 20px; }
         .print-details {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            font-size: 11px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 12px;
         }
-
         .print-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 10px;
+            font-size: 11px;
         }
-
         .print-table th, .print-table td {
             border: 1px solid #ddd;
-            padding: 4px;
+            padding: 6px;
             text-align: right;
         }
+        .print-table th { background: #f5f5f5; }
 
         @media print {
             body > *:not(.print-invoice) { display: none !important; }
             .print-invoice { display: block !important; }
-            @page { size: A5; margin: 8mm; }
+            @page { size: A5; margin: 10mm; }
         }
 
-        .success-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 30px;
-            z-index: 3000;
-            font-size: 13px;
-            animation: slideUp 0.3s;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideUp {
@@ -619,21 +621,38 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            margin-top: 30px;
-            font-size: 12px;
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        @media (max-width: 600px) {
-            .stats-grid { gap: 8px; }
-            .stat-card { padding: 10px; }
-            .stat-number { font-size: 18px; }
+        .success-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            z-index: 3000;
+            animation: slideUp 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            margin-top: 50px;
+            color: #5b5880;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .modal-container { width: 95%; margin: 20px; }
             .modal-body { padding: 15px; }
-            .invoice-stats { gap: 6px; }
-            .stat-badge { font-size: 10px; padding: 3px 8px; }
+            .customer-details { flex-direction: column; }
         }
     </style>
 </head>
@@ -649,27 +668,27 @@
 
 <div class="stats-wrapper">
     <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div><div class="stat-number" id="totalCustomers">0</div><div class="stat-label">عملاء</div></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-file-invoice"></i></div><div><div class="stat-number" id="totalInvoices">0</div><div class="stat-label">فواتير</div></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div><div><div class="stat-number" id="totalDebtSum">0</div><div class="stat-label">ديون</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-content"><div class="stat-label">إجمالي العملاء</div><div class="stat-number" id="totalCustomers">0</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-file-invoice"></i></div><div class="stat-content"><div class="stat-label">إجمالي الفواتير</div><div class="stat-number" id="totalInvoices">0</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div><div class="stat-content"><div class="stat-label">إجمالي الديون</div><div class="stat-number" id="totalDebtSum">0</div><div class="stat-unit">جنيه</div></div></div>
     </div>
 </div>
 
 <div class="search-section">
     <div class="search-container">
-        <input type="text" id="searchInput" placeholder="🔍 ابحث عن عميل...">
+        <input type="text" id="searchInput" placeholder="🔍 ابحث عن عميل بالاسم أو رقم الهاتف ...">
         <button id="searchBtn"><i class="fas fa-search"></i> بحث</button>
     </div>
 </div>
 
 <div class="debtors-section">
-    <div class="section-title"><h2><i class="fas fa-user-friends"></i> العملاء</h2></div>
+    <div class="section-title"><h2><i class="fas fa-user-friends"></i> قائمة العملاء</h2></div>
     <div id="customersGrid" class="debtors-grid"></div>
 </div>
 
-<div class="footer"><p>© 2025 الريان للأدوات المنزلية</p></div>
+<div class="footer"><p>© 2025 الريان للأدوات المنزلية | نظام إدارة متطور</p></div>
 
-<!-- المودال -->
+<!-- المودال الرئيسي -->
 <div id="customerModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
@@ -677,22 +696,15 @@
             <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
-            <div id="customerInfoSection"></div>
-            <button id="universalPayBtn" class="universal-payment"><i class="fas fa-money-bill-wave"></i> دفع دفعة جديدة</button>
-            
-            <!-- سجل المعاملات -->
-            <div class="transactions-history" id="transactionsHistory">
-                <h4><i class="fas fa-history"></i> سجل المدفوعات</h4>
-                <div id="transactionsList" class="transactions-list"></div>
-            </div>
-            
-            <h3 style="margin-bottom: 12px; font-size: 16px;"><i class="fas fa-receipt"></i> الفواتير</h3>
+            <div id="customerInfoSection" class="customer-info-section"></div>
+            <button id="universalPayBtn" class="universal-payment"><i class="fas fa-money-bill-wave"></i> دفع دفعة على إجمالي ديون العميل</button>
+            <h3 style="margin-bottom: 15px;"><i class="fas fa-receipt"></i> الفواتير</h3>
             <div id="modalInvoicesList" class="invoices-list"></div>
         </div>
     </div>
 </div>
 
-<!-- نافذة التفاصيل -->
+<!-- نافذة عرض تفاصيل الفاتورة -->
 <div id="detailsModal" class="details-modal">
     <button class="close-details" onclick="closeDetailsModal()"><i class="fas fa-times"></i></button>
     <div id="detailsContent"></div>
@@ -700,19 +712,19 @@
 
 <!-- قالب الطباعة -->
 <div id="invoicePrint" class="print-invoice">
-    <div class="print-header"><h1>الريان للأدوات المنزلية</h1><p>فاتورة بيع</p></div>
+    <div class="print-header"><h1>الريان للأدوات المنزلية</h1><p>فاتورة بيع رسمية</p></div>
     <div class="print-details">
         <div><p><strong>رقم الفاتورة:</strong> <span id="printInvoiceNumber">--</span></p><p><strong>التاريخ:</strong> <span id="printInvoiceDate">--</span></p><p><strong>الوقت:</strong> <span id="printInvoiceTime">--</span></p></div>
         <div><p><strong>اسم البائع:</strong> <span id="printSellerName">نظام الريان</span></p><p><strong>اسم المشتري:</strong> <span id="printBuyerName">--</span></p></div>
-        <div><p><strong>نوع البيع:</strong> <span id="printSaleType">آجل</span></p><p><strong>الإجمالي:</strong> <span id="printTotal">--</span></p><p><strong>المدفوع:</strong> <span id="printPaid">--</span></p><p><strong>المتبقي:</strong> <span id="printRemaining">--</span></p></div>
+        <div><p><strong>نوع البيع:</strong> <span id="printSaleType">آجل</span></p><p><strong>إجمالي الفاتورة:</strong> <span id="printTotal">--</span></p><p><strong>المدفوع:</strong> <span id="printPaid">--</span></p><p><strong>المتبقي:</strong> <span id="printRemaining">--</span></p></div>
     </div>
-    <table class="print-table"><thead><tr><th>#</th><th>المنتج</th><th>السيريال</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody id="printItems"></tbody><tfoot><tr><td colspan="5">الإجمالي النهائي:</td><td id="printTotalAmount">0 جنيه</td></tr></tfoot></table>
-    <p style="padding: 15px 0; text-align: center; font-size: 10px;">جميع المنتجات غير قابلة للاسترجاع</p>
+    <table class="print-table"><thead><tr><th>#</th><th>اسم المنتج</th><th>السيريال</th><th>الكمية</th><th>سعر الوحدة</th><th>الإجمالي</th></tr></thead><tbody id="printItems"></tbody><tfoot><tr><td colspan="5" style="text-align: left;">الإجمالي النهائي:</td><td id="printTotalAmount">0 جنيه</td></tr></tfoot></table>
+    <p style="padding: 15px 0; text-align: center; color: #666; font-size: 10px;">جميع المنتجات غير قابلة للاسترجاع بعد الخروج من المعرض</p>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
@@ -726,7 +738,6 @@
     let currentCustomerId = null;
     let currentCustomerData = null;
     let currentInvoices = [];
-    let currentTransactions = [];
 
     function formatNumber(num) { return (num || 0).toLocaleString(); }
     
@@ -737,42 +748,6 @@
         toast.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 2500);
-    }
-
-    async function loadTransactions(customerId) {
-        const transactionsRef = collection(db, "customers", customerId, "transactions");
-        const snapshot = await getDocs(transactionsRef);
-        const transactions = [];
-        snapshot.forEach(doc => transactions.push({ id: doc.id, ...doc.data() }));
-        transactions.sort((a, b) => b.timestamp - a.timestamp);
-        return transactions;
-    }
-
-    async function addTransaction(customerId, amount, note = "دفعة") {
-        const transaction = {
-            amount: amount,
-            note: note,
-            timestamp: Date.now(),
-            date: new Date().toLocaleDateString("ar-EG"),
-            time: new Date().toLocaleTimeString("ar-EG")
-        };
-        const newId = Date.now().toString();
-        await setDoc(doc(db, "customers", customerId, "transactions", newId), transaction);
-    }
-
-    async function displayTransactions() {
-        const container = document.getElementById("transactionsList");
-        if (!currentTransactions.length) {
-            container.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8;">لا توجد مدفوعات مسجلة</div>';
-            return;
-        }
-        container.innerHTML = currentTransactions.map(t => `
-            <div class="transaction-item">
-                <div class="transaction-amount">💰 ${formatNumber(t.amount)} جنيه</div>
-                <div class="transaction-note">${t.note || "دفعة"}</div>
-                <div class="transaction-date">📅 ${t.date || ""} ${t.time || ""}</div>
-            </div>
-        `).join('');
     }
 
     async function fetchAllData() {
@@ -804,7 +779,7 @@
             data = allCustomers.filter(c => c.name.toLowerCase().includes(term) || c.phone.includes(term));
         }
         if (data.length === 0) {
-            grid.innerHTML = `<div style="text-align:center; padding:30px;">🚫 لا يوجد عملاء</div>`;
+            grid.innerHTML = `<div style="text-align:center; padding:40px; background:rgba(255,255,255,0.6); border-radius:40px;">🚫 لا يوجد عملاء</div>`;
             return;
         }
         for (const cust of data) {
@@ -813,8 +788,9 @@
             card.innerHTML = `
                 <div class="debtor-avatar"><i class="fas fa-user-alt"></i></div>
                 <div class="debtor-name">${escapeHtml(cust.name)}</div>
-                <div style="font-size:12px; color:#8f8bb3;"><i class="fas fa-phone"></i> ${escapeHtml(cust.phone) || "غير محدد"}</div>
+                <div style="font-size:13px; color:#8f8bb3;"><i class="fas fa-phone"></i> ${escapeHtml(cust.phone) || "غير محدد"}</div>
                 <div class="debtor-balance"><i class="fas fa-money-bill-wave"></i> ${formatNumber(cust.totalDebt)} جنيه</div>
+                <div style="margin-top:12px; font-size:12px; color:#6c5ce7;"><i class="fas fa-file-invoice"></i> ${cust.invoicesCount} فاتورة</div>
             `;
             card.onclick = () => openCustomerModal(cust.id);
             grid.appendChild(card);
@@ -832,25 +808,21 @@
         salesSnap.forEach(s => currentInvoices.push({ id: s.id, ...s.data() }));
         currentInvoices.sort((a,b) => (b.date || "").localeCompare(a.date || ""));
         
-        currentTransactions = await loadTransactions(customerId);
-        
         document.getElementById("modalCustomerName").innerHTML = `<i class="fas fa-user"></i> ${escapeHtml(currentCustomerData.name)}`;
         
         document.getElementById("customerInfoSection").innerHTML = `
             <div class="customer-details">
-                <div class="info-item"><i class="fas fa-phone-alt"></i> ${escapeHtml(currentCustomerData.phone) || "غير مسجل"}</div>
-                <div class="info-item"><i class="fas fa-money-bill"></i> إجمالي الدين: ${formatNumber(currentCustomerData.totalDebt)} جنيه</div>
-                <div class="info-item"><i class="fas fa-chart-line"></i> ${currentInvoices.length} فواتير</div>
+                <div class="info-item"><i class="fas fa-phone-alt"></i> <strong>الهاتف:</strong> ${escapeHtml(currentCustomerData.phone) || "غير مسجل"}</div>
+                <div class="info-item"><i class="fas fa-money-bill"></i> <strong>إجمالي الدين:</strong> ${formatNumber(currentCustomerData.totalDebt)} جنيه</div>
+                <div class="info-item"><i class="fas fa-chart-line"></i> <strong>عدد الفواتير:</strong> ${currentInvoices.length}</div>
             </div>
-            <button class="edit-customer-btn" id="editCustomerMainBtn"><i class="fas fa-edit"></i> تعديل البيانات</button>
+            <button class="edit-customer-btn" id="editCustomerMainBtn"><i class="fas fa-edit"></i> تعديل بيانات العميل</button>
         `;
         document.getElementById("editCustomerMainBtn").addEventListener("click", () => showEditCustomerForm());
         
-        await displayTransactions();
-        
         const invoicesContainer = document.getElementById("modalInvoicesList");
         if (currentInvoices.length === 0) {
-            invoicesContainer.innerHTML = `<div style="text-align:center; padding:30px;">📭 لا توجد فواتير</div>`;
+            invoicesContainer.innerHTML = `<div style="text-align:center; padding:40px; background:#f8f7ff; border-radius:30px;">📭 لا توجد فواتير لهذا العميل</div>`;
         } else {
             invoicesContainer.innerHTML = "";
             for (const inv of currentInvoices) {
@@ -858,18 +830,18 @@
                 invCard.className = "invoice-card";
                 invCard.innerHTML = `
                     <div class="invoice-header">
-                        <span class="invoice-number"><i class="fas fa-hashtag"></i> فاتورة ${inv.invoiceNumber || inv.id.slice(0,6)}</span>
-                        <span class="invoice-date"><i class="far fa-calendar"></i> ${inv.date || "غير محدد"}</span>
+                        <span class="invoice-number"><i class="fas fa-hashtag"></i> فاتورة رقم ${inv.invoiceNumber || inv.id.slice(0,8)}</span>
+                        <span class="invoice-date"><i class="far fa-calendar"></i> ${inv.date || "تاريخ غير محدد"}</span>
                     </div>
                     <div class="invoice-stats">
-                        <div class="stat-badge"><i class="fas fa-tag"></i> ${formatNumber(inv.totalAmount)} جنيه</div>
-                        <div class="stat-badge success"><i class="fas fa-hand-holding-usd"></i> مدفوع: ${formatNumber(inv.paid)}</div>
-                        <div class="stat-badge danger"><i class="fas fa-credit-card"></i> متبقي: ${formatNumber(inv.remainingDebt)}</div>
+                        <div class="stat-badge"><i class="fas fa-tag"></i> الإجمالي: ${formatNumber(inv.totalAmount)} جنيه</div>
+                        <div class="stat-badge success"><i class="fas fa-hand-holding-usd"></i> مدفوع: ${formatNumber(inv.paid)} جنيه</div>
+                        <div class="stat-badge danger"><i class="fas fa-credit-card"></i> متبقي: ${formatNumber(inv.remainingDebt)} جنيه</div>
                     </div>
                     <div class="invoice-actions">
-                        <button class="btn-print"><i class="fas fa-print"></i> طباعة</button>
-                        <button class="btn-edit-invoice"><i class="fas fa-pen"></i> تعديل</button>
-                        <button class="btn-view"><i class="fas fa-eye"></i> عرض</button>
+                        <button class="btn-print" data-invoice-id="${inv.id}"><i class="fas fa-print"></i> طباعة</button>
+                        <button class="btn-edit-invoice" data-invoice-id="${inv.id}"><i class="fas fa-pen"></i> تعديل</button>
+                        <button class="btn-view" data-invoice-id="${inv.id}"><i class="fas fa-eye"></i> عرض</button>
                     </div>
                 `;
                 invCard.querySelector(".btn-print").addEventListener("click", (e) => { e.stopPropagation(); printInvoice(inv, currentCustomerData.name); });
@@ -888,9 +860,9 @@
         const originalHtml = section.innerHTML;
         section.innerHTML = `
             <div class="inline-form">
-                <h4>تعديل بيانات العميل</h4>
-                <input type="text" id="editCustomerName" value="${escapeHtml(currentCustomerData.name)}">
-                <input type="text" id="editCustomerPhone" value="${escapeHtml(currentCustomerData.phone || '')}">
+                <h4><i class="fas fa-edit"></i> تعديل بيانات العميل</h4>
+                <input type="text" id="editCustomerName" placeholder="الاسم" value="${escapeHtml(currentCustomerData.name)}">
+                <input type="text" id="editCustomerPhone" placeholder="رقم الهاتف" value="${escapeHtml(currentCustomerData.phone || '')}">
                 <div class="form-buttons">
                     <button class="btn-save" id="saveCustomerBtn">حفظ</button>
                     <button class="btn-cancel" id="cancelCustomerBtn">إلغاء</button>
@@ -902,19 +874,19 @@
             const newPhone = document.getElementById("editCustomerPhone").value;
             if (!newName) { showToast("الاسم مطلوب", false); return; }
             await updateDoc(doc(db, "customers", currentCustomerId), { name: newName, phone: newPhone || "" });
-            showToast("تم تحديث بيانات العميل");
+            showToast("تم تحديث بيانات العميل بنجاح");
             await refreshAll();
             openCustomerModal(currentCustomerId);
         };
-        document.getElementById("cancelCustomerBtn").onclick = () => { section.innerHTML = originalHtml; };
+        document.getElementById("cancelCustomerBtn").onclick = () => { section.innerHTML = originalHtml; document.getElementById("editCustomerMainBtn").addEventListener("click", () => showEditCustomerForm()); };
     }
     
     function showEditInvoiceForm(invoice, cardElement) {
         const originalHtml = cardElement.innerHTML;
         cardElement.innerHTML = `
             <div class="inline-form">
-                <h4>تعديل الفاتورة</h4>
-                <input type="number" id="editInvoiceTotal" value="${invoice.totalAmount}">
+                <h4><i class="fas fa-edit"></i> تعديل الفاتورة</h4>
+                <input type="number" id="editInvoiceTotal" placeholder="الإجمالي الكلي" value="${invoice.totalAmount}">
                 <div class="form-buttons">
                     <button class="btn-save" id="saveInvoiceBtn">حفظ</button>
                     <button class="btn-cancel" id="cancelInvoiceBtn">إلغاء</button>
@@ -929,23 +901,28 @@
             if (newRemaining < 0) newRemaining = 0;
             await updateDoc(doc(db, "customers", currentCustomerId, "sales", invoice.id), { totalAmount: newTotal, remainingDebt: newRemaining });
             await recalcCustomerTotalDebt(currentCustomerId);
-            showToast("تم تعديل الفاتورة");
+            showToast("تم تعديل الفاتورة بنجاح");
             await refreshAll();
             openCustomerModal(currentCustomerId);
         };
-        document.getElementById("cancelInvoiceBtn").onclick = () => { cardElement.innerHTML = originalHtml; };
+        document.getElementById("cancelInvoiceBtn").onclick = () => { cardElement.innerHTML = originalHtml; attachInvoiceButtons(cardElement, invoice); };
+    }
+    
+    function attachInvoiceButtons(cardElement, invoice) {
+        const btns = cardElement.querySelectorAll("button");
+        if(btns.length) return;
     }
     
     function showPaymentForm() {
         const currentDebt = currentCustomerData.totalDebt || 0;
-        if (currentDebt <= 0) { showToast("العميل ليس عليه ديون!", false); return; }
+        if (currentDebt <= 0) { showToast("✨ العميل ليس عليه أي ديون!", false); return; }
         const section = document.getElementById("customerInfoSection");
         const originalHtml = section.innerHTML;
         section.innerHTML = `
             <div class="inline-form">
                 <h4><i class="fas fa-money-bill-wave"></i> دفع دفعة</h4>
-                <p style="margin-bottom: 8px; color:#ef4444;">إجمالي الدين: ${formatNumber(currentDebt)} جنيه</p>
-                <input type="number" id="paymentAmount" placeholder="المبلغ المراد دفعه">
+                <p style="margin-bottom: 10px; color: #ef4444;">إجمالي الدين: ${formatNumber(currentDebt)} جنيه</p>
+                <input type="number" id="paymentAmount" placeholder="المبلغ المراد دفعه" step="any">
                 <div class="form-buttons">
                     <button class="btn-save" id="confirmPaymentBtn">تأكيد الدفع</button>
                     <button class="btn-cancel" id="cancelPaymentBtn">إلغاء</button>
@@ -968,12 +945,11 @@
                 }
             }
             await recalcCustomerTotalDebt(currentCustomerId);
-            await addTransaction(currentCustomerId, payValue, `دفعة نقدية`);
-            showToast(`✅ تم تسجيل دفعة ${formatNumber(payValue)} جنيه`);
+            showToast(`✅ تم تسجيل دفعة بقيمة ${formatNumber(payValue)} جنيه`);
             await refreshAll();
             openCustomerModal(currentCustomerId);
         };
-        document.getElementById("cancelPaymentBtn").onclick = () => { section.innerHTML = originalHtml; };
+        document.getElementById("cancelPaymentBtn").onclick = () => { section.innerHTML = originalHtml; document.getElementById("editCustomerMainBtn").addEventListener("click", () => showEditCustomerForm()); };
     }
     
     function showInvoiceDetails(invoice) {
@@ -991,12 +967,12 @@
             itemsHtml = "<div class='product-item'>⚠️ لا توجد منتجات مسجلة</div>";
         }
         document.getElementById("detailsContent").innerHTML = `
-            <h3><i class="fas fa-file-invoice"></i> فاتورة ${invoice.invoiceNumber || invoice.id.slice(0,8)}</h3>
+            <h3><i class="fas fa-file-invoice"></i> فاتورة رقم ${invoice.invoiceNumber || invoice.id.slice(0,8)}</h3>
             <p><strong>التاريخ:</strong> ${invoice.date || "غير محدد"}</p>
             <p><strong>الإجمالي:</strong> ${formatNumber(invoice.totalAmount)} جنيه</p>
             <p><strong>المدفوع:</strong> ${formatNumber(invoice.paid)} جنيه</p>
             <p><strong>المتبقي:</strong> ${formatNumber(invoice.remainingDebt)} جنيه</p>
-            <h4 style="margin-top: 12px;">📦 المنتجات:</h4>
+            <h4 style="margin-top: 15px;">📦 المنتجات:</h4>
             ${itemsHtml}
         `;
         document.getElementById("detailsModal").style.display = "block";
@@ -1028,11 +1004,11 @@
         if (invoice.items && invoice.items.length) {
             invoice.items.forEach((item, idx) => {
                 const row = document.createElement("tr");
-                row.innerHTML = `一道${idx+1}</td><td>${escapeHtml(item.name || "منتج")}</td><td>${escapeHtml(item.serial || "---")}</td><td>${item.quantity || 1}</td><td>${formatNumber(item.price || 0)} جنيه</td><td>${formatNumber((item.quantity || 1) * (item.price || 0))} جنيه</td>`;
+                row.innerHTML = `<td>${idx+1}</td><td>${escapeHtml(item.name || "منتج")}</td><td>${escapeHtml(item.serial || "---")}</td><td>${item.quantity || 1}</td><td>${formatNumber(item.price || 0)} جنيه</td><td>${formatNumber((item.quantity || 1) * (item.price || 0))} جنيه</td>`;
                 itemsBody.appendChild(row);
             });
         } else {
-            itemsBody.innerHTML = "<tr><td colspan='6'>لا توجد منتجات مسجلة</td></tr>";
+            itemsBody.innerHTML = "<tr><td colspan='6' style='text-align:center'>لا توجد منتجات مسجلة</td></tr>";
         }
         setTimeout(() => window.print(), 100);
     }

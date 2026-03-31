@@ -1002,6 +1002,22 @@ function createEmployeeCard(emp) {
             </div>
         </div>
 
+        <div class="bonus-section">
+    <div class="section-header">
+        <h4><i class="fas fa-plus-circle"></i> الحوافز</h4>
+        <button class="add-deduction-btn" onclick="addBonus('${emp.id}')">
+            <i class="fas fa-plus"></i> إضافة حافز
+        </button>
+    </div>
+
+    <div id="bonus-${emp.id}" class="bonus-list"></div>
+
+    <div class="total-deductions">
+        <span>إجمالي الحوافز</span>
+        <span class="total-amount" id="totalBonusSpan-${emp.id}">0 جنيه</span>
+    </div>
+</div>
+
         <div class="commitments-box" id="commitmentsBox-${emp.id}" data-total="${emp.commitmentsTotal || 0}">
             <div class="commitments-summary">
                 <div><i class="fas fa-hand-holding-heart"></i> عدد الالتزامات: <strong>${emp.commitmentsCount || 0}</strong></div>
@@ -1037,6 +1053,38 @@ window.addDeduction = function(empId, amount = '', reason = '') {
     calculateNetSalary(empId);
 };
 
+// ====== الحوافز ======
+window.addBonus = function(empId, amount = '', reason = '') {
+
+    const container = document.getElementById(`bonus-${empId}`);
+    if (!container) return;
+
+    const uid = 'bonus_' + Date.now() + '_' + Math.random();
+
+    const div = document.createElement('div');
+    div.className = 'deduction-item';
+
+    div.id = uid;
+
+    div.innerHTML = `
+        <input type="number" class="bonus-input" placeholder="المبلغ" value="${amount}" oninput="calculateNetSalary('${empId}')">
+        <input type="text" class="bonus-reason" placeholder="سبب الحافز" value="${reason}">
+        <button class="remove-deduction" onclick="removeBonusItem('${empId}','${uid}')">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+    `;
+
+    container.appendChild(div);
+
+    calculateNetSalary(empId);
+};
+
+window.removeBonusItem = function(empId, rowId) {
+    const el = document.getElementById(rowId);
+    if (el) el.remove();
+    calculateNetSalary(empId);
+};
+
 function addDeductionRow(empId, amount, reason) { if (amount) window.addDeduction(empId, amount, reason); }
 
 window.removeDeductionItem = function(empId, rowId) {
@@ -1048,13 +1096,31 @@ window.removeDeductionItem = function(empId, rowId) {
 // ====== حساب صافي الراتب ======
 window.calculateNetSalary = function(empId) {
     const salary = Number(document.getElementById(`salary-${empId}`)?.value) || 0;
-    const container = document.getElementById(`deductions-${empId}`);
+    // الخصومات
+    const dedContainer = document.getElementById(`deductions-${empId}`);
     let totalDed = 0;
-    if (container) container.querySelectorAll('.deduction-input').forEach(inp => { totalDed += Number(inp.value) || 0; });
+    if (dedContainer) {
+        dedContainer.querySelectorAll('.deduction-input').forEach(inp => {
+            totalDed += Number(inp.value) || 0;
+        });
+    }
+    // الحوافز
+    const bonusContainer = document.getElementById(`bonus-${empId}`);
+    let totalBonus = 0;
+    if (bonusContainer) {
+        bonusContainer.querySelectorAll('.bonus-input').forEach(inp => {
+            totalBonus += Number(inp.value) || 0;
+        });
+    }
+    // الالتزامات
     const commitmentsBox = document.getElementById(`commitmentsBox-${empId}`);
     const commitmentsTotal = commitmentsBox ? Number(commitmentsBox.dataset.total) || 0 : 0;
-    const net = salary - totalDed - commitmentsTotal;
+
+    const net = salary + totalBonus - totalDed - commitmentsTotal;
+
     document.getElementById(`totalDeductionsSpan-${empId}`).innerHTML = totalDed.toLocaleString() + ' جنيه';
+    document.getElementById(`totalBonusSpan-${empId}`).innerHTML = totalBonus.toLocaleString() + ' جنيه';
+
     document.getElementById(`netSalary-${empId}`).innerHTML = net.toLocaleString() + ' جنيه';
 };
 
@@ -1071,7 +1137,31 @@ window.saveEmployeeData = async function(empId) {
                 if (amt && parseFloat(amt) > 0) deductions.push({ amount: Number(amt), reason: reason || 'خصم' });
             });
         }
-        await updateDoc(doc(db, "employees", empId), { salary: salaryVal, deductions: deductions, updatedAt: new Date().toISOString() });
+        // الحوافز
+        const bonusContainer = document.getElementById(`bonus-${empId}`);
+        const bonuses = [];
+        
+        if (bonusContainer) {
+            bonusContainer.querySelectorAll('.deduction-item').forEach(item => {
+        
+                const amt = item.querySelector('.bonus-input')?.value;
+                const reason = item.querySelector('.bonus-reason')?.value;
+        
+                if (amt && parseFloat(amt) > 0) {
+                    bonuses.push({
+                        amount: Number(amt),
+                        reason: reason || 'حافز'
+                    });
+                }
+        
+            });
+        }
+        await updateDoc(doc(db, "employees", empId), {
+            salary: salaryVal,
+            deductions: deductions,
+            bonuses: bonuses,
+            updatedAt: new Date().toISOString()
+        });
         alert("✅ تم حفظ جميع البيانات بنجاح");
         loadEmployees();
     } catch(e) { alert("❌ خطأ في الحفظ"); console.error(e); }
