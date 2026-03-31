@@ -2,26 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    
-    <title>MR Fikry | المدينون</title>
-    
-    <!-- تحسين SEO -->
-    <meta name="description" content="إدارة المدينون والديون - MR Fikry">
-    <meta name="author" content="MR Fikry">
-    <meta name="theme-color" content="#6c5ce7">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="MR Fikry - المدينون">
-    <meta property="og:description" content="نظام متطور لإدارة المدينون والديون">
-    <meta property="og:image" content="https://alryan.pages.dev/icon.jpg">
-    
-    <!-- Fonts and Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>الريان للأدوات المنزلية | نظام إدارة العملاء والفواتير</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -35,382 +19,176 @@
             min-height: 100vh;
             color: #2d2a4e;
             line-height: 1.5;
-            position: relative;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(108, 92, 231, 0.12) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* ===== الهيدر الأنيق ===== */
+        /* ===== الهيدر ===== */
         .header {
-            padding: 20px 40px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
             position: sticky;
             top: 0;
             z-index: 100;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .brand-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border-radius: 16px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 26px;
-            box-shadow: 0 8px 16px -6px rgba(108, 92, 231, 0.4);
+            font-size: 20px;
         }
 
         .brand-text {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             background: linear-gradient(145deg, #4a3f96, #6c5ce7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .brand-text span {
-            font-weight: 300;
-            font-size: 16px;
-            color: #8f8bb3;
-            -webkit-text-fill-color: #8f8bb3;
-            margin-right: 6px;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
         .date-badge {
             background: white;
-            padding: 8px 18px;
-            border-radius: 40px;
+            padding: 6px 12px;
+            border-radius: 30px;
             font-weight: 500;
             color: #4a3f96;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(108, 92, 231, 0.15);
-            font-size: 14px;
+            font-size: 12px;
         }
 
-        .date-badge i {
-            margin-left: 8px;
-            color: #6c5ce7;
-        }
-
-        /* ===== شريط التنقل ===== */
-        .nav-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px auto 10px;
-            gap: 20px;
-            padding: 0 20px;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            color: white;
-            box-shadow: 0 10px 20px -8px rgba(108, 92, 231, 0.4);
-        }
-
-        .nav-link:not(.active) {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(108, 92, 231, 0.2);
-            color: #4a3f96;
-        }
-
-        .nav-link:not(.active):hover {
-            background: white;
-            transform: translateY(-2px);
-        }
-
-        /* ===== بطاقات الإحصائيات المتطورة ===== */
+        /* ===== الإحصائيات ===== */
         .stats-wrapper {
             max-width: 1300px;
-            margin: 30px auto 20px;
-            padding: 0 20px;
+            margin: 20px auto;
+            padding: 0 15px;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 12px;
         }
 
         .stat-card {
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(8px);
-            border-radius: 30px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            border-radius: 20px;
+            padding: 15px;
             display: flex;
             align-items: center;
-            gap: 20px;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            background: white;
-            box-shadow: 0 20px 40px -12px rgba(108, 92, 231, 0.2);
+            gap: 12px;
         }
 
         .stat-icon {
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border-radius: 18px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 28px;
-        }
-
-        .stat-content {
-            flex: 1;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: #8f8bb3;
-            margin-bottom: 5px;
+            font-size: 20px;
         }
 
         .stat-number {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: 700;
             color: #2d2a4e;
         }
 
-        .stat-unit {
-            font-size: 16px;
+        .stat-label {
+            font-size: 11px;
             color: #8f8bb3;
-            margin-right: 5px;
         }
 
-        /* ===== شريط البحث ===== */
+        /* ===== البحث ===== */
         .search-section {
             max-width: 1300px;
-            margin: 20px auto;
-            padding: 0 20px;
+            margin: 15px auto;
+            padding: 0 15px;
         }
 
         .search-container {
             background: white;
             border-radius: 50px;
-            padding: 5px;
+            padding: 4px;
             display: flex;
-            align-items: center;
-            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(108, 92, 231, 0.15);
+            gap: 8px;
         }
 
         .search-container input {
             flex: 1;
-            padding: 16px 25px;
+            padding: 12px 18px;
             border: none;
             outline: none;
-            font-size: 15px;
+            font-size: 14px;
             font-family: 'Cairo', sans-serif;
             background: transparent;
             border-radius: 50px;
-        }
-
-        .search-container input::placeholder {
-            color: #b7b1d9;
         }
 
         .search-container button {
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
             border: none;
             color: white;
-            padding: 12px 30px;
+            padding: 10px 20px;
             border-radius: 40px;
-            font-size: 15px;
             font-weight: 500;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 4px;
-            transition: 0.3s;
+            font-size: 13px;
         }
 
-        .search-container button:hover {
-            background: linear-gradient(145deg, #5b4bc4, #7a6ad9);
-            transform: translateY(-2px);
-        }
-
-        /* ===== شبكة المدينين ===== */
+        /* ===== شبكة العملاء ===== */
         .debtors-section {
             max-width: 1300px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
+            margin: 20px auto;
+            padding: 0 15px;
         }
 
         .section-title h2 {
-            font-size: 32px;
-            font-weight: 600;
-            color: #2d2a4e;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::before,
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            height: 2px;
-            width: 40px;
-            background: linear-gradient(90deg, transparent, #6c5ce7, transparent);
-            top: 50%;
-        }
-
-        .section-title h2::before {
-            right: -60px;
-        }
-
-        .section-title h2::after {
-            left: -60px;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         .debtors-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 15px;
         }
 
-        /* ===== بطاقة المدين المتطورة ===== */
         .debtor-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            border-radius: 25px;
+            padding: 18px;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s;
         }
 
         .debtor-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 20px 40px -12px rgba(108, 92, 231, 0.2);
+            transform: translateY(-3px);
+            background: white;
         }
 
         .debtor-avatar {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .debtor-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2d2a4e;
-            margin-bottom: 10px;
-        }
-
-        .debtor-balance {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #ef4444;
-            background: rgba(239, 68, 68, 0.1);
-            padding: 8px 12px;
-            border-radius: 20px;
-        }
-
-        .debtor-balance i {
-            font-size: 16px;
-        }
-
-        /* ===== لوحة التعديل المتطورة ===== */
-        .edit-panel {
-            max-width: 700px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .edit-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
-        }
-
-        .edit-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px dashed rgba(108, 92, 231, 0.2);
-        }
-
-        .edit-icon {
             width: 50px;
             height: 50px;
             background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
@@ -420,706 +198,859 @@
             justify-content: center;
             color: white;
             font-size: 24px;
+            margin-bottom: 12px;
         }
 
-        .edit-title {
-            flex: 1;
+        .debtor-name {
+            font-size: 18px;
+            font-weight: 700;
         }
 
-        .edit-title h3 {
-            font-size: 20px;
-            color: #2d2a4e;
-            margin-bottom: 5px;
+        .debtor-balance {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 6px 10px;
+            border-radius: 16px;
+            margin-top: 10px;
         }
 
-        .edit-title p {
-            color: #8f8bb3;
-            font-size: 14px;
+        /* ===== مودال ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
         }
 
-        .edit-section {
-            background: rgba(108, 92, 231, 0.05);
-            border-radius: 25px;
+        .modal-container {
+            background: white;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 18px 20px;
+            background: linear-gradient(135deg, #6c5ce7, #8b7cf0);
+            color: white;
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .modal-body {
             padding: 20px;
+        }
+
+        /* ===== معلومات العميل ===== */
+        .customer-info-section {
+            background: #f8f7ff;
+            border-radius: 20px;
+            padding: 15px;
             margin-bottom: 20px;
         }
 
-        .edit-section h4 {
+        .customer-details {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #6c5ce7;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        .modern-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid rgba(108, 92, 231, 0.15);
-            border-radius: 16px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 15px;
-            margin-bottom: 10px;
-            transition: 0.3s;
-        }
-
-        .modern-input:focus {
-            outline: none;
-            border-color: #6c5ce7;
-            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
-        }
-
-        .modern-select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid rgba(108, 92, 231, 0.15);
-            border-radius: 16px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 15px;
-            margin-bottom: 10px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
             flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
-        .btn-primary {
-            flex: 1;
-            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border: none;
-            padding: 14px;
-            border-radius: 20px;
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
+        .info-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.3s;
-            font-family: 'Cairo', sans-serif;
-            min-width: 120px;
+            gap: 6px;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -8px #6c5ce7;
-        }
-
-        .btn-danger {
-            background: linear-gradient(145deg, #ef4444, #dc2626);
+        .edit-customer-btn {
+            background: #f59e0b;
             border: none;
-            padding: 14px;
+            padding: 8px 16px;
             border-radius: 20px;
             color: white;
-            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* ===== زرار الدفع ===== */
+        .universal-payment {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            color: white;
             font-weight: 600;
             cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* ===== سجل المعاملات ===== */
+        .transactions-history {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .transactions-history h4 {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
-            transition: 0.3s;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -8px #ef4444;
-        }
-
-        .btn-success {
-            background: linear-gradient(145deg, #10b981, #059669);
+            margin-bottom: 12px;
+            color: #334155;
+            font-size: 14px;
         }
 
         .transactions-list {
-            background: white;
-            border-radius: 20px;
-            padding: 15px;
-            max-height: 300px;
+            max-height: 200px;
             overflow-y: auto;
         }
 
         .transaction-item {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 8px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
-            padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .transaction-item:last-child {
-            border-bottom: none;
-        }
-
-        .transaction-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .transaction-icon.pay {
-            background: #10b981;
-        }
-
-        .transaction-icon.add {
-            background: #ef4444;
-        }
-
-        .transaction-details {
-            flex: 1;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-right: 3px solid #10b981;
         }
 
         .transaction-amount {
             font-weight: 700;
-        }
-
-        .transaction-note {
-            font-size: 13px;
-            color: #8f8bb3;
+            color: #10b981;
+            font-size: 14px;
         }
 
         .transaction-date {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .transaction-note {
             font-size: 12px;
-            color: #b7b1d9;
+            color: #475569;
+            flex: 1;
         }
 
-        /* ===== نموذج الإضافة ===== */
-        .add-section {
-            max-width: 500px;
-            margin: 30px auto;
-            padding: 0 20px;
+        /* ===== الفواتير - تصميم متجاوب وجذاب ===== */
+        .invoices-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .add-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 30px;
-            text-align: center;
+        .invoice-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
 
-        .add-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(145deg, #6c5ce7, #8b7cf0);
-            border-radius: 30px;
+        .invoice-card:hover {
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .invoice-number {
+            font-weight: 700;
+            color: #6c5ce7;
+            font-size: 14px;
+            background: #ede9fe;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .invoice-date {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .invoice-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .stat-badge {
+            background: #f1f5f9;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 5px;
+        }
+
+        .stat-badge.danger {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .stat-badge.success {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .invoice-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn-print, .btn-edit-invoice, .btn-view {
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
             color: white;
-            font-size: 40px;
-            margin: 0 auto 20px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* ===== فوتر ===== */
-        .footer {
+        .btn-print { background: #10b981; }
+        .btn-edit-invoice { background: #3b82f6; }
+        .btn-view { background: #8b5cf6; }
+
+        /* ===== نماذج ===== */
+        .inline-form {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            margin-top: 12px;
+            border: 2px solid #6c5ce7;
+        }
+
+        .inline-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-save {
+            background: #10b981;
+            color: white;
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: #e2e8f0;
+            color: #475569;
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        /* ===== نافذة التفاصيل ===== */
+        .details-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        .close-details {
+            float: left;
+            background: #ef4444;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+        }
+
+        .product-item {
+            background: #f8f9ff;
+            padding: 8px;
+            margin: 6px 0;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        /* ===== طباعة ===== */
+        .print-invoice {
+            display: none;
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .print-header {
             text-align: center;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(8px);
-            border-top: 1px solid rgba(255, 255, 255, 0.6);
-            color: #5b5880;
-            font-size: 15px;
-            margin-top: 50px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #6c5ce7;
+            padding-bottom: 10px;
         }
 
-        .footer strong {
-            color: #6c5ce7;
+        .print-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 11px;
+            margin-bottom: 15px;
         }
 
-        /* ===== Responsive ===== */
-        @media (max-width: 768px) {
-            .header {
-                padding: 15px 25px;
-                flex-wrap: wrap;
-            }
-
-            .brand-text {
-                font-size: 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title h2 {
-                font-size: 26px;
-            }
-
-            .section-title h2::before,
-            .section-title h2::after {
-                width: 30px;
-            }
-
-            .section-title h2::before { right: -40px; }
-            .section-title h2::after { left: -40px; }
-
-            .action-buttons {
-                flex-direction: column;
-            }
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
         }
 
-        @media (max-width: 480px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .nav-bar {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .nav-link {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .search-container {
-                flex-direction: column;
-                background: transparent;
-                gap: 10px;
-            }
-
-            .search-container input {
-                width: 100%;
-                background: white;
-                border-radius: 40px;
-            }
-
-            .search-container button {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .section-title h2::before,
-            .section-title h2::after {
-                display: none;
-            }
+        .print-table th, .print-table td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: right;
         }
 
-        .watermark {
+        @media print {
+            body > *:not(.print-invoice) { display: none !important; }
+            .print-invoice { display: block !important; }
+            @page { size: A5; margin: 8mm; }
+        }
+
+        .success-toast {
             position: fixed;
             bottom: 20px;
-            left: 20px;
-            opacity: 0.05;
-            font-size: 80px;
-            font-weight: 800;
-            color: #2d2a4e;
-            pointer-events: none;
-            z-index: -1;
-            transform: rotate(-10deg);
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            z-index: 3000;
+            font-size: 13px;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            margin-top: 30px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid { gap: 8px; }
+            .stat-card { padding: 10px; }
+            .stat-number { font-size: 18px; }
+            .modal-body { padding: 15px; }
+            .invoice-stats { gap: 6px; }
+            .stat-badge { font-size: 10px; padding: 3px 8px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Watermark -->
-    <div class="watermark">MR Fikry</div>
-
-    <!-- Header -->
-    <header class="header">
-        <div class="brand">
-            <div class="brand-icon">
-                <i class="fas fa-hand-holding-heart"></i>
-            </div>
-            <div class="brand-text">
-                MR Fikry <span>| المدينون</span>
-            </div>
-        </div>
-        
-        <div class="header-left">
-            <div class="date-badge">
-                <i class="far fa-calendar-alt"></i>
-                <span id="currentDate"></span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Navigation Tabs -->
-    <div class="nav-bar">
-        <div class="nav-link active" onclick="showTab('debtorsTab')">
-            <i class="fas fa-users"></i>
-            المدينون
-        </div>
-        <div class="nav-link" onclick="showTab('addTab')">
-            <i class="fas fa-plus-circle"></i>
-            إضافة مدين
-        </div>
+<div class="header">
+    <div class="brand">
+        <div class="brand-icon"><i class="fas fa-store"></i></div>
+        <div class="brand-text"><span>الريان</span> للأدوات المنزلية</div>
     </div>
+    <div class="date-badge"><i class="far fa-calendar-alt"></i> <span id="currentDate"></span></div>
+</div>
 
-    <!-- Stats -->
-    <div class="stats-wrapper" id="debtorsTab">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">عدد المدينين</div>
-                    <div class="stat-number" id="totalDebtors">0</div>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon" style="background: linear-gradient(145deg, #ef4444, #dc2626);">
-                    <i class="fas fa-wallet"></i>
-                </div>
-                <div class="stat-content">
-                    <div class="stat-label">إجمالي المديونية</div>
-                    <div class="stat-number" id="totalBalance">0 <span class="stat-unit">جنيه</span></div>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon" style="background: linear-gradient(145deg, #10b981, #059669);">
-                    <i class="fas fa-history"></i>
-                </div>
-                <div class="stat-content">
-                    <div class="stat-label">إجمالي العمليات</div>
-                    <div class="stat-number" id="totalTransactions">0</div>
-                </div>
-            </div>
-        </div>
+<div class="stats-wrapper">
+    <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div><div class="stat-number" id="totalCustomers">0</div><div class="stat-label">عملاء</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-file-invoice"></i></div><div><div class="stat-number" id="totalInvoices">0</div><div class="stat-label">فواتير</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div><div><div class="stat-number" id="totalDebtSum">0</div><div class="stat-label">ديون</div></div></div>
     </div>
+</div>
 
-    <!-- Search -->
-    <div class="search-section" id="debtorsTab">
-        <div class="search-container">
-            <input type="text" id="searchDebtor" placeholder="ابحث باسم المدين...">
-            <button onclick="filterDebtors()">
-                <i class="fas fa-search"></i>
-                بحث
-            </button>
-        </div>
+<div class="search-section">
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 ابحث عن عميل...">
+        <button id="searchBtn"><i class="fas fa-search"></i> بحث</button>
     </div>
+</div>
 
-    <!-- Debtors Grid -->
-    <div class="debtors-section" id="debtorsTab">
-        <div class="section-title">
-            <h2>قائمة المدينين</h2>
+<div class="debtors-section">
+    <div class="section-title"><h2><i class="fas fa-user-friends"></i> العملاء</h2></div>
+    <div id="customersGrid" class="debtors-grid"></div>
+</div>
+
+<div class="footer"><p>© 2025 الريان للأدوات المنزلية</p></div>
+
+<!-- المودال -->
+<div id="customerModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2><i class="fas fa-user-circle"></i> <span id="modalCustomerName">العميل</span></h2>
+            <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
         </div>
-        <div id="debtorsList" class="debtors-grid"></div>
-    </div>
-
-    <!-- Edit Panel -->
-    <div id="editBox" class="edit-panel" style="display: none;">
-        <div class="edit-card">
-            <div class="edit-header">
-                <div class="edit-icon">
-                    <i class="fas fa-user-edit"></i>
-                </div>
-                <div class="edit-title">
-                    <h3>تعديل بيانات المدين</h3>
-                    <p>إدارة الديون والعمليات</p>
-                </div>
-            </div>
-
-            <div class="edit-section">
-                <h4><i class="fas fa-user"></i> البيانات الشخصية</h4>
-                <input id="editName" class="modern-input" placeholder="اسم المدين">
-                <input id="editBalance" class="modern-input" disabled>
-                
-                <div class="action-buttons">
-                    <button class="btn-primary" onclick="saveEdit()">
-                        <i class="fas fa-save"></i>
-                        حفظ التعديل
-                    </button>
-                    <button class="btn-danger" onclick="deleteDebtor()">
-                        <i class="fas fa-trash"></i>
-                        مسح العميل
-                    </button>
-                </div>
-            </div>
-
-            <div class="edit-section">
-                <h4><i class="fas fa-money-bill-wave"></i> إضافة / دفع مبلغ</h4>
-                <select id="transType" class="modern-select">
-                    <option value="pay">💰 دفع (ينقص من الدين)</option>
-                    <option value="add">➕ إضافة (يزيد الدين)</option>
-                </select>
-                <input id="transAmount" type="number" class="modern-input" placeholder="المبلغ">
-                <textarea id="transNote" class="modern-input" placeholder="ملاحظة (اختياري)" rows="2"></textarea>
-                
-                <button class="btn-primary btn-success" onclick="saveTransaction()">
-                    <i class="fas fa-check-circle"></i>
-                    تسجيل العملية
-                </button>
-            </div>
-
-            <div class="edit-section">
-                <h4><i class="fas fa-history"></i> سجل العمليات</h4>
+        <div class="modal-body">
+            <div id="customerInfoSection"></div>
+            <button id="universalPayBtn" class="universal-payment"><i class="fas fa-money-bill-wave"></i> دفع دفعة جديدة</button>
+            
+            <!-- سجل المعاملات -->
+            <div class="transactions-history" id="transactionsHistory">
+                <h4><i class="fas fa-history"></i> سجل المدفوعات</h4>
                 <div id="transactionsList" class="transactions-list"></div>
             </div>
+            
+            <h3 style="margin-bottom: 12px; font-size: 16px;"><i class="fas fa-receipt"></i> الفواتير</h3>
+            <div id="modalInvoicesList" class="invoices-list"></div>
         </div>
     </div>
+</div>
 
-    <!-- Add Debtor -->
-    <div id="addTab" style="display: none;">
-        <div class="add-section">
-            <div class="add-card">
-                <div class="add-icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <h3 style="margin-bottom: 20px;">إضافة مدين جديد</h3>
-                <input id="newName" class="modern-input" placeholder="اسم المدين">
-                <input id="newBalance" type="number" class="modern-input" placeholder="المبلغ">
-                <button class="btn-primary" onclick="addDebtor()" style="width: 100%;">
-                    <i class="fas fa-save"></i>
-                    حفظ
-                </button>
+<!-- نافذة التفاصيل -->
+<div id="detailsModal" class="details-modal">
+    <button class="close-details" onclick="closeDetailsModal()"><i class="fas fa-times"></i></button>
+    <div id="detailsContent"></div>
+</div>
+
+<!-- قالب الطباعة -->
+<div id="invoicePrint" class="print-invoice">
+    <div class="print-header"><h1>الريان للأدوات المنزلية</h1><p>فاتورة بيع</p></div>
+    <div class="print-details">
+        <div><p><strong>رقم الفاتورة:</strong> <span id="printInvoiceNumber">--</span></p><p><strong>التاريخ:</strong> <span id="printInvoiceDate">--</span></p><p><strong>الوقت:</strong> <span id="printInvoiceTime">--</span></p></div>
+        <div><p><strong>اسم البائع:</strong> <span id="printSellerName">نظام الريان</span></p><p><strong>اسم المشتري:</strong> <span id="printBuyerName">--</span></p></div>
+        <div><p><strong>نوع البيع:</strong> <span id="printSaleType">آجل</span></p><p><strong>الإجمالي:</strong> <span id="printTotal">--</span></p><p><strong>المدفوع:</strong> <span id="printPaid">--</span></p><p><strong>المتبقي:</strong> <span id="printRemaining">--</span></p></div>
+    </div>
+    <table class="print-table"><thead><tr><th>#</th><th>المنتج</th><th>السيريال</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody id="printItems"></tbody><tfoot><tr><td colspan="5">الإجمالي النهائي:</td><td id="printTotalAmount">0 جنيه</td></tr></tfoot></table>
+    <p style="padding: 15px 0; text-align: center; font-size: 10px;">جميع المنتجات غير قابلة للاسترجاع</p>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
+        authDomain: "login-employees1.firebaseapp.com",
+        projectId: "login-employees1"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let allCustomers = [];
+    let currentCustomerId = null;
+    let currentCustomerData = null;
+    let currentInvoices = [];
+    let currentTransactions = [];
+
+    function formatNumber(num) { return (num || 0).toLocaleString(); }
+    
+    function showToast(message, isSuccess = true) {
+        const toast = document.createElement('div');
+        toast.className = 'success-toast';
+        toast.style.background = isSuccess ? '#10b981' : '#ef4444';
+        toast.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+    }
+
+    async function loadTransactions(customerId) {
+        const transactionsRef = collection(db, "customers", customerId, "transactions");
+        const snapshot = await getDocs(transactionsRef);
+        const transactions = [];
+        snapshot.forEach(doc => transactions.push({ id: doc.id, ...doc.data() }));
+        transactions.sort((a, b) => b.timestamp - a.timestamp);
+        return transactions;
+    }
+
+    async function addTransaction(customerId, amount, note = "دفعة") {
+        const transaction = {
+            amount: amount,
+            note: note,
+            timestamp: Date.now(),
+            date: new Date().toLocaleDateString("ar-EG"),
+            time: new Date().toLocaleTimeString("ar-EG")
+        };
+        const newId = Date.now().toString();
+        await setDoc(doc(db, "customers", customerId, "transactions", newId), transaction);
+    }
+
+    async function displayTransactions() {
+        const container = document.getElementById("transactionsList");
+        if (!currentTransactions.length) {
+            container.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8;">لا توجد مدفوعات مسجلة</div>';
+            return;
+        }
+        container.innerHTML = currentTransactions.map(t => `
+            <div class="transaction-item">
+                <div class="transaction-amount">💰 ${formatNumber(t.amount)} جنيه</div>
+                <div class="transaction-note">${t.note || "دفعة"}</div>
+                <div class="transaction-date">📅 ${t.date || ""} ${t.time || ""}</div>
             </div>
-        </div>
-    </div>
+        `).join('');
+    }
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, Timestamp, increment, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    async function fetchAllData() {
+        const snapshot = await getDocs(collection(db, "customers"));
+        let customersArray = [];
+        let totalDebtAll = 0;
+        let totalInvoicesCount = 0;
+        for (const docSnap of snapshot.docs) {
+            const cData = docSnap.data();
+            const customerId = docSnap.id;
+            const salesSnapshot = await getDocs(collection(db, "customers", customerId, "sales"));
+            totalInvoicesCount += salesSnapshot.size;
+            totalDebtAll += (cData.totalDebt || 0);
+            customersArray.push({ id: customerId, name: cData.name || "بدون اسم", phone: cData.phone || "", totalDebt: cData.totalDebt || 0, invoicesCount: salesSnapshot.size });
+        }
+        allCustomers = customersArray;
+        document.getElementById("totalCustomers").innerText = customersArray.length;
+        document.getElementById("totalInvoices").innerText = totalInvoicesCount;
+        document.getElementById("totalDebtSum").innerHTML = formatNumber(totalDebtAll);
+        return customersArray;
+    }
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
-            authDomain: "login-employees1.firebaseapp.com",
-            projectId: "login-employees1"
-        };
+    async function renderCustomers(filter = "") {
+        const grid = document.getElementById("customersGrid");
+        grid.innerHTML = "";
+        let data = allCustomers;
+        if (filter.trim()) {
+            const term = filter.trim().toLowerCase();
+            data = allCustomers.filter(c => c.name.toLowerCase().includes(term) || c.phone.includes(term));
+        }
+        if (data.length === 0) {
+            grid.innerHTML = `<div style="text-align:center; padding:30px;">🚫 لا يوجد عملاء</div>`;
+            return;
+        }
+        for (const cust of data) {
+            const card = document.createElement("div");
+            card.className = "debtor-card";
+            card.innerHTML = `
+                <div class="debtor-avatar"><i class="fas fa-user-alt"></i></div>
+                <div class="debtor-name">${escapeHtml(cust.name)}</div>
+                <div style="font-size:12px; color:#8f8bb3;"><i class="fas fa-phone"></i> ${escapeHtml(cust.phone) || "غير محدد"}</div>
+                <div class="debtor-balance"><i class="fas fa-money-bill-wave"></i> ${formatNumber(cust.totalDebt)} جنيه</div>
+            `;
+            card.onclick = () => openCustomerModal(cust.id);
+            grid.appendChild(card);
+        }
+    }
+
+    async function openCustomerModal(customerId) {
+        currentCustomerId = customerId;
+        const customerDoc = await getDoc(doc(db, "customers", customerId));
+        if (!customerDoc.exists()) return;
+        currentCustomerData = customerDoc.data();
         
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // عناصر DOM
-        const currentDateEl = document.getElementById("currentDate");
-        const debtorsList = document.getElementById("debtorsList");
-        const totalDebtors = document.getElementById("totalDebtors");
-        const totalBalance = document.getElementById("totalBalance");
-        const totalTransactions = document.getElementById("totalTransactions");
-        const editBox = document.getElementById("editBox");
-        const editName = document.getElementById("editName");
-        const editBalance = document.getElementById("editBalance");
-        const transAmount = document.getElementById("transAmount");
-        const transType = document.getElementById("transType");
-        const transNote = document.getElementById("transNote");
-        const transactionsList = document.getElementById("transactionsList");
-        const newName = document.getElementById("newName");
-        const newBalance = document.getElementById("newBalance");
-        const searchInput = document.getElementById("searchDebtor");
-        const addTab = document.getElementById("addTab");
-        const debtorsTab = document.getElementById("debtorsTab");
-
-        // التاريخ
+        const salesSnap = await getDocs(collection(db, "customers", customerId, "sales"));
+        currentInvoices = [];
+        salesSnap.forEach(s => currentInvoices.push({ id: s.id, ...s.data() }));
+        currentInvoices.sort((a,b) => (b.date || "").localeCompare(a.date || ""));
+        
+        currentTransactions = await loadTransactions(customerId);
+        
+        document.getElementById("modalCustomerName").innerHTML = `<i class="fas fa-user"></i> ${escapeHtml(currentCustomerData.name)}`;
+        
+        document.getElementById("customerInfoSection").innerHTML = `
+            <div class="customer-details">
+                <div class="info-item"><i class="fas fa-phone-alt"></i> ${escapeHtml(currentCustomerData.phone) || "غير مسجل"}</div>
+                <div class="info-item"><i class="fas fa-money-bill"></i> إجمالي الدين: ${formatNumber(currentCustomerData.totalDebt)} جنيه</div>
+                <div class="info-item"><i class="fas fa-chart-line"></i> ${currentInvoices.length} فواتير</div>
+            </div>
+            <button class="edit-customer-btn" id="editCustomerMainBtn"><i class="fas fa-edit"></i> تعديل البيانات</button>
+        `;
+        document.getElementById("editCustomerMainBtn").addEventListener("click", () => showEditCustomerForm());
+        
+        await displayTransactions();
+        
+        const invoicesContainer = document.getElementById("modalInvoicesList");
+        if (currentInvoices.length === 0) {
+            invoicesContainer.innerHTML = `<div style="text-align:center; padding:30px;">📭 لا توجد فواتير</div>`;
+        } else {
+            invoicesContainer.innerHTML = "";
+            for (const inv of currentInvoices) {
+                const invCard = document.createElement("div");
+                invCard.className = "invoice-card";
+                invCard.innerHTML = `
+                    <div class="invoice-header">
+                        <span class="invoice-number"><i class="fas fa-hashtag"></i> فاتورة ${inv.invoiceNumber || inv.id.slice(0,6)}</span>
+                        <span class="invoice-date"><i class="far fa-calendar"></i> ${inv.date || "غير محدد"}</span>
+                    </div>
+                    <div class="invoice-stats">
+                        <div class="stat-badge"><i class="fas fa-tag"></i> ${formatNumber(inv.totalAmount)} جنيه</div>
+                        <div class="stat-badge success"><i class="fas fa-hand-holding-usd"></i> مدفوع: ${formatNumber(inv.paid)}</div>
+                        <div class="stat-badge danger"><i class="fas fa-credit-card"></i> متبقي: ${formatNumber(inv.remainingDebt)}</div>
+                    </div>
+                    <div class="invoice-actions">
+                        <button class="btn-print"><i class="fas fa-print"></i> طباعة</button>
+                        <button class="btn-edit-invoice"><i class="fas fa-pen"></i> تعديل</button>
+                        <button class="btn-view"><i class="fas fa-eye"></i> عرض</button>
+                    </div>
+                `;
+                invCard.querySelector(".btn-print").addEventListener("click", (e) => { e.stopPropagation(); printInvoice(inv, currentCustomerData.name); });
+                invCard.querySelector(".btn-edit-invoice").addEventListener("click", (e) => { e.stopPropagation(); showEditInvoiceForm(inv, invCard); });
+                invCard.querySelector(".btn-view").addEventListener("click", (e) => { e.stopPropagation(); showInvoiceDetails(inv); });
+                invoicesContainer.appendChild(invCard);
+            }
+        }
+        
+        document.getElementById("universalPayBtn").onclick = () => showPaymentForm();
+        document.getElementById("customerModal").style.display = "flex";
+    }
+    
+    function showEditCustomerForm() {
+        const section = document.getElementById("customerInfoSection");
+        const originalHtml = section.innerHTML;
+        section.innerHTML = `
+            <div class="inline-form">
+                <h4>تعديل بيانات العميل</h4>
+                <input type="text" id="editCustomerName" value="${escapeHtml(currentCustomerData.name)}">
+                <input type="text" id="editCustomerPhone" value="${escapeHtml(currentCustomerData.phone || '')}">
+                <div class="form-buttons">
+                    <button class="btn-save" id="saveCustomerBtn">حفظ</button>
+                    <button class="btn-cancel" id="cancelCustomerBtn">إلغاء</button>
+                </div>
+            </div>
+        `;
+        document.getElementById("saveCustomerBtn").onclick = async () => {
+            const newName = document.getElementById("editCustomerName").value;
+            const newPhone = document.getElementById("editCustomerPhone").value;
+            if (!newName) { showToast("الاسم مطلوب", false); return; }
+            await updateDoc(doc(db, "customers", currentCustomerId), { name: newName, phone: newPhone || "" });
+            showToast("تم تحديث بيانات العميل");
+            await refreshAll();
+            openCustomerModal(currentCustomerId);
+        };
+        document.getElementById("cancelCustomerBtn").onclick = () => { section.innerHTML = originalHtml; };
+    }
+    
+    function showEditInvoiceForm(invoice, cardElement) {
+        const originalHtml = cardElement.innerHTML;
+        cardElement.innerHTML = `
+            <div class="inline-form">
+                <h4>تعديل الفاتورة</h4>
+                <input type="number" id="editInvoiceTotal" value="${invoice.totalAmount}">
+                <div class="form-buttons">
+                    <button class="btn-save" id="saveInvoiceBtn">حفظ</button>
+                    <button class="btn-cancel" id="cancelInvoiceBtn">إلغاء</button>
+                </div>
+            </div>
+        `;
+        document.getElementById("saveInvoiceBtn").onclick = async () => {
+            const newTotal = parseFloat(document.getElementById("editInvoiceTotal").value);
+            if (isNaN(newTotal) || newTotal < 0) { showToast("قيمة غير صحيحة", false); return; }
+            const currentPaid = invoice.paid || 0;
+            let newRemaining = newTotal - currentPaid;
+            if (newRemaining < 0) newRemaining = 0;
+            await updateDoc(doc(db, "customers", currentCustomerId, "sales", invoice.id), { totalAmount: newTotal, remainingDebt: newRemaining });
+            await recalcCustomerTotalDebt(currentCustomerId);
+            showToast("تم تعديل الفاتورة");
+            await refreshAll();
+            openCustomerModal(currentCustomerId);
+        };
+        document.getElementById("cancelInvoiceBtn").onclick = () => { cardElement.innerHTML = originalHtml; };
+    }
+    
+    function showPaymentForm() {
+        const currentDebt = currentCustomerData.totalDebt || 0;
+        if (currentDebt <= 0) { showToast("العميل ليس عليه ديون!", false); return; }
+        const section = document.getElementById("customerInfoSection");
+        const originalHtml = section.innerHTML;
+        section.innerHTML = `
+            <div class="inline-form">
+                <h4><i class="fas fa-money-bill-wave"></i> دفع دفعة</h4>
+                <p style="margin-bottom: 8px; color:#ef4444;">إجمالي الدين: ${formatNumber(currentDebt)} جنيه</p>
+                <input type="number" id="paymentAmount" placeholder="المبلغ المراد دفعه">
+                <div class="form-buttons">
+                    <button class="btn-save" id="confirmPaymentBtn">تأكيد الدفع</button>
+                    <button class="btn-cancel" id="cancelPaymentBtn">إلغاء</button>
+                </div>
+            </div>
+        `;
+        document.getElementById("confirmPaymentBtn").onclick = async () => {
+            let payValue = parseFloat(document.getElementById("paymentAmount").value);
+            if (isNaN(payValue) || payValue <= 0) { showToast("المبلغ غير صحيح", false); return; }
+            let remainingToPay = payValue;
+            for (const inv of currentInvoices) {
+                if (remainingToPay <= 0) break;
+                const invRemaining = inv.remainingDebt || 0;
+                if (invRemaining > 0) {
+                    const payForThis = Math.min(remainingToPay, invRemaining);
+                    const newPaid = (inv.paid || 0) + payForThis;
+                    const newRemaining = inv.totalAmount - newPaid;
+                    await updateDoc(doc(db, "customers", currentCustomerId, "sales", inv.id), { paid: newPaid, remainingDebt: newRemaining < 0 ? 0 : newRemaining });
+                    remainingToPay -= payForThis;
+                }
+            }
+            await recalcCustomerTotalDebt(currentCustomerId);
+            await addTransaction(currentCustomerId, payValue, `دفعة نقدية`);
+            showToast(`✅ تم تسجيل دفعة ${formatNumber(payValue)} جنيه`);
+            await refreshAll();
+            openCustomerModal(currentCustomerId);
+        };
+        document.getElementById("cancelPaymentBtn").onclick = () => { section.innerHTML = originalHtml; };
+    }
+    
+    function showInvoiceDetails(invoice) {
+        let itemsHtml = "";
+        if (invoice.items && invoice.items.length) {
+            invoice.items.forEach((item, idx) => {
+                itemsHtml += `<div class="product-item">
+                    <strong>${idx+1}. ${escapeHtml(item.name)}</strong><br>
+                    السيريال: ${escapeHtml(item.serial || '—')}<br>
+                    الكمية: ${item.quantity} | السعر: ${item.price} جنيه<br>
+                    الإجمالي: ${formatNumber((item.quantity || 1) * (item.price || 0))} جنيه
+                </div>`;
+            });
+        } else {
+            itemsHtml = "<div class='product-item'>⚠️ لا توجد منتجات مسجلة</div>";
+        }
+        document.getElementById("detailsContent").innerHTML = `
+            <h3><i class="fas fa-file-invoice"></i> فاتورة ${invoice.invoiceNumber || invoice.id.slice(0,8)}</h3>
+            <p><strong>التاريخ:</strong> ${invoice.date || "غير محدد"}</p>
+            <p><strong>الإجمالي:</strong> ${formatNumber(invoice.totalAmount)} جنيه</p>
+            <p><strong>المدفوع:</strong> ${formatNumber(invoice.paid)} جنيه</p>
+            <p><strong>المتبقي:</strong> ${formatNumber(invoice.remainingDebt)} جنيه</p>
+            <h4 style="margin-top: 12px;">📦 المنتجات:</h4>
+            ${itemsHtml}
+        `;
+        document.getElementById("detailsModal").style.display = "block";
+    }
+    
+    function closeDetailsModal() {
+        document.getElementById("detailsModal").style.display = "none";
+    }
+    
+    async function recalcCustomerTotalDebt(customerId) {
+        const salesSnap = await getDocs(collection(db, "customers", customerId, "sales"));
+        let totalRemaining = 0;
+        salesSnap.forEach(d => totalRemaining += (d.data().remainingDebt || 0));
+        await updateDoc(doc(db, "customers", customerId), { totalDebt: totalRemaining });
+    }
+    
+    function printInvoice(invoice, customerName) {
         const now = new Date();
-        currentDateEl.textContent = now.toLocaleDateString('ar-EG', { 
-            year: 'numeric', 
-            month: 'numeric', 
-            day: 'numeric' 
-        });
-
-        let currentDebtorId = null;
-        let allDebtors = [];
-
-        // Tabs
-        window.showTab = (tabId) => {
-            if (tabId === 'debtorsTab') {
-                debtorsTab.style.display = 'block';
-                addTab.style.display = 'none';
-                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-                document.querySelector('.nav-link:first-child').classList.add('active');
-            } else {
-                debtorsTab.style.display = 'none';
-                addTab.style.display = 'block';
-                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-                document.querySelector('.nav-link:last-child').classList.add('active');
-            }
-        };
-
-        // إضافة مدين
-        window.addDebtor = async () => {
-            if (!newName.value || !newBalance.value) { 
-                alert("❌ الرجاء إدخال جميع البيانات"); 
-                return; 
-            }
-            await addDoc(collection(db, "debtors"), { 
-                name: newName.value, 
-                balance: +newBalance.value, 
-                createdAt: Timestamp.now() 
+        document.getElementById("printInvoiceNumber").innerText = invoice.invoiceNumber || invoice.id.slice(0,8);
+        document.getElementById("printInvoiceDate").innerText = invoice.date || now.toLocaleDateString("ar-EG");
+        document.getElementById("printInvoiceTime").innerText = now.toLocaleTimeString("ar-EG");
+        document.getElementById("printBuyerName").innerText = customerName;
+        document.getElementById("printTotal").innerText = formatNumber(invoice.totalAmount) + " جنيه";
+        document.getElementById("printPaid").innerText = formatNumber(invoice.paid) + " جنيه";
+        document.getElementById("printRemaining").innerText = formatNumber(invoice.remainingDebt) + " جنيه";
+        document.getElementById("printTotalAmount").innerHTML = formatNumber(invoice.totalAmount) + " جنيه";
+        const itemsBody = document.getElementById("printItems");
+        itemsBody.innerHTML = "";
+        if (invoice.items && invoice.items.length) {
+            invoice.items.forEach((item, idx) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `一道${idx+1}</td><td>${escapeHtml(item.name || "منتج")}</td><td>${escapeHtml(item.serial || "---")}</td><td>${item.quantity || 1}</td><td>${formatNumber(item.price || 0)} جنيه</td><td>${formatNumber((item.quantity || 1) * (item.price || 0))} جنيه</td>`;
+                itemsBody.appendChild(row);
             });
-            newName.value = ""; 
-            newBalance.value = "";
-            alert("✅ تم إضافة المدين بنجاح");
-            loadDebtors();
-            showTab('debtorsTab');
-        };
-
-        // مسح مدين
-        window.deleteDebtor = async () => {
-            if (!currentDebtorId) return;
-            if (!confirm("⚠️ هل أنت متأكد؟ سيتم مسح العميل وكل عملياته نهائيًا")) return;
-            
-            const transSnap = await getDocs(collection(db, "debtors", currentDebtorId, "transactions"));
-            for (const docu of transSnap.docs) await deleteDoc(docu.ref);
-            await deleteDoc(doc(db, "debtors", currentDebtorId));
-            
-            alert("✅ تم مسح العميل بالكامل");
-            editBox.style.display = "none"; 
-            transactionsList.innerHTML = ""; 
-            currentDebtorId = null;
-            loadDebtors();
-        };
-
-        // فتح مدين
-        async function openDebtor(id) {
-            currentDebtorId = id;
-            const snap = await getDoc(doc(db, "debtors", id));
-            editBox.style.display = "block";
-            editName.value = snap.data().name;
-            editBalance.value = snap.data().balance + " جنيه";
-            loadTransactions(id);
-            window.scrollTo({ top: editBox.offsetTop - 100, behavior: "smooth" });
+        } else {
+            itemsBody.innerHTML = "<tr><td colspan='6'>لا توجد منتجات مسجلة</td></tr>";
         }
-
-        // حفظ تعديل الاسم
-        window.saveEdit = async () => {
-            await updateDoc(doc(db, "debtors", currentDebtorId), { name: editName.value });
-            alert("✅ تم تعديل الاسم بنجاح");
-            loadDebtors();
-        };
-
-        // إضافة / دفع مبلغ
-        window.saveTransaction = async () => {
-            const amount = +transAmount.value; 
-            if (!amount) {
-                alert("❌ الرجاء إدخال المبلغ");
-                return;
-            }
-            
-            await updateDoc(doc(db, "debtors", currentDebtorId), { 
-                balance: increment(transType.value === "pay" ? -amount : amount) 
-            });
-            
-            await addDoc(collection(db, "debtors", currentDebtorId, "transactions"), { 
-                type: transType.value, 
-                amount, 
-                note: transNote.value || "بدون ملاحظة", 
-                date: Timestamp.now() 
-            });
-            
-            transAmount.value = ""; 
-            transNote.value = "";
-            alert("✅ تم تسجيل العملية بنجاح");
-            openDebtor(currentDebtorId);
-            loadDebtors();
-        };
-
-        // سجل العمليات
-        async function loadTransactions(id) {
-            transactionsList.innerHTML = "";
-            const snap = await getDocs(collection(db, "debtors", id, "transactions"));
-            
-            if (snap.empty) {
-                transactionsList.innerHTML = '<p style="text-align: center; color: #8f8bb3;">لا توجد عمليات حتى الآن</p>';
-                return;
-            }
-
-            snap.forEach(d => {
-                const t = d.data();
-                const li = document.createElement("div");
-                li.className = "transaction-item";
-                
-                const date = t.date?.toDate().toLocaleDateString('ar-EG') || '';
-                
-                li.innerHTML = `
-                    <div class="transaction-icon ${t.type === 'pay' ? 'pay' : 'add'}">
-                        <i class="fas ${t.type === 'pay' ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
-                    </div>
-                    <div class="transaction-details">
-                        <div class="transaction-amount">${t.amount} جنيه</div>
-                        <div class="transaction-note">${t.note || ''}</div>
-                        <div class="transaction-date">${date}</div>
-                    </div>
-                `;
-                transactionsList.appendChild(li);
-            });
-        }
-
-        // تحميل المدينين
-        async function loadDebtors() {
-            debtorsList.innerHTML = ""; 
-            allDebtors = [];
-            
-            let totalB = 0, totalT = 0, count = 0;
-            
-            const snap = await getDocs(collection(db, "debtors"));
-            
-            for (const d of snap.docs) {
-                const data = d.data(); 
-                data.id = d.id; 
-                allDebtors.push(data);
-                
-                count++; 
-                totalB += data.balance;
-                
-                const transSnap = await getDocs(collection(db, "debtors", d.id, "transactions"));
-                totalT += transSnap.size;
-            }
-            
-            totalDebtors.textContent = count;
-            totalBalance.textContent = totalB.toLocaleString() + " جنيه";
-            totalTransactions.textContent = totalT;
-            
-            displayDebtors(allDebtors);
-        }
-
-        // عرض المدينين
-        function displayDebtors(arr) {
-            debtorsList.innerHTML = "";
-            
-            if (arr.length === 0) {
-                debtorsList.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 60px; background: white; border-radius: 30px;">
-                        <i class="fas fa-users" style="font-size: 60px; color: #6c5ce7; margin-bottom: 20px;"></i>
-                        <p style="font-size: 18px; color: #8f8bb3;">لا يوجد مدينون حتى الآن</p>
-                    </div>
-                `;
-                return;
-            }
-
-            arr.forEach(data => {
-                const card = document.createElement("div");
-                card.className = "debtor-card";
-                card.innerHTML = `
-                    <div class="debtor-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="debtor-name">${data.name}</div>
-                    <div class="debtor-balance">
-                        <i class="fas fa-wallet"></i>
-                        ${data.balance.toLocaleString()} جنيه
-                    </div>
-                `;
-                
-                card.onclick = () => openDebtor(data.id);
-                debtorsList.appendChild(card);
-            });
-        }
-
-        // فلترة المدينين
-        window.filterDebtors = function() {
-            const query = searchInput.value.trim().toLowerCase();
-            const filtered = allDebtors.filter(d => d.name.toLowerCase().includes(query));
-            displayDebtors(filtered);
-        };
-
-        // بحث مباشر
-        searchInput.addEventListener("input", filterDebtors);
-
-        // تحميل أولي
-        loadDebtors();
-        showTab('debtorsTab');
-    </script>
+        setTimeout(() => window.print(), 100);
+    }
+    
+    function closeModal() { document.getElementById("customerModal").style.display = "none"; currentCustomerId = null; }
+    async function refreshAll() { await fetchAllData(); await renderCustomers(document.getElementById("searchInput").value); }
+    function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+    
+    document.getElementById("searchBtn").addEventListener("click", () => renderCustomers(document.getElementById("searchInput").value));
+    document.getElementById("searchInput").addEventListener("keyup", (e) => { if(e.key === "Enter") renderCustomers(e.target.value); });
+    document.getElementById("currentDate").innerText = new Date().toLocaleDateString("ar-EG", { year:'numeric', month:'long', day:'numeric' });
+    
+    window.closeModal = closeModal;
+    window.closeDetailsModal = closeDetailsModal;
+    window.onclick = (e) => { if(e.target.classList.contains("modal-overlay")) closeModal(); };
+    
+    await fetchAllData();
+    await renderCustomers("");
+</script>
 </body>
 </html>

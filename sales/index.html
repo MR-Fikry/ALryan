@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> فاتورة البيع</title>
+    <title>الريان للأدوات المنزلية - فاتورة البيع</title>
 
-    <!-- Basic SEO -->
     <meta name="description" content="نظام مبيعات شركة الريان للأدوات المنزلية">
-    <meta name="keywords" content="الريان, أدوات منزلية, فواتير, مبيعات, سيريال, منتجات">
+    <meta name="keywords" content="الريان, أدوات منزلية, فواتير, مبيعات">
     <meta name="author" content="شركة الريان">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#2e7d32">
-    <link rel="stylesheet" href="style.css">
-
-    <!-- CSS + Icons -->
+    <meta name="theme-color" content="#8b5cf6">
     <link rel="icon" href="https://alryan.pages.dev/icon.jpg" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+    <link rel="stylesheet" href="style.css">    
 
 </head>
 <body>
@@ -26,76 +21,59 @@
     </header>
 
     <div class="bu">
-      <a href="" class="activ">مبيعات</a>
-      <a href="Returns/" class="go">مرتجعات</a>
-      <a href="Commitments/" class="go">التزاماتي</a>
+        <a href="#" class="activ">مبيعات</a>
+        <a href="Returns/" class="go">مرتجعات</a>
+        <a href="Commitments/" class="go">التزاماتي</a>
     </div>
 
     <div class="container">
-        <!-- معلومات البائع -->
         <div class="employee-info" id="employeeInfo">
-            <div>
-                <i class="fas fa-user"></i>
-                <span id="employeeName">جاري التحميل...</span>
-            </div>
-            <div>
-                <i class="fas fa-phone"></i>
-                <span id="employeePhone">جاري التحميل...</span>
-            </div>
+            <div><i class="fas fa-user"></i> <span id="employeeName">جاري التحميل...</span></div>
+            <div><i class="fas fa-phone"></i> <span id="employeePhone">جاري التحميل...</span></div>
         </div>
 
-        <!-- معلومات الفاتورة -->
         <div class="invoice-info" id="invoiceInfo">
-            <div class="invoice-number">
-                <i class="fas fa-file-invoice"></i>
-                رقم الفاتورة: <span id="invoiceNumber">--</span>
-            </div>
-            <div class="invoice-date">
-                <i class="fas fa-calendar"></i>
-                <span id="invoiceDate">--</span>
-            </div>
+            <div class="invoice-number"><i class="fas fa-file-invoice"></i> رقم الفاتورة: <span id="invoiceNumber">--</span></div>
+            <div class="invoice-date"><i class="fas fa-calendar"></i> <span id="invoiceDate">--</span></div>
         </div>
 
-        <!-- عنوان الصفحة -->
-        <div class="page-title">
-            <h2><i class="fas fa-receipt"></i> فاتورة بيع</h2>
-        </div>
+        <div class="page-title"><h2><i class="fas fa-receipt"></i> فاتورة بيع</h2></div>
 
-        <!-- قسم اسم المشتري -->
-<div class="input-section">
-    <label class="input-label">
-        <i class="fas fa-user"></i> اسم المشتري
-    </label>
-    <input 
-        type="text"
-        id="buyerNameInput"
-        class="serial-input"
-        placeholder="اكتب اسم المشتري..."
-        autocomplete="off"
-    >
-</div>
-
-
-        <!-- قسم إدخال السيريال -->
         <div class="input-section">
-            <label class="input-label">
-                <i class="fas fa-barcode"></i> إضافة منتج بالسيريال
-            </label>
-            <input 
-                type="text" 
-                id="serialInput" 
-                class="serial-input" 
-                placeholder="اكتب أو انسخ رمز السيريال هنا..."
-                autocomplete="off"
-                autofocus
-            >
+            <label class="input-label"><i class="fas fa-money-bill"></i> نوع البيع</label>
+            <select id="saleType" class="serial-input">
+                <option value="cash">بيع كاش</option>
+                <option value="credit">بيع آجل</option>
+            </select>
+        </div>
+
+        <div class="BEYR">
+            <div class="input-section na">
+                <label class="input-label"><i class="fas fa-user"></i> اسم المشتري</label>
+                <input type="text" id="buyerNameInput" class="serial-input" placeholder="اكتب اسم المشتري..." autocomplete="off">
+                <div id="customerSuggestions" class="suggestions"></div>
+            </div>
+
+            <div class="input-section ph">
+                <label class="input-label"><i class="fas fa-phone"></i> رقم الهاتف</label>
+                <input type="text" id="buyerPhoneInput" class="serial-input" placeholder="رقم الهاتف..." autocomplete="off">
+            </div>
+        </div>
+
+        <div id="customerDebt"></div>
+
+        <div class="input-section">
+            <label class="input-label"><i class="fas fa-barcode"></i> إضافة منتج بالسيريال</label>
+            <input type="text" id="serialInput" class="serial-input" placeholder="اكتب أو انسخ رمز السيريال هنا..." autocomplete="off" autofocus>
             <span class="input-hint">ابدأ بالكتابة وسيظهر لك قائمة بالمنتجات المطابقة</span>
-            
-            <!-- قائمة الاقتراحات -->
             <div class="suggestions" id="suggestions"></div>
         </div>
 
-        <!-- سلة المشتريات -->
+        <div class="input-section" id="paidContainer" style="display:none">
+            <label class="input-label"><i class="fas fa-coins"></i> المدفوع</label>
+            <input type="number" id="paidAmount" class="serial-input" placeholder="المبلغ المدفوع">
+        </div>
+
         <div class="cart-section" id="cartSection">
             <div class="cart-title">
                 <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
@@ -103,7 +81,6 @@
             </div>
             
             <div class="cart-items" id="cartItems">
-                <!-- المنتجات ستضاف هنا ديناميكياً -->
                 <div class="empty-cart" id="emptyCart">
                     <i class="fas fa-shopping-cart"></i>
                     <p>لا توجد منتجات في السلة</p>
@@ -112,110 +89,76 @@
             </div>
             
             <div class="cart-summary" id="cartSummary" style="display: none;">
-                <div class="summary-row">
-                    <span class="summary-label">عدد المنتجات:</span>
-                    <span class="summary-value" id="summaryCount">0</span>
-                </div>
-                <div class="summary-row">
-                    <span class="summary-label">إجمالي الفاتورة:</span>
-                    <span class="summary-value total-amount" id="summaryTotal">0 جنيه</span>
-                </div>
+                <div class="summary-row"><span class="summary-label">عدد المنتجات:</span><span class="summary-value" id="summaryCount">0</span></div>
+                <div class="summary-row"><span class="summary-label">إجمالي الفاتورة:</span><span class="summary-value total-amount" id="summaryTotal">0 جنيه</span></div>
             </div>
             
             <div class="quick-actions">
-                <button class="quick-btn" onclick="addAnotherProduct()">
-                    <i class="fas fa-plus"></i> إضافة منتج آخر
-                </button>
-                <button class="quick-btn" onclick="clearCart()">
-                    <i class="fas fa-trash"></i> تفريغ السلة
-                </button>
+                <button class="quick-btn" onclick="window.addAnotherProduct()"><i class="fas fa-plus"></i> إضافة منتج آخر</button>
+                <button class="quick-btn" onclick="window.clearCart()"><i class="fas fa-trash"></i> تفريغ السلة</button>
             </div>
             
             <div class="button-group">
-                <button class="btn btn-primary" onclick="completeSale()" id="completeBtn" disabled>
-                    <i class="fas fa-check-circle"></i> إتمام البيع
-                </button>
-                <button class="btn btn-warning" onclick="printInvoice()" id="printBtn" disabled>
-                    <i class="fas fa-print"></i> طباعة الفاتورة
-                </button>
-                <button class="btn btn-secondary" onclick="resetForm()">
-                    <i class="fas fa-redo"></i> إلغاء الفاتورة
-                </button>
+                <button class="btn btn-primary" onclick="window.completeSale()" id="completeBtn" disabled><i class="fas fa-check-circle"></i> إتمام البيع</button>
+                <button class="btn btn-warning" onclick="window.printInvoice()" id="printBtn" disabled><i class="fas fa-print"></i> طباعة الفاتورة</button>
+                <button class="btn btn-secondary" onclick="window.resetForm()"><i class="fas fa-redo"></i> إلغاء الفاتورة</button>
             </div>
         </div>
     </div>
 
-    <!-- الإشعارات -->
     <div class="notification" id="notification">
-        <div class="notification-content">
-            <i class="fas fa-check-circle" id="notificationIcon"></i>
-            <span id="notificationMessage"></span>
-        </div>
-        <button class="notification-close" onclick="hideNotification()">
-            <i class="fas fa-times"></i>
-        </button>
+        <div class="notification-content"><i class="fas fa-check-circle" id="notificationIcon"></i><span id="notificationMessage"></span></div>
+        <button class="notification-close" onclick="window.hideNotification()"><i class="fas fa-times"></i></button>
     </div>
 
-    <!-- نموذج طباعة الفاتورة (مخفي) -->
     <div id="invoicePrint" class="print-invoice">
         <div class="print-header">
-            <img src="/logo.png" alt="" class="logo">
             <h1>الريان للأدوات المنزلية</h1>
             <p>فاتورة بيع</p>
         </div>
-        
         <div class="print-details">
             <div>
-                <p><strong>رقم الفاتورة:</strong> <span id="printInvoiceNumber">--</span></p>
-                <p><strong>التاريخ:</strong> <span id="printInvoiceDate">--</span></p>
-                <p><strong>الوقت:</strong> <span id="printInvoiceTime">--</span></p>
+            <p><strong>رقم الفاتورة:</strong> <span id="printInvoiceNumber">--</span></p>
+            <p><strong>التاريخ:</strong> <span id="printInvoiceDate">--</span></p>
+            <p><strong>الوقت:</strong> <span id="printInvoiceTime">--</span></p>
             </div>
-           <div>
+            
+            <div>
             <p><strong>اسم البائع:</strong> <span id="printSellerName">--</span></p>
             <p><strong>اسم المشتري:</strong> <span id="printBuyerName">--</span></p>
-           </div>
-
+            </div>
+            
+            <div>
+            <p><strong>نوع البيع:</strong> <span id="printSaleType">--</span></p>
+            <p><strong>إجمالي الفاتورة:</strong> <span id="printTotal">--</span></p>
+            <p><strong>المدفوع:</strong> <span id="printPaid">--</span></p>
+            <p><strong>المتبقي:</strong> <span id="printRemaining">--</span></p>
         </div>
         
+        </div>
         <table class="print-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>اسم المنتج</th>
-                    <th>السيريال</th>
-                    <th>الكمية</th>
-                    <th>سعر الوحدة</th>
-                    <th>الإجمالي</th>
-                </tr>
-            </thead>
-            <tbody id="printItems">
-                <!-- سيتم ملؤه ديناميكياً -->
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5" style="text-align: left;">الإجمالي النهائي:</td>
-                    <td id="printTotalAmount">0 جنيه</td>
-                </tr>
-            </tfoot>
+            <thead><tr><th>#</th><th>اسم المنتج</th><th>السيريال</th><th>الكمية</th><th>سعر الوحدة</th><th>الإجمالي</th></tr></thead>
+            <tbody id="printItems"></tbody>
+            <tfoot><tr><td colspan="5" style="text-align: left;">الإجمالي النهائي:</td><td id="printTotalAmount">0 جنيه</td></tr></tfoot>
         </table>
-        
-
+        <p style="padding: 20px 0; text-align: center; color: rgb(53, 53, 53);">جميع الالعاب و منتجات التجميل غير قابله للارجاع </p>
     </div>
-
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import {
-            getFirestore,
-            collection,
-            getDocs,
-            addDoc,
-            updateDoc,
-            doc,
-            Timestamp,
-            writeBatch,
-            increment
-        } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import {
+    getFirestore,
+    collection,
+    collectionGroup,
+    getDocs,
+    doc,
+    Timestamp,
+    writeBatch,
+    increment,
+    query,
+    orderBy,
+    limit
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
@@ -226,7 +169,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // عناصر DOM
+        // DOM Elements
         const serialInput = document.getElementById('serialInput');
         const suggestions = document.getElementById('suggestions');
         const cartItems = document.getElementById('cartItems');
@@ -239,56 +182,62 @@
         const printBtn = document.getElementById('printBtn');
         const employeeName = document.getElementById('employeeName');
         const employeePhone = document.getElementById('employeePhone');
-        const invoiceNumber = document.getElementById('invoiceNumber');
-        const invoiceDate = document.getElementById('invoiceDate');
-        const notification = document.getElementById('notification');
+        const invoiceNumberSpan = document.getElementById('invoiceNumber');
+        const invoiceDateSpan = document.getElementById('invoiceDate');
+        const notificationDiv = document.getElementById('notification');
         const notificationMessage = document.getElementById('notificationMessage');
         const notificationIcon = document.getElementById('notificationIcon');
-        
+        const buyerNameInput = document.getElementById("buyerNameInput");
+        const buyerPhoneInput = document.getElementById("buyerPhoneInput");
+        const customerSuggestionsDiv = document.getElementById("customerSuggestions");
+        const customerDebtDiv = document.getElementById("customerDebt");
+        const saleTypeSelect = document.getElementById("saleType");
+        const paidContainer = document.getElementById("paidContainer");
+        const paidAmountInput = document.getElementById("paidAmount");
 
-        // عناصر طباعة الفاتورة
+        // Print elements
         const printInvoiceNumber = document.getElementById('printInvoiceNumber');
         const printInvoiceDate = document.getElementById('printInvoiceDate');
         const printInvoiceTime = document.getElementById('printInvoiceTime');
         const printSellerName = document.getElementById('printSellerName');
+        const printBuyerName = document.getElementById('printBuyerName');
         const printItems = document.getElementById('printItems');
         const printTotalAmount = document.getElementById('printTotalAmount');
+        const printSaleType = document.getElementById('printSaleType');
+        const printTotal = document.getElementById('printTotal');
+        const printPaid = document.getElementById('printPaid');
+        const printRemaining = document.getElementById('printRemaining');
 
-        // المتغيرات العامة
         let products = [];
         let cart = [];
         let currentEmployee = null;
         let currentInvoiceNumber = null;
-        let lastInvoiceNumber = 1000;
+        let customers = [];
+        let selectedCustomer = null;
+        let previousDebt = 0;
 
-        // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', async () => {
-            // تحميل بيانات البائع
             loadEmployeeData();
-            
-            // إنشاء رقم فاتورة جديد
-            generateInvoiceNumber();
-            
-            // تحديث تاريخ الفاتورة
+            await generateInvoiceNumber();
             updateInvoiceDate();
-            
-            // تحميل المنتجات
             await loadProducts();
-            
-            // تحميل السلة من التخزين المحلي إن وجدت
+            await loadCustomers();
             loadCartFromStorage();
-            
-            // تحديث واجهة السلة
             updateCartUI();
-            
-            // تركيز على حقل الإدخال
             serialInput.focus();
-            
-            // إضافة تأثير ظهور
-            document.querySelector('.container').classList.add('fade-in');
+            saleTypeSelect.addEventListener('change', togglePaidField);
+            togglePaidField();
         });
 
-        // تحميل بيانات البائع
+        function togglePaidField() {
+            if (saleTypeSelect.value === "credit") {
+                paidContainer.style.display = "block";
+            } else {
+                paidContainer.style.display = "none";
+                if (paidAmountInput) paidAmountInput.value = "";
+            }
+        }
+
         function loadEmployeeData() {
             try {
                 const employee = JSON.parse(localStorage.getItem('currentEmployee'));
@@ -296,218 +245,202 @@
                     currentEmployee = employee;
                     employeeName.textContent = employee.name || 'غير معروف';
                     employeePhone.textContent = employee.phone || 'غير معروف';
-                    
-                    // تحديث بيانات الطباعة
                     printSellerName.textContent = employee.name || 'غير معروف';
-                } else {
-                    showNotification('لم يتم العثور على بيانات البائع. الرجاء تسجيل الدخول مرة أخرى.', 'error');
                 }
             } catch (error) {
-                console.error('Error loading employee data:', error);
-                showNotification('حدث خطأ في تحميل بيانات البائع', 'error');
+                console.error('Error loading employee:', error);
             }
         }
 
-        // إنشاء رقم فاتورة جديد
-        function generateInvoiceNumber() {
-            try {
-                const savedNumber = localStorage.getItem('lastInvoiceNumber');
-                if (savedNumber) {
-                    lastInvoiceNumber = parseInt(savedNumber);
-                }
-                
-                currentInvoiceNumber = lastInvoiceNumber + 1;
-                invoiceNumber.textContent = `#${currentInvoiceNumber}`;
-                printInvoiceNumber.textContent = `#${currentInvoiceNumber}`;
-                
-                localStorage.setItem('lastInvoiceNumber', currentInvoiceNumber);
-            } catch (error) {
-                console.error('Error generating invoice number:', error);
-                currentInvoiceNumber = `TEMP-${Date.now()}`;
-                invoiceNumber.textContent = currentInvoiceNumber;
-                printInvoiceNumber.textContent = currentInvoiceNumber;
-            }
-        }
+       async function generateInvoiceNumber() {
 
-        // تحديث تاريخ الفاتورة
+    try {
+
+        const snapshot = await getDocs(collectionGroup(db, "sales"));
+
+        let maxNumber = 1000;
+
+        snapshot.forEach(doc => {
+
+            const data = doc.data();
+
+            if (data.invoiceNumber && data.invoiceNumber > maxNumber) {
+                maxNumber = data.invoiceNumber;
+            }
+
+        });
+
+        currentInvoiceNumber = maxNumber + 1;
+
+        invoiceNumberSpan.textContent = `#${currentInvoiceNumber}`;
+        printInvoiceNumber.textContent = `#${currentInvoiceNumber}`;
+
+    } catch (error) {
+
+        currentInvoiceNumber = 1001;
+
+        invoiceNumberSpan.textContent = `#${currentInvoiceNumber}`;
+        printInvoiceNumber.textContent = `#${currentInvoiceNumber}`;
+
+    }
+
+}
         function updateInvoiceDate() {
             const now = new Date();
             const dateStr = now.toLocaleDateString('ar-EG');
             const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-            
-            invoiceDate.textContent = dateStr;
+            invoiceDateSpan.textContent = `${dateStr} - ${timeStr}`;
             printInvoiceDate.textContent = dateStr;
             printInvoiceTime.textContent = timeStr;
         }
 
-        // تحميل المنتجات
+        window.selectCustomer = function(customer) {
+            selectedCustomer = customer;
+            buyerNameInput.value = customer.name || '';
+            buyerPhoneInput.value = customer.phone || '';
+            previousDebt = customer.totalDebt || 0;
+            
+            customerDebtDiv.style.display = "block";
+            customerDebtDiv.innerHTML = `
+                <div style="background: linear-gradient(135deg,#8b5cf6,#31117e); color:white; padding:16px; border-radius:14px; box-shadow:0 6px 15px rgba(0,0,0,0.2);">
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:15px;">
+
+        <span style="display:flex; align-items:center; gap:8px;">
+            <i class="fas fa-user-circle" style="font-size:18px;"></i>
+            ${customer.name || 'عميل'}
+        </span>
+
+        <span style="display:flex; align-items:center; gap:8px;">
+            <i class="fas fa-phone-alt"></i>
+            ${customer.phone || '—'}
+        </span>
+
+    </div>
+
+    <div style="background:rgba(255,255,255,0.18); border-radius:10px; padding:12px;">
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+
+            <span style="display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-wallet"></i>
+                الديون السابقة
+            </span>
+
+            <span style="font-weight:bold; font-size:16px;">
+                ${previousDebt.toLocaleString()} جنيه
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+            `;
+            customerSuggestionsDiv.style.display = "none";
+        };
+
+        buyerNameInput.addEventListener("input", () => {
+            const value = buyerNameInput.value.trim().toLowerCase();
+            customerSuggestionsDiv.innerHTML = "";
+            if (value.length < 2) {
+                customerSuggestionsDiv.style.display = "none";
+                return;
+            }
+            const results = customers.filter(c => (c.name && c.name.toLowerCase().includes(value)) || (c.phone && c.phone.includes(value)));
+            results.forEach(c => {
+                const div = document.createElement("div");
+                div.style.cssText = "padding: 12px; border-bottom: 1px solid #eee; cursor: pointer;";
+                div.innerHTML = `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0;">    <div>        <strong style="display:flex; align-items:center; gap:6px;">            <i class="fas fa-user-circle" style="color:#6c63ff;"></i>            ${c.name || 'بدون اسم'}        </strong>        <small style="display:flex; align-items:center; gap:6px; color:#666;">            <i class="fas fa-phone-alt"></i>            ${c.phone || 'بدون هاتف'}        </small>    </div>    <div style="display:flex; align-items:center; gap:6px; font-weight:bold; color:#dc3545;">        <i class="fas fa-wallet"></i>        ${(c.totalDebt || 0).toLocaleString()} جنيه    </div></div>`;                div.onclick = () => window.selectCustomer(c);
+                customerSuggestionsDiv.appendChild(div);
+            });
+            customerSuggestionsDiv.style.display = results.length > 0 ? "block" : "none";
+        });
+
         async function loadProducts() {
-            try {
-                const snapshot = await getDocs(collection(db, 'products'));
-                products = snapshot.docs.map(doc => ({ 
-                    id: doc.id, 
-                    ...doc.data(),
-                    originalQuantity: doc.data().quantity || 0
-                }));
-                console.log(`تم تحميل ${products.length} منتج`);
-            } catch (error) {
-                console.error('Error loading products:', error);
-                showNotification('حدث خطأ في تحميل المنتجات', 'error');
-            }
+            const snapshot = await getDocs(collection(db, 'products'));
+            products = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), originalQuantity: doc.data().quantity || 0 }));
         }
 
-        // تحميل السلة من التخزين المحلي
+        async function loadCustomers() {
+            const snapshot = await getDocs(collection(db, "customers"));
+            customers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        }
+
         function loadCartFromStorage() {
-            try {
-                const savedCart = localStorage.getItem('currentCart');
-                if (savedCart) {
-                    cart = JSON.parse(savedCart);
-                    if (cart.length > 0) {
-                        showNotification('تم استعادة السلة السابقة', 'success');
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading cart from storage:', error);
-                cart = [];
-            }
+            const saved = localStorage.getItem('currentCart');
+            if (saved) cart = JSON.parse(saved);
         }
 
-        // حفظ السلة في التخزين المحلي
         function saveCartToStorage() {
-            try {
-                localStorage.setItem('currentCart', JSON.stringify(cart));
-            } catch (error) {
-                console.error('Error saving cart to storage:', error);
-            }
+            localStorage.setItem('currentCart', JSON.stringify(cart));
         }
 
-        // البحث عن المنتج بالسيريال
         function findProductBySerial(serial) {
             return products.find(p => p.serial === serial);
         }
 
-        // البحث عن المنتج في السلة
         function findProductInCart(serial) {
             return cart.find(item => item.serial === serial);
         }
 
-        // Autocomplete للسيريال
         serialInput.addEventListener('input', () => {
             const value = serialInput.value.trim().toLowerCase();
             suggestions.innerHTML = '';
-
-            if (!value) {
-                suggestions.style.display = 'none';
-                return;
-            }
-
-            const filteredProducts = products.filter(p =>
-    p.originalQuantity > 0 && (
-        p.serial?.toLowerCase().includes(value) ||
-        p.name?.toLowerCase().includes(value)
-    )
-);
-
-
-            if (filteredProducts.length === 0) {
+            if (!value) { suggestions.style.display = 'none'; return; }
+            const filtered = products.filter(p => p.originalQuantity > 0 && ((p.serial && p.serial.toLowerCase().includes(value)) || (p.name && p.name.toLowerCase().includes(value))));
+            if (filtered.length === 0) {
                 const noResults = document.createElement('div');
                 noResults.textContent = 'لا توجد منتجات مطابقة';
-                noResults.style.color = '#999';
                 noResults.style.padding = '12px';
                 noResults.style.textAlign = 'center';
                 suggestions.appendChild(noResults);
             } else {
-                filteredProducts.forEach(p => {
+                filtered.forEach(p => {
                     const div = document.createElement('div');
                     const inCart = findProductInCart(p.serial);
-                    const cartIndicator = inCart ? `<span style="color: #4caf50; font-size: 12px;">(في السلة: ${inCart.cartQuantity})</span>` : '';
-                    const available = p.originalQuantity > 0 ? p.originalQuantity : 'غير محدود';
-                    
-                    div.innerHTML = `
-                        <div style="display: flex; justify-content: space-between;">
-                            <div>
-                                <strong>${p.serial}</strong> - ${p.name}
-                            </div>
-                            ${cartIndicator}
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-                            <small style="color:#666">السعر: ${p.sellPrice || 0} جنيه</small>
-                            <small style="color:#666">المخزون: ${available}</small>
-                        </div>
-                    `;
+                    const cartIndicator = inCart ? `<span style="color:#4caf50;"> (في السلة: ${inCart.cartQuantity})</span>` : '';
+                    div.innerHTML = `<div><strong>${p.serial}</strong> - ${p.name} ${cartIndicator}</div><div><small>💰 ${p.sellPrice || 0} جنيه | 📦 المخزون: ${p.originalQuantity}</small></div>`;
                     div.onclick = () => addToCart(p);
                     suggestions.appendChild(div);
                 });
             }
-            
             suggestions.style.display = 'block';
         });
 
-        // إخفاء الاقتراحات عند النقر خارجها
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#serialInput') && !e.target.closest('.suggestions')) {
-                suggestions.style.display = 'none';
-            }
-        });
-
-        // إضافة منتج للسلة
         function addToCart(product) {
+            if (product.originalQuantity === 0) {
+                showNotification(`❌ المنتج ${product.name} غير متوفر`, 'error');
+                return;
+            }
+            const existing = findProductInCart(product.serial);
+            const inCart = existing ? existing.cartQuantity : 0;
+            if (inCart >= product.originalQuantity) {
+                showNotification(`⚠️ الكمية المتاحة ${product.originalQuantity} فقط`, 'error');
+                return;
+            }
+            if (existing) {
+                existing.cartQuantity += 1;
+                showNotification(`➕ تم زيادة كمية ${product.name}`, 'success');
+            } else {
+                cart.push({ ...product, cartQuantity: 1 });
+                showNotification(`✅ تم إضافة ${product.name}`, 'success');
+            }
+            serialInput.value = '';
+            suggestions.style.display = 'none';
+            updateCartUI();
+            saveCartToStorage();
+            serialInput.focus();
+        }
 
-    // ❌ لو المخزون صفر → امنع الإضافة
-    if (product.originalQuantity === 0) {
-        showNotification(`❌ المنتج ${product.name} غير متوفر في المخزون`, 'error');
-        return;
-    }
-
-    // التحقق من توفر المنتج إذا كان محدود الكمية
-    const existingItem = findProductInCart(product.serial);
-    const totalInCart = existingItem ? existingItem.cartQuantity : 0;
-
-    if (totalInCart >= product.originalQuantity) {
-        showNotification(
-            `الكمية المتاحة من ${product.name} هي ${product.originalQuantity} فقط`,
-            'error'
-        );
-        return;
-    }
-
-    if (existingItem) {
-        existingItem.cartQuantity += 1;
-        showNotification(`تم زيادة كمية ${product.name}`, 'success');
-    } else {
-        cart.push({
-            ...product,
-            cartQuantity: 1
-        });
-        showNotification(`تم إضافة ${product.name} إلى السلة`, 'success');
-    }
-
-    serialInput.value = '';
-    suggestions.style.display = 'none';
-
-    updateCartUI();
-    saveCartToStorage();
-    serialInput.focus();
-}
-
-
-        // تحديث واجهة السلة - الإصلاح هنا!
         function updateCartUI() {
-            console.log('Updating cart UI, cart length:', cart.length);
-            console.log('Cart items:', cart);
-            
-            // تحديث عدد المنتجات
             const totalItems = cart.reduce((sum, item) => sum + item.cartQuantity, 0);
-            cartCount.textContent = `${totalItems} ${totalItems === 1 ? 'منتج' : 'منتجات'}`;
-            
-            // إخفاء أو إظهار السلة الفارغة
+            cartCount.textContent = `${totalItems} منتج${totalItems !== 1 ? 'ات' : ''}`;
             if (cart.length === 0) {
                 emptyCart.style.display = 'block';
                 cartSummary.style.display = 'none';
                 completeBtn.disabled = true;
                 printBtn.disabled = true;
-                
-                // تنظيف محتوى cartItems
                 cartItems.innerHTML = '';
                 cartItems.appendChild(emptyCart);
             } else {
@@ -515,343 +448,290 @@
                 cartSummary.style.display = 'block';
                 completeBtn.disabled = false;
                 printBtn.disabled = false;
-                
-                // تحديث قائمة المنتجات
                 cartItems.innerHTML = '';
                 cart.forEach((item, index) => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'cart-item';
-                    itemElement.innerHTML = `
+                    const div = document.createElement('div');
+                    div.className = 'cart-item';
+                    div.innerHTML = `
                         <div class="item-info">
-                            <div class="item-name">${item.name}</div>
+                            <div class="item-name">📦 ${item.name}</div>
                             <div class="item-details">
-                                <div>
-                                    <span class="item-price">${item.sellPrice} جنيه</span>
-                                    <span class="item-quantity">الكمية: ${item.cartQuantity}</span>
-                                </div>
-                                <div class="item-serial">السيريال: ${item.serial}</div>
+                                <span class="item-price">💰 ${item.sellPrice} جنيه</span>
+                                <span class="item-quantity">🔢 الكمية: ${item.cartQuantity}</span>
+                                <span class="item-total">💵 الإجمالي: ${(item.sellPrice * item.cartQuantity).toLocaleString()} جنيه</span>
+                                <div class="item-serial">🔖 السيريال: ${item.serial}</div>
                             </div>
                         </div>
                         <div class="item-actions">
-                            <button class="item-btn" onclick="increaseQuantity(${index})">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                            <button class="item-btn" onclick="decreaseQuantity(${index})">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button class="item-btn remove" onclick="removeFromCart(${index})">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                            <button class="item-btn" onclick="window.increaseQuantity(${index})"><i class="fas fa-plus"></i></button>
+                            <button class="item-btn" onclick="window.decreaseQuantity(${index})"><i class="fas fa-minus"></i></button>
+                            <button class="item-btn remove" onclick="window.removeFromCart(${index})"><i class="fas fa-trash"></i></button>
                         </div>
                     `;
-                    cartItems.appendChild(itemElement);
+                    cartItems.appendChild(div);
                 });
-                
                 updateCartSummary();
                 updatePrintInvoice();
             }
         }
 
-        // تحديث إحصائيات السلة
         function updateCartSummary() {
             const totalItems = cart.reduce((sum, item) => sum + item.cartQuantity, 0);
             const totalAmount = cart.reduce((sum, item) => sum + (item.sellPrice * item.cartQuantity), 0);
-            
             summaryCount.textContent = totalItems;
             summaryTotal.textContent = `${totalAmount.toLocaleString()} جنيه`;
         }
 
-        // تحديث نموذج الطباعة
         function updatePrintInvoice() {
-    printItems.innerHTML = '';
-    let totalAmount = 0;
+        
+            printItems.innerHTML = '';
+        
+            let total = 0;
+        
+            printBuyerName.textContent = buyerNameInput.value || '—';
+        
+            cart.forEach((item, idx) => {
+        
+                const itemTotal = item.sellPrice * item.cartQuantity;
+                total += itemTotal;
+        
+                const row = document.createElement('tr');
+        
+                row.innerHTML = `
+                <td>${idx + 1}</td>
+                <td>${item.name}</td>
+                <td>${item.serial}</td>
+                <td>${item.cartQuantity}</td>
+                <td>${item.sellPrice} جنيه</td>
+                <td>${itemTotal.toLocaleString()} جنيه</td>
+                `;
+        
+                printItems.appendChild(row);
+        
+            });
+        
+           const saleType = saleTypeSelect.value;
 
-    const buyerName = document.getElementById('buyerNameInput').value || '—';
-    document.getElementById('printBuyerName').textContent = buyerName;
+let paid = 0;
+let remaining = 0;
 
-    cart.forEach((item, index) => {
-        const itemTotal = item.sellPrice * item.cartQuantity;
-        totalAmount += itemTotal;
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${item.name}</td>
-            <td>${item.serial}</td>
-            <td>${item.cartQuantity}</td>
-            <td>${item.sellPrice} جنيه</td>
-            <td>${itemTotal} جنيه</td>
-        `;
-        printItems.appendChild(row);
-    });
-
-    printTotalAmount.textContent = `${totalAmount.toLocaleString()} جنيه`;
+if (saleType === "cash") {
+    paid = total;
+    remaining = 0;
+} else {
+    paid = parseFloat(paidAmountInput.value) || 0;
+    remaining = total - paid;
 }
+        
+            printSaleType.textContent = saleType === "credit" ? "بيع آجل" : "بيع كاش";
+            printTotal.textContent = total.toLocaleString() + " جنيه";
+            printPaid.textContent = paid.toLocaleString() + " جنيه";
+            printRemaining.textContent = remaining.toLocaleString() + " جنيه";
+        
+            printTotalAmount.textContent = `${total.toLocaleString()} جنيه`;
+        
+        }
 
-
-        // زيادة كمية منتج
         window.increaseQuantity = function(index) {
             const item = cart[index];
-            const originalProduct = findProductBySerial(item.serial);
-            
-            if (originalProduct.originalQuantity > 0 && item.cartQuantity >= originalProduct.originalQuantity) {
-                showNotification(`الكمية المتاحة من ${item.name} هي ${originalProduct.originalQuantity} فقط`, 'error');
+            const original = findProductBySerial(item.serial);
+            if (original && item.cartQuantity >= original.originalQuantity) {
+                showNotification(`⚠️ الكمية المتاحة ${original.originalQuantity} فقط`, 'error');
                 return;
             }
-            
-            item.cartQuantity += 1;
+            item.cartQuantity++;
             updateCartUI();
             saveCartToStorage();
-            showNotification(`تم زيادة كمية ${item.name} إلى ${item.cartQuantity}`, 'success');
         };
 
-        // تقليل كمية منتج
         window.decreaseQuantity = function(index) {
             const item = cart[index];
-            
             if (item.cartQuantity > 1) {
-                item.cartQuantity -= 1;
+                item.cartQuantity--;
                 updateCartUI();
                 saveCartToStorage();
-                showNotification(`تم تقليل كمية ${item.name} إلى ${item.cartQuantity}`, 'success');
             } else {
-                removeFromCart(index);
+                window.removeFromCart(index);
             }
         };
 
-        // حذف منتج من السلة
         window.removeFromCart = function(index) {
-            const item = cart[index];
-            if (confirm(`هل تريد إزالة ${item.name} من السلة؟`)) {
+            if (confirm(`🗑️ هل تريد إزالة ${cart[index].name}؟`)) {
                 cart.splice(index, 1);
-                updateCartUI(); // تحديث الواجهة فوراً
+                updateCartUI();
                 saveCartToStorage();
-                showNotification(`تم إزالة ${item.name} من السلة`, 'success');
+                showNotification('✅ تم الإزالة', 'success');
             }
         };
 
-        // إضافة منتج آخر
-        window.addAnotherProduct = function() {
-            serialInput.focus();
-            showNotification('يمكنك الآن إضافة منتج آخر', 'success');
-        };
+        window.addAnotherProduct = () => { serialInput.focus(); showNotification('📦 يمكنك إضافة منتج آخر', 'success'); };
+        window.clearCart = () => { if (confirm('🗑️ تفريغ السلة؟')) { cart = []; updateCartUI(); saveCartToStorage(); showNotification('✅ تم التفريغ', 'success'); serialInput.focus(); } };
 
-        // تفريغ السلة
-        window.clearCart = function() {
-            if (cart.length === 0) {
-                showNotification('السلة فارغة بالفعل', 'error');
-                return;
-            }
-            
-            if (confirm('هل تريد تفريغ السلة بالكامل؟')) {
-                cart = [];
-                updateCartUI(); // تحديث الواجهة فوراً
-                saveCartToStorage();
-                showNotification('تم تفريغ السلة بالكامل', 'success');
-                serialInput.focus();
-            }
-        };
+        window.completeSale = async function() {
+            if (cart.length === 0) { showNotification('⚠️ السلة فارغة', 'error'); return; }
+            if (!currentEmployee) { showNotification('❌ لا يوجد بائع', 'error'); return; }
 
-        // إتمام عملية البيع (فاتورة واحدة – Document واحد)
-window.completeSale = async function () {
-    if (cart.length === 0) {
-        showNotification('السلة فارغة، أضف منتجات أولاً', 'error');
-        return;
-    }
+            const saleType = saleTypeSelect.value;
+            const buyerName = buyerNameInput.value.trim();
+            const buyerPhone = buyerPhoneInput.value.trim();
+            const paidAmount = paidAmountInput ? parseFloat(paidAmountInput.value) || 0 : 0;
 
-    if (!currentEmployee) {
-        showNotification('لا يوجد بيانات بائع صالحة', 'error');
-        return;
-    }
-
-    try {
-        const batch = writeBatch(db);
-        const now = Timestamp.now();
-
-        // ✅ التحقق من الكميات قبل أي حفظ
-        for (const item of cart) {
-            if (item.originalQuantity > 0 && item.cartQuantity > item.originalQuantity) {
-                showNotification(
-                    `الكمية المتاحة من ${item.name} هي ${item.originalQuantity} فقط`,
-                    'error'
-                );
-                return;
-            }
-        }
-
-for (const item of cart) {
-    if (item.originalQuantity === 0) {
-        showNotification(
-            `❌ المنتج ${item.name} غير متوفر في المخزون`,
-            'error'
-        );
-        return;
-    }
-}
-
-
-        // تجهيز عناصر الفاتورة
-        const invoiceItems = cart.map(item => ({
-            productId: item.id,
-            name: item.name,
-            serial: item.serial,
-            price: item.sellPrice,
-            quantity: item.cartQuantity,
-            total: item.sellPrice * item.cartQuantity,
-            buyPrice: item.buyPrice
-        }));
-
-        const totalAmount = invoiceItems.reduce(
-            (sum, item) => sum + item.total,
-            0
-        );
-
-        // ✅ ID الفاتورة = رقم الفاتورة
-        const invoiceId = String(currentInvoiceNumber);
-        const invoiceRef = doc(db, 'sales', invoiceId);
-        const buyerName = document.getElementById('buyerNameInput').value || '';
-
-
-        batch.set(invoiceRef, {
-    invoiceNumber: currentInvoiceNumber,
-    buyer: {
-        name: buyerName
-    },
-    seller: {
-        name: currentEmployee.name,
-        phone: currentEmployee.phone
-    },
-    items: invoiceItems,
-    totalAmount,
-    createdAt: now,
-    date: new Date().toLocaleDateString('ar-EG'),
-    time: new Date().toLocaleTimeString('ar-EG')
-});
-
-
-        // خصم الكميات من المنتجات
-        for (const item of cart) {
-            if (item.id && item.originalQuantity > 0) {
-                const productRef = doc(db, 'products', item.id);
-
-                batch.update(productRef, {
-                    quantity: increment(-item.cartQuantity)
-                });
-
-                // تحديث الكمية محليًا
-                const pIndex = products.findIndex(p => p.id === item.id);
-                if (pIndex !== -1) {
-                    products[pIndex].originalQuantity -= item.cartQuantity;
-                }
-            }
-        }
-
-        // تنفيذ كل العمليات مرة واحدة
-        await batch.commit();
-
-        // رسالة نجاح
-        showNotification(
-            `✅ تم إصدار الفاتورة رقم ${currentInvoiceNumber} بنجاح! 
-            إجمالي المبلغ: ${totalAmount.toLocaleString()} جنيه`,
-            'success'
-        );
-
-        // تفريغ السلة وتحديث الواجهة
-        cart = [];
-        saveCartToStorage();
-        updateCartUI();
-
-        // إنشاء فاتورة جديدة
-        generateInvoiceNumber();
-        updateInvoiceDate();
-
-        setTimeout(() => {
-            serialInput.focus();
-        }, 400);
-
-    } catch (error) {
-        console.error('Error completing sale:', error);
-        showNotification('حدث خطأ أثناء إتمام عملية البيع', 'error');
-    }
-};
-
-
-        // طباعة الفاتورة
-        window.printInvoice = function() {
-            if (cart.length === 0) {
-                showNotification('السلة فارغة، لا يمكن طباعة فاتورة', 'error');
+            if (saleType === "credit" && !buyerName) {
+                showNotification("⚠️ لازم تكتب اسم العميل", "error");
+                buyerNameInput.focus();
                 return;
             }
 
-            updatePrintInvoice();
-            
-            const printContent = document.getElementById('invoicePrint');
-            printContent.style.display = 'block';
-            
-            window.print();
-            
-            printContent.style.display = 'none';
-        };
+            try {
+                const batch = writeBatch(db);
+                const now = Timestamp.now();
 
-        // إعادة تعيين النموذج
-        window.resetForm = function() {
-            if (cart.length === 0) {
-                showNotification('لا توجد فاتورة للإلغاء', 'warning');
-                return;
-            }
-            
-            if (confirm('هل تريد إلغاء الفاتورة الحالية؟ سيتم تفريغ السلة.')) {
-                cart = [];
-                updateCartUI(); // تحديث الواجهة فوراً
-                saveCartToStorage();
-                
-                generateInvoiceNumber();
-                updateInvoiceDate();
-                
-                serialInput.focus();
-                showNotification('تم إلغاء الفاتورة، يمكنك بدء فاتورة جديدة', 'success');
-            }
-        };
-
-        // عرض الإشعارات
-        function showNotification(message, type = 'success') {
-            notificationMessage.textContent = message;
-            notification.className = `notification ${type}`;
-            
-            if (type === 'success') {
-                notificationIcon.className = 'fas fa-check-circle';
-            } else if (type === 'error') {
-                notificationIcon.className = 'fas fa-exclamation-circle';
-            } else if (type === 'warning') {
-                notificationIcon.className = 'fas fa-exclamation-triangle';
-            }
-            
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                hideNotification();
-            }, 4000);
-        }
-
-        function hideNotification() {
-            notification.classList.remove('show');
-        }
-
-        // دعم الإدخال عن طريق Enter
-        serialInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const value = serialInput.value.trim();
-                if (value) {
-                    const product = findProductBySerial(value);
-                    if (product) {
-                        addToCart(product);
-                    } else {
-                        showNotification('لم يتم العثور على منتج بهذا السيريال', 'error');
+                for (const item of cart) {
+                    if (item.originalQuantity === 0 || (item.originalQuantity > 0 && item.cartQuantity > item.originalQuantity)) {
+                        showNotification(`⚠️ الكمية غير متوفرة لـ ${item.name}`, 'error');
+                        return;
                     }
                 }
+
+                const invoiceItems = cart.map(item => ({
+                    productId: item.id, name: item.name, serial: item.serial,
+                    price: item.sellPrice, quantity: item.cartQuantity,
+                    total: item.sellPrice * item.cartQuantity, buyPrice: item.buyPrice
+                }));
+
+                const totalAmount = invoiceItems.reduce((sum, i) => sum + i.total, 0);
+                const remainingDebt = saleType === "credit" ? totalAmount - paidAmount : 0;
+                let newTotalDebt = previousDebt;
+                if (saleType === "credit") newTotalDebt = previousDebt + remainingDebt;
+
+                const counterRef = doc(db, "counters", "invoices");
+
+                batch.set(counterRef, {
+                    lastNumber: currentInvoiceNumber
+                }, { merge: true });
+
+                const customerInvoiceRef = doc(db, "customers", buyerName, "sales",String(currentInvoiceNumber));
+               batch.set(customerInvoiceRef, {
+                    invoiceNumber: currentInvoiceNumber,
+                    saleType: saleType,
+                    items: invoiceItems,
+                    totalAmount: totalAmount,
+                    paid: paidAmount,
+                    remainingDebt: remainingDebt,
+                    date: new Date().toLocaleDateString('ar-EG'),
+                    time: new Date().toLocaleTimeString('ar-EG'),
+                    createdAt: now,
+                    seller: {
+                        name: currentEmployee.name,
+                        phone: currentEmployee.phone
+                    },
+                    buyer: {
+                        name: buyerName,
+                        phone: buyerPhone
+                    },
+                    customerDetails: {
+                        previousDebt: previousDebt,
+                        currentInvoiceTotal: totalAmount,
+                        currentInvoicePaid: paidAmount,
+                        currentInvoiceRemaining: remainingDebt,
+                        newTotalDebt: newTotalDebt
+                    }
+                });
+
+                const customerRef = doc(db, "customers", buyerName);
+
+                batch.set(customerRef, {
+                    name: buyerName,
+                    phone: buyerPhone,
+                    totalDebt: newTotalDebt,
+                    createdAt: now,
+                    firstInvoiceDate: now,
+                    firstInvoiceAmount: totalAmount,
+                    firstInvoiceNumber: currentInvoiceNumber
+                }, { merge: true });
+
+                for (const item of cart) {
+                    if (item.id && item.originalQuantity > 0) {
+                        batch.update(doc(db, 'products', item.id), { quantity: increment(-item.cartQuantity) });
+                        const pIndex = products.findIndex(p => p.id === item.id);
+                        if (pIndex !== -1) products[pIndex].originalQuantity -= item.cartQuantity;
+                    }
+                }
+
+                await batch.commit();
+
+                let msg = `✅ فاتورة ${currentInvoiceNumber}\n📋 الإجمالي: ${totalAmount.toLocaleString()} جنيه\n💵 المدفوع: ${paidAmount.toLocaleString()} جنيه`;
+                if (saleType === "credit") msg += `\n📝 المتبقي: ${remainingDebt.toLocaleString()} جنيه\n💰 الديون السابقة: ${previousDebt.toLocaleString()} جنيه\n💰 الديون الحالية: ${newTotalDebt.toLocaleString()} جنيه`;
+                showNotification(msg, 'success');
+
+                updatePrintInvoice();
+                setTimeout(() => window.print(), 500);
+
+                cart = [];
+                saveCartToStorage();
+                updateCartUI();
+                await generateInvoiceNumber();
+                updateInvoiceDate();
+                buyerNameInput.value = '';
+                buyerPhoneInput.value = '';
+                if (paidAmountInput) paidAmountInput.value = '';
+                selectedCustomer = null;
+                previousDebt = 0;
+                customerDebtDiv.style.display = 'none';
+                saleTypeSelect.value = 'cash';
+                togglePaidField();
+                serialInput.focus();
+
+            } catch (error) {
+                console.error(error);
+                showNotification('❌ حدث خطأ', 'error');
+            }
+        };
+
+        window.printInvoice = function() {
+            if (cart.length === 0) { showNotification('⚠️ السلة فارغة', 'error'); return; }
+            updatePrintInvoice();
+            const printContent = document.getElementById('invoicePrint');
+            printContent.style.display = 'block';
+            window.print();
+            setTimeout(() => printContent.style.display = 'none', 100);
+        };
+
+        window.resetForm = function() {
+            if (confirm('🔄 إلغاء الفاتورة الحالية؟')) {
+                cart = [];
+                updateCartUI();
+                saveCartToStorage();
+                generateInvoiceNumber();
+                updateInvoiceDate();
+                buyerNameInput.value = '';
+                buyerPhoneInput.value = '';
+                if (paidAmountInput) paidAmountInput.value = '';
+                selectedCustomer = null;
+                previousDebt = 0;
+                customerDebtDiv.style.display = 'none';
+                serialInput.focus();
+                showNotification('✅ تم الإلغاء', 'success');
+            }
+        };
+
+        serialInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const product = findProductBySerial(serialInput.value.trim());
+                if (product) addToCart(product);
+                else showNotification('❌ منتج غير موجود', 'error');
             }
         });
+
+        function showNotification(message, type = 'success') {
+            notificationMessage.textContent = message;
+            notificationDiv.className = `notification ${type}`;
+            notificationIcon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            notificationDiv.classList.add('show');
+            setTimeout(() => notificationDiv.classList.remove('show'), 4000);
+        }
+
+        window.hideNotification = () => notificationDiv.classList.remove('show');
     </script>
-    <script type="module" src="script.js"></script>
 </body>
 </html>

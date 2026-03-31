@@ -1150,14 +1150,42 @@ window.showCommitmentsList = async function(empId) {
             if (data.product) { typeIcon = '📦'; typeLabel = 'منتج'; }
             else { typeIcon = '💰'; typeLabel = 'مال'; }
             html += `<div class="commitment-item">
-                        <div><strong>${typeIcon} النوع:</strong> ${typeLabel}</div>
-                        ${data.product ? `<div><strong>📦 المنتج:</strong> ${data.product.name || 'منتج'}</div>
-                        <div><strong>🔢 السيريال:</strong> ${data.product.serial || '-'}</div>
-                        <div><strong>💵 سعر البيع:</strong> ${data.product.sellPrice || 0} جنيه</div>` : ''}
-                        <div><strong>💰 القيمة:</strong> ${data.amount} جنيه</div>
-                        <div><strong>📝 ملاحظة:</strong> ${data.note || '-'}</div>
-                        <div><strong>📅 التاريخ:</strong> ${data.createdAt || '-'}</div>
-                     </div>`;
+
+  <div>
+    <strong><i class="fas fa-tag"></i> النوع: </strong> ${typeLabel}
+  </div>
+
+  ${data.product ? `
+  <div>
+    <strong><i class="fas fa-box"></i> المنتج: </strong> ${data.product.name || 'منتج'}
+  </div>
+
+  <div>
+    <strong><i class="fas fa-barcode"></i> السيريال: </strong> ${data.product.serial || '-'}
+  </div>
+
+  <div>
+    <strong><i class="fas fa-layer-group"></i> الكمية: </strong> ${data.product.quantity || '-'}
+  </div>
+
+  <div>
+    <strong><i class="fas fa-coins"></i> سعر البيع: </strong> ${data.product.sellPrice || 0} جنيه
+  </div>
+  ` : ''}
+
+  <div>
+    <strong><i class="fas fa-money-bill-wave"></i> القيمة: </strong> ${data.amount} جنيه
+  </div>
+
+  <div>
+    <strong><i class="fas fa-note-sticky"></i> ملاحظة:</strong> ${data.note || '-'}
+  </div>
+
+  <div>
+    <strong><i class="fas fa-calendar-days"></i> التاريخ:</strong> ${data.createdAt || '-'}
+  </div>
+
+</div>`;
         });
         html += '</div>';
         container.innerHTML = html;
