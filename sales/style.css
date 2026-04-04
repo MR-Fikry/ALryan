@@ -819,7 +819,7 @@ body > *:not(#invoicePrint) {
         max-width: 100%;
         justify-content: center;
         margin: 0 auto;
-        padding: 30px;              /* 🔥 تقليل المسافات */
+        padding: 0px;              /* 🔥 تقليل المسافات */
         margin: 0;
         background: #fff;
         font-size: 11px;           /* 🔥 تصغير الخط */
@@ -827,7 +827,7 @@ body > *:not(#invoicePrint) {
     }
 
     .print-header h1{
-      font-size: 15px;
+      font-size: 19px;
     }
 
     .print-footer{
@@ -844,7 +844,7 @@ body > *:not(#invoicePrint) {
     table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 10.5px;         /* 🔥 أصغر شوية */
+        font-size: 13px;         /* 🔥 أصغر شوية */
     }
 
     th, td {
@@ -860,7 +860,7 @@ body > *:not(#invoicePrint) {
     }
 
     tfoot td {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: bold;
     }
 
@@ -875,11 +875,11 @@ body > *:not(#invoicePrint) {
     }
 
     /* تقليل العناوين */
-    h1 { font-size: 16px; margin: 4px 0; }
-    h2 { font-size: 14px; margin: 4px 0; }
-    h3 { font-size: 13px; margin: 3px 0; }
-    p  { margin: 2px 0; }
-    .print-table tfoot td{ font-size: 10px;}
+    h1 { font-size: 18px; margin: 4px 0; }
+    h2 { font-size: 16px; margin: 4px 0; }
+    h3 { font-size: 15px; margin: 3px 0; }
+    p  { margin: 7px 0; font-size: 13px;}
+    .print-table tfoot td{ font-size: 12px;}
 }
 
 /* إجمالي المنتج داخل السلة */
