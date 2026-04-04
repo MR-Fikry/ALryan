@@ -124,7 +124,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-
         .date-badge {
             background: rgba(255,255,255,0.9);
             padding: 10px 22px;
@@ -146,180 +145,28 @@
             padding: 0 20px;
         }
 
-        
+        /* زرار إضافة موظف */
+        .add-employee-btn {
+            background: linear-gradient(135deg, #6c5ce7, #a78bfa);
+            border: none;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 15px rgba(108,92,231,0.3);
+            transition: 0.3s;
+        }
 
-
-
-
-
-
-
-
-
-
-/* زرار إضافة موظف */
-
-.add-employee-btn{
-background: linear-gradient(135deg,#6c5ce7,#a78bfa);
-border:none;
-color:white;
-padding:14px 24px;
-border-radius:12px;
-font-size:15px;
-font-weight:600;
-cursor:pointer;
-margin-bottom:20px;
-display:flex;
-align-items:center;
-gap:10px;
-box-shadow:0 6px 15px rgba(108,92,231,0.3);
-transition:0.3s;
-}
-
-.add-employee-btn:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 25px rgba(108,92,231,0.5);
-}
-
-
-/* أزرار الحفظ والحذف */
-
-.save-btn{
-width:100%;
-margin-top:10px;
-padding:12px;
-border:none;
-border-radius:10px;
-font-size:14px;
-font-weight:600;
-cursor:pointer;
-background:linear-gradient(135deg,#10b981,#34d399);
-color:white;
-transition:0.3s;
-}
-
-.save-btn:hover{
-transform:scale(1.02);
-box-shadow:0 6px 18px rgba(16,185,129,0.4);
-}
-
-.delete-employee{
-background:linear-gradient(135deg,#ef4444,#f97316);
-}
-
-.delete-employee:hover{
-box-shadow:0 6px 18px rgba(239,68,68,0.5);
-}
-
-
-/* المودال */
-
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:1000;
-backdrop-filter:blur(5px);
-}
-
-
-/* صندوق الفورم */
-
-.modal-box{
-background:white;
-padding:30px;
-border-radius:16px;
-width:320px;
-box-shadow:0 20px 40px rgba(0,0,0,0.2);
-animation:popup 0.3s ease;
-}
-
-@keyframes popup{
-from{
-transform:scale(0.8);
-opacity:0;
-}
-to{
-transform:scale(1);
-opacity:1;
-}
-}
-
-
-/* عنوان الفورم */
-
-.modal-box h3{
-margin-bottom:15px;
-text-align:center;
-color:#333;
-}
-
-
-/* الانبوت */
-
-.modal-box input{
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:8px;
-border:1px solid #ddd;
-font-size:14px;
-transition:0.3s;
-}
-
-.modal-box input:focus{
-outline:none;
-border-color:#6c5ce7;
-box-shadow:0 0 0 3px rgba(108,92,231,0.2);
-}
-
-
-/* راديو */
-
-.modal-box label{
-margin-right:10px;
-font-size:14px;
-cursor:pointer;
-}
-
-
-/* أزرار الفورم */
-
-.modal-box button{
-padding:10px 18px;
-border:none;
-border-radius:8px;
-font-size:14px;
-font-weight:600;
-cursor:pointer;
-margin-right:8px;
-margin-top:10px;
-}
-
-.modal-box button:first-of-type{
-background:linear-gradient(135deg,#6c5ce7,#a78bfa);
-color:white;
-}
-
-.modal-box button:last-of-type{
-background:#eee;
-}
-
-
-
-
-
-
-
-
-
-
+        .add-employee-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108,92,231,0.5);
+        }
 
         .nav-link {
             padding: 12px 32px;
@@ -490,7 +337,7 @@ background:#eee;
 
         .employees-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 28px;
         }
 
@@ -584,7 +431,7 @@ background:#eee;
             box-shadow: 0 0 0 3px rgba(108,92,231,0.1);
         }
 
-        .deductions-section {
+        .deductions-section, .bonus-section {
             background: #fffaf5;
             border-radius: 24px;
             padding: 18px;
@@ -629,7 +476,7 @@ background:#eee;
             box-shadow: 0 8px 18px rgba(249,115,22,0.25);
         }
 
-        .deductions-list {
+        .deductions-list, .bonus-list {
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -644,15 +491,17 @@ background:#eee;
             align-items: center;
             border-right: 4px solid #f97316;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            flex-wrap: wrap;
         }
 
-        .deduction-input, .deduction-reason {
-            flex: 1;
-            padding: 10px 14px;
+        .deduction-input, .deduction-reason, .bonus-input, .bonus-reason {
+            padding: 10px;
             border: 1px solid #f1e5e0;
             border-radius: 18px;
             font-family: 'Cairo', sans-serif;
             font-size: 14px;
+            flex: 1;
+            min-width: 100px;
         }
 
         .remove-deduction {
@@ -681,7 +530,7 @@ background:#eee;
             font-weight: 800;
         }
 
-        /* الالتزامات - تصميم محسّن */
+        /* الالتزامات */
         .commitments-box {
             background: linear-gradient(145deg, #f1f4ff, #ffffff);
             border-radius: 24px;
@@ -700,10 +549,12 @@ background:#eee;
             background: rgba(99,102,241,0.08);
             padding: 10px 12px;
             border-radius: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .commitments-summary div {
-            font-size: 14px;
+            font-size: 12px;
             color: #374151;
         }
 
@@ -713,7 +564,7 @@ background:#eee;
             margin-right: 5px;
         }
 
-        .commitments-box button {
+        .commitments-box > button {
             width: 100%;
             padding: 10px;
             border: none;
@@ -731,36 +582,80 @@ background:#eee;
             gap: 8px;
         }
 
-        .commitments-box button:hover {
+        .commitments-box > button:hover {
             transform: scale(1.01);
             box-shadow: 0 6px 14px rgba(99,102,241,0.3);
         }
 
         .commitments-list {
             margin-top: 14px;
-            max-height: 250px;
+            max-height: 400px;
             overflow-y: auto;
         }
 
         .commitment-item {
             background: white;
-            padding: 12px;
+            padding: 15px;
             border-radius: 16px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 13px;
-            line-height: 1.6;
             border-right: 3px solid #6366f1;
             box-shadow: 0 2px 6px rgba(0,0,0,0.03);
         }
 
-        .commitment-item div {
-            margin-bottom: 4px;
+        .commitment-item > div {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .commitment-item strong {
-            color: #1f2937;
-            display: inline-block;
-            min-width: 70px;
+            min-width: 80px;
+            color: #2c3e50;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .commitment-item input, .commitment-item select {
+            flex: 1;
+            min-width: 150px;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .commitment-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+
+        .commitment-actions button {
+            padding: 6px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .cancel-btn {
+            background: #64748b;
+            color: white;
         }
 
         .net-salary {
@@ -809,6 +704,97 @@ background:#eee;
             margin-top: 12px;
         }
 
+        .delete-employee:hover {
+            box-shadow: 0 6px 18px rgba(239,68,68,0.5);
+        }
+
+        .button-tow {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .button-tow button {
+            flex: 1;
+            margin-top: 0;
+        }
+
+        /* المودال */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            width: 350px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: popup 0.3s ease;
+        }
+
+        @keyframes popup {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-box h3 {
+            margin-bottom: 15px;
+            text-align: center;
+            color: #333;
+        }
+
+        .modal-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .modal-box input:focus {
+            outline: none;
+            border-color: #6c5ce7;
+        }
+
+        .modal-box label {
+            margin-left: 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .modal-box button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .modal-box button:first-of-type {
+            background: linear-gradient(135deg, #6c5ce7, #a78bfa);
+            color: white;
+        }
+
+        .modal-box button:last-of-type {
+            background: #eee;
+            margin-right: 8px;
+        }
+
         .footer {
             text-align: center;
             padding: 30px;
@@ -817,24 +803,6 @@ background:#eee;
             margin-top: 60px;
             color: #5a5699;
             border-top: 1px solid rgba(108,92,231,0.2);
-        }
-
-        @media (max-width: 780px) {
-            .employees-grid { grid-template-columns: 1fr; }
-            .header { padding: 15px 20px; }
-            .deduction-item { flex-direction: column; align-items: stretch; }
-            .stat-card { padding: 16px; }
-            .section-title h2::before,
-            .section-title h2::after { display: none; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .employee-card {
-            animation: fadeInUp 0.5s ease-out;
         }
 
         .watermark {
@@ -848,7 +816,24 @@ background:#eee;
             pointer-events: none;
             z-index: -1;
             transform: rotate(-10deg);
-            font-family: 'Cairo', sans-serif;
+        }
+
+        @media (max-width: 780px) {
+            .header { padding: 15px 20px; }
+            .employees-grid { grid-template-columns: 1fr; }
+            .section-title h2::before,
+            .section-title h2::after { display: none; }
+            .commitment-item > div { flex-direction: column; align-items: flex-start; }
+            .commitment-item strong { min-width: auto; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .employee-card {
+            animation: fadeInUp 0.5s ease-out;
         }
     </style>
 </head>
@@ -860,7 +845,7 @@ background:#eee;
 <header class="header">
     <div class="brand">
         <div class="brand-icon"><i class="fas fa-crown"></i></div>
-        <div class="brand-text">إدارة متكاملة </div>
+        <div class="brand-text">نظام إدارة الموظفين</div>
     </div>
     <div class="header-left">
         <div class="date-badge" id="currentDate"></div>
@@ -889,36 +874,33 @@ background:#eee;
 
 <div class="employees-section">
     <button onclick="showAddEmployee()" class="add-employee-btn">
-<i class="fas fa-user-plus"></i> إضافة موظف
-</button>
-    <div class="section-title"><h2> قائمة الموظفين </h2></div>
+        <i class="fas fa-user-plus"></i> إضافة موظف
+    </button>
+    <div class="section-title"><h2>قائمة الموظفين</h2></div>
     <div id="employeesGrid" class="employees-grid"></div>
 </div>
 
-
 <div id="addEmployeeModal" class="modal">
-<div class="modal-box">
-
-<h3>إضافة موظف جديد</h3>
-
-<input id="newName" placeholder="اسم الموظف">
-<input id="newPhone" placeholder="رقم الهاتف">
-<input id="newPassword" placeholder="كلمة المرور">
-
-<label><input type="radio" name="newGender" value="ذكر"> ذكر</label>
-<label><input type="radio" name="newGender" value="أنثى"> أنثى</label>
-
-<br><br>
-
-<button onclick="createEmployee()">حفظ</button>
-<button onclick="closeAddEmployee()">إلغاء</button>
-
+    <div class="modal-box">
+        <h3>إضافة موظف جديد</h3>
+        <input id="newName" placeholder="اسم الموظف">
+        <input id="newPhone" placeholder="رقم الهاتف">
+        <input id="newPassword" placeholder="كلمة المرور" type="password">
+        <label><input type="radio" name="newGender" value="ذكر"> ذكر</label>
+        <label><input type="radio" name="newGender" value="أنثى"> أنثى</label>
+        <br><br>
+        <button onclick="createEmployee()">حفظ</button>
+        <button onclick="closeAddEmployee()">إلغاء</button>
+    </div>
 </div>
-</div>
+
+<footer class="footer">
+    <p><i class="fas fa-code"></i> developed by MR Fikry | جميع الحقوق محفوظة</p>
+</footer>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { addDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
@@ -933,7 +915,6 @@ document.getElementById("currentDate").innerHTML = `<i class="far fa-calendar-al
 
 let allEmployeesCache = [];
 
-// ====== تحميل الموظفين ======
 async function loadEmployees() {
     employeesGrid.innerHTML = '<div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-pulse"></i> جاري التحميل...</div>';
     const snapshot = await getDocs(collection(db, "employees"));
@@ -953,7 +934,6 @@ async function loadEmployees() {
     updateStats(employeesArray);
 }
 
-// ====== عرض الموظفين ======
 function renderEmployees(employees) {
     employeesGrid.innerHTML = "";
     employees.forEach(emp => {
@@ -963,12 +943,12 @@ function renderEmployees(employees) {
     setTimeout(() => {
         employees.forEach(emp => {
             if (emp.deductions) emp.deductions.forEach(ded => addDeductionRow(emp.id, ded.amount, ded.reason));
+            if (emp.bonuses) emp.bonuses.forEach(bonus => addBonusRow(emp.id, bonus.amount, bonus.reason));
             calculateNetSalary(emp.id);
         });
     }, 100);
 }
 
-// ====== إنشاء بطاقة الموظف ======
 function createEmployeeCard(emp) {
     const card = document.createElement("div");
     card.className = "employee-card";
@@ -979,10 +959,10 @@ function createEmployeeCard(emp) {
         <div class="employee-header">
             <div class="employee-avatar"><i class="fas ${genderIcon}"></i></div>
             <div>
-    <div class="employee-name">${emp.name || 'موظف'}</div>
-    <div class="employee-phone"><i class="fas fa-id-card"></i> ID : ${emp.employeeId || '-'}</div>
-<div class="employee-phone"><i class="fas fa-phone-alt"></i> ${emp.phone || '—'}</div>
-</div>
+                <div class="employee-name">${emp.name || 'موظف'}</div>
+                <div class="employee-phone"><i class="fas fa-id-card"></i> ID : ${emp.employeeId || '-'}</div>
+                <div class="employee-phone"><i class="fas fa-phone-alt"></i> ${emp.phone || '—'}</div>
+            </div>
         </div>
 
         <div class="salary-section">
@@ -1003,20 +983,16 @@ function createEmployeeCard(emp) {
         </div>
 
         <div class="bonus-section">
-    <div class="section-header">
-        <h4><i class="fas fa-plus-circle"></i> الحوافز</h4>
-        <button class="add-deduction-btn" onclick="addBonus('${emp.id}')">
-            <i class="fas fa-plus"></i> إضافة حافز
-        </button>
-    </div>
-
-    <div id="bonus-${emp.id}" class="bonus-list"></div>
-
-    <div class="total-deductions">
-        <span>إجمالي الحوافز</span>
-        <span class="total-amount" id="totalBonusSpan-${emp.id}">0 جنيه</span>
-    </div>
-</div>
+            <div class="section-header">
+                <h4><i class="fas fa-plus-circle"></i> الحوافز</h4>
+                <button class="add-deduction-btn" onclick="addBonus('${emp.id}')"><i class="fas fa-plus"></i> إضافة حافز</button>
+            </div>
+            <div id="bonus-${emp.id}" class="bonus-list"></div>
+            <div class="total-deductions">
+                <span>إجمالي الحوافز</span>
+                <span class="total-amount" id="totalBonusSpan-${emp.id}">0 جنيه</span>
+            </div>
+        </div>
 
         <div class="commitments-box" id="commitmentsBox-${emp.id}" data-total="${emp.commitmentsTotal || 0}">
             <div class="commitments-summary">
@@ -1032,51 +1008,72 @@ function createEmployeeCard(emp) {
             <span class="net-amount" id="netSalary-${emp.id}">0 جنيه</span>
         </div>
 
-        <button class="save-btn" onclick="saveEmployeeData('${emp.id}')"><i class="fas fa-save"></i> حفظ البيانات</button>
-        <button class="save-btn delete-employee" onclick="deleteEmployeeById('${emp.id}')"><i class="fas fa-trash-alt"></i> حذف الموظف</button>
+        <div class="button-tow">
+            <button class="save-btn" onclick="saveEmployeeData('${emp.id}')">
+                <i class="fas fa-save"></i> حفظ البيانات
+            </button>
+            <button class="save-btn delete-employee" onclick="deleteEmployeeById('${emp.id}')">
+                <i class="fas fa-trash-alt"></i> حذف الموظف
+            </button>
+        </div>
     `;
     return card;
 }
 
-// ====== خصومات ======
-window.addDeduction = function(empId, amount = '', reason = '') {
+function addDeductionRow(empId, amount, reason) {
+    if (amount) {
+        const container = document.getElementById(`deductions-${empId}`);
+        if (!container) return;
+        const uid = 'ded_' + Date.now() + '_' + Math.random();
+        const div = document.createElement('div');
+        div.className = 'deduction-item';
+        div.id = uid;
+        div.innerHTML = `<input type="number" class="deduction-input" placeholder="المبلغ" value="${amount}" oninput="calculateNetSalary('${empId}')">
+                         <input type="text" class="deduction-reason" placeholder="سبب الخصم" value="${reason}">
+                         <button class="remove-deduction" onclick="removeDeductionItem('${empId}','${uid}')"><i class="fas fa-trash-alt"></i></button>`;
+        container.appendChild(div);
+    }
+}
+
+function addBonusRow(empId, amount, reason) {
+    if (amount) {
+        const container = document.getElementById(`bonus-${empId}`);
+        if (!container) return;
+        const uid = 'bonus_' + Date.now() + '_' + Math.random();
+        const div = document.createElement('div');
+        div.className = 'deduction-item';
+        div.id = uid;
+        div.innerHTML = `<input type="number" class="bonus-input" placeholder="المبلغ" value="${amount}" oninput="calculateNetSalary('${empId}')">
+                         <input type="text" class="bonus-reason" placeholder="سبب الحافز" value="${reason}">
+                         <button class="remove-deduction" onclick="removeBonusItem('${empId}','${uid}')"><i class="fas fa-trash-alt"></i></button>`;
+        container.appendChild(div);
+    }
+}
+
+window.addDeduction = function(empId) {
     const container = document.getElementById(`deductions-${empId}`);
     if (!container) return;
     const uid = 'ded_' + Date.now() + '_' + Math.random();
     const div = document.createElement('div');
     div.className = 'deduction-item';
     div.id = uid;
-    div.innerHTML = `<input type="number" class="deduction-input" placeholder="المبلغ" value="${amount}" oninput="calculateNetSalary('${empId}')">
-                     <input type="text" class="deduction-reason" placeholder="سبب الخصم" value="${reason}">
+    div.innerHTML = `<input type="number" class="deduction-input" placeholder="المبلغ" oninput="calculateNetSalary('${empId}')">
+                     <input type="text" class="deduction-reason" placeholder="سبب الخصم">
                      <button class="remove-deduction" onclick="removeDeductionItem('${empId}','${uid}')"><i class="fas fa-trash-alt"></i></button>`;
     container.appendChild(div);
-    calculateNetSalary(empId);
 };
 
-// ====== الحوافز ======
-window.addBonus = function(empId, amount = '', reason = '') {
-
+window.addBonus = function(empId) {
     const container = document.getElementById(`bonus-${empId}`);
     if (!container) return;
-
     const uid = 'bonus_' + Date.now() + '_' + Math.random();
-
     const div = document.createElement('div');
     div.className = 'deduction-item';
-
     div.id = uid;
-
-    div.innerHTML = `
-        <input type="number" class="bonus-input" placeholder="المبلغ" value="${amount}" oninput="calculateNetSalary('${empId}')">
-        <input type="text" class="bonus-reason" placeholder="سبب الحافز" value="${reason}">
-        <button class="remove-deduction" onclick="removeBonusItem('${empId}','${uid}')">
-            <i class="fas fa-trash-alt"></i>
-        </button>
-    `;
-
+    div.innerHTML = `<input type="number" class="bonus-input" placeholder="المبلغ" oninput="calculateNetSalary('${empId}')">
+                     <input type="text" class="bonus-reason" placeholder="سبب الحافز">
+                     <button class="remove-deduction" onclick="removeBonusItem('${empId}','${uid}')"><i class="fas fa-trash-alt"></i></button>`;
     container.appendChild(div);
-
-    calculateNetSalary(empId);
 };
 
 window.removeBonusItem = function(empId, rowId) {
@@ -1085,18 +1082,14 @@ window.removeBonusItem = function(empId, rowId) {
     calculateNetSalary(empId);
 };
 
-function addDeductionRow(empId, amount, reason) { if (amount) window.addDeduction(empId, amount, reason); }
-
 window.removeDeductionItem = function(empId, rowId) {
     const el = document.getElementById(rowId);
     if (el) el.remove();
     calculateNetSalary(empId);
 };
 
-// ====== حساب صافي الراتب ======
 window.calculateNetSalary = function(empId) {
     const salary = Number(document.getElementById(`salary-${empId}`)?.value) || 0;
-    // الخصومات
     const dedContainer = document.getElementById(`deductions-${empId}`);
     let totalDed = 0;
     if (dedContainer) {
@@ -1104,7 +1097,6 @@ window.calculateNetSalary = function(empId) {
             totalDed += Number(inp.value) || 0;
         });
     }
-    // الحوافز
     const bonusContainer = document.getElementById(`bonus-${empId}`);
     let totalBonus = 0;
     if (bonusContainer) {
@@ -1112,19 +1104,14 @@ window.calculateNetSalary = function(empId) {
             totalBonus += Number(inp.value) || 0;
         });
     }
-    // الالتزامات
     const commitmentsBox = document.getElementById(`commitmentsBox-${empId}`);
     const commitmentsTotal = commitmentsBox ? Number(commitmentsBox.dataset.total) || 0 : 0;
-
     const net = salary + totalBonus - totalDed - commitmentsTotal;
-
     document.getElementById(`totalDeductionsSpan-${empId}`).innerHTML = totalDed.toLocaleString() + ' جنيه';
     document.getElementById(`totalBonusSpan-${empId}`).innerHTML = totalBonus.toLocaleString() + ' جنيه';
-
     document.getElementById(`netSalary-${empId}`).innerHTML = net.toLocaleString() + ' جنيه';
 };
 
-// ====== حفظ بيانات الموظف ======
 window.saveEmployeeData = async function(empId) {
     try {
         const salaryVal = Number(document.getElementById(`salary-${empId}`).value) || 0;
@@ -1137,23 +1124,13 @@ window.saveEmployeeData = async function(empId) {
                 if (amt && parseFloat(amt) > 0) deductions.push({ amount: Number(amt), reason: reason || 'خصم' });
             });
         }
-        // الحوافز
         const bonusContainer = document.getElementById(`bonus-${empId}`);
         const bonuses = [];
-        
         if (bonusContainer) {
             bonusContainer.querySelectorAll('.deduction-item').forEach(item => {
-        
                 const amt = item.querySelector('.bonus-input')?.value;
                 const reason = item.querySelector('.bonus-reason')?.value;
-        
-                if (amt && parseFloat(amt) > 0) {
-                    bonuses.push({
-                        amount: Number(amt),
-                        reason: reason || 'حافز'
-                    });
-                }
-        
+                if (amt && parseFloat(amt) > 0) bonuses.push({ amount: Number(amt), reason: reason || 'حافز' });
             });
         }
         await updateDoc(doc(db, "employees", empId), {
@@ -1167,7 +1144,6 @@ window.saveEmployeeData = async function(empId) {
     } catch(e) { alert("❌ خطأ في الحفظ"); console.error(e); }
 };
 
-// ====== حذف الموظف ======
 window.deleteEmployeeById = async function(empId) {
     if(confirm("⚠️ هل أنت متأكد من حذف الموظف نهائياً؟")) {
         await deleteDoc(doc(db, "employees", empId));
@@ -1175,115 +1151,116 @@ window.deleteEmployeeById = async function(empId) {
     }
 };
 
+window.showAddEmployee = function() {
+    document.getElementById("addEmployeeModal").style.display = "flex";
+};
 
-window.showAddEmployee = function(){
-document.getElementById("addEmployeeModal").style.display="flex";
+window.closeAddEmployee = function() {
+    document.getElementById("addEmployeeModal").style.display = "none";
+};
+
+function generateEmployeeId() {
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    return "Fi" + randomNum;
 }
 
-window.closeAddEmployee = function(){
-document.getElementById("addEmployeeModal").style.display="none";
-}
+window.createEmployee = async function() {
+    const name = document.getElementById("newName").value.trim();
+    const phone = document.getElementById("newPhone").value.trim();
+    const password = document.getElementById("newPassword").value.trim();
+    const gender = document.querySelector('input[name="newGender"]:checked')?.value;
+    if(!name || !password) {
+        alert("اكمل البيانات");
+        return;
+    }
+    let newId = generateEmployeeId();
+    await addDoc(collection(db, "employees"), {
+        name, phone, gender, employeeId: newId, password,
+        salary: 0, deductions: [], bonuses: [],
+        createdAt: new Date().toLocaleString()
+    });
+    alert("تم إضافة الموظف\nID : " + newId);
+    closeAddEmployee();
+    loadEmployees();
+};
 
-function generateEmployeeId(){
-const randomNum = Math.floor(1000 + Math.random() * 9000);
-return "Fi" + randomNum;
-}
-
-window.createEmployee = async function(){
-
-const name = document.getElementById("newName").value.trim();
-const phone = document.getElementById("newPhone").value.trim();
-const password = document.getElementById("newPassword").value.trim();
-const gender = document.querySelector('input[name="newGender"]:checked')?.value;
-
-if(!name || !password){
-alert("اكمل البيانات");
-return;
-}
-
-let newId = generateEmployeeId();
-
-await addDoc(collection(db,"employees"),{
-name,
-phone,
-gender,
-employeeId:newId,
-password,
-salary:0,
-deductions:[],
-createdAt:new Date().toLocaleString()
-});
-
-alert("تم إضافة الموظف\nID : " + newId);
-
-closeAddEmployee();
-loadEmployees();
-}
-
-// ====== عرض الالتزامات ======
 window.showCommitmentsList = async function(empId) {
     const container = document.getElementById(`commitmentsList-${empId}`);
     if (!container) return;
     if (container.style.display === "block") { container.style.display = "none"; return; }
-
     container.innerHTML = '<div style="padding:12px;text-align:center;"><i class="fas fa-spinner fa-pulse"></i> جاري التحميل...</div>';
+    container.style.display = "block";
     const snap = await getDocs(collection(db, "employees", empId, "commitments"));
-    
     if (snap.empty) {
         container.innerHTML = '<div class="commitment-item">📭 لا توجد التزامات لهذا الموظف</div>';
     } else {
-        let html = '<div class="commitments-list">';
+        let html = '';
         snap.forEach(docSnap => {
             const data = docSnap.data();
-            let typeIcon = '';
-            let typeLabel = '';
-            if (data.product) { typeIcon = '📦'; typeLabel = 'منتج'; }
-            else { typeIcon = '💰'; typeLabel = 'مال'; }
-            html += `<div class="commitment-item">
-
-  <div>
-    <strong><i class="fas fa-tag"></i> النوع: </strong> ${typeLabel}
-  </div>
-
-  ${data.product ? `
-  <div>
-    <strong><i class="fas fa-box"></i> المنتج: </strong> ${data.product.name || 'منتج'}
-  </div>
-
-  <div>
-    <strong><i class="fas fa-barcode"></i> السيريال: </strong> ${data.product.serial || '-'}
-  </div>
-
-  <div>
-    <strong><i class="fas fa-layer-group"></i> الكمية: </strong> ${data.product.quantity || '-'}
-  </div>
-
-  <div>
-    <strong><i class="fas fa-coins"></i> سعر البيع: </strong> ${data.product.sellPrice || 0} جنيه
-  </div>
-  ` : ''}
-
-  <div>
-    <strong><i class="fas fa-money-bill-wave"></i> القيمة: </strong> ${data.amount} جنيه
-  </div>
-
-  <div>
-    <strong><i class="fas fa-note-sticky"></i> ملاحظة:</strong> ${data.note || '-'}
-  </div>
-
-  <div>
-    <strong><i class="fas fa-calendar-days"></i> التاريخ:</strong> ${data.createdAt || '-'}
-  </div>
-
-</div>`;
+            let typeLabel = data.product ? 'منتج' : 'مال';
+            html += `<div class="commitment-item" id="commit-${docSnap.id}">
+                        <div><strong><i class="fas fa-tag"></i> النوع:</strong> ${typeLabel}</div>
+                        ${data.product ? `
+                        <div><strong><i class="fas fa-box"></i> المنتج:</strong> ${data.product.name || '-'}</div>
+                        <div><strong><i class="fas fa-barcode"></i> السيريال:</strong> ${data.product.serial || '-'}</div>
+                        <div><strong><i class="fas fa-layer-group"></i> الكمية:</strong> ${data.product.quantity || '-'}</div>
+                        <div><strong><i class="fas fa-coins"></i> سعر البيع:</strong> ${data.product.sellPrice || 0} جنيه</div>
+                        ` : ''}
+                        <div><strong><i class="fas fa-money-bill-wave"></i> القيمة:</strong> ${data.amount} جنيه</div>
+                        <div><strong><i class="fas fa-note-sticky"></i> ملاحظة:</strong> ${data.note || '-'}</div>
+                        <div><strong><i class="fas fa-calendar-days"></i> التاريخ:</strong> ${data.createdAt || '-'}</div>
+                        <div class="commitment-actions">
+                            <button onclick="editCommitment('${empId}','${docSnap.id}')" class="edit-btn"><i class="fas fa-pen"></i> تعديل</button>
+                            <button onclick="deleteCommitment('${empId}','${docSnap.id}')" class="delete-btn"><i class="fas fa-trash"></i> حذف</button>
+                        </div>
+                    </div>`;
         });
-        html += '</div>';
         container.innerHTML = html;
     }
-    container.style.display = "block";
 };
 
-// ====== فلتر البحث ======
+window.editCommitment = async function(empId, commitmentId) {
+    const el = document.getElementById(`commit-${commitmentId}`);
+    const amountMatch = el.innerHTML.match(/القيمة:<\/strong> (\d+)/);
+    const amount = amountMatch ? amountMatch[1] : 0;
+    const noteMatch = el.innerHTML.match(/ملاحظة:<\/strong> ([^<]+)/);
+    const note = noteMatch ? noteMatch[1].trim() : '';
+    el.innerHTML = `
+        <div><strong>القيمة:</strong> <input type="number" id="editAmount-${commitmentId}" value="${amount}"></div>
+        <div><strong>ملاحظة:</strong> <input type="text" id="editNote-${commitmentId}" value="${note}"></div>
+        <div class="commitment-actions">
+            <button onclick="saveCommitment('${empId}','${commitmentId}')" class="save-btn"><i class="fas fa-save"></i> حفظ</button>
+            <button onclick="loadEmployees()" class="cancel-btn">إلغاء</button>
+        </div>
+    `;
+};
+
+window.saveCommitment = async function(empId, commitmentId) {
+    const amount = Number(document.getElementById(`editAmount-${commitmentId}`).value) || 0;
+    const note = document.getElementById(`editNote-${commitmentId}`).value;
+    try {
+        await updateDoc(doc(db, "employees", empId, "commitments", commitmentId), {
+            amount: amount, note: note, updatedAt: new Date().toLocaleString()
+        });
+        alert("تم التعديل بنجاح");
+        loadEmployees();
+    } catch(e) {
+        console.error(e);
+        alert("خطأ في التعديل");
+    }
+};
+
+window.deleteCommitment = async function(empId, commitmentId) {
+    if(!confirm("هل تريد حذف هذا الالتزام؟")) return;
+    try {
+        await deleteDoc(doc(db, "employees", empId, "commitments", commitmentId));
+        loadEmployees();
+    } catch(e) {
+        console.error(e);
+        alert("حدث خطأ في الحذف");
+    }
+};
+
 window.filterEmployees = function() {
     const val = document.getElementById("searchInput").value.toLowerCase().trim();
     document.querySelectorAll(".employee-card").forEach(card => {
@@ -1291,18 +1268,18 @@ window.filterEmployees = function() {
         card.style.display = name.includes(val) ? '' : 'none';
     });
 };
+
 document.getElementById("searchInput")?.addEventListener("input", filterEmployees);
 
-// ====== تحديث إحصائيات ======
 function updateStats(emps) {
     let totalEmp = emps.length;
     let totalSal = 0, totalDed = 0, totalNet = 0;
     emps.forEach(emp => {
         const salary = Number(emp.salary) || 0;
         totalSal += salary;
-        let sumDed = (emp.deductions || []).reduce((s,d)=> s + (Number(d.amount)||0),0);
+        let sumDed = (emp.deductions || []).reduce((s,d)=> s + (Number(d.amount)||0), 0);
         totalDed += sumDed;
-        const netVal = salary - sumDed - (emp.commitmentsTotal||0);
+        const netVal = salary + ((emp.bonuses || []).reduce((s,b)=> s + (Number(b.amount)||0), 0)) - sumDed - (emp.commitmentsTotal||0);
         totalNet += netVal > 0 ? netVal : 0;
     });
     document.getElementById("totalEmployees").innerText = totalEmp;
