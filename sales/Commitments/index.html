@@ -243,11 +243,11 @@
       font-weight: 800;
     }
 
-    .btn-add {
+    .btn-add, .request-salary-btn {
       background: linear-gradient(135deg, var(--primary), var(--primary-soft));
       width: 100%;
       max-width: 380px;
-      margin: 10px auto 32px;
+      margin: 10px auto;
       padding: 16px;
       border: none;
       border-radius: 80px;
@@ -263,8 +263,19 @@
       box-shadow: 0 8px 18px rgba(108,92,231,0.3);
     }
 
-    .btn-add:hover {
+    .request-salary-btn {
+      background: linear-gradient(135deg, #00b894, #00a187);
+      box-shadow: 0 8px 18px rgba(0,184,148,0.3);
+    }
+
+    .btn-add:hover, .request-salary-btn:hover {
       transform: translateY(-3px);
+    }
+
+    .request-salary-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .commitments-grid {
@@ -314,14 +325,6 @@
       margin: 12px 0;
     }
 
-    .payment-detail {
-      background: #e8f8f5;
-      border-radius: 20px;
-      padding: 12px;
-      margin: 12px 0;
-      border-right: 3px solid var(--success);
-    }
-
     .empty-state {
       text-align: center;
       padding: 60px;
@@ -330,138 +333,120 @@
       grid-column: 1/-1;
     }
 
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(10px);
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
-  padding:20px;
-  overflow-y:auto;
-  animation:fadeIn .25s ease;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+      animation: fadeIn .25s ease;
+    }
 
-/* صندوق المودال */
-.modal-container{
-  background:#fff;
-  width:100%;
-  max-width:560px;
-  max-height:90vh;
-  display:flex;
-  flex-direction:column;
-
-  border-radius:32px;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.18),
-    0 6px 14px rgba(0,0,0,0.12);
-
-  animation:modalSlide .35s cubic-bezier(.22,1,.36,1);
-  overflow:hidden;
-}
-
-/* الهيدر */
-.modal-header{
-  background:linear-gradient(135deg,#6c5ce7,#8e7dff);
-  color:white;
-  padding:20px 24px;
-  font-size:1.2rem;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-/* جسم المودال */
-.modal-body{
-  padding:28px;
-  overflow-y:auto;
-  flex:1;
-}
-
-/* الفوتر */
-.modal-footer{
-  padding:18px 24px;
-  background:#f6f7fb;
-  display:flex;
-  gap:12px;
-  justify-content:flex-end;
-  border-top:1px solid #eee;
-}
-
-/* أزرار */
-.modal-footer .btn{
-  padding:12px 22px;
-  border:none;
-  border-radius:22px;
-  cursor:pointer;
-  font-size:.95rem;
-  transition:.2s;
-}
-
-.modal-footer .btn-primary{
-  background:#6c5ce7;
-  color:white;
-}
-
-.modal-footer .btn-primary:hover{
-  background:#5649d8;
-  transform:translateY(-2px);
-}
-
-.modal-footer .btn-cancel{
-  background:#e0e0e0;
-}
-
-.modal-footer .btn-cancel:hover{
-  background:#d3d3d3;
-}
-
-/* أنيميشن */
-@keyframes modalSlide{
-  from{
-    opacity:0;
-    transform:translateY(40px) scale(.95);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
-}
-
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-
-/* شكل السكرول */
-.modal-body::-webkit-scrollbar{
-  width:6px;
-}
-
-.modal-body::-webkit-scrollbar-thumb{
-  background:#6c5ce7;
-  border-radius:20px;
-}
+    .modal-container, .modal-content {
+      background: #fff;
+      width: 100%;
+      max-width: 560px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      border-radius: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+      animation: modalSlide .35s cubic-bezier(.22,1,.36,1);
+      overflow: hidden;
+    }
 
     .modal-header {
-      background: linear-gradient(145deg, var(--primary), var(--primary-soft));
-      padding: 20px 28px;
+      background: linear-gradient(135deg, #6c5ce7, #8e7dff);
       color: white;
+      padding: 20px 24px;
+      font-size: 1.2rem;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 28px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 18px 24px;
+      background: #f6f7fb;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      border-top: 1px solid #eee;
+    }
+
+    .modal-footer .btn {
+      padding: 12px 22px;
+      border: none;
+      border-radius: 22px;
+      cursor: pointer;
+      font-size: .95rem;
+      transition: .2s;
+    }
+
+    .modal-footer .btn-primary {
+      background: #6c5ce7;
+      color: white;
+    }
+
+    .modal-footer .btn-primary:hover {
+      background: #5649d8;
+      transform: translateY(-2px);
+    }
+
+    .modal-footer .btn-cancel, .btn-secondary {
+      background: #e0e0e0;
+    }
+
+    .modal-footer .btn-cancel:hover, .btn-secondary:hover {
+      background: #d3d3d3;
+    }
+
+    .close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @keyframes modalSlide {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .form-group {
       margin-bottom: 20px;
     }
 
-    .form-group label{
-      padding: 15px 0;
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
     }
 
-    .form-control {
+    .form-control, .form-input {
       width: 100%;
       padding: 14px 18px;
       border-radius: 28px;
@@ -471,7 +456,7 @@
       transition: 0.2s;
     }
 
-    .form-control:focus {
+    .form-control:focus, .form-input:focus {
       border-color: var(--primary);
       outline: none;
     }
@@ -497,11 +482,8 @@
       cursor: pointer;
     }
 
-    .modal-footer {
-      display: flex;
-      gap: 12px;
-      padding: 20px 28px;
-      background: #f5f3ff;
+    .suggestion-item:hover {
+      background: #f0edff;
     }
 
     .btn {
@@ -566,6 +548,22 @@
       font-weight: 700;
     }
     
+    .bonus-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 15px;
+      border-bottom: 1px solid #eee;
+      background: #e8f8f5;
+      margin: 5px 0;
+      border-radius: 8px;
+    }
+
+    .bonus-amount {
+      color: #00b894;
+      font-weight: bold;
+    }
+    
     .quantity-control {
       display: flex;
       align-items: center;
@@ -614,9 +612,11 @@
       padding: 10px;
       background: #f8f9fa;
       border-radius: 20px;
+      gap: 10px;
     }
     
     .payment-option {
+      flex: 1;
       text-align: center;
       padding: 10px;
       border-radius: 16px;
@@ -631,7 +631,7 @@
     }
     
     .payment-option i {
-      font-size: 1rem;
+      font-size: 1.2rem;
       display: block;
       margin-bottom: 5px;
     }
@@ -643,13 +643,102 @@
       margin-top: 10px;
     }
 
+    .edit-profile-btn {
+      background: #0066ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: auto;
+      transition: all 0.3s ease;
+    }
+
+    .edit-profile-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,102,255,0.4);
+    }
+
+    .stats-card {
+      padding: 20px;
+      border-radius: 25px;
+      margin: 20px 0;
+      background: linear-gradient(135deg, #fff 0%, #f0fff4 100%);
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      background: #ffeaa7;
+      color: #fdcb6e;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-approved {
+      background: #d4edda;
+      color: #28a745;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-rejected {
+      background: #f8d7da;
+      color: #dc3545;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .request-status-container {
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .salary-paid-message {
+      background: #e8f8f5;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 15px;
+      border-right: 4px solid #00b894;
+    }
+
     @media (max-width: 640px) {
       .container { padding: 0 16px; }
       .employee-name { font-size: 1.4rem; }
       .stat-value { font-size: 1.5rem; }
-      .brand-text{
-        font-size: 16px;
-      }
+      .brand-text { font-size: 16px; }
+      .payment-method { flex-direction: column; }
     }
   </style>
 </head>
@@ -671,15 +760,35 @@
         <div class="employee-name" id="empName">---</div>
         <div class="employee-phone"><i class="fas fa-phone-alt"></i> <span id="empPhone">---</span></div>
       </div>
+      <button id="editProfileBtn" class="edit-profile-btn">
+        <i class="fas fa-user-edit"></i> تعديل الملف الشخصي
+      </button>
     </div>
+
     <div class="stats-grid">
       <div class="stat-block salary"><div class="stat-label">💰 الراتب الأساسي</div><div class="stat-value" id="baseSalary">0 ج.م</div></div>
-        <div class="summary-card"><div class="summary-label">المتبقي بعد الخصم</div><div class="summary-amount" id="netAfterDeduction">0 ج.م</div></div>
-
+      <div class="stat-block remaining"><div class="stat-label">المتبقي بعد الخصم</div><div class="stat-value" id="netAfterDeduction">0 ج.م</div></div>
     </div>
+
     <div style="margin-top: 20px; background: linear-gradient(135deg, #fff5e6, #fff0e0); border-radius: 20px; padding: 18px;">
-      <i class="fas fa-receipt"></i> <strong>📋 قائمة الخصومات الثابتة:</strong>
+      <i class="fas fa-receipt"></i> <strong>📋 قائمة الخصومات الشهرية:</strong>
       <div id="deductionsList" style="margin-top: 12px;"></div>
+    </div>
+
+    <div class="stats-card">
+      <h3><i class="fas fa-star"></i> المكافآت الشهرية</h3>
+      <div id="bonusesList" class="deductions-list"></div>
+      <div class="total-row">
+        <span>إجمالي المكافآت:</span>
+        <span id="totalBonuses" style="color: #00b894;">0 ج.م</span>
+      </div>
+    </div>
+
+    <div class="request-status-container" id="requestStatusContainer"></div>
+
+    <div class="buttons-container">
+      <button class="btn-add" id="openModalBtn"><i class="fas fa-plus-circle"></i> تسجيل التزام جديد</button>
+      <button class="request-salary-btn" id="requestSalaryBtn"><i class="fas fa-hand-holding-usd"></i> طلب قبض الراتب</button>
     </div>
   </div>
 
@@ -694,31 +803,21 @@
 
   <div class="summary-grid" id="summaryGrid" style="display: none;">
     <div class="summary-card">
-  <div class="summary-icon">
-    <i class="fas fa-coins"></i>
+      <div class="summary-icon"><i class="fas fa-coins"></i></div>
+      <div class="summary-label">إجمالي الالتزامات</div>
+      <div class="summary-amount" id="totalCommitmentsAmount">0 ج.م</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon"><i class="fas fa-chart-line"></i></div>
+      <div class="summary-label">الخصم الشهري</div>
+      <div class="summary-amount" id="monthlyDeductionAmount">0 ج.م</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon"><i class="fas fa-minus-circle"></i></div>
+      <div class="summary-label">إجمالي الخصومات</div>
+      <div class="summary-amount" id="totalDeductions">0 ج.م</div>
+    </div>
   </div>
-  <div class="summary-label">إجمالي الالتزامات</div>
-  <div class="summary-amount" id="totalCommitmentsAmount">0 ج.م</div>
-</div>
-
-<div class="summary-card">
-  <div class="summary-icon">
-    <i class="fas fa-chart-line"></i>
-  </div>
-  <div class="summary-label">الخصم الشهري</div>
-  <div class="summary-amount" id="monthlyDeductionAmount">0 ج.م</div>
-</div>
-
-<div class="summary-card">
-  <div class="summary-icon">
-    <i class="fas fa-minus-circle"></i>
-  </div>
-  <div class="summary-label">إجمالي الخصومات</div>
-  <div class="summary-amount" id="totalDeductions">0 ج.م</div>
-</div>
-  </div>
-
-  <button class="btn-add" id="openModalBtn"><i class="fas fa-plus-circle"></i> تسجيل التزام جديد</button>
 
   <div style="text-align: center; margin: 15px 0;"><h3 style="font-weight: 600;"><i class="fas fa-list-ul"></i> سجل الالتزامات</h3></div>
   <div id="commitmentsContainer" class="commitments-grid">
@@ -728,13 +827,24 @@
 
 <footer class="footer"><i class="fas fa-crown"></i> <strong>MR Fikry</strong> | الالتزامات</footer>
 
+<!-- Modal تسجيل التزام -->
 <div class="modal" id="commitModal">
   <div class="modal-container">
-    <div class="modal-header"><h3><i class="fas fa-file-signature"></i> تسجيل التزام</h3><button id="closeModalBtn" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;"><i class="fas fa-times"></i></button></div>
+    <div class="modal-header">
+      <h3><i class="fas fa-file-signature"></i> تسجيل التزام</h3>
+      <button id="closeModalBtn" class="close"><i class="fas fa-times"></i></button>
+    </div>
     <div class="modal-body">
-      <div class="form-group"><label><i class="fas fa-tag"></i> نوع الالتزام</label><select id="commitType" class="form-control"><option value="money">💰 التزام مالي</option><option value="product">📦 شراء منتج</option></select></div>
+      <div class="form-group">
+        <label><i class="fas fa-tag"></i> نوع الالتزام</label>
+        <select id="commitType" class="form-control">
+          <option value="money">💰 التزام مالي</option>
+          <option value="product">📦 شراء منتج</option>
+        </select>
+      </div>
       <div id="productSearchGroup" style="display: none;">
-        <div class="form-group"><label><i class="fas fa-box"></i> البحث عن منتج</label>
+        <div class="form-group">
+          <label><i class="fas fa-box"></i> البحث عن منتج</label>
           <input type="text" id="productSearchInput" class="form-control" placeholder="اسم المنتج أو السيريال" autocomplete="off">
           <div id="productSuggestions" class="suggestions-list"></div>
         </div>
@@ -776,11 +886,51 @@
           </div>
         </div>
       </div>
-      <div class="form-group" id="moneyAmountGroup"><label><i class="fas fa-calculator"></i> القيمة (ج.م)</label><input type="number" id="commitAmount" class="form-control" placeholder="أدخل المبلغ" step="0.01"></div>
-      <div class="form-group"><label><i class="fas fa-pen-alt"></i> ملاحظات</label><textarea id="commitNote" class="form-control" rows="2" placeholder="سبب الالتزام ..."></textarea></div>
-      <div class="form-group"><label><i class="fas fa-calendar-month"></i> الشهر المستهدف</label><input type="month" id="targetMonthInput" class="form-control"></div>
+      <div class="form-group" id="moneyAmountGroup">
+        <label><i class="fas fa-calculator"></i> القيمة (ج.م)</label>
+        <input type="number" id="commitAmount" class="form-control" placeholder="أدخل المبلغ" step="0.01">
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-pen-alt"></i> ملاحظات</label>
+        <textarea id="commitNote" class="form-control" rows="2" placeholder="سبب الالتزام ..."></textarea>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-calendar-month"></i> الشهر المستهدف</label>
+        <input type="month" id="targetMonthInput" class="form-control">
+      </div>
     </div>
-    <div class="modal-footer"><button id="saveCommitBtn" class="btn btn-primary"><i class="fas fa-save"></i> حفظ</button><button id="cancelModalBtn" class="btn" style="background:#ccc;">إلغاء</button></div>
+    <div class="modal-footer">
+      <button id="saveCommitBtn" class="btn btn-primary"><i class="fas fa-save"></i> حفظ</button>
+      <button id="cancelModalBtn" class="btn btn-cancel">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة تعديل الملف الشخصي -->
+<div class="modal" id="profileModal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><i class="fas fa-user-edit"></i> تعديل البيانات الشخصية</h3>
+      <button id="closeProfileModalBtn" class="close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label><i class="fas fa-user"></i> الاسم:</label>
+        <input type="text" id="editName" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-phone"></i> رقم الهاتف:</label>
+        <input type="tel" id="editPhone" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-lock"></i> كلمة المرور الجديدة (اختياري):</label>
+        <input type="password" id="editPassword" class="form-input" placeholder="اتركه فارغاً إذا لم تريد التغيير">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelProfileBtn" class="btn-secondary">إلغاء</button>
+      <button id="saveProfileBtn" class="btn-primary">حفظ التغييرات</button>
+    </div>
   </div>
 </div>
 
@@ -788,7 +938,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { 
     getFirestore, collection, addDoc, getDocs, query, where,
-    doc, updateDoc, arrayUnion, increment
+    doc, updateDoc, increment, getDoc, deleteDoc
   } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
   // Firebase Configuration
@@ -813,19 +963,21 @@
 
   // Global Variables
   let employeeDocId = null;
-  let employeeFullData = { salary: 0, deductions: [] };
+  let employeeFullData = { salary: 0 };
   let allProducts = [];
   let selectedProduct = null;
   let currentDate = new Date();
   let currentYearMonth = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}`;
-  let selectedPaymentMethod = 'full'; // full, partial, cash
+  let selectedPaymentMethod = 'full';
 
   // DOM Elements
   const empNameSpan = document.getElementById('empName');
   const empPhoneSpan = document.getElementById('empPhone');
   const baseSalarySpan = document.getElementById('baseSalary');
   const totalDeductionsSpan = document.getElementById('totalDeductions');
+  const totalBonusesSpan = document.getElementById('totalBonuses');
   const deductionsListDiv = document.getElementById('deductionsList');
+  const bonusesListDiv = document.getElementById('bonusesList');
   const currentMonthDisplay = document.getElementById('currentMonthDisplay');
   const summaryGrid = document.getElementById('summaryGrid');
   const totalCommitmentsSpan = document.getElementById('totalCommitmentsAmount');
@@ -833,6 +985,7 @@
   const netAfterSpan = document.getElementById('netAfterDeduction');
   const commitmentsContainer = document.getElementById('commitmentsContainer');
   const modal = document.getElementById('commitModal');
+  const profileModal = document.getElementById('profileModal');
   const commitType = document.getElementById('commitType');
   const productGroup = document.getElementById('productSearchGroup');
   const productSearchInput = document.getElementById('productSearchInput');
@@ -848,13 +1001,50 @@
   const paymentMethodGroup = document.getElementById('paymentMethodGroup');
   const partialPaymentGroup = document.getElementById('partialPaymentGroup');
   const cashPaid = document.getElementById('cashPaid');
-  const deductionFromSalary = document.getElementById('deductionFromSalary');
+  const deductionFromSalarySpan = document.getElementById('deductionFromSalary');
+  const requestSalaryBtn = document.getElementById('requestSalaryBtn');
+  const requestStatusContainer = document.getElementById('requestStatusContainer');
+  
+  // Profile Edit Elements
+  const editNameInput = document.getElementById('editName');
+  const editPhoneInput = document.getElementById('editPhone');
+  const editPasswordInput = document.getElementById('editPassword');
+  const saveProfileBtn = document.getElementById('saveProfileBtn');
   
   // Modal Controls
-  document.getElementById('openModalBtn').onclick = () => { 
+  document.getElementById('openModalBtn').onclick = async () => {
+    const isSalaryPaid = await checkIfSalaryPaid();
+    if (isSalaryPaid) {
+      showToast("❌ لا يمكن إضافة التزامات جديدة بعد صرف راتب الشهر!", "error");
+      return;
+    }
     modal.style.display = 'flex'; 
     resetModalForm(); 
   };
+  
+  // Request Salary Button
+  if (requestSalaryBtn) {
+    requestSalaryBtn.onclick = async () => {
+      await requestSalaryPayment();
+    };
+  }
+  
+  // Profile Modal Controls
+  document.getElementById('editProfileBtn').onclick = async () => {
+    await openProfileModal();
+  };
+  
+  const closeProfileModal = () => { 
+    profileModal.style.display = 'none'; 
+  };
+  
+  document.getElementById('closeProfileModalBtn').onclick = closeProfileModal;
+  document.getElementById('cancelProfileBtn').onclick = closeProfileModal;
+  if (profileModal) {
+    profileModal.addEventListener('click', (e) => { 
+      if(e.target === profileModal) closeProfileModal(); 
+    });
+  }
   
   const closeModalFunc = () => { modal.style.display = 'none'; };
   document.getElementById('closeModalBtn').onclick = closeModalFunc;
@@ -863,15 +1053,371 @@
     if(e.target === modal) closeModalFunc(); 
   });
   
+  // التحقق من صرف الراتب
+  async function checkIfSalaryPaid() {
+    try {
+      const salaryPaymentsRef = collection(db, 'salaryPayments');
+      const paymentQuery = query(
+        salaryPaymentsRef,
+        where("employeeId", "==", employeeDocId),
+        where("month", "==", currentYearMonth),
+        where("status", "==", "completed")
+      );
+      const paymentSnap = await getDocs(paymentQuery);
+      return !paymentSnap.empty;
+    } catch(e) {
+      console.error(e);
+      return false;
+    }
+  }
+  
+  // Request Salary Payment Function
+  async function requestSalaryPayment() {
+    const isSalaryPaid = await checkIfSalaryPaid();
+    if (isSalaryPaid) {
+      showToast("❌ تم صرف راتب هذا الشهر بالفعل!", "error");
+      return;
+    }
+    
+    const salary = employeeFullData.salary || 0;
+    
+    // جلب خصومات الشهر الحالي
+    const monthlyDeductionsRef = collection(db, 'employees', employeeDocId, 'monthlyDeductions');
+    const deductionsSnap = await getDocs(monthlyDeductionsRef);
+    let totalMonthlyDeduction = 0;
+    deductionsSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      if(data.month === currentYearMonth) {
+        totalMonthlyDeduction += (Number(data.amount) || 0);
+      }
+    });
+    
+    // جلب مكافآت الشهر الحالي
+    const monthlyBonusesRef = collection(db, 'employees', employeeDocId, 'monthlyBonuses');
+    const bonusesSnap = await getDocs(monthlyBonusesRef);
+    let totalMonthlyBonus = 0;
+    bonusesSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      if(data.month === currentYearMonth) {
+        totalMonthlyBonus += (Number(data.amount) || 0);
+      }
+    });
+    
+    // جلب التزامات الشهر الحالي
+    const commitmentsRef = collection(db, 'employees', employeeDocId, 'commitments');
+    const qSnap = await getDocs(commitmentsRef);
+    let totalCommitmentsDeduction = 0;
+    qSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      if(data.month === currentYearMonth) {
+        const deductionValue = data.deductedAmount !== undefined ? data.deductedAmount : data.amount;
+        totalCommitmentsDeduction += (Number(deductionValue) || 0);
+      }
+    });
+    
+    const totalDeduction = totalMonthlyDeduction + totalCommitmentsDeduction;
+    const netSalary = salary + totalMonthlyBonus - totalDeduction;
+    
+    if (netSalary <= 0) {
+      showToast("⚠️ لا يمكن طلب القبض والراتب صفر أو أقل!", "error");
+      return;
+    }
+    
+    const requestsRef = collection(db, "salaryRequests");
+    const existingQuery = query(requestsRef, 
+      where("employeeId", "==", employeeDocId),
+      where("month", "==", currentYearMonth),
+      where("status", "in", ["pending", "approved"])
+    );
+    const existingSnap = await getDocs(existingQuery);
+    
+    let hasActiveRequest = false;
+    existingSnap.forEach(doc => {
+      const data = doc.data();
+      if (data.status === "pending" || data.status === "approved") {
+        hasActiveRequest = true;
+      }
+    });
+    
+    if (hasActiveRequest) {
+      showToast("⚠️ يوجد طلب قبض قيد الانتظار بالفعل لهذا الشهر!", "error");
+      return;
+    }
+    
+    const requestData = {
+      employeeId: employeeDocId,
+      employeeName: employeeFullData.name,
+      employeePhone: employeeFullData.phone,
+      month: currentYearMonth,
+      netSalary: netSalary,
+      baseSalary: salary,
+      totalDeductions: totalDeduction,
+      totalBonuses: totalMonthlyBonus,
+      monthlyCommitments: totalCommitmentsDeduction,
+      requestDate: new Date().toISOString(),
+      status: "pending",
+      note: ""
+    };
+    
+    try {
+      await addDoc(collection(db, "salaryRequests"), requestData);
+      showToast("✅ تم إرسال طلب القبض إلى المدير للموافقة", "success");
+      await checkSalaryRequestStatus();
+    } catch(e) {
+      console.error(e);
+      showToast("❌ حدث خطأ في إرسال الطلب", "error");
+    }
+  }
+  
+  // Check Salary Request Status
+  async function checkSalaryRequestStatus() {
+    try {
+      const requestsRef = collection(db, 'salaryRequests');
+      const q = query(requestsRef, 
+        where("employeeId", "==", employeeDocId),
+        where("month", "==", currentYearMonth),
+        where("status", "in", ["pending", "approved", "rejected", "completed"])
+      );
+      const snap = await getDocs(q);
+      
+      let latestRequest = null;
+      snap.forEach(doc => {
+        const data = doc.data();
+        if (!latestRequest || new Date(data.requestDate) > new Date(latestRequest.requestDate)) {
+          latestRequest = { id: doc.id, ...data };
+        }
+      });
+      
+      if (latestRequest && requestStatusContainer) {
+        if (latestRequest.status === "pending") {
+          requestStatusContainer.innerHTML = '<div class="status-pending"><i class="fas fa-clock"></i> طلب قبض قيد الانتظار...</div>';
+          if (requestSalaryBtn) {
+            requestSalaryBtn.disabled = true;
+            requestSalaryBtn.style.opacity = "0.5";
+          }
+        } else if (latestRequest.status === "approved") {
+          requestStatusContainer.innerHTML = '<div class="status-approved"><i class="fas fa-check-circle"></i> تم الموافقة على طلب القبض! جاري تصفية الشهر...</div>';
+          if (requestSalaryBtn) {
+            requestSalaryBtn.disabled = true;
+            requestSalaryBtn.style.opacity = "0.5";
+          }
+          await finalizeSalaryPayment(latestRequest);
+        } else if (latestRequest.status === "rejected") {
+          requestStatusContainer.innerHTML = '<div class="status-rejected"><i class="fas fa-times-circle"></i> تم رفض طلب القبض</div>';
+          if (requestSalaryBtn) {
+            requestSalaryBtn.disabled = false;
+            requestSalaryBtn.style.opacity = "1";
+          }
+        } else if (latestRequest.status === "completed") {
+          requestStatusContainer.innerHTML = '<div class="status-approved"><i class="fas fa-check-double"></i> تم صرف راتب هذا الشهر</div>';
+          if (requestSalaryBtn) {
+            requestSalaryBtn.disabled = true;
+            requestSalaryBtn.style.opacity = "0.5";
+          }
+        }
+      } else if (requestStatusContainer) {
+        requestStatusContainer.innerHTML = '';
+        const isSalaryPaid = await checkIfSalaryPaid();
+        if (!isSalaryPaid) {
+          requestSalaryBtn.disabled = false;
+          requestSalaryBtn.style.opacity = "1";
+        }
+      }
+    } catch(e) {
+      console.error("خطأ في التحقق من حالة الطلب:", e);
+    }
+  }
+  
+  // Finalize Salary Payment
+  async function finalizeSalaryPayment(request) {
+    try {
+      showToast("🔄 جاري تصفية الشهر وإنشاء سجل جديد...", "success");
+      
+      const paymentRecord = {
+        employeeId: employeeDocId,
+        employeeName: employeeFullData.name,
+        month: currentYearMonth,
+        netSalary: request.netSalary,
+        baseSalary: request.baseSalary,
+        totalDeductions: request.totalDeductions,
+        totalBonuses: request.totalBonuses,
+        monthlyCommitments: request.monthlyCommitments,
+        paymentDate: new Date().toISOString(),
+        status: "completed"
+      };
+      
+      await addDoc(collection(db, 'salaryPayments'), paymentRecord);
+      
+      // أرشفة التزامات الشهر
+      const commitmentsRef = collection(db, 'employees', employeeDocId, 'commitments');
+      const commitmentsSnap = await getDocs(commitmentsRef);
+      for (const docSnap of commitmentsSnap.docs) {
+        const data = docSnap.data();
+        if (data.month === currentYearMonth) {
+          await addDoc(collection(db, 'employees', employeeDocId, 'pastCommitments'), {
+            ...data,
+            archivedAt: new Date().toISOString(),
+            archivedMonth: currentYearMonth
+          });
+          await deleteDoc(doc(db, 'employees', employeeDocId, 'commitments', docSnap.id));
+        }
+      }
+      
+      // أرشفة خصومات الشهر
+      const monthlyDeductionsRef = collection(db, 'employees', employeeDocId, 'monthlyDeductions');
+      const deductionsSnap = await getDocs(monthlyDeductionsRef);
+      for (const docSnap of deductionsSnap.docs) {
+        const data = docSnap.data();
+        if (data.month === currentYearMonth) {
+          await addDoc(collection(db, 'employees', employeeDocId, 'pastMonthlyDeductions'), {
+            ...data,
+            archivedAt: new Date().toISOString(),
+            archivedMonth: currentYearMonth
+          });
+          await deleteDoc(doc(db, 'employees', employeeDocId, 'monthlyDeductions', docSnap.id));
+        }
+      }
+      
+      // أرشفة مكافآت الشهر
+      const monthlyBonusesRef = collection(db, 'employees', employeeDocId, 'monthlyBonuses');
+      const bonusesSnap = await getDocs(monthlyBonusesRef);
+      for (const docSnap of bonusesSnap.docs) {
+        const data = docSnap.data();
+        if (data.month === currentYearMonth) {
+          await addDoc(collection(db, 'employees', employeeDocId, 'pastMonthlyBonuses'), {
+            ...data,
+            archivedAt: new Date().toISOString(),
+            archivedMonth: currentYearMonth
+          });
+          await deleteDoc(doc(db, 'employees', employeeDocId, 'monthlyBonuses', docSnap.id));
+        }
+      }
+      
+      await addDoc(collection(db, 'notifications'), {
+        employeeId: employeeDocId,
+        employeeName: employeeFullData.name,
+        type: "salary_paid",
+        message: `تم صرف راتب شهر ${currentYearMonth} بنجاح. صافي المستلم: ${request.netSalary} ج.م`,
+        date: new Date().toISOString(),
+        read: false
+      });
+      
+      await updateDoc(doc(db, "salaryRequests", request.id), {
+        status: "completed",
+        completedAt: new Date().toISOString()
+      });
+      
+      showToast(`✅ تم صرف الراتب بنجاح! صافي المستلم: ${request.netSalary} ج.م`, "success");
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      
+    } catch(e) {
+      console.error("خطأ في تصفية الراتب:", e);
+      showToast("❌ حدث خطأ في تصفية الراتب", "error");
+    }
+  }
+  
+  // Open Profile Modal
+  async function openProfileModal() {
+    if (!employeeDocId) {
+      showToast("جاري تحميل البيانات...", "error");
+      return;
+    }
+    
+    try {
+      const employeeRef = doc(db, "employees", employeeDocId);
+      const employeeSnap = await getDoc(employeeRef);
+      
+      if (employeeSnap.exists()) {
+        const data = employeeSnap.data();
+        editNameInput.value = data.name || '';
+        editPhoneInput.value = data.phone || '';
+        editPasswordInput.value = '';
+        profileModal.style.display = 'flex';
+      } else {
+        showToast("حدث خطأ في تحميل البيانات", "error");
+      }
+    } catch (error) {
+      console.error("خطأ في تحميل بيانات الموظف:", error);
+      showToast("حدث خطأ في تحميل البيانات", "error");
+    }
+  }
+  
+  // Save Profile Changes
+  saveProfileBtn.onclick = async () => {
+    const newName = editNameInput.value.trim();
+    const newPhone = editPhoneInput.value.trim();
+    const newPassword = editPasswordInput.value.trim();
+    
+    if (!newName || !newPhone) {
+      showToast("الاسم ورقم الهاتف مطلوبان", "error");
+      return;
+    }
+    
+    if (newPhone !== currentEmployee.phone) {
+      try {
+        const phoneQuery = query(collection(db, "employees"), where("phone", "==", newPhone));
+        const phoneSnap = await getDocs(phoneQuery);
+        if (!phoneSnap.empty && phoneSnap.docs[0].id !== employeeDocId) {
+          showToast("رقم الهاتف مستخدم من قبل موظف آخر", "error");
+          return;
+        }
+      } catch (error) {
+        console.error("خطأ في التحقق من رقم الهاتف:", error);
+      }
+    }
+    
+    try {
+      const employeeRef = doc(db, "employees", employeeDocId);
+      const updateData = {
+        name: newName,
+        phone: newPhone,
+        updatedAt: new Date().toISOString()
+      };
+      
+      if (newPassword) {
+        updateData.password = newPassword;
+      }
+      
+      await updateDoc(employeeRef, updateData);
+      
+      currentEmployee.name = newName;
+      currentEmployee.phone = newPhone;
+      if (newPassword) {
+        currentEmployee.password = newPassword;
+      }
+      localStorage.setItem("currentEmployee", JSON.stringify(currentEmployee));
+      
+      empNameSpan.textContent = newName;
+      empPhoneSpan.textContent = newPhone;
+      
+      showToast("تم تحديث البيانات بنجاح ✅", "success");
+      closeProfileModal();
+      await loadEmployeeAndDeductions();
+    } catch (error) {
+      console.error("خطأ في تحديث البيانات:", error);
+      showToast("حدث خطأ في تحديث البيانات", "error");
+    }
+  };
+  
   // Type Selection Handler
   commitType.addEventListener('change', () => { 
     const isProduct = commitType.value === 'product';
     productGroup.style.display = isProduct ? 'block' : 'none';
     moneyAmountGroup.style.display = isProduct ? 'none' : 'block';
+    
     if(commitType.value !== 'product') {
       selectedProduct = null;
       productSearchInput.value = '';
+      paymentMethodGroup.style.display = 'none';
+      partialPaymentGroup.style.display = 'none';
     } else {
+      paymentMethodGroup.style.display = 'block';
+      selectedPaymentMethod = 'full';
+      document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+      document.querySelector('.payment-option[data-method="full"]').classList.add('active');
       updateTotalPrice();
       updateDeductionAmount();
     }
@@ -886,8 +1432,14 @@
       
       if (selectedPaymentMethod === 'partial') {
         partialPaymentGroup.style.display = 'block';
+        if (!cashPaid.value || parseFloat(cashPaid.value) === 0) {
+          cashPaid.value = '0';
+        }
       } else {
         partialPaymentGroup.style.display = 'none';
+        if (selectedPaymentMethod === 'cash') {
+          cashPaid.value = '0';
+        }
       }
       
       updateDeductionAmount();
@@ -908,60 +1460,77 @@
   
   // Deduction Amount Update
   function updateDeductionAmount() {
-    if (!selectedProduct || !selectedProduct.sellPrice) return;
+    if (!selectedProduct || !selectedProduct.sellPrice) {
+      if (deductionFromSalarySpan) {
+        deductionFromSalarySpan.textContent = ``;
+      }
+      return;
+    }
     
     const qty = parseInt(productQuantity.value) || 1;
     const totalAmount = qty * selectedProduct.sellPrice;
     
     if (selectedPaymentMethod === 'cash') {
-      deductionFromSalary.textContent = `سيتم دفع: ${totalAmount.toFixed(2)} ج.م كاش بالكامل (لن يتم خصم شيء من المرتب)`;
-      deductionFromSalary.style.background = '#e8f8f5';
-      deductionFromSalary.style.color = '#00b894';
+      deductionFromSalarySpan.textContent = `💰 سيتم دفع: ${totalAmount.toFixed(2)} ج.م كاش بالكامل (لن يتم خصم شيء من المرتب)`;
+      deductionFromSalarySpan.style.background = '#e8f8f5';
+      deductionFromSalarySpan.style.color = '#00b894';
     } else if (selectedPaymentMethod === 'partial') {
-      const paidCash = parseFloat(cashPaid.value) || 0;
+      let paidCash = parseFloat(cashPaid.value) || 0;
+      if (paidCash > totalAmount) {
+        paidCash = totalAmount;
+        cashPaid.value = totalAmount;
+      }
       const remaining = totalAmount - paidCash;
       if (remaining > 0) {
-        deductionFromSalary.textContent = `سيتم خصم: ${remaining.toFixed(2)} ج.م من المرتب`;
-        deductionFromSalary.style.background = '#ffe6e6';
-        deductionFromSalary.style.color = '#d63031';
+        deductionFromSalarySpan.textContent = `📉 سيتم خصم: ${remaining.toFixed(2)} ج.م من المرتب (المتبقي بعد دفع ${paidCash.toFixed(2)} ج.م كاش)`;
+        deductionFromSalarySpan.style.background = '#ffe6e6';
+        deductionFromSalarySpan.style.color = '#d63031';
       } else if (remaining === 0) {
-        deductionFromSalary.textContent = `تم الدفع كاملًا كاش (لن يتم خصم شيء من المرتب)`;
-        deductionFromSalary.style.background = '#e8f8f5';
-        deductionFromSalary.style.color = '#00b894';
-      } else {
-        deductionFromSalary.textContent = `⚠️ المبلغ المدفوع أكبر من الإجمالي!`;
-        deductionFromSalary.style.background = '#fff3cd';
-        deductionFromSalary.style.color = '#f39c12';
+        deductionFromSalarySpan.textContent = `✅ تم الدفع كاملًا كاش (لن يتم خصم شيء من المرتب)`;
+        deductionFromSalarySpan.style.background = '#e8f8f5';
+        deductionFromSalarySpan.style.color = '#00b894';
       }
     } else {
-      deductionFromSalary.textContent = `سيتم خصم: ${totalAmount.toFixed(2)} ج.م من المرتب (خصم كامل)`;
-      deductionFromSalary.style.background = '#ffe6e6';
-      deductionFromSalary.style.color = '#d63031';
+      deductionFromSalarySpan.textContent = `📉 سيتم خصم: ${totalAmount.toFixed(2)} ج.م من المرتب (خصم كامل)`;
+      deductionFromSalarySpan.style.background = '#ffe6e6';
+      deductionFromSalarySpan.style.color = '#d63031';
     }
   }
   
   // Event Listeners
-  cashPaid.addEventListener('input', updateDeductionAmount);
+  if (cashPaid) {
+    cashPaid.addEventListener('input', function() {
+      let value = parseFloat(this.value) || 0;
+      if (value < 0) this.value = 0;
+      updateDeductionAmount();
+    });
+  }
   
-  decreaseQty.addEventListener('click', () => {
-    let qty = parseInt(productQuantity.value);
-    if (qty > 1) {
-      productQuantity.value = qty - 1;
+  if (decreaseQty) {
+    decreaseQty.addEventListener('click', () => {
+      let qty = parseInt(productQuantity.value);
+      if (qty > 1) {
+        productQuantity.value = qty - 1;
+        updateTotalPrice();
+      }
+    });
+  }
+  
+  if (increaseQty) {
+    increaseQty.addEventListener('click', () => {
+      let qty = parseInt(productQuantity.value);
+      productQuantity.value = qty + 1;
       updateTotalPrice();
-    }
-  });
+    });
+  }
   
-  increaseQty.addEventListener('click', () => {
-    let qty = parseInt(productQuantity.value);
-    productQuantity.value = qty + 1;
-    updateTotalPrice();
-  });
-  
-  productQuantity.addEventListener('change', () => {
-    let qty = parseInt(productQuantity.value);
-    if (isNaN(qty) || qty < 1) productQuantity.value = 1;
-    updateTotalPrice();
-  });
+  if (productQuantity) {
+    productQuantity.addEventListener('change', () => {
+      let qty = parseInt(productQuantity.value);
+      if (isNaN(qty) || qty < 1) productQuantity.value = 1;
+      updateTotalPrice();
+    });
+  }
   
   // Load Employee Data
   async function loadEmployeeAndDeductions() {
@@ -976,30 +1545,51 @@
       currentEmployee.id = employeeDocId;
       localStorage.setItem("currentEmployee", JSON.stringify(currentEmployee));
       
-      // Update UI
       empNameSpan.textContent = employeeFullData.name || currentEmployee.name || "غير محدد";
       empPhoneSpan.textContent = employeeFullData.phone || currentEmployee.phone;
       
       const salary = employeeFullData.salary || 0;
       baseSalarySpan.textContent = `${salary} ج.م`;
       
-      const deductionsArr = employeeFullData.deductions || [];
-      let totalDed = 0;
+      await loadMonthlyDeductionsAndBonuses();
+      await loadCommitmentsForMonth();
+      await checkSalaryRequestStatus();
+    } catch(e) { 
+      console.error(e); 
+      showToast("خطأ في تحميل بيانات الموظف", "error"); 
+    }
+  }
+  
+  // جلب الخصومات والمكافآت الشهرية
+  async function loadMonthlyDeductionsAndBonuses() {
+    try {
+      // جلب خصومات الشهر الحالي
+      const monthlyDeductionsRef = collection(db, 'employees', employeeDocId, 'monthlyDeductions');
+      const deductionsSnap = await getDocs(monthlyDeductionsRef);
       
-      if(deductionsArr.length === 0) {
-        deductionsListDiv.innerHTML = '<div style="color: #888; padding: 8px;">لا توجد خصومات مسجلة</div>';
+      let totalDed = 0;
+      let monthDeductions = [];
+      
+      deductionsSnap.forEach(docSnap => {
+        const data = docSnap.data();
+        if(data.month === currentYearMonth) {
+          monthDeductions.push({ id: docSnap.id, ...data });
+          totalDed += (Number(data.amount) || 0);
+        }
+      });
+      
+      if(monthDeductions.length === 0) {
+        deductionsListDiv.innerHTML = '<div style="color: #888; padding: 8px;">لا توجد خصومات لهذا الشهر</div>';
       } else {
         let html = '';
-        deductionsArr.forEach(d => { 
-          const amount = Number(d.amount) || 0;
-          totalDed += amount; 
+        monthDeductions.forEach(d => { 
           html += `
             <div class="deduction-item">
               <span class="deduction-reason">
                 <i class="fas fa-exclamation-triangle" style="color: #d63031; margin-left: 8px;"></i> 
-                ${d.reason || 'خصم ثابت'}
+                ${d.reason || 'خصم شهري'}
               </span>
-              <span class="deduction-amount">${amount} ج.م</span>
+              <span class="deduction-amount">${d.amount} ج.م</span>
             </div>
           `;
         });
@@ -1007,13 +1597,46 @@
       }
       
       totalDeductionsSpan.textContent = `${totalDed} ج.م`;
-      const remainingRaw = salary - totalDed;
-      employeeFullData.deductionsTotal = totalDed;
       
-      await loadCommitmentsForMonth();
-    } catch(e) { 
-      console.error(e); 
-      showToast("خطأ في تحميل بيانات الموظف", "error"); 
+      // جلب مكافآت الشهر الحالي
+      const monthlyBonusesRef = collection(db, 'employees', employeeDocId, 'monthlyBonuses');
+      const bonusesSnap = await getDocs(monthlyBonusesRef);
+      
+      let totalBonus = 0;
+      let monthBonuses = [];
+      
+      bonusesSnap.forEach(docSnap => {
+        const data = docSnap.data();
+        if(data.month === currentYearMonth) {
+          monthBonuses.push({ id: docSnap.id, ...data });
+          totalBonus += (Number(data.amount) || 0);
+        }
+      });
+      
+      if(monthBonuses.length === 0) {
+        if(bonusesListDiv) bonusesListDiv.innerHTML = '<div style="color: #888; padding: 8px;">لا توجد مكافآت لهذا الشهر</div>';
+      } else {
+        let html = '';
+        monthBonuses.forEach(b => { 
+          html += `
+            <div class="bonus-item">
+              <span class="bonus-reason">
+                <i class="fas fa-star" style="color: #f39c12; margin-left: 8px;"></i> 
+                ${b.reason || 'مكافأة شهرية'}
+              </span>
+              <span class="bonus-amount">+${b.amount} ج.م</span>
+            </div>
+          `;
+        });
+        if(bonusesListDiv) bonusesListDiv.innerHTML = html;
+      }
+      
+      if(totalBonusesSpan) totalBonusesSpan.textContent = `+${totalBonus} ج.م`;
+      employeeFullData.monthlyDeductionsTotal = totalDed;
+      employeeFullData.monthlyBonusesTotal = totalBonus;
+      
+    } catch(e) {
+      console.error("خطأ في جلب الخصومات والمكافآت الشهرية:", e);
     }
   }
   
@@ -1040,7 +1663,9 @@
     let newDate = new Date(year, month-1 + delta, 1);
     currentYearMonth = `${newDate.getFullYear()}-${String(newDate.getMonth()+1).padStart(2,'0')}`;
     updateMonthUI();
+    loadMonthlyDeductionsAndBonuses();
     loadCommitmentsForMonth();
+    checkSalaryRequestStatus();
   };
   
   document.getElementById('prevMonthBtn').onclick = () => changeMonth(-1);
@@ -1056,42 +1681,93 @@
     commitmentsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-pulse"></i> جاري التحميل...</div>';
     
     try {
+      const isSalaryPaid = await checkIfSalaryPaid();
+      
       const commitmentsRef = collection(db, 'employees', employeeDocId, 'commitments');
       const qSnap = await getDocs(commitmentsRef);
       let monthCommitments = [];
-      let totalMonthlyAmount = 0;
+      let totalCommitmentsDeduction = 0;
       
       qSnap.forEach(docSnap => {
         const data = docSnap.data();
         if(data.month === currentYearMonth) {
           monthCommitments.push({ id: docSnap.id, ...data });
-          totalMonthlyAmount += (Number(data.deductedAmount) || Number(data.amount) || 0);
+          const deductionValue = data.deductedAmount !== undefined ? data.deductedAmount : data.amount;
+          totalCommitmentsDeduction += (Number(deductionValue) || 0);
         }
       });
       
-      if(monthCommitments.length === 0) {
-        commitmentsContainer.innerHTML = `<div class="empty-state"><i class="far fa-calendar-times"></i> لا توجد التزامات لهذا الشهر</div>`;
+      const salary = employeeFullData.salary || 0;
+      const monthlyDeductions = employeeFullData.monthlyDeductionsTotal || 0;
+      const monthlyBonuses = employeeFullData.monthlyBonusesTotal || 0;
+      const totalMonthlyDeduction = totalCommitmentsDeduction + monthlyDeductions;
+      const monthlyDeductionAmount = totalMonthlyDeduction - monthlyBonuses;
+      
+      if (summaryGrid && (monthCommitments.length > 0 || monthlyDeductions > 0 || monthlyBonuses > 0 || isSalaryPaid)) {
+        summaryGrid.style.display = 'grid';
+      } else if (summaryGrid) {
         summaryGrid.style.display = 'none';
-        return;
       }
       
-      summaryGrid.style.display = 'grid';
-      totalCommitmentsSpan.textContent = `${totalMonthlyAmount} ج.م`;
-      
-      const salary = employeeFullData.salary || 0;
-      const fixedDed = employeeFullData.deductionsTotal || 0;
-      const monthlyDeductionAmount = totalMonthlyAmount + fixedDed;
+      totalCommitmentsSpan.textContent = `${totalCommitmentsDeduction} ج.م`;
       monthlyDeductionSpan.textContent = `${monthlyDeductionAmount} ج.م`;
       
       const net = salary - monthlyDeductionAmount;
-      netAfterSpan.textContent = `${net} ج.م`;
-      netAfterSpan.style.color = net >= 0 ? '#00b894' : '#d63031';
+      
+      if (isSalaryPaid) {
+        netAfterSpan.innerHTML = `✅ تم صرف راتب هذا الشهر`;
+        netAfterSpan.style.color = '#00b894';
+        netAfterSpan.style.fontSize = '16px';
+        netAfterSpan.style.fontWeight = 'bold';
+        
+        if (requestSalaryBtn) {
+          requestSalaryBtn.disabled = true;
+          requestSalaryBtn.style.opacity = "0.5";
+        }
+      } else {
+        netAfterSpan.innerHTML = `${net} ج.م`;
+        netAfterSpan.style.color = net >= 0 ? '#00b894' : '#d63031';
+        netAfterSpan.style.fontSize = '2rem';
+        netAfterSpan.style.fontWeight = '800';
+      }
+      
+      if(monthCommitments.length === 0 && !isSalaryPaid && monthlyDeductions === 0 && monthlyBonuses === 0) {
+        commitmentsContainer.innerHTML = `<div class="empty-state"><i class="far fa-calendar-times"></i> لا توجد التزامات لهذا الشهر</div>`;
+        return;
+      }
       
       let html = '';
+      
+      // عرض الخصومات الشهرية
+      if (monthlyDeductions > 0) {
+        html += `<div class="commit-card money" style="border-top-color: #d63031;">
+          <div class="commit-header">
+            <span class="commit-type"><i class="fas fa-exclamation-triangle" style="color: #d63031;"></i> خصومات شهرية</span>
+            <span class="commit-amount" style="color: #d63031;">-${monthlyDeductions} ج.م</span>
+          </div>
+          <div class="product-detail" style="background: #ffe6e6;">
+            <small>خصومات تم إضافتها لهذا الشهر</small>
+          </div>
+        </div>`;
+      }
+      
+      // عرض المكافآت الشهرية
+      if (monthlyBonuses > 0) {
+        html += `<div class="commit-card money" style="border-top-color: #00b894;">
+          <div class="commit-header">
+            <span class="commit-type"><i class="fas fa-star" style="color: #f39c12;"></i> مكافآت شهرية</span>
+            <span class="commit-amount" style="color: #00b894;">+${monthlyBonuses} ج.م</span>
+          </div>
+          <div class="product-detail" style="background: #e8f8f5;">
+            <small>مكافآت تم إضافتها لهذا الشهر</small>
+          </div>
+        </div>`;
+      }
+      
+      // عرض الالتزامات
       monthCommitments.forEach(c => {
         const isMoney = c.type === 'money';
         const isPartial = c.paymentMethod === 'partial';
-        const isCash = c.paymentMethod === 'cash';
         
         html += `<div class="commit-card ${isMoney ? 'money' : 'product'} ${isPartial ? 'partial' : ''}">
           <div class="commit-header">
@@ -1106,10 +1782,10 @@
           html += `<div class="product-detail">
             <i class="fas fa-cube"></i> <strong>${c.product.name || 'منتج'}</strong><br>
             <small>سعر الوحدة: ${c.product.sellPrice || 0} ج.م | الكمية: ${c.product.quantity || 1}</small><br>`;
-          if(c.paidCash !== undefined) {
+          if(c.paidCash !== undefined && c.paidCash > 0) {
             html += `<small>💰 دفع كاش: ${c.paidCash} ج.م</small><br>`;
           }
-          if(c.deductedAmount !== undefined) {
+          if(c.deductedAmount !== undefined && c.deductedAmount > 0) {
             html += `<small>📉 خصم من المرتب: ${c.deductedAmount} ج.م</small><br>`;
           }
           html += `<small>سيريال: ${c.product.serial || '-'}</small>
@@ -1117,13 +1793,21 @@
         }
         
         if(c.note && c.note !== "بدون ملاحظات") {
-          html += `<div><i class="fas fa-comment"></i> ${c.note}</div>`;
+          html += `<div style="margin-top: 8px;"><i class="fas fa-comment"></i> ${c.note}</div>`;
         }
         
         html += `<div style="margin-top:12px; font-size:12px; color:#888;">
           <i class="far fa-clock"></i> ${c.createdAt || ''}
         </div></div>`;
       });
+      
+      if (isSalaryPaid) {
+        html += `<div class="salary-paid-message">
+          <i class="fas fa-check-circle" style="color: #00b894; font-size: 20px;"></i>
+          <strong style="color: #00b894; display: block; margin-top: 5px;">✅ تم صرف راتب شهر ${currentYearMonth}</strong>
+          <small style="color: #555;">لا يمكن إضافة التزامات جديدة أو طلب قبض لهذا الشهر</small>
+        </div>`;
+      }
       
       commitmentsContainer.innerHTML = html;
     } catch(e) { 
@@ -1134,9 +1818,10 @@
   
   // Reset Modal Form
   function resetModalForm() {
-    document.getElementById('commitType').value = 'money';
+    commitType.value = 'money';
     productGroup.style.display = 'none';
     moneyAmountGroup.style.display = 'block';
+    paymentMethodGroup.style.display = 'none';
     commitAmount.value = '';
     commitNote.value = '';
     productSearchInput.value = '';
@@ -1146,11 +1831,12 @@
     selectedPaymentMethod = 'full';
     
     document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
-    document.querySelector('.payment-option[data-method="full"]').classList.add('active');
+    const fullOption = document.querySelector('.payment-option[data-method="full"]');
+    if (fullOption) fullOption.classList.add('active');
     partialPaymentGroup.style.display = 'none';
     
     updateTotalPrice();
-    suggestionsDiv.classList.remove('active');
+    if (suggestionsDiv) suggestionsDiv.classList.remove('active');
     targetMonthInput.value = currentYearMonth;
   }
   
@@ -1158,7 +1844,7 @@
   window.searchProductsDynamic = () => {
     const term = productSearchInput.value.trim().toLowerCase();
     if(term.length < 1) { 
-      suggestionsDiv.classList.remove('active'); 
+      if (suggestionsDiv) suggestionsDiv.classList.remove('active'); 
       return; 
     }
     
@@ -1167,7 +1853,7 @@
       p.serial?.toLowerCase().includes(term)
     ));
     
-    if(filtered.length) {
+    if(filtered.length && suggestionsDiv) {
       suggestionsDiv.innerHTML = filtered.map(p => `
         <div class="suggestion-item" 
              data-id="${p.id}"
@@ -1189,24 +1875,36 @@
             serial: el.dataset.serial
           };
           productSearchInput.value = selectedProduct.name;
-          suggestionsDiv.classList.remove('active');
+          if (suggestionsDiv) suggestionsDiv.classList.remove('active');
           updateTotalPrice();
         });
       });
-    } else { 
+    } else if (suggestionsDiv) { 
       suggestionsDiv.classList.remove('active'); 
     }
   };
   
-  productSearchInput.addEventListener('input', window.searchProductsDynamic);
+  if (productSearchInput) {
+    productSearchInput.addEventListener('input', window.searchProductsDynamic);
+  }
+  
   document.addEventListener('click', (e) => { 
-    if(!productSearchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+    if(productSearchInput && suggestionsDiv && 
+       !productSearchInput.contains(e.target) && 
+       !suggestionsDiv.contains(e.target)) {
       suggestionsDiv.classList.remove('active');
     }
   });
   
   // Save Commitment
   document.getElementById('saveCommitBtn').onclick = async () => {
+    const isSalaryPaid = await checkIfSalaryPaid();
+    if (isSalaryPaid) {
+      showToast("❌ لا يمكن إضافة التزامات بعد صرف راتب الشهر!", "error");
+      closeModalFunc();
+      return;
+    }
+    
     const type = commitType.value;
     let amount = 0;
     let deductedAmount = 0;
@@ -1219,6 +1917,7 @@
         return; 
       }
       deductedAmount = amount;
+      paidCash = 0;
     } else {
       if(!selectedProduct) { 
         showToast("اختر منتجًا من القائمة", "error"); 
@@ -1244,6 +1943,10 @@
         paidCash = parseFloat(cashPaid.value) || 0;
         if (paidCash > amount) {
           showToast("⚠️ المبلغ المدفوع أكبر من الإجمالي!", "error");
+          return;
+        }
+        if (paidCash < 0) {
+          showToast("⚠️ المبلغ المدفوع لا يمكن أن يكون سالباً!", "error");
           return;
         }
         deductedAmount = amount - paidCash;
@@ -1292,19 +1995,19 @@
       let message = "تم تسجيل الالتزام بنجاح ✅";
       if (type === 'product') {
         if (selectedPaymentMethod === 'cash') {
-          message = `تم تسجيل شراء المنتج - تم دفع ${paidCash} ج.م كاش بالكامل`;
+          message = `✅ تم تسجيل شراء المنتج - تم دفع ${paidCash.toFixed(2)} ج.م كاش بالكامل`;
         } else if (selectedPaymentMethod === 'partial') {
-          message = `تم تسجيل شراء المنتج - دفع ${paidCash} ج.م كاش، وخصم ${deductedAmount} ج.م من المرتب`;
+          message = `✅ تم تسجيل شراء المنتج - دفع ${paidCash.toFixed(2)} ج.م كاش، وخصم ${deductedAmount.toFixed(2)} ج.م من المرتب`;
         } else {
-          message = `تم تسجيل شراء المنتج - سيتم خصم ${deductedAmount} ج.م من المرتب`;
+          message = `✅ تم تسجيل شراء المنتج - سيتم خصم ${deductedAmount.toFixed(2)} ج.م من المرتب`;
         }
       }
       
       showToast(message, "success");
       closeModalFunc();
-      loadCommitmentsForMonth();
+      await loadCommitmentsForMonth();
     } catch(e) { 
-      showToast("حدث خطأ", "error"); 
+      showToast("حدث خطأ: " + e.message, "error"); 
       console.error(e); 
     }
   };
@@ -1316,12 +2019,15 @@
     toastDiv.style.borderRightColor = type === 'success' ? '#00b894' : '#d63031';
     toastDiv.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i> ${msg}`;
     document.body.appendChild(toastDiv);
-    setTimeout(() => { toastDiv.remove(); }, 2800);
+    setTimeout(() => { toastDiv.remove(); }, 3000);
   }
   
   // Set Current Date
   const now = new Date();
-  document.getElementById('currentDate').innerHTML = `<i class="far fa-calendar-alt"></i> ${now.toLocaleDateString('ar-EG')}`;
+  const currentDateSpan = document.getElementById('currentDate');
+  if (currentDateSpan) {
+    currentDateSpan.innerHTML = `<i class="far fa-calendar-alt"></i> ${now.toLocaleDateString('ar-EG')}`;
+  }
   
   // Initialize App
   (async function init() {
@@ -1331,6 +2037,5 @@
     await loadCommitmentsForMonth();
   })();
 </script>
-<script src="script.js"></script>
 </body>
 </html>

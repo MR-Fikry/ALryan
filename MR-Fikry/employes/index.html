@@ -145,6 +145,29 @@
             padding: 0 20px;
         }
 
+        .nav-link {
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(4px);
+            color: #4a3f6e;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            border: 1px solid rgba(108,92,231,0.15);
+            cursor: pointer;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #6c5ce7, #8b5cf6);
+            color: white;
+            box-shadow: 0 12px 24px -12px rgba(108,92,231,0.5);
+            border: none;
+        }
+
         /* زرار إضافة موظف */
         .add-employee-btn {
             background: linear-gradient(135deg, #6c5ce7, #a78bfa);
@@ -166,28 +189,6 @@
         .add-employee-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(108,92,231,0.5);
-        }
-
-        .nav-link {
-            padding: 12px 32px;
-            border-radius: 60px;
-            font-weight: 600;
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(4px);
-            color: #4a3f6e;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            border: 1px solid rgba(108,92,231,0.15);
-        }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, #6c5ce7, #8b5cf6);
-            color: white;
-            box-shadow: 0 12px 24px -12px rgba(108,92,231,0.5);
-            border: none;
         }
 
         /* بطاقات الإحصائيات */
@@ -296,6 +297,154 @@
         .search-container button:hover {
             transform: scale(1.02);
             box-shadow: 0 6px 16px rgba(108,92,231,0.4);
+        }
+
+        /* طلبات القبض */
+        .requests-section {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .requests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .request-card {
+            background: white;
+            border-radius: 28px;
+            padding: 22px;
+            transition: all 0.3s ease;
+            border: 1px solid #ede9fe;
+            box-shadow: 0 10px 25px -12px rgba(0,0,0,0.08);
+        }
+
+        .request-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px -15px rgba(108,92,231,0.2);
+            border-color: #c4b5fd;
+        }
+
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0eefb;
+        }
+
+        .request-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1e1a3a;
+            font-size: 1.2rem;
+        }
+
+        .status-pending {
+            background: #ffeaa7;
+            color: #fdcb6e;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-approved {
+            background: #d4edda;
+            color: #28a745;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #dc3545;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-completed {
+            background: #cce5ff;
+            color: #0066cc;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .request-details p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .request-details i {
+            width: 25px;
+            color: #6c5ce7;
+        }
+
+        .request-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .approve-btn, .reject-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .approve-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .approve-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .reject-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .reject-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .request-note {
+            margin-top: 12px;
+            padding: 10px;
+            background: #fff3cd;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #856404;
         }
 
         /* شبكة الموظفين */
@@ -653,6 +802,11 @@
             color: white;
         }
         
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+        }
+
         .cancel-btn {
             background: #64748b;
             color: white;
@@ -818,9 +972,18 @@
             transform: rotate(-10deg);
         }
 
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 48px;
+            color: #888;
+            grid-column: 1/-1;
+        }
+
         @media (max-width: 780px) {
             .header { padding: 15px 20px; }
-            .employees-grid { grid-template-columns: 1fr; }
+            .employees-grid, .requests-grid { grid-template-columns: 1fr; }
             .section-title h2::before,
             .section-title h2::after { display: none; }
             .commitment-item > div { flex-direction: column; align-items: flex-start; }
@@ -832,7 +995,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .employee-card {
+        .employee-card, .request-card {
             animation: fadeInUp 0.5s ease-out;
         }
     </style>
@@ -853,10 +1016,12 @@
 </header>
 
 <div class="nav-bar">
-    <a href="#" class="nav-link active"><i class="fas fa-users"></i> الموظفين</a>
+    <div class="nav-link active" data-tab="employees"><i class="fas fa-users"></i> الموظفين</div>
+    <div class="nav-link" data-tab="requests"><i class="fas fa-hand-holding-usd"></i> طلبات القبض</div>
 </div>
 
-<div class="stats-wrapper">
+<!-- إحصائيات -->
+<div class="stats-wrapper" id="statsWrapper">
     <div class="stats-grid">
         <div class="stat-card"><div class="stat-icon" style="background: linear-gradient(135deg, #6c5ce7, #a78bfa);"><i class="fas fa-users"></i></div><div class="stat-content"><div class="stat-label">إجمالي الموظفين</div><div class="stat-number" id="totalEmployees">0</div></div></div>
         <div class="stat-card"><div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"><i class="fas fa-wallet"></i></div><div class="stat-content"><div class="stat-label">إجمالي الرواتب</div><div class="stat-number" id="totalSalaries">0</div></div></div>
@@ -865,19 +1030,32 @@
     </div>
 </div>
 
-<div class="search-section">
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="🔍 ابحث باسم الموظف ...">
-        <button onclick="filterEmployees()"><i class="fas fa-search"></i> بحث</button>
+<!-- قسم الموظفين -->
+<div id="employeesTab">
+    <div class="search-section">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 ابحث باسم الموظف ...">
+            <button onclick="filterEmployees()"><i class="fas fa-search"></i> بحث</button>
+        </div>
+    </div>
+
+    <div class="employees-section">
+        <button onclick="showAddEmployee()" class="add-employee-btn">
+            <i class="fas fa-user-plus"></i> إضافة موظف
+        </button>
+        <div class="section-title"><h2>قائمة الموظفين</h2></div>
+        <div id="employeesGrid" class="employees-grid"></div>
     </div>
 </div>
 
-<div class="employees-section">
-    <button onclick="showAddEmployee()" class="add-employee-btn">
-        <i class="fas fa-user-plus"></i> إضافة موظف
-    </button>
-    <div class="section-title"><h2>قائمة الموظفين</h2></div>
-    <div id="employeesGrid" class="employees-grid"></div>
+<!-- قسم طلبات القبض -->
+<div id="requestsTab" style="display: none;">
+    <div class="requests-section">
+        <div class="section-title"><h2>طلبات قبض الرواتب</h2></div>
+        <div id="salaryRequestsGrid" class="requests-grid">
+            <div class="empty-state"><i class="fas fa-spinner fa-pulse"></i> جاري التحميل...</div>
+        </div>
+    </div>
 </div>
 
 <div id="addEmployeeModal" class="modal">
@@ -900,8 +1078,8 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
+import { getFirestore,collection,getDocs,getDoc,doc,updateDoc,deleteDoc,addDoc,query,where
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 const firebaseConfig = {
     apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
     authDomain: "login-employees1.firebaseapp.com",
@@ -911,9 +1089,145 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const employeesGrid = document.getElementById("employeesGrid");
+const salaryRequestsGrid = document.getElementById("salaryRequestsGrid");
 document.getElementById("currentDate").innerHTML = `<i class="far fa-calendar-alt"></i> ${new Date().toLocaleDateString('ar-EG')}`;
 
 let allEmployeesCache = [];
+
+// تبديل التبويبات
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        const tab = link.dataset.tab;
+        if (tab === 'employees') {
+            document.getElementById('employeesTab').style.display = 'block';
+            document.getElementById('requestsTab').style.display = 'none';
+            document.getElementById('statsWrapper').style.display = 'block';
+            loadEmployees();
+        } else {
+            document.getElementById('employeesTab').style.display = 'none';
+            document.getElementById('requestsTab').style.display = 'block';
+            document.getElementById('statsWrapper').style.display = 'none';
+            loadSalaryRequests();
+        }
+    });
+});
+
+// تحميل طلبات القبض
+async function loadSalaryRequests() {
+    if (!salaryRequestsGrid) return;
+    
+    try {
+        const snapshot = await getDocs(collection(db, "salaryRequests"));
+        const requests = [];
+        snapshot.forEach(doc => {
+            requests.push({ id: doc.id, ...doc.data() });
+        });
+        
+        requests.sort((a, b) => new Date(b.requestDate) - new Date(a.requestDate));
+        
+        if (requests.length === 0) {
+            salaryRequestsGrid.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i> لا توجد طلبات قبض</div>';
+            return;
+        }
+        
+        let html = '';
+        requests.forEach(req => {
+            const statusClass = req.status === 'pending' ? 'status-pending' : 
+                               (req.status === 'approved' ? 'status-approved' : 
+                               (req.status === 'rejected' ? 'status-rejected' : 'status-completed'));
+            const statusText = req.status === 'pending' ? 'قيد الانتظار' :
+                              (req.status === 'approved' ? 'تمت الموافقة' :
+                              (req.status === 'rejected' ? 'مرفوض' : 'مكتمل'));
+            
+            html += `
+                <div class="request-card" data-id="${req.id}">
+                    <div class="request-header">
+                        <h3><i class="fas fa-user"></i> ${req.employeeName || 'موظف'}</h3>
+                        <span class="${statusClass}">${statusText}</span>
+                    </div>
+                    <div class="request-details">
+                        <p><i class="fas fa-calendar"></i> الشهر: ${req.month || '-'}</p>
+                        <p><i class="fas fa-phone"></i> الهاتف: ${req.employeePhone || '-'}</p>
+                        <p><i class="fas fa-money-bill-wave"></i> صافي الراتب: ${(req.netSalary || 0).toLocaleString()} جنيه</p>
+                        <p><i class="fas fa-chart-line"></i> الراتب الأساسي: ${(req.baseSalary || 0).toLocaleString()} جنيه</p>
+                        <p><i class="fas fa-minus-circle"></i> الخصومات: ${(req.totalDeductions || 0).toLocaleString()} جنيه</p>
+                        <p><i class="fas fa-plus-circle"></i> المكافآت: +${(req.totalBonuses || 0).toLocaleString()} جنيه</p>
+                        <p><i class="fas fa-hand-holding-heart"></i> التزامات الشهر: ${(req.monthlyCommitments || 0).toLocaleString()} جنيه</p>
+                        <p><i class="far fa-clock"></i> تاريخ الطلب: ${new Date(req.requestDate).toLocaleString('ar-EG')}</p>
+                    </div>
+                    ${req.status === 'pending' ? `
+                    <div class="request-actions">
+                        <button class="approve-btn" onclick="approveSalaryRequest('${req.id}')">
+                            <i class="fas fa-check-circle"></i> موافقة
+                        </button>
+                        <button class="reject-btn" onclick="rejectSalaryRequest('${req.id}')">
+                            <i class="fas fa-times-circle"></i> رفض
+                        </button>
+                    </div>
+                    ` : ''}
+                    ${req.note ? `<div class="request-note"><i class="fas fa-comment"></i> ملاحظة: ${req.note}</div>` : ''}
+                </div>
+            `;
+        });
+        
+        salaryRequestsGrid.innerHTML = html;
+    } catch(e) {
+        console.error("خطأ في تحميل طلبات القبض:", e);
+        if (salaryRequestsGrid) salaryRequestsGrid.innerHTML = '<div class="empty-state">حدث خطأ في تحميل الطلبات</div>';
+    }
+}
+
+// الموافقة على طلب القبض
+window.approveSalaryRequest = async function(requestId) {
+    if (!confirm("⚠️ هل أنت متأكد من الموافقة على طلب القبض؟ سيتم إشعار الموظف تلقائياً.")) return;
+    
+    try {
+        const requestRef = doc(db, "salaryRequests", requestId);
+        const requestSnap = await getDoc(requestRef);
+        
+        if (!requestSnap.exists()) {
+            alert("الطلب غير موجود");
+            return;
+        }
+        
+        await updateDoc(requestRef, {
+            status: "approved",
+            approvedAt: new Date().toISOString(),
+            approvedBy: "admin"
+        });
+        
+        alert("✅ تمت الموافقة على طلب القبض. سيتم إشعار الموظف تلقائياً.");
+        loadSalaryRequests();
+        loadEmployees();
+    } catch(e) {
+        console.error("خطأ في الموافقة:", e);
+        alert("❌ حدث خطأ في الموافقة على الطلب");
+    }
+};
+
+// رفض طلب القبض
+window.rejectSalaryRequest = async function(requestId) {
+    const reason = prompt("✏️ أدخل سبب الرفض (اختياري):");
+    
+    try {
+        const requestRef = doc(db, "salaryRequests", requestId);
+        
+        await updateDoc(requestRef, {
+            status: "rejected",
+            rejectedAt: new Date().toISOString(),
+            rejectedBy: "admin",
+            note: reason || "تم رفض الطلب من قبل المدير"
+        });
+        
+        alert("❌ تم رفض طلب القبض");
+        loadSalaryRequests();
+    } catch(e) {
+        console.error("خطأ في الرفض:", e);
+        alert("❌ حدث خطأ في رفض الطلب");
+    }
+};
 
 async function loadEmployees() {
     employeesGrid.innerHTML = '<div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-pulse"></i> جاري التحميل...</div>';
