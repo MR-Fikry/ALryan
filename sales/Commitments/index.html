@@ -757,6 +757,8 @@
     <div class="employee-header">
       <div class="employee-avatar"><i class="fas fa-user-circle"></i></div>
       <div>
+
+        <div class="ID" style="font-size:18px;font-weight:bold;color:#0984e3"><span id="empId"></span> : ID </div>
         <div class="employee-name" id="empName">---</div>
         <div class="employee-phone"><i class="fas fa-phone-alt"></i> <span id="empPhone">---</span></div>
       </div>
@@ -971,6 +973,7 @@
   let selectedPaymentMethod = 'full';
 
   // DOM Elements
+  const empId = document.getElementById('empId');
   const empNameSpan = document.getElementById('empName');
   const empPhoneSpan = document.getElementById('empPhone');
   const baseSalarySpan = document.getElementById('baseSalary');
@@ -1390,6 +1393,7 @@
       }
       localStorage.setItem("currentEmployee", JSON.stringify(currentEmployee));
       
+      
       empNameSpan.textContent = newName;
       empPhoneSpan.textContent = newPhone;
       
@@ -1541,10 +1545,20 @@
       
       const docRef = snap.docs[0];
       employeeDocId = docRef.id;
-      employeeFullData = { id: docRef.id, ...docRef.data() };
+      const data = docRef.data();
+      employeeFullData = {
+        id: docRef.id,          // document id
+        employeeId: data.employeeId, // الكود زي Fi6137
+        name: data.name,
+        phone: data.phone,
+        salary: data.salary || 0
+      };
+
+
       currentEmployee.id = employeeDocId;
       localStorage.setItem("currentEmployee", JSON.stringify(currentEmployee));
       
+      empId.textContent = employeeFullData.employeeId;
       empNameSpan.textContent = employeeFullData.name || currentEmployee.name || "غير محدد";
       empPhoneSpan.textContent = employeeFullData.phone || currentEmployee.phone;
       
