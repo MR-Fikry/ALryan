@@ -377,7 +377,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 4px 10px;
+            padding: 4px 5px;
             border-radius: 20px;
             font-size: 11px;
             display: inline-flex;
@@ -423,6 +423,7 @@
             transform: translate(-50%, -50%);
             background: white;
             border-radius: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.705); /* الظل */
             padding: 20px;
             width: 90%;
             max-width: 400px;
@@ -431,6 +432,19 @@
             z-index: 2000;
             display: none;
         }
+
+        .inform-bill{
+          padding: 30px 5px 0;
+        }
+
+        .p-inform{
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: space-between;
+         font-size: 13px;
+         padding: 10px;
+         gap: 10px;
+        }   
 
         .close-details {
             float: left;
@@ -506,6 +520,8 @@
             font-weight: bold;
         }
 
+        
+
         @media print {
             body > *:not(#invoicePrint) { display: none !important; }
             #invoicePrint, #invoicePrint * { visibility: visible !important; }
@@ -514,6 +530,14 @@
             @page { size: A5 portrait; margin: 6mm; }
             .print-table th, .print-table td { padding: 4px 3px; border: 1px solid #000; white-space: nowrap; }
             h1, h2, h3 { margin: 4px 0; }
+        }
+
+
+        @media (max-width : 450px) {
+        .modal-body {
+            padding: 10px;
+        }
+
         }
 
         .toast-msg {
@@ -566,6 +590,27 @@
 
 .delete-customer-btn:active{
     transform:scale(.96);
+}
+</style>
+<style>
+    .products-table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+font-size: 14px;
+}
+
+.products-table th,
+.products-table td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+font-size: 11px;
+}
+
+.products-table th{
+background:#f2f2f2;
+font-weight:bold;
 }
 </style>
 </head>
@@ -1026,7 +1071,19 @@
                     tbody.innerHTML = currentInvoices.map(inv => `
                         <tr>
                             <td>${inv.invoiceNumber || inv.id.slice(0,6)}</td>
-                            <td>${inv.date || "---"}</td>
+                            <td>
+  ${
+    inv.date
+      ? inv.date.split('/').map((part, index) => {
+          // لو ده الجزء الأخير (السنة)
+          if (index === 2) {
+            return part.slice(-2); // ناخد آخر رقمين
+          }
+          return part;
+        }).join('/')
+      : "---"
+  }
+</td>
                             <td>${formatNum(inv.totalAmount)}</td>
                             <td>${formatNum(inv.paid)}</td>
                             <td class="${inv.remainingDebt > 0 ? 'text-danger' : ''}">${formatNum(inv.remainingDebt)}</td>
@@ -1183,32 +1240,74 @@
             document.getElementById("cancelPay").onclick = () => { div.innerHTML = orig; };
         }
 
-        function showInvoiceDetails(inv) {
-            let itemsHtml = "";
-            if (inv.items && inv.items.length) {
-                inv.items.forEach((it, i) => {
-                    itemsHtml += `<div class="product-row">
-                        <strong>${i+1}. ${escapeHtml(it.name)}</strong><br>
-                        سيريال: ${escapeHtml(it.serial || '—')}<br>
-                        كمية: ${it.quantity} | سعر: ${it.price} جنيه<br>
-                        الإجمالي: ${formatNum((it.quantity||1)*(it.price||0))} جنيه
-                    </div>`;
-                });
-            } else {
-                itemsHtml = "<div>لا توجد منتجات</div>";
-            }
-            
-            document.getElementById("detailsContent").innerHTML = `
-                <h3>فاتورة ${inv.invoiceNumber || inv.id.slice(0,8)}</h3>
-                <p><strong>التاريخ:</strong> ${inv.date || "غير محدد"}</p>
-                <p><strong>الإجمالي:</strong> ${formatNum(inv.totalAmount)} جنيه</p>
-                <p><strong>المدفوع:</strong> ${formatNum(inv.paid)} جنيه</p>
-                <p><strong>المتبقي:</strong> ${formatNum(inv.remainingDebt)} جنيه</p>
-                <h4>المنتجات:</h4>
-                ${itemsHtml}
-            `;
-            document.getElementById("detailsModal").style.display = "block";
-        }
+       function showInvoiceDetails(inv) {
+
+let rows = "";
+
+if (inv.items && inv.items.length) {
+
+inv.items.forEach((it, i) => {
+
+rows += `
+<tr>
+<td>${i+1}</td>
+<td>${escapeHtml(it.name)}</td>
+<td>${escapeHtml(it.serial || '—')}</td>
+<td>${it.quantity}</td>
+<td>${it.price} </td>
+<td>${formatNum((it.quantity||1)*(it.price||0))} </td>
+</tr>
+`;
+
+});
+
+} else {
+rows = `<tr><td colspan="6">لا توجد منتجات</td></tr>`;
+}
+
+const tableHtml = `
+<table class="products-table">
+<thead>
+<tr>
+<th>#</th>
+<th>المنتج</th>
+<th>السيريال</th>
+<th>الكمية</th>
+<th>السعر</th>
+<th>الإجمالي</th>
+</tr>
+</thead>
+
+<tbody>
+${rows}
+</tbody>
+</table>
+`;
+
+document.getElementById("detailsContent").innerHTML = `
+<div class="inform-bill">
+
+<div>
+<h3 style="font-size:15px;">
+<i class="fas fa-receipt" style="font-size:15px;margin:0 3px"></i>
+فاتورة : ${inv.invoiceNumber || inv.id.slice(0,8)}
+</h3>
+</div>
+
+<div class="p-inform">
+<p><strong>التاريخ:</strong> ${inv.date || "غير محدد"}</p>
+<p><strong>الإجمالي:</strong> ${formatNum(inv.totalAmount)} جنيه</p>
+<p><strong>المدفوع:</strong> ${formatNum(inv.paid)} جنيه</p>
+<p><strong>المتبقي:</strong> ${formatNum(inv.remainingDebt)} جنيه</p>
+</div>
+
+</div>
+
+${tableHtml}
+`;
+
+document.getElementById("detailsModal").style.display = "block";
+}
 
         function printInvoice(inv, customerName) {
     const now = new Date();
