@@ -26,7 +26,6 @@
             line-height: 1.5;
         }
 
-        /* ===== تصميم احترافي ===== */
         .pro-header {
             background: white;
             padding: 16px 30px;
@@ -35,6 +34,8 @@
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border-bottom: 1px solid #e9edf2;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .pro-logo {
@@ -57,13 +58,6 @@
             color: #1e293b;
         }
 
-        .pro-logo span {
-            color: #64748b;
-            font-weight: 400;
-            font-size: 14px;
-            margin-right: 8px;
-        }
-
         .pro-date {
             background: #f8fafc;
             padding: 8px 20px;
@@ -74,7 +68,6 @@
             border: 1px solid #e2e8f0;
         }
 
-        /* ===== بطاقات احترافية ===== */
         .pro-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -120,12 +113,6 @@
             margin-bottom: 5px;
         }
 
-        .pro-card-label {
-            font-size: 13px;
-            color: #94a3b8;
-        }
-
-        /* ===== شريط الأدوات الاحترافي ===== */
         .pro-toolbar {
             max-width: 1400px;
             margin: 10px auto 20px;
@@ -145,7 +132,6 @@
             align-items: center;
             padding: 4px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .pro-search input {
@@ -156,7 +142,6 @@
             font-family: 'Cairo', sans-serif;
             font-size: 14px;
             background: transparent;
-            border-radius: 12px;
         }
 
         .pro-search button {
@@ -172,14 +157,8 @@
             align-items: center;
             gap: 8px;
             margin: 4px;
-            transition: 0.2s;
         }
 
-        .pro-search button:hover {
-            background: #1d4ed8;
-        }
-
-        /* ===== التقويم الاحترافي ===== */
         .pro-date-filter {
             max-width: 1400px;
             margin: 10px auto 20px;
@@ -195,12 +174,6 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        }
-
-        .pro-date-panel i {
-            color: #2563eb;
-            font-size: 18px;
         }
 
         .pro-date-panel select {
@@ -209,15 +182,9 @@
             border-radius: 10px;
             font-family: 'Cairo', sans-serif;
             font-size: 14px;
-            color: #1e293b;
             background: #f8fafc;
             cursor: pointer;
-            outline: none;
             min-width: 180px;
-        }
-
-        .pro-date-panel select:hover {
-            border-color: #2563eb;
         }
 
         .pro-stats-badge {
@@ -230,7 +197,6 @@
             margin-right: auto;
         }
 
-        /* ===== ملخص اليوم الاحترافي ===== */
         .pro-summary {
             max-width: 1400px;
             margin: 20px auto;
@@ -244,7 +210,6 @@
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
-            box-shadow: 0 15px 30px -10px #0f172a;
         }
 
         .pro-summary-item {
@@ -267,14 +232,6 @@
             font-weight: 700;
         }
 
-        .pro-summary-value small {
-            font-size: 14px;
-            font-weight: 400;
-            color: #94a3b8;
-            margin-right: 8px;
-        }
-
-        /* ===== بطاقات الفواتير الاحترافية ===== */
         .pro-invoices {
             max-width: 1400px;
             margin: 25px auto;
@@ -289,12 +246,7 @@
             border-radius: 20px;
             padding: 22px;
             border: 1px solid #edf2f7;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
             transition: 0.2s;
-        }
-
-        .pro-invoice-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
         }
 
         .pro-invoice-header {
@@ -315,22 +267,33 @@
             border-radius: 30px;
         }
 
-        .pro-invoice-date {
-            font-size: 13px;
-            color: #64748b;
+        .invoice-status {
+            margin-bottom: 15px;
         }
 
-        .pro-invoice-details {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 20px;
+        .status-credit {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-cash {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .pro-detail-row {
             display: flex;
             align-items: center;
             gap: 12px;
+            margin-bottom: 12px;
         }
 
         .pro-detail-icon {
@@ -342,11 +305,6 @@
             align-items: center;
             justify-content: center;
             color: #475569;
-            font-size: 15px;
-        }
-
-        .pro-detail-info {
-            flex: 1;
         }
 
         .pro-detail-label {
@@ -357,7 +315,6 @@
         .pro-detail-value {
             font-size: 15px;
             font-weight: 500;
-            color: #0f172a;
         }
 
         .pro-total-box {
@@ -368,20 +325,23 @@
             margin: 18px 0;
         }
 
-        .pro-total-label {
-            font-size: 13px;
-            color: #64748b;
-        }
-
         .pro-total-amount {
             font-size: 24px;
             font-weight: 700;
-            color: #0f172a;
         }
+
+        .invoice-money {
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .invoice-paid { color: #16a34a; }
+        .invoice-remaining { color: #dc2626; font-weight: bold; }
 
         .pro-actions {
             display: flex;
             gap: 12px;
+            margin-top: 15px;
         }
 
         .pro-action-btn {
@@ -389,28 +349,21 @@
             border: none;
             padding: 10px;
             border-radius: 10px;
-            font-size: 14px;
             font-weight: 500;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            transition: 0.2s;
-            background: #f1f5f9;
-            color: #334155;
+            background: #1d4ed8;
+            color: white;
         }
 
-        .pro-action-btn:hover {
-            background: #e2e8f0;
+        .pro-action-btn:last-child {
+            background: #64748b;
         }
 
-        .pro-action-btn i {
-            font-size: 13px;
-        }
-
-        /* ===== فاتورة الطباعة الاحترافية ===== */
+        /* ===== طباعة ===== */
         .pro-print {
             display: none;
             background: white;
@@ -418,7 +371,6 @@
             max-width: 750px;
             margin: 30px auto;
             border-radius: 24px;
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
         }
 
         .pro-print-header {
@@ -428,23 +380,26 @@
             padding-bottom: 20px;
         }
 
-        .pro-print-header h2 {
-            font-size: 26px;
-            color: #0f172a;
-        }
-
-        .pro-print-header p {
-            color: #2563eb;
-            font-weight: 500;
-        }
-
         .pro-print-details {
             display: flex;
             justify-content: space-between;
             background: #f8fafc;
             padding: 20px;
             border-radius: 16px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .pro-print-payment {
+            background: #fef9e3;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .pro-print-table {
@@ -453,351 +408,110 @@
             margin-bottom: 25px;
         }
 
-        .pro-print-table th {
-            background: #f1f5f9;
-            padding: 12px;
-            font-weight: 600;
-            color: #0f172a;
-        }
-
-        .pro-print-table td, .pro-print-table th {
+        .pro-print-table th, .pro-print-table td {
             border: 1px solid #e2e8f0;
             padding: 10px;
+            text-align: right;
+        }
+
+        .pro-print-table th {
+            background: #f1f5f9;
         }
 
         .pro-print-total {
             background: #0f172a;
             color: white;
-            padding: 15px 20px;
+            padding: 12px;
             border-radius: 12px;
             text-align: left;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
         }
-@media print {
 
-body > *:not(#invoicePrint) {
-  display: none !important;
-}
+        @media print {
+            body > *:not(#invoicePrint) { display: none !important; }
+            #invoicePrint, #invoicePrint * { visibility: visible !important; }
+            #invoicePrint {
+                display: block !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+                background: #fff;
+                font-size: 11px;
+            }
+            @page { size: A5 portrait; margin: 5mm; }
+            .pro-print-table th, .pro-print-table td { padding: 4px; }
+        }
 
-
-    .logo{
-      width: 10px;
-    }
-
-    /* إظهار الفاتورة فقط */
-    #invoicePrint,
-    #invoicePrint * {
-        visibility: visible !important;
-    }
-
-    #invoicePrint {
-        display: block !important;
-        position: absolute;     /* ✅ زي ما هو */
-        top: 0;                 /* ✅ بدل inset */
-        left: 0;                /* ✅ بدل inset */
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 30px;
-        background: #fff;
-        font-size: 11px;
-        line-height: 1.2;
-        height: auto;           /* 🔥 مهم جدًا */
-    }
-
-    .print-header h1{
-      font-size: 15px;
-    }
-
-    .print-footer{
-      margin: 0;
-    }
-
-    /* مقاس الورقة A5 */
-    @page {
-        size: A5 portrait;
-        margin: 6mm;
-    }
-
-    /* الجدول */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 10.5px;
-    }
-
-    th, td {
-        padding: 4px 3px;
-        border: 1px solid #000;
-        text-align: right;
-        white-space: normal;   /* 🔥 بدل nowrap */
-    }
-
-    thead th {
-        font-weight: bold;
-        background: #f1f1f1;
-    }
-
-    tfoot td {
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    /* منع تقطيع الصفوف */
-    table, tr, td, th {
-        page-break-inside: avoid;
-    }
-
-    .no-print {
-        display: none !important;
-    }
-
-    h1 { font-size: 16px; margin: 4px 0; }
-    h2 { font-size: 14px; margin: 4px 0; }
-    h3 { font-size: 13px; margin: 3px 0; }
-    p  { margin: 2px 0; }
-    .print-table tfoot td{ font-size: 10px;}
-}
-
-
-        /* ===== نتيجة البحث ===== */
         .pro-result {
             max-width: 1400px;
             margin: 10px 30px;
             font-size: 14px;
-            color: #475569;
         }
-
         .pro-result span {
             background: #eef2ff;
-            color: #2563eb;
             padding: 4px 12px;
             border-radius: 30px;
             margin-right: 8px;
             font-weight: 600;
         }
 
-        /* ===== التجاوب للموبايل ===== */
-@media (max-width: 768px) {
-
-    .pro-header{
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-        padding: 15px;
-    }
-
-    .pro-logo h1{
-        font-size:18px;
-    }
-
-    .pro-date{
-        font-size:13px;
-        padding:6px 14px;
-    }
-
-    /* البطاقات */
-    .pro-stats{
-        grid-template-columns: 1fr;
-        padding:15px;
-        gap:15px;
-    }
-
-    .pro-card-value{
-        font-size:26px;
-    }
-
-    /* البحث */
-    .pro-toolbar{
-        padding:0 15px;
-    }
-
-    .pro-search{
-        min-width:100%;
-        flex-direction:column;
-        padding:8px;
-        gap:6px;
-    }
-
-    .pro-search input{
-        width:100%;
-        padding:10px;
-    }
-
-    .pro-search button{
-        width:100%;
-        justify-content:center;
-    }
-
-    /* الفلتر */
-    .pro-date-filter{
-        padding:0 15px;
-    }
-
-    .pro-date-panel{
-        flex-direction:column;
-        align-items:stretch;
-        gap:12px;
-    }
-
-    .pro-date-panel select{
-        width:100%;
-        min-width:100%;
-    }
-
-    .pro-stats-badge{
-        margin-right:0;
-        text-align:center;
-    }
-
-    /* ملخص اليوم */
-    .pro-summary{
-        padding:0 15px;
-    }
-
-    .pro-summary-card{
-        flex-direction:column;
-        gap:20px;
-        padding:20px;
-    }
-
-    .pro-summary-value{
-        font-size:22px;
-    }
-
-    /* الفواتير */
-    .pro-invoices{
-        grid-template-columns:1fr;
-        padding:0 15px;
-    }
-
-    .pro-invoice-card{
-        padding:18px;
-    }
-
-    .pro-invoice-header{
-        flex-direction:column;
-        gap:6px;
-        align-items:flex-start;
-    }
-
-    .pro-total-amount{
-        font-size:20px;
-    }
-
-    /* الازرار */
-    .pro-actions{
-        flex-direction:column;
-    }
-
-    .pro-action-btn{
-        width:100%;
-    }
-
-}
-
-/* موبايلات صغيرة جدا */
-@media (max-width:480px){
-
-    .pro-logo i{
-        font-size:22px;
-        padding:8px;
-    }
-
-    .pro-logo h1{
-        font-size:16px;
-    }
-
-    .pro-card{
-        padding:16px;
-    }
-
-    .pro-card-value{
-        font-size:22px;
-    }
-
-    .pro-total-amount{
-        font-size:18px;
-    }
-
-}
+        @media (max-width: 768px) {
+            .pro-stats { grid-template-columns: 1fr; padding: 15px; }
+            .pro-invoices { grid-template-columns: 1fr; padding: 0 15px; }
+            .pro-toolbar, .pro-date-filter, .pro-summary { padding: 0 15px; }
+            .pro-search { flex-direction: column; }
+            .pro-search button { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- هيدر احترافي -->
     <div class="pro-header">
         <div class="pro-logo">
             <i class="fas fa-chart-bar"></i>
-            <h1>MR Fikry </h1>
+            <h1>MR Fikry</h1>
         </div>
         <div class="pro-date" id="currentDateDisplay"></div>
     </div>
 
-    <!-- بطاقات الإحصائيات -->
     <div class="pro-stats">
         <div class="pro-card">
-            <div class="pro-card-header">
-                <i class="fas fa-file-invoice"></i>
-                <h3>عدد الفواتير</h3>
-            </div>
+            <div class="pro-card-header"><i class="fas fa-file-invoice"></i><h3>عدد الفواتير</h3></div>
             <div class="pro-card-value" id="invoiceCount">0</div>
-            <div class="pro-card-label">إجمالي الفواتير المسجلة</div>
         </div>
-
         <div class="pro-card">
-            <div class="pro-card-header">
-                <i class="fas fa-coins"></i>
-                <h3>إجمالي المبيعات</h3>
-            </div>
+            <div class="pro-card-header"><i class="fas fa-coins"></i><h3>إجمالي المبيعات</h3></div>
             <div class="pro-card-value" id="totalSales">0</div>
-            <div class="pro-card-label">القيمة الإجمالية</div>
         </div>
-
         <div class="pro-card">
-            <div class="pro-card-header">
-                <i class="fas fa-chart-line"></i>
-                <h3>الأرباح</h3>
-            </div>
+            <div class="pro-card-header"><i class="fas fa-chart-line"></i><h3>الأرباح</h3></div>
             <div class="pro-card-value" id="totalProfit">0</div>
-            <div class="pro-card-label">صافي الربح</div>
         </div>
     </div>
 
-    <!-- شريط البحث -->
     <div class="pro-toolbar">
         <div class="pro-search">
             <input type="text" id="searchInput" placeholder="ابحث برقم الفاتورة أو اسم البائع أو المشتري">
-            <button onclick="searchInvoices()">
-                <i class="fas fa-search"></i>
-                بحث
-            </button>
+            <button onclick="searchInvoices()"><i class="fas fa-search"></i> بحث</button>
         </div>
     </div>
+    <div class="pro-result">عدد الفواتير: <span id="resultCount">0</span></div>
 
-    <!-- نتيجة البحث -->
-    <div class="pro-result">
-        <i class="far fa-file-alt"></i>
-        عدد الفواتير: <span id="resultCount">0</span>
-    </div>
-
-    <!-- فلتر التاريخ الاحترافي (بدون زراير) -->
     <div class="pro-date-filter">
         <div class="pro-date-panel">
             <i class="fas fa-calendar-alt"></i>
-            <span style="color: #475569; font-size: 14px;">تصفية حسب التاريخ:</span>
+            <span>تصفية حسب التاريخ:</span>
             <select id="dateFilterSelect" onchange="filterByDate()">
                 <option value="all">كل الفواتير</option>
-                <!-- يتم تعبئتها ديناميكياً -->
             </select>
-            <div class="pro-stats-badge" id="selectedDateBadge">
-                عرض الكل
-            </div>
+            <div class="pro-stats-badge" id="selectedDateBadge">عرض الكل</div>
         </div>
     </div>
 
-    <!-- ملخص اليوم المحدد -->
     <div class="pro-summary" id="daySummary" style="display: none;">
         <div class="pro-summary-card">
             <div class="pro-summary-item">
@@ -815,7 +529,7 @@ body > *:not(#invoicePrint) {
         </div>
     </div>
 
-    <!-- فاتورة الطباعة -->
+    <!-- فاتورة الطباعة - تم إضافة قسم المدفوع والمتبقي -->
     <div id="invoicePrint" class="pro-print">
         <div class="pro-print-header">
             <h2>MR Fikry</h2>
@@ -832,43 +546,33 @@ body > *:not(#invoicePrint) {
                 <div><strong>الوقت:</strong> <span id="printTime"></span></div>
             </div>
         </div>
+        <!-- قسم خاص بنوع البيع والمدفوع والمتبقي (يظهر بوضوح للآجل) -->
+        <div class="pro-print-payment">
+            <div><strong>🏷️ نوع البيع:</strong> <span id="printSaleType"></span></div>
+            <div><strong>💵 المدفوع:</strong> <span id="printPaid"></span></div>
+            <div><strong>🧾 المتبقي:</strong> <span id="printRemaining"></span></div>
+        </div>
         <table class="pro-print-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>المنتج</th>
-                    <th>السيريال</th>
-                    <th>الكمية</th>
-                    <th>السعر</th>
-                    <th>الإجمالي</th>
-                </tr>
-            </thead>
+            <thead><tr><th>#</th><th>المنتج</th><th>السيريال</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>
             <tbody id="printItems"></tbody>
         </table>
         <div class="pro-print-total" id="printTotalAmount"></div>
     </div>
 
-    <!-- بطاقات الفواتير -->
     <div class="pro-invoices" id="invoicesContainer"></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import {
-            getFirestore,
-            collection,
-            getDocs
-        } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDuwURf9DxvGlEIox6J92iPF9-lmnKETH8",
             authDomain: "login-employees1.firebaseapp.com",
             projectId: "login-employees1",
         };
-        
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // عناصر DOM
         const invoiceCountEl = document.getElementById("invoiceCount");
         const totalSalesEl = document.getElementById("totalSales");
         const totalProfitEl = document.getElementById("totalProfit");
@@ -878,59 +582,45 @@ body > *:not(#invoicePrint) {
         const selectedDateBadge = document.getElementById("selectedDateBadge");
         const daySummary = document.getElementById("daySummary");
 
-        // عرض التاريخ الحالي
         const now = new Date();
-        currentDateDisplay.innerHTML = `<i class="far fa-calendar-alt" style="margin-left: 6px;"></i> ${now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+        currentDateDisplay.innerHTML = `<i class="far fa-calendar-alt"></i> ${now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' })}`;
 
-        // البيانات
         let allInvoices = {};
         let invoicesByDay = {};
         let allDays = [];
 
-        // تهيئة
         async function init() {
             const snap = await getDocs(collection(db, "sales"));
-
-            let totalSales = 0;
-            let totalProfit = 0;
+            let totalSales = 0, totalProfit = 0;
 
             snap.forEach(doc => {
                 const data = doc.data();
                 if (!data.createdAt) return;
-
                 const date = data.createdAt.toDate();
-                const day = date.toLocaleDateString("ar-EG", { year: 'numeric', month: 'numeric', day: 'numeric' });
-                const dayForSelect = date.toLocaleDateString("en-CA"); // YYYY-MM-DD للقيمة
+                const dayDisplay = date.toLocaleDateString("ar-EG", { year: 'numeric', month: 'numeric', day: 'numeric' });
+                const dayForSelect = date.toLocaleDateString("en-CA");
+                allInvoices[doc.id] = { id: doc.id, ...data, createdAtDate: date };
 
-                allInvoices[doc.id] = { id: doc.id, ...data };
-                totalSales += data.totalAmount || 0;
-
-                data.items?.forEach(i => {
-                    totalProfit += (i.price - (i.buyPrice || 0)) * i.quantity;
-                });
+                if (data.items) {
+                    data.items.forEach(i => totalProfit += (i.price - (i.buyPrice || 0)) * i.quantity);
+                }
+                if (data.saleType === "credit") totalSales += data.paid || 0;
+                else totalSales += data.totalAmount || 0;
 
                 if (!invoicesByDay[dayForSelect]) {
-                    invoicesByDay[dayForSelect] = {
-                        display: day,
-                        ids: []
-                    };
+                    invoicesByDay[dayForSelect] = { display: dayDisplay, ids: [] };
                     allDays.push(dayForSelect);
                 }
                 invoicesByDay[dayForSelect].ids.push(doc.id);
             });
-
-            // ترتيب الأيام تنازلياً
             allDays.sort().reverse();
-
             invoiceCountEl.textContent = snap.size;
             totalSalesEl.textContent = totalSales.toLocaleString() + " جنيه";
-            totalProfitEl.textContent = totalProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " جنيه";
-
+            totalProfitEl.textContent = totalProfit.toLocaleString(undefined, { minimumFractionDigits: 2 }) + " جنيه";
             populateDateFilter();
             showAllInvoices();
         }
 
-        // تعبئة قائمة التاريخ
         function populateDateFilter() {
             dateFilterSelect.innerHTML = '<option value="all">كل الفواتير</option>';
             allDays.forEach(day => {
@@ -941,51 +631,36 @@ body > *:not(#invoicePrint) {
             });
         }
 
-        // عرض كل الفواتير
         function showAllInvoices() {
             invoicesContainer.innerHTML = "";
             daySummary.style.display = "none";
             selectedDateBadge.textContent = "عرض الكل";
-
-            Object.keys(allInvoices).forEach(id => {
-                const inv = allInvoices[id];
-                createInvoiceCard(id, inv);
-            });
+            const sorted = Object.values(allInvoices).sort((a,b) => b.createdAtDate - a.createdAtDate);
+            sorted.forEach(inv => createInvoiceCard(inv.id, inv));
+            document.getElementById("resultCount").textContent = sorted.length;
         }
 
-        // تصفية حسب التاريخ
         window.filterByDate = function() {
             const selected = dateFilterSelect.value;
-            
-            if (selected === "all") {
-                showAllInvoices();
-                return;
-            }
-
+            if (selected === "all") { showAllInvoices(); return; }
             invoicesContainer.innerHTML = "";
-            
-            let daySales = 0;
-            let dayProfit = 0;
-
-            invoicesByDay[selected].ids.forEach(id => {
-                const inv = allInvoices[id];
-                daySales += inv.totalAmount || 0;
-                inv.items?.forEach(i => {
-                    dayProfit += (i.price - (i.buyPrice || 0)) * i.quantity;
-                });
-                createInvoiceCard(id, inv);
+            let daySales = 0, dayProfit = 0;
+            const ids = invoicesByDay[selected].ids;
+            const invoicesList = ids.map(id => allInvoices[id]).sort((a,b) => b.createdAtDate - a.createdAtDate);
+            invoicesList.forEach(inv => {
+                if (inv.saleType === "credit") daySales += inv.paid || 0;
+                else daySales += inv.totalAmount || 0;
+                if (inv.items) inv.items.forEach(item => dayProfit += (item.price - (item.buyPrice || 0)) * item.quantity);
+                createInvoiceCard(inv.id, inv);
             });
-
-            // عرض ملخص اليوم
             daySummary.style.display = "block";
             document.getElementById("daySales").textContent = daySales.toLocaleString();
-            document.getElementById("dayProfit").textContent = dayProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById("dayCount").textContent = invoicesByDay[selected].ids.length;
-            
+            document.getElementById("dayProfit").textContent = dayProfit.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById("dayCount").textContent = ids.length;
             selectedDateBadge.textContent = invoicesByDay[selected].display;
+            document.getElementById("resultCount").textContent = ids.length;
         };
 
-        // إنشاء بطاقة فاتورة
         function createInvoiceCard(id, inv) {
             const card = document.createElement("div");
             card.className = "pro-invoice-card";
@@ -994,85 +669,43 @@ body > *:not(#invoicePrint) {
                     <div class="pro-invoice-num">#${inv.invoiceNumber}</div>
                     <div class="pro-invoice-date">${inv.date || "—"}</div>
                 </div>
-                
+                <div class="invoice-status">
+                    ${inv.saleType === "credit" ? `<span class="status-credit">🔴 آجل - ${inv.buyer?.name || ''}</span>` : `<span class="status-cash">🟢 كاش</span>`}
+                </div>
                 <div class="pro-invoice-details">
-                    <div class="pro-detail-row">
-                        <div class="pro-detail-icon"><i class="fas fa-user-tie"></i></div>
-                        <div class="pro-detail-info">
-                            <div class="pro-detail-label">البائع</div>
-                            <div class="pro-detail-value">${inv.seller?.name || "غير محدد"}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="pro-detail-row">
-                        <div class="pro-detail-icon"><i class="fas fa-user"></i></div>
-                        <div class="pro-detail-info">
-                            <div class="pro-detail-label">المشتري</div>
-                            <div class="pro-detail-value">${inv.buyer?.name || "غير محدد"}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="pro-detail-row">
-                        <div class="pro-detail-icon"><i class="fas fa-clock"></i></div>
-                        <div class="pro-detail-info">
-                            <div class="pro-detail-label">الوقت</div>
-                            <div class="pro-detail-value">${inv.time || "—"}</div>
-                        </div>
-                    </div>
+                    <div class="pro-detail-row"><div class="pro-detail-icon"><i class="fas fa-user-tie"></i></div><div class="pro-detail-info"><div class="pro-detail-label">البائع</div><div class="pro-detail-value">${inv.seller?.name || "غير محدد"}</div></div></div>
+                    <div class="pro-detail-row"><div class="pro-detail-icon"><i class="fas fa-user"></i></div><div class="pro-detail-info"><div class="pro-detail-label">المشتري</div><div class="pro-detail-value">${inv.buyer?.name || "غير محدد"}</div></div></div>
+                    <div class="pro-detail-row"><div class="pro-detail-icon"><i class="fas fa-clock"></i></div><div class="pro-detail-info"><div class="pro-detail-label">الوقت</div><div class="pro-detail-value">${inv.time || "—"}</div></div></div>
                 </div>
-                
-                <div class="pro-total-box">
-                    <div class="pro-total-label">المبلغ الإجمالي</div>
-                    <div class="pro-total-amount">${inv.totalAmount?.toLocaleString()} جنيه</div>
-                </div>
-                
+                <div class="pro-total-box"><div class="pro-total-label">المبلغ الإجمالي</div><div class="pro-total-amount">${(inv.totalAmount || 0).toLocaleString()} جنيه</div></div>
+                <div class="invoice-money"><div class="invoice-paid">💵 المدفوع: ${(inv.paid || 0).toLocaleString()} جنيه</div><div class="invoice-remaining">🧾 المتبقي: ${(inv.remainingDebt || 0).toLocaleString()} جنيه</div></div>
                 <div class="pro-actions">
-                    <button class="pro-action-btn" onclick="showInvoice('${id}')">
-                        <i class="fas fa-eye"></i>
-                        عرض
-                    </button>
-                    <button class="pro-action-btn" onclick="printInvoice('${id}')">
-                        <i class="fas fa-print"></i>
-                        طباعة
-                    </button>
+                    <button class="pro-action-btn" onclick="showInvoice('${id}')"><i class="fas fa-eye"></i> عرض</button>
+                    <button class="pro-action-btn" onclick="printInvoice('${id}')"><i class="fas fa-print"></i> طباعة</button>
                 </div>
             `;
-            
             invoicesContainer.appendChild(card);
         }
 
-        // عرض الفاتورة للطباعة
         window.showInvoice = function(id) {
             const inv = allInvoices[id];
             if (!inv) return;
-
             const box = document.getElementById("invoicePrint");
             box.style.display = "block";
-
             document.getElementById("printInvoiceNumber").textContent = inv.invoiceNumber || "—";
             document.getElementById("printSeller").textContent = inv.seller?.name || "—";
             document.getElementById("printBuyer").textContent = inv.buyer?.name || "—";
             document.getElementById("printDate").textContent = inv.date || "—";
             document.getElementById("printTime").textContent = inv.time || "—";
-
+            document.getElementById("printSaleType").textContent = inv.saleType === "credit" ? "بيع آجل" : "بيع كاش";
+            document.getElementById("printPaid").textContent = (inv.paid || 0).toLocaleString() + " جنيه";
+            document.getElementById("printRemaining").textContent = (inv.remainingDebt || 0).toLocaleString() + " جنيه";
             const tbody = document.getElementById("printItems");
             tbody.innerHTML = "";
-            
             inv.items?.forEach((item, i) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td>${item.name || "—"}</td>
-                        <td>${item.serial || "—"}</td>
-                        <td>${item.quantity || 0}</td>
-                        <td>${item.price?.toLocaleString()} جنيه</td>
-                        <td>${item.total?.toLocaleString()} جنيه</td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr><td>${i+1}</td><td>${item.name || "—"}</td><td>${item.serial || "—"}</td><td>${item.quantity || 0}</td><td>${(item.price || 0).toLocaleString()} جنيه</td><td>${(item.total || (item.price * item.quantity)).toLocaleString()} جنيه</td></tr>`;
             });
-
-            document.getElementById("printTotalAmount").textContent = `الإجمالي: ${inv.totalAmount?.toLocaleString()} جنيه`;
-
+            document.getElementById("printTotalAmount").innerHTML = `الإجمالي: ${(inv.totalAmount || 0).toLocaleString()} جنيه`;
             box.scrollIntoView({ behavior: "smooth" });
         };
 
@@ -1081,30 +714,27 @@ body > *:not(#invoicePrint) {
             setTimeout(() => window.print(), 300);
         };
 
-        // البحث
         window.searchInvoices = function() {
             const text = document.getElementById("searchInput").value.trim().toLowerCase();
             invoicesContainer.innerHTML = "";
             let count = 0;
-
-            Object.keys(allInvoices).forEach(id => {
-                const inv = allInvoices[id];
-                
+            const sorted = Object.values(allInvoices).sort((a,b) => b.createdAtDate - a.createdAtDate);
+            sorted.forEach(inv => {
                 const invoiceNum = inv.invoiceNumber?.toString().toLowerCase() || "";
                 const sellerName = inv.seller?.name?.toLowerCase() || "";
                 const buyerName = inv.buyer?.name?.toLowerCase() || "";
-
                 if (!text || invoiceNum.includes(text) || sellerName.includes(text) || buyerName.includes(text)) {
                     count++;
-                    createInvoiceCard(id, inv);
+                    createInvoiceCard(inv.id, inv);
                 }
             });
-
             document.getElementById("resultCount").textContent = count;
             daySummary.style.display = "none";
             selectedDateBadge.textContent = "نتائج البحث";
+            dateFilterSelect.value = "all";
         };
 
+        document.getElementById("searchInput")?.addEventListener("keypress", e => { if(e.key === "Enter") searchInvoices(); });
         init();
     </script>
 </body>

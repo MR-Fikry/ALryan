@@ -612,6 +612,24 @@ font-size: 11px;
 background:#f2f2f2;
 font-weight:bold;
 }
+
+.add-funds-btn {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.add-funds-btn:hover {
+    background: linear-gradient(135deg, #15803d, #166534);
+    transform: translateY(-2px);
+}
+
+
 </style>
 </head>
 <body>
@@ -658,7 +676,7 @@ font-weight:bold;
         <div class="modal-body">
             <div id="customerInfo"></div>
             <button id="payButton" class="pay-btn-big"><i class="fas fa-money-bill-wave"></i> دفع دفعة جديدة</button>
-            
+
             <div class="transactions-box">
                 <h4><i class="fas fa-history"></i> سجل المدفوعات</h4>
                 <div id="transactionsList" class="transactions-list"></div>
@@ -1029,16 +1047,20 @@ font-weight:bold;
             if (!currentCustomer) return;
             
             document.getElementById("modalName").innerHTML = `<i class="fas fa-user"></i> ${escapeHtml(currentCustomer.name)}`;
-            document.getElementById("customerInfo").innerHTML = `
-                <div class="customer-card">
-                    <div class="customer-row">
-                        <span class="customer-badge"><i class="fas fa-phone"></i> ${escapeHtml(currentCustomer.phone) || "غير مسجل"}</span>
-                        <span class="customer-badge"><i class="fas fa-money-bill"></i> إجمالي الدين: ${formatNum(currentCustomer.totalDebt)} جنيه</span>
-                        <span class="customer-badge"><i class="fas fa-file"></i> ${currentInvoices.length} فاتورة</span>
-                    </div>
-                    <button class="edit-btn" id="editCustomerBtn"><i class="fas fa-edit"></i> تعديل البيانات</button>
-                    <button class="delete-customer-btn" id="deleteCustomerBtn"><i class="fas fa-trash"></i> حذف العميل</button>
+            document.getElementById("customerInfo").innerHTML =// داخل renderCustomerModal، في customerInfo HTML:
+            `<div class="customer-card">
+                <div class="customer-row">
+                    <span class="customer-badge"><i class="fas fa-phone"></i> ${escapeHtml(currentCustomer.phone) || "غير مسجل"}</span>
+                    <span class="customer-badge"><i class="fas fa-money-bill"></i> إجمالي الدين: ${formatNum(currentCustomer.totalDebt)} جنيه</span>
+                    <span class="customer-badge"><i class="fas fa-file"></i> ${currentInvoices.length} فاتورة</span>
                 </div>
+                <div class="customer-actions" style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
+                    <button class="edit-btn" id="editCustomerBtn"><i class="fas fa-edit"></i> تعديل</button>
+                    <button class="pay-btn" id="payButton"><i class="fas fa-hand-holding-usd"></i> تسديد</button>
+                    <button class="add-funds-btn" id="addFundsBtn"><i class="fas fa-plus-circle"></i> إضافة أموال</button>
+                    <button class="delete-customer-btn" id="deleteCustomerBtn"><i class="fas fa-trash"></i> حذف</button>
+                </div>
+            </div>
             `;
             
             const editBtn = document.getElementById("editCustomerBtn");
@@ -1046,6 +1068,12 @@ font-weight:bold;
             
             const deleteBtn = document.getElementById("deleteCustomerBtn");
             if (deleteBtn) deleteBtn.onclick = () => deleteCustomerCompletely(currentCustomerId, currentCustomer.name);
+            
+
+            // داخل دالة renderCustomerModal، بعد سطر payBtn.onclick = ... أضف:
+            const addFundsBtn = document.getElementById("addFundsBtn");
+            if (addFundsBtn) addFundsBtn.onclick = () => showAddFundsForm();
+
             
             // عرض المعاملات
             let transContainer = document.getElementById("transactionsList");
@@ -1061,6 +1089,77 @@ font-weight:bold;
                     `).join('');
                 }
             }
+
+            // ============= دوال إضافة أموال للعميل =============
+            function showAddFundsForm() {
+                if (!currentCustomer) return;
+                
+                const div = document.getElementById("customerInfo");
+                const orig = div.innerHTML;
+                
+                div.innerHTML = `
+                    <div class="inline-form">
+                        <p style="margin-bottom:8px;color:#16a34a">💰 إضافة أموال للعميل: <strong>${escapeHtml(currentCustomer.name)}</strong></p>
+                        <input type="number" id="addFundsAmount" placeholder="المبلغ المراد إضافته" step="0.01">
+                        <textarea id="addFundsNote" placeholder="ملاحظة (اختياري)" rows="2" style="width:100%; padding:8px; border-radius:8px; border:1px solid #ddd; font-family:inherit;"></textarea>
+                        <div class="form-buttons">
+                            <button class="btn-save" id="confirmAddFunds">تأكيد الإضافة</button>
+                            <button class="btn-cancel" id="cancelAddFunds">إلغاء</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById("confirmAddFunds").onclick = async () => {
+                    const amount = parseFloat(document.getElementById("addFundsAmount").value);
+                    const note = document.getElementById("addFundsNote").value.trim() || "إضافة رصيد";
+                    
+                    if (isNaN(amount) || amount <= 0) {
+                        showMsg("⚠️ المبلغ غير صحيح", false);
+                        return;
+                    }
+                    
+                    // إضافة سجل معاملة منفصل (موجب = زيادة رصيد العميل)
+                    await addFundsTransaction(currentCustomerId, amount, note);
+                    
+                    // تحديث دين العميل (زيادة الدين)
+                    const newDebt = (currentCustomer.totalDebt || 0) + amount;
+                    await updateDoc(doc(db, "customers", currentCustomerId), { totalDebt: newDebt });
+                    
+                    // تحديث البيانات محلياً وفي Firebase
+                    await refreshCustomerFromFirebase(currentCustomerId);
+                    await refreshAll();
+                    
+                    showMsg(`✅ تم إضافة ${formatNum(amount)} جنيه للعميل\n📝 ${note}`, true);
+                    openCustomer(currentCustomerId);
+                };
+                
+                document.getElementById("cancelAddFunds").onclick = () => {
+                    div.innerHTML = orig;
+                    // إعادة ربط الأزرار الأصلية
+                    document.getElementById("payButton").onclick = () => showPaymentForm();
+                    document.getElementById("addFundsBtn").onclick = () => showAddFundsForm();
+                };
+            }
+            
+            // إضافة سجل معاملة من نوع "إضافة أموال" (تزيد الدين)
+            async function addFundsTransaction(cid, amount, note = "إضافة رصيد") {
+                const transaction = {
+                    type: "add_funds",        // نوع المعاملة
+                    amount: amount,           // المبلغ الموجب
+                    note: note,               // الملاحظة
+                    timestamp: Date.now(),
+                    date: new Date().toLocaleDateString("ar-EG"),
+                    time: new Date().toLocaleTimeString("ar-EG")
+                };
+                
+                // حفظ في مجموعة transactions
+                await setDoc(doc(db, "customers", cid, "transactions", Date.now().toString()), transaction);
+                
+                // حفظ نسخة في localStorage
+                const transactions = getFromLocalStorage(`transactions_${cid}`, []);
+                transactions.unshift(transaction);
+                saveToLocalStorage(`transactions_${cid}`, transactions);
+            }
             
             // عرض الفواتير
             let tbody = document.getElementById("invoicesTableBody");
@@ -1072,18 +1171,18 @@ font-weight:bold;
                         <tr>
                             <td>${inv.invoiceNumber || inv.id.slice(0,6)}</td>
                             <td>
-  ${
-    inv.date
-      ? inv.date.split('/').map((part, index) => {
-          // لو ده الجزء الأخير (السنة)
-          if (index === 2) {
-            return part.slice(-2); // ناخد آخر رقمين
-          }
-          return part;
-        }).join('/')
-      : "---"
-  }
-</td>
+                              ${
+                                inv.date
+                                  ? inv.date.split('/').map((part, index) => {
+                                      // لو ده الجزء الأخير (السنة)
+                                      if (index === 2) {
+                                        return part.slice(-2); // ناخد آخر رقمين
+                                      }
+                                      return part;
+                                    }).join('/')
+                                  : "---"
+                              }
+                            </td>
                             <td>${formatNum(inv.totalAmount)}</td>
                             <td>${formatNum(inv.paid)}</td>
                             <td class="${inv.remainingDebt > 0 ? 'text-danger' : ''}">${formatNum(inv.remainingDebt)}</td>

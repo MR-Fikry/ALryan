@@ -650,6 +650,29 @@ if (saleType === "cash") {
                     firstInvoiceNumber: currentInvoiceNumber
                 }, { merge: true });
 
+
+                const saleRef = doc(db, "sales", String(currentInvoiceNumber));
+
+                batch.set(saleRef, {
+                    invoiceNumber: currentInvoiceNumber,
+                    saleType: saleType,
+                    items: invoiceItems,
+                    totalAmount: totalAmount,
+                    paid: paidAmount,
+                    remainingDebt: remainingDebt,
+                    date: new Date().toLocaleDateString('ar-EG'),
+                    time: new Date().toLocaleTimeString('ar-EG'),
+                    createdAt: now,
+                    seller: {
+                        name: currentEmployee.name,
+                        phone: currentEmployee.phone
+                    },
+                    buyer: {
+                        name: buyerName,
+                        phone: buyerPhone
+                    }
+                });
+
                 for (const item of cart) {
                     if (item.id && item.originalQuantity > 0) {
                         batch.update(doc(db, 'products', item.id), { quantity: increment(-item.cartQuantity) });
@@ -665,7 +688,6 @@ if (saleType === "cash") {
                 showNotification(msg, 'success');
 
                 updatePrintInvoice();
-                setTimeout(() => window.print(), 500);
 
                 cart = [];
                 saveCartToStorage();
@@ -684,7 +706,7 @@ if (saleType === "cash") {
 
             } catch (error) {
                 console.error(error);
-                showNotification('❌ حدث خطأ', 'error');
+                showNotification('اكتب اسم العميل', 'error');
             }
         };
 
