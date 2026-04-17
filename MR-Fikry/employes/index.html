@@ -1181,29 +1181,50 @@ async function loadSalaryRequests() {
 
 // الموافقة على طلب القبض
 window.approveSalaryRequest = async function(requestId) {
-    if (!confirm("⚠️ هل أنت متأكد من الموافقة على طلب القبض؟ سيتم إشعار الموظف تلقائياً.")) return;
-    
+    if (!confirm("⚠️ هل أنت متأكد من الموافقة على طلب القبض؟")) return;
+
     try {
         const requestRef = doc(db, "salaryRequests", requestId);
         const requestSnap = await getDoc(requestRef);
-        
+
         if (!requestSnap.exists()) {
             alert("الطلب غير موجود");
             return;
         }
-        
+
+        const reqData = requestSnap.data();
+        const empId = reqData.employeeId;
+
+        // 🔹 مرجع الموظف
+        const empRef = doc(db, "employees", empId);
+
+        // 🔥 1. امسح كل الالتزامات
+        const commitmentsSnap = await getDocs(collection(db, "employees", empId, "commitments"));
+        for (const c of commitmentsSnap.docs) {
+            await deleteDoc(doc(db, "employees", empId, "commitments", c.id));
+        }
+
+        // 🔥 2. صفر الخصومات والحوافز
+        await updateDoc(empRef, {
+            deductions: [],
+            bonuses: [],
+            updatedAt: new Date().toISOString()
+        });
+
+        // 🔥 3. وافق على الطلب
         await updateDoc(requestRef, {
             status: "approved",
-            approvedAt: new Date().toISOString(),
-            approvedBy: "admin"
+            approvedAt: new Date().toISOString()
         });
-        
-        alert("✅ تمت الموافقة على طلب القبض. سيتم إشعار الموظف تلقائياً.");
+
+        alert("✅ تم القبض وبدأ شهر جديد");
+
         loadSalaryRequests();
         loadEmployees();
-    } catch(e) {
-        console.error("خطأ في الموافقة:", e);
-        alert("❌ حدث خطأ في الموافقة على الطلب");
+
+    } catch (e) {
+        console.error(e);
+        alert("❌ حصل خطأ");
     }
 };
 
